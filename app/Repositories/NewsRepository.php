@@ -4,7 +4,6 @@
 namespace App\Repositories;
 
 
-
 use App\Models\News;
 use App\Traits\ImageUploads;
 use Illuminate\Http\Request;
@@ -12,31 +11,22 @@ use Illuminate\Http\Request;
 class NewsRepository extends BaseRepository
 {
     use ImageUploads;
+
     private $model;
     public function __construct()
     {
+
         $this->model = new News();
     }
 
-    public function index($request)
+    public function index()
     {
-        if (isset($request['name_oz'])&&empty($request['name_oz']))
-        {
-            $this->model->where('name_oz', 'like', '%'.$request['name_oz'].'%')->get();
-        }
-        if (isset($request['name_uz']) && empty($request['name_uz']))
-        {
-            $this->model->where('name_uz', 'like', '%'.$request['name_uz'].'%')->get();
-        }
-        if (isset($request['description_oz']) && empty($request['description_oz']))
-        {
-            $this->model->where('description_oz', 'like', '%'.$request['description_oz'].'%')->get();
-        }
-        if (isset($request['description_uz']) && empty($request['description_uz']))
-        {
-            $this->model->where('description_uz', 'like', '%'.$request['description_uz'].'%')->get();
-        }
         return $this->model->orderBy('id', 'desc')->paginate($this->limit);
+    }
+
+    public function findById($id)
+    {
+        return $this->model->whereId($id)->first();
     }
 
     public function create($data)
@@ -44,21 +34,20 @@ class NewsRepository extends BaseRepository
         $model = $this->model->create([
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
-            'name_ru' => $data['name_ru'],
-            'name_en' => $data['name_en'],
+            'name_ru' => $data['name_ru'] ?? null,
+            'name_en' => $data['name_en'] ?? null,
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
-            'description_ru' => $data['description_ru'],
-            'description_en' => $data['description_en'],
-            'content_oz' => $data['content_oz'],
-            'content_uz' => $data['content_uz'],
-            'content_ru' => $data['content_ru'],
-            'content_en' => $data['content_en'],
+            'description_ru' => $data['description_ru'] ?? null,
+            'description_en' => $data['description_en'] ?? null,
+            'content_oz' => contentByDomDocment($data['content_oz']),
+            'content_uz' => contentByDomDocment($data['content_uz']),
+            'content_ru' => $data['content_ru'] ?? null,
+            'content_en' => $data['content_en'] ?? null,
             'status' => true,
-            'images' => $this->uploads($data['photo'],'news')
+            'image' => $this->uploads($data['images'], 'news')
         ]);
-        if ($model)
-        {
+        if ($model) {
             return $model;
         }
 
@@ -71,18 +60,33 @@ class NewsRepository extends BaseRepository
         $model->update([
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
-            'name_ru' => $data['name_ru'],
-            'name_en' => $data['name_en'],
+            'name_ru' => $data['name_ru']??null,
+            'name_en' => $data['name_en']??null,
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
-            'description_ru' => $data['description_ru'],
-            'description_en' => $data['description_en'],
-            'content_oz' => $data['content_oz'],
-            'content_uz' => $data['content_uz'],
-            'content_ru' => $data['content_ru'],
-            'content_en' => $data['content_en'],
-            'status' => $data['status'],
-            'images' => $this->uploads($data['photo'],'news')
+            'description_ru' => $data['description_ru']??null,
+            'description_en' => $data['description_en']??null,
+            'content_oz' => contentByDomDocment($data['content_oz']),
+            'content_uz' => contentByDomDocment($data['content_uz']),
+            'content_ru' => $data['content_ru']??null,
+            'content_en' => $data['content_en']??null,
+            'status' => true,
+            'image' => $this->uploads($data['images'], 'news')
         ]);
+        if ($model){
+            return $model;
+        }
+        return false;
+    }
+
+    public function delete($id)
+    {
+        $model = $this->model->where('id', $id)->first();
+        if ($model->image)
+        {
+            unlink($model->image);
+        }
+        $model->delete();
+        return true;
     }
 }

@@ -115,10 +115,16 @@
                                 <th></th>
                             </tr>
                             <tr>
-                                <form action="filter">
+                                <form action="">
+                                    <input type="hidden" name="from_filter" value="true">
+                                    <button type="submit" class="d-none"></button>
                                     <th></th>
-                                    <th class="w-25"><input type="text" class="form-control" name="name_oz"></th>
-                                    <th class="w-25"><input type="text" class="form-control" name="description"></th>
+                                    <th class="w-25">
+                                        <input type="text" class="form-control form-control-sm" name="name_oz" value="{{isset($filter->name_oz)?$filter->name_oz:''}}">
+                                    </th>
+                                    <th class="w-25">
+                                        <input type="text" class="form-control form-control-sm" name="description_oz" value="{{isset($filter->description_oz)?$filter->description_oz:''}}">
+                                    </th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -144,7 +150,15 @@
                                         <td class="text-center">{{\Carbon\Carbon::parse($model->created_at)->format('d.m.Y')}}</td>
                                         <td class="text-center">
                                             <a href="{{route('news.edit', $model->id)}}"><i class="fa fa-edit"></i></a>
-                                            <a class="trash_user" data-id="{{ $model->id }}" style="cursor: pointer"><i class="fa fa-trash-alt"></i></a>
+                                            <form action="{{ route('news.destroy',  $model->id) }}" method="post"
+                                                  onsubmit="return confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn  btn-danger">
+                                                    <span class="fa fa-trash-alt"></span>
+
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

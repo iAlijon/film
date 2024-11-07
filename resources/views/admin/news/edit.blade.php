@@ -1,13 +1,13 @@
 @extends('admin.layouts.admin')
 
-@section('title', 'Yangililar qo\'shish')
+@section('title', 'Yangilikni O\'zgartirish')
 
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Yangiliklar Qo'shish</h1>
+                    <h1>Yangilikni O'zgartirish</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -40,7 +40,8 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('news.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('news.update', $model->id)}}" method="post" enctype="multipart/form-data">
+                        @method('PUT')
                         @csrf
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             {{----  oz  ----}}
@@ -48,7 +49,7 @@
 
                                 <div class="form-group">
                                     <label>Name_oz</label>
-                                    <input type="text" class="form-control" name="name_oz">
+                                    <input type="text" class="form-control" name="name_oz" value="{{$model->name_oz}}">
                                 </div>
 
                                 <div class="form-group">
@@ -58,29 +59,29 @@
 
                                 <div class="form-group">
                                     <label>Description_oz</label>
-                                    <textarea name="description_oz" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_oz" cols="30" rows="5" class="form-control">{{$model->description_oz}}</textarea>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Content_oz</label>
-                                    <textarea name="content_oz" class="textarea form-control summernote" id="summernote"></textarea>
+                                    <textarea name="content_oz" class="textarea form-control summernote" id="summernote">{{$model->content_oz}}</textarea>
                                 </div>
                             </div>
                             {{----  uz  ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
                                     <label>Name_uz</label>
-                                    <input type="text" class="form-control" name="name_uz">
+                                    <input type="text" class="form-control" name="name_uz" value="{{$model->name_uz}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Description_uz</label>
-                                    <textarea name="description_uz" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_uz" cols="30" rows="5" class="form-control">{{$model->description_uz}}</textarea>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Content_uz</label>
-                                    <textarea name="content_uz" class="textarea form-control summernote" id="summernote"></textarea>
+                                    <textarea name="content_uz" class="textarea form-control summernote" id="summernote">{{$model->content_uz}}</textarea>
                                 </div>
                             </div>
                             <div class="text-right">
@@ -93,7 +94,3 @@
         </div>
     </section>
 @endsection
-
-@push('js')
-
-@endpush

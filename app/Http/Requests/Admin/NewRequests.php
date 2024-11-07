@@ -24,8 +24,8 @@ class NewRequests extends FormRequest
     public function rules()
     {
         return [
-            'name_uz' => 'required|string',
             'name_oz' => 'required|string',
+            'name_uz' => 'required|string',
             'name_ru' => 'nullable',
             'name_en' => 'nullable',
             'description_oz' => 'required',
@@ -36,7 +36,6 @@ class NewRequests extends FormRequest
             'content_uz' => 'required',
             'content_ru' => 'nullable',
             'content_en' => 'nullable',
-            'status' => 'required|boolean',
             'images' => 'required|image|mimes:png,jpeg,jpg|max:2048'
         ];
     }

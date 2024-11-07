@@ -10,7 +10,9 @@
             height: 24px;
         }
 
-        .switch input {display:none;}
+        .switch input {
+            display: none;
+        }
 
         .slider {
             position: absolute;
@@ -53,127 +55,138 @@
         }
 
         /*------ ADDED CSS ---------*/
-        .slider:after
-        {
-            content:'OFF';
+        .slider:after {
+            content: 'OFF';
             color: white;
             display: block;
             position: absolute;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
             top: 50%;
             left: 70%;
             font-size: 10px;
             font-family: Verdana, sans-serif;
         }
 
-        input:checked + .slider:after
-        {
-            content:'ON';
+        input:checked + .slider:after {
+            content: 'ON';
             color: white;
             display: block;
             position: absolute;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
             top: 50%;
             left: 30%;
             font-size: 10px;
             font-family: Verdana, sans-serif;
         }
-
+        .project-actions{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Har bir elementni teng kenglikda qilish */
+            gap: 10px; /* elementlar orasidagi masofa */
+            height: 100%;
+        }
+        .project-actions a{
+            width: 100%;
+        }
         /*--------- END --------*/
 
     </style>
 @endpush
 @section('content')
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Yangiliklar</h1>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="card card-info">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h3 class="card-title">News List</h3>
-                        <a href="{{route('news.create')}}" class="btn btn-success ml-auto">Qo'shish</a>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th class="text-center">#</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Status</th>
-                                <th>Created</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <form action="">
-                                    <input type="hidden" name="from_filter" value="true">
-                                    <button type="submit" class="d-none"></button>
-                                    <th></th>
-                                    <th class="w-25">
-                                        <input type="text" class="form-control form-control-sm" name="name_oz" value="{{isset($filter->name_oz)?$filter->name_oz:''}}">
-                                    </th>
-                                    <th class="w-25">
-                                        <input type="text" class="form-control form-control-sm" name="description_oz" value="{{isset($filter->description_oz)?$filter->description_oz:''}}">
-                                    </th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </form>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($models as $k => $model)
-                                    <tr>
-                                        <td class="text-center">{{$k + 1}}</td>
-                                        <td>{{$model->name_oz}}</td>
-                                        <td>{{$model->description_oz}}</td>
-                                        <td class="text-center">
-                                            <label class="switch">
-                                                <input type="checkbox"
-                                                       class="status-toggle"
-                                                       data-id="{{$model->id}}"
-                                                    {{$model->status == true ? 'checked':false}}
-                                                >
-                                                <div class="slider round"></div>
-                                            </label>
-                                        </td>
-                                        <td class="text-center">{{\Carbon\Carbon::parse($model->created_at)->format('d.m.Y')}}</td>
-                                        <td class="text-center">
-                                            <a href="{{route('news.edit', $model->id)}}"><i class="fa fa-edit"></i></a>
-                                            <form action="{{ route('news.destroy',  $model->id) }}" method="post"
-                                                  onsubmit="return confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" class="btn  btn-danger">
-                                                    <span class="fa fa-trash-alt"></span>
-
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                            <div class="text-right">
-                                {{$models->links()}}
-                            </div>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Yangiliklar</h1>
                 </div>
             </div>
-            <!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-info">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">News List</h3>
+                    <a href="{{route('news.create')}}" class="btn btn-success ml-auto">Qo'shish</a>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <form action="">
+                                <input type="hidden" name="from_filter" value="true">
+                                <button type="submit" class="d-none"></button>
+                                <th></th>
+                                <th class="w-25">
+                                    <input type="text" class="form-control form-control-sm" name="name_oz"
+                                           value="{{isset($filter->name_oz)?$filter->name_oz:''}}">
+                                </th>
+                                <th class="w-25">
+                                    <input type="text" class="form-control form-control-sm" name="description_oz"
+                                           value="{{isset($filter->description_oz)?$filter->description_oz:''}}">
+                                </th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </form>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($models as $k => $model)
+                            <tr>
+                                <td class="text-center">{{$k + 1}}</td>
+                                <td>{{$model->name_oz}}</td>
+                                <td>{{$model->description_oz}}</td>
+                                <td class="text-center">
+                                    <label class="switch">
+                                        <input type="checkbox"
+                                               class="status-toggle"
+                                               data-id="{{$model->id}}"
+                                            {{$model->status == true ? 'checked':false}}
+                                        >
+                                        <div class="slider round"></div>
+                                    </label>
+                                </td>
+                                <td class="text-center">{{\Carbon\Carbon::parse($model->created_at)->format('d.m.Y')}}</td>
+                                <td class="project-actions text-right">
+                                    <a href="{{route('news.edit', $model->id)}}" class="btn btn-info btn-sm"><i
+                                            class="fas fa-pencil-alt"></i>Edit</a>
+                                    <a href="{{route('news.show', $model->id)}}" class="btn btn-primary btn-sm"><i
+                                            class="fas fa-folder"></i>View</a>
+                                    <form action="{{ route('news.destroy',  $model->id) }}" method="post"
+                                          onsubmit="return confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')">
+                                        @csrf
+                                        @method('delete')
+                                        <a type="submit" class="btn btn-danger btn-sm">
+                                            <span class="fa fa-trash-alt"></span>
+                                            Delete
+                                        </a>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                        <div class="text-right">
+                            {{$models->links()}}
+                        </div>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
 @endsection
 @push('js')
     <script>
@@ -186,19 +199,18 @@
                 $.ajax({
                     url: "{{route('new-status')}}",
                     method: "POST",
-                    data:{
+                    data: {
                         _token: $('meta[name="csrf-token"]').attr('content'),
-                        id:itemId,
-                        status:newStatus
+                        id: itemId,
+                        status: newStatus
                     },
-                    success: function (data)
-                    {
+                    success: function (data) {
                         console.log(data)
                         location.reload()
                     },
-                    error: function (error){
+                    error: function (error) {
                         console.log(error)
-                      alert('ID'+' '+itemId+' '+'m\'alumotni holati o\'zgarmadi')
+                        alert('ID' + ' ' + itemId + ' ' + 'm\'alumotni holati o\'zgarmadi')
                     }
                 })
 

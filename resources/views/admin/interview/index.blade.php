@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 
-@section('title', 'Yangiliklar')
+@section('title', 'Intervyu')
 @push('css')
     <style>
         .switch {
@@ -97,54 +97,43 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Yangiliklar</h1>
+                    <h1>Intervyu</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('interview.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Intervyu</li>
+                    </ol>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
-
-    <!-- Main content -->
+    <!-- general form elements disabled -->
     <section class="content">
-        <div class="container-fluid">
-            <div class="card card-info">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3 class="card-title">News List</h3>
-                    <a href="{{route('news.create')}}" class="btn btn-success ml-auto"><i class="fa fa-plus"></i> Qo'shish</a>
+        <div class="card card-warning">
+            <div class="card-header">
+                <h3 class="card-title">Intervyu List</h3>
+                <div class="text-right">
+                    <a href="{{route('interview.create')}}" class="btn btn-success text-white"><i class="fa fa-plus"></i> Qo'shish</a>
                 </div>
-                <div class="card-body">
-                    <table class="table table-bordered table-hover">
-                        <thead>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table class="table table-hover table-bordered">
+                    <thead>
                         <tr>
-                            <th class="text-center">#</th>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Description</th>
                             <th>Status</th>
-                            <th>Created</th>
+                            <th>Create</th>
                             <th></th>
                         </tr>
-                        <tr>
-                            <form action="">
-                                <input type="hidden" name="from_filter" value="true">
-                                <button type="submit" class="d-none"></button>
-                                <th></th>
-                                <th class="w-25">
-                                    <input type="text" class="form-control form-control-sm" name="name_oz"
-                                           value="{{isset($filter->name_oz)?$filter->name_oz:''}}">
-                                </th>
-                                <th class="w-25">
-                                    <input type="text" class="form-control form-control-sm" name="description_oz"
-                                           value="{{isset($filter->description_oz)?$filter->description_oz:''}}">
-                                </th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </form>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
                         @foreach($models as $k => $model)
                             <tr>
-                                <td class="text-center">{{$k + 1}}</td>
+                                <td>{{$k + 1}}</td>
                                 <td>{{$model->name_oz}}</td>
                                 <td>{{$model->description_oz}}</td>
                                 <td class="text-center">
@@ -159,37 +148,28 @@
                                 </td>
                                 <td class="text-center">{{\Carbon\Carbon::parse($model->created_at)->format('d.m.Y')}}</td>
                                 <td class="project-actions text-right">
-                                    <a href="{{route('news.edit', $model->id)}}" class="btn btn-info btn-sm"><i
+                                    <a href="{{route('interview.edit', $model->id)}}" class="btn btn-info btn-sm"><i
                                             class="fas fa-pencil-alt"></i>Edit</a>
-                                    <a href="{{route('news.show', $model->id)}}" class="btn btn-primary btn-sm"><i
+                                    <a href="{{route('interview.show', $model->id)}}" class="btn btn-primary btn-sm"><i
                                             class="fas fa-folder"></i>View</a>
-                                    <form action="{{ route('news.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
+                                    <form action="{{ route('interview.destroy',  $model->id) }}" method="post"
+                                          onsubmit="return confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')">
                                         @csrf
                                         @method('delete')
-
+                                        <a type="submit" class="btn btn-danger btn-sm">
+                                            <span class="fa fa-trash-alt"></span>
+                                            Delete
+                                        </a>
                                     </form>
-                                    <a type="submit" class="btn btn-danger btn-sm"
-                                       onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
-                                        document.getElementById('deleteItem-<?= $model->id ?>').submit();
-                                       }">
-                                        <span class="fa fa-trash-alt"></span>
-                                        Delete
-                                    </a>
                                 </td>
                             </tr>
                         @endforeach
-                        </tbody>
-                        <div class="text-right">
-                            {{$models->links()}}
-                        </div>
-                    </table>
-                </div>
-                <!-- /.card-body -->
+                    </tbody>
+                </table>
             </div>
+            <!-- /.card-body -->
         </div>
-        <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
 @endsection
 @push('js')
     <script>
@@ -198,14 +178,13 @@
                 const checkbox = $(this);
                 const itemId = checkbox.data('id');
                 const newStatus = checkbox.is(':checked') ? true : false;
-                console.log(itemId, newStatus)
                 $.ajax({
-                    url: "{{route('new-status')}}",
+                    url: "{{route('interview-status')}}",
                     method: "POST",
                     data: {
                         _token: $('meta[name="csrf-token"]').attr('content'),
-                        id: itemId,
-                        status: newStatus
+                        status: newStatus,
+                        id:itemId
                     },
                     success: function (data) {
                         console.log(data)

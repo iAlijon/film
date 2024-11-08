@@ -15,6 +15,20 @@ return new class extends Migration
     {
         Schema::create('inter_views', function (Blueprint $table) {
             $table->id();
+            $table->string('name_oz');
+            $table->string('name_uz');
+            $table->string('name_ru')->nullable();
+            $table->string('name_en')->nullable();
+            $table->longText('description_oz');
+            $table->longText('description_uz');
+            $table->longText('description_ru')->nullable();
+            $table->longText('description_en')->nullable();
+            $table->text('content_oz');
+            $table->text('content_uz');
+            $table->text('content_ru')->nullable();
+            $table->text('content_en')->nullable();
+            $table->boolean('status')->default(true);
+            $table->string('images');
             $table->timestamps();
         });
     }

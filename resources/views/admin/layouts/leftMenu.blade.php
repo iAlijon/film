@@ -32,18 +32,53 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{route('interview.index')}}" class="nav-link">
                             <i class="far fa-circle"></i>
                             <p class="text">Intervyu</p>
                             <span class="badge badge-primary right"></span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{route('portret.index')}}" class="nav-link">
                             <i class="far fa-circle"></i>
-                            <p class="text">Portret</p>
+                            <p class="text">Portret
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
                             <span class="badge badge-primary right"></span>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="" class="nav-link">
+                                    <i class="fa fa-users nav-icon"></i>
+                                    <p>Rejissyorlar</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link">
+                                    <i class="fa fa-users nav-icon"></i>
+                                    <p>Aktyorlar</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link">
+                                    <i class="fa fa-users nav-icon"></i>
+                                    <p>Operatorlar</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link">
+                                    <i class="fa fa-users nav-icon"></i>
+                                    <p>Kompozitor-bastakorlar</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link">
+                                    <i class="fa fa-users nav-icon"></i>
+                                    <p>Рассомлар</p>
+                                </a>
+                            </li>
+
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">

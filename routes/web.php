@@ -21,6 +21,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
     Route::resources([
         'news' => \App\Http\Controllers\Admin\NewsController::class,
         'interview' => \App\Http\Controllers\Admin\InterViewController::class,
+        'portret' => \App\Http\Controllers\Admin\PortretController::class
     ]);
     Route::post('/new-status', [\App\Http\Controllers\Admin\NewsController::class, 'newStatus'])->name('new-status');
+    Route::post('/interview-status', [\App\Http\Controllers\Admin\InterViewController::class, 'interviewStatus'])->name('interview-status');
 });

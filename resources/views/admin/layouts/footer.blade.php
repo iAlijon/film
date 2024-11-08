@@ -5,5 +5,5 @@
         "Kino Tahlil"
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2024 <a href="https://myjob.mehnat.uz">"Kino Tahlil"</a>.</strong> Barcha huquqlar himoyalangan.
+    <strong>Copyright &copy; 2024 <a href="#">"Kino Tahlil"</a>.</strong> Barcha huquqlar himoyalangan.
 </footer>

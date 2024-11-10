@@ -129,6 +129,24 @@
                             <th>Create</th>
                             <th></th>
                         </tr>
+                        <tr>
+                            <form action="">
+                                <input type="hidden" name="from_filter" value="true">
+                                <button type="submit" class="d-none"></button>
+                                <th></th>
+                                <th class="w-25">
+                                    <input type="text" class="form-control form-control-sm" name="name_oz"
+                                           value="{{request('name_oz')}}">
+                                </th>
+                                <th class="w-25">
+                                    <input type="text" class="form-control form-control-sm" name="description_oz"
+                                           value="{{request('description_oz')}}">
+                                </th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </form>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach($models as $k => $model)
@@ -160,7 +178,7 @@
                                             <span class="fa fa-trash-alt"></span>
                                             Delete
                                         </a>
-                                    </form>
+                                      </form>
                                 </td>
                             </tr>
                         @endforeach

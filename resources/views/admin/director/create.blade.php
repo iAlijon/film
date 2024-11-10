@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin')
 
-@section('title', 'Yangiliklar')
-
 @section('content')
+    <section class="content-header">
 
+    </section>
 @endsection

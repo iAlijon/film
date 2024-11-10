@@ -3,10 +3,11 @@
 
 namespace App\Repositories;
 
+use App\Http\Filter\InterviewFilter;
 use App\Models\InterView;
 use App\Traits\ImageUploads;
 
-class InterViewRepository
+class InterViewRepository extends BaseRepository
 {
     use ImageUploads;
 
@@ -16,9 +17,11 @@ class InterViewRepository
     }
 
 
-    public function index()
+    public function index($request)
     {
-        return $this->model->orderBy('id', 'desc')->paginate(20);
+        $filter = new InterviewFilter($request);
+        $filter = $filter->filter();
+        return $filter->orderBy('id', 'desc')->paginate($this->limit);
     }
 
     public function findById($id)

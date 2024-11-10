@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 
+use App\Http\Filter\NewFilter;
 use App\Models\News;
 use App\Traits\ImageUploads;
 use Illuminate\Http\Request;
@@ -22,9 +23,11 @@ class NewsRepository extends BaseRepository
         $this->model = new News();
     }
 
-    public function index()
+    public function index($request)
     {
-        return $this->model->orderBy('id', 'desc')->paginate($this->limit);
+        $filter = new NewFilter($request);
+        $filter = $filter->filter();
+        return $filter->orderBy('id', 'desc')->paginate($this->limit);
     }
 
     public function findById($id)

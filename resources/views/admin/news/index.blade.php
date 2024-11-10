@@ -129,11 +129,11 @@
                                 <th></th>
                                 <th class="w-25">
                                     <input type="text" class="form-control form-control-sm" name="name_oz"
-                                           value="{{isset($filter->name_oz)?$filter->name_oz:''}}">
+                                           value="{{request('name_oz')}}">
                                 </th>
                                 <th class="w-25">
                                     <input type="text" class="form-control form-control-sm" name="description_oz"
-                                           value="{{isset($filter->description_oz)?$filter->description_oz:''}}">
+                                           value="{{request('description_oz')}}">
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -142,7 +142,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($models as $k => $model)
+                        @forelse($models as $k => $model)
                             <tr>
                                 <td class="text-center">{{$k + 1}}</td>
                                 <td>{{$model->name_oz}}</td>
@@ -158,11 +158,11 @@
                                     </label>
                                 </td>
                                 <td class="text-center">{{\Carbon\Carbon::parse($model->created_at)->format('d.m.Y')}}</td>
-                                <td class="project-actions text-right">
-                                    <a href="{{route('news.edit', $model->id)}}" class="btn btn-info btn-sm"><i
-                                            class="fas fa-pencil-alt"></i>Edit</a>
-                                    <a href="{{route('news.show', $model->id)}}" class="btn btn-primary btn-sm"><i
-                                            class="fas fa-folder"></i>View</a>
+                                <td class="d-flex justify-content-center align-content-around">
+                                    <a href="{{route('news.edit', $model->id)}}" class="btn btn-info btn-sm mr-1"><i
+                                            class="fas fa-pencil-alt"></i></a>
+                                    <a href="{{route('news.show', $model->id)}}" class="btn btn-primary btn-sm mr-1"><i
+                                            class="fas fa-eye"></i></a>
                                     <form action="{{ route('news.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
                                         @csrf
                                         @method('delete')
@@ -173,11 +173,18 @@
                                         document.getElementById('deleteItem-<?= $model->id ?>').submit();
                                        }">
                                         <span class="fa fa-trash-alt"></span>
-                                        Delete
                                     </a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="9" class="text-center">
+                                    <div class="alert alert-default-warning">
+                                        Ma'lumot mavjud emas
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
                         </tbody>
                         <div class="text-right">
                             {{$models->links()}}

@@ -23,22 +23,7 @@ class NewsController extends Controller
      */
     public function index(Request $request)
     {
-        $input = $request->all();
-        $news = new News();
-        if (isset($input['name_oz']) && empty($input['name_oz'])) {
-            $news->where('name_oz', 'like', '%' . $input['name_oz'] . '%')->get();
-        }
-        if (isset($input['name_uz']) && empty($input['name_uz'])) {
-            $news->where('name_uz', 'like', '%' . $input['name_uz'] . '%')->get();
-        }
-        if (isset($input['description_oz']) && empty($input['description_oz'])) {
-            $news->where('description_oz', 'like', '%' . $input['description_oz'] . '%')->get();
-        }
-        if (isset($input['description_uz']) && empty($input['description_uz'])) {
-            $news->where('description_uz', 'like', '%' . $input['description_uz'] . '%')->get();
-        }
-
-        $models = $this->repo->index();
+        $models = $this->repo->index($request);
         return view('admin.news.index', compact('models'));
     }
 
@@ -78,7 +63,8 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        return view('admin.news.show');
+        $model = $this->repo->findById($id);
+        return view('admin.news.show', compact('model'));
     }
 
     /**

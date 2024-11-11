@@ -14,7 +14,7 @@
     </section>
     <section class="content">
         <div class="col-sm-12">
-            <div class="card card-primary card-outline">
+            <div class="card card-primary card-outline" >
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                         <li class="nav-item">

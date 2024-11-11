@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Storage;
 class NewsRepository extends BaseRepository
 {
     use ImageUploads;
-
-    private $model;
-
     public function __construct()
     {
 

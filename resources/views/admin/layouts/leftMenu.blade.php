@@ -23,7 +23,7 @@
         <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-header">MENUS</li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a href="{{route('news.index')}}" class="nav-link">
                             <i class="far fa-circle"></i>
                             <p class="text">Yangiliklar</p>

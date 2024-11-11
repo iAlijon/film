@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\DirectorRequest;
+use App\Models\UserCategory;
 use App\Repositories\DirectorRepository;
 use Illuminate\Http\Request;
 
@@ -32,8 +34,8 @@ class DirectorController extends Controller
      */
     public function create()
     {
-
-        return view('admin.director.create');
+        $categories = UserCategory::select('id', 'name_oz')->get();
+        return view('admin..director.create', compact('categories'));
     }
 
     /**
@@ -42,9 +44,12 @@ class DirectorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DirectorRequest $request)
     {
-        //
+        $model = $this->repo->create($request->validated());
+        if ($model)
+            return redirect()->route('director.index');
+        return false;
     }
 
     /**
@@ -55,7 +60,9 @@ class DirectorController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = $this->repo->findById($id);
+        $user->image = explode('storage/director/', $user->images);
+        return view('admin.director.show', compact('user'));
     }
 
     /**
@@ -66,7 +73,8 @@ class DirectorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = $this->repo->findById($id);
+        return view('admin.director.edit', compact('model'));
     }
 
     /**
@@ -76,9 +84,12 @@ class DirectorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DirectorRequest $request, $id)
     {
-        //
+        $model = $this->repo->update($request->validated(), $id);
+        if ($model)
+            return redirect()->route('redirect.index');
+        return false;
     }
 
     /**
@@ -89,6 +100,7 @@ class DirectorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->repo->delete($id);
+        return redirect()->route('director.index');
     }
 }

@@ -79,14 +79,14 @@
             font-family: Verdana, sans-serif;
         }
         .project-actions{
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Har bir elementni teng kenglikda qilish */
-            gap: 10px; /* elementlar orasidagi masofa */
-            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
         }
-        .project-actions a{
-            width: 100%;
-        }
+       .table{
+           text-align: center;
+       }
         /*--------- END --------*/
 
     </style>
@@ -109,15 +109,16 @@
             <div class="card card-info">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title">News List</h3>
-                    <a href="{{route('news.create')}}" class="btn btn-success ml-auto"><i class="fa fa-plus"></i> Qo'shish</a>
+                    <a href="{{route('news.create')}}" class="btn btn-success ml-auto">&plus; Qo'shish</a>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-hover">
                         <thead>
-                        <tr>
+                        <tr class="text-center">
                             <th class="text-center">#</th>
                             <th>Name</th>
                             <th>Description</th>
+                            <th>Kategoriya</th>
                             <th>Status</th>
                             <th>Created</th>
                             <th></th>
@@ -135,6 +136,14 @@
                                     <input type="text" class="form-control form-control-sm" name="description_oz"
                                            value="{{request('description_oz')}}">
                                 </th>
+                                <th>
+                                    <select name="new_category_id" class="form-control form-control-sm" id="new_category_id" onchange="this.form.submit()">
+                                        <option value="">----</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}" {{request('new_category_id') == $category->id ?'selected':''}}>{{$category->name_oz}}</option>
+                                        @endforeach
+                                    </select>
+                                </th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -147,6 +156,7 @@
                                 <td class="text-center">{{$k + 1}}</td>
                                 <td>{{$model->name_oz}}</td>
                                 <td>{{$model->description_oz}}</td>
+                                <td>{{$model->new_category->name_oz}}</td>
                                 <td class="text-center">
                                     <label class="switch">
                                         <input type="checkbox"
@@ -158,22 +168,24 @@
                                     </label>
                                 </td>
                                 <td class="text-center">{{\Carbon\Carbon::parse($model->created_at)->format('d.m.Y')}}</td>
-                                <td class="d-flex justify-content-center align-content-around">
-                                    <a href="{{route('news.edit', $model->id)}}" class="btn btn-info btn-sm mr-1"><i
-                                            class="fas fa-pencil-alt"></i></a>
-                                    <a href="{{route('news.show', $model->id)}}" class="btn btn-primary btn-sm mr-1"><i
-                                            class="fas fa-eye"></i></a>
-                                    <form action="{{ route('news.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
-                                        @csrf
-                                        @method('delete')
+                                <td>
+                                    <div class="project-actions">
+                                        <a href="{{route('news.edit', $model->id)}}" class="btn btn-info btn-sm mr-1"><i
+                                                class="fas fa-pencil-alt"></i></a>
+                                        <a href="{{route('news.show', $model->id)}}" class="btn btn-primary btn-sm mr-1"><i
+                                                class="fas fa-eye"></i></a>
+                                        <form action="{{ route('news.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
+                                            @csrf
+                                            @method('delete')
 
-                                    </form>
-                                    <a type="submit" class="btn btn-danger btn-sm"
-                                       onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
-                                        document.getElementById('deleteItem-<?= $model->id ?>').submit();
-                                       }">
-                                        <span class="fa fa-trash-alt"></span>
-                                    </a>
+                                        </form>
+                                        <a type="submit" class="btn btn-danger btn-sm"
+                                           onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
+                                               document.getElementById('deleteItem-<?= $model->id ?>').submit();
+                                               }">
+                                            <span class="fa fa-trash-alt"></span>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         @empty

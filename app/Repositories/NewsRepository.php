@@ -24,7 +24,7 @@ class NewsRepository extends BaseRepository
     {
         $filter = new NewFilter($request);
         $filter = $filter->filter();
-        return $filter->orderBy('id', 'desc')->paginate($this->limit);
+        return $filter->with('new_category')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
     public function findById($id)
@@ -47,8 +47,9 @@ class NewsRepository extends BaseRepository
             'content_uz' => contentByDomDocment($data['content_uz']),
             'content_ru' => $data['content_ru'] ?? null,
             'content_en' => $data['content_en'] ?? null,
-            'status' => true,
-            'image' => $this->uploads($data['images'], 'news')
+            'status' => $data['status'] == 'active' ? true : false,
+            'image' => $this->uploads($data['images'], 'news'),
+            'category_id' => $data['new_category_id']
         ]);
         if ($model) {
             return $model;
@@ -59,7 +60,13 @@ class NewsRepository extends BaseRepository
 
     public function update($data, $id)
     {
+        dd($data);
         $model = $this->model->find($id);
+        if ($model->image)
+        {
+            $path = explode('storage/news/', $model->image);
+            @unlink('storage/news/'.$path[1]);
+        }
         $model->update([
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
@@ -73,8 +80,9 @@ class NewsRepository extends BaseRepository
             'content_uz' => contentByDomDocment($data['content_uz']),
             'content_ru' => $data['content_ru'] ?? null,
             'content_en' => $data['content_en'] ?? null,
-            'status' => true,
-            'image' => $this->uploads($data['images'], 'news')
+            'status' => $data['status'] == 'active' ? true:false,
+            'image' => $this->uploads($data['images'], 'news'),
+            'category_id' => $data['new_category_id']
         ]);
         if ($model) {
             return $model;

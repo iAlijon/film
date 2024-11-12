@@ -22,14 +22,14 @@
     <link rel="stylesheet" href="{{asset('adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- JQVMap -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/jqvmap/jqvmap.min.css')}}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/daterangepicker/daterangepicker.css')}}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/summernote/summernote-bs4.min.css')}}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
     @stack('css')
 </head>
 <body>
@@ -80,6 +80,8 @@
     <script src="{{asset('adminlte/plugins/daterangepicker/daterangepicker.js')}}"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="{{asset('adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+    <!-- Bootstrap Switch -->
+    <script src="{{asset('adminlte/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
     <!-- Select2 -->
     <script src="{{asset('adminlte/plugins/select2/js/select2.full.min.js')}}"></script>
     <!-- Summernote -->
@@ -92,6 +94,7 @@
     <script src="{{asset('adminlte/dist/js/demo.js')}}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{asset('adminlte/dist/js/pages/dashboard.js')}}"></script>
+    <script src="{{asset('adminlte/dist/js/add.js')}}"></script>
     <script>
         $(function (){
             $('.select2').select2()

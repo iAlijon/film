@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\NewRequests;
 use App\Models\News;
+use App\Models\NewsCategory;
 use Illuminate\Http\Request;
 use App\Repositories\NewsRepository;
 
@@ -23,8 +24,9 @@ class NewsController extends Controller
      */
     public function index(Request $request)
     {
+        $categories = NewsCategory::select('id', 'name_oz', 'name_uz')->get();
         $models = $this->repo->index($request);
-        return view('admin.news.index', compact('models'));
+        return view('admin.news.index', compact('models', 'categories'));
     }
 
     /**
@@ -34,7 +36,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-       return view('admin.news.create');
+        $categories = NewsCategory::select('id', 'name_oz')->get();
+       return view('admin.news.create', compact('categories'));
     }
 
     /**
@@ -75,8 +78,9 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
+        $categories = NewsCategory::select('id', 'name_oz', 'name_uz')->get();
         $model = $this->repo->findById($id);
-        return view('admin.news.edit', compact('model'));
+        return view('admin.news.edit', compact('model', 'categories'));
     }
 
     /**
@@ -88,6 +92,7 @@ class NewsController extends Controller
      */
     public function update(NewRequests $request, $id)
     {
+        dd($request->all());
         $model = $this->repo->update($request->validated(), $id);
         if ($model){
             return redirect()->route('news.index');

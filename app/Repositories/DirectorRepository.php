@@ -74,8 +74,8 @@ class DirectorRepository extends BaseRepository
             'description_en' => $data['description_en'] ?? null,
             'content_oz' => contentByDomDocment($data['content_oz']),
             'content_uz' => contentByDomDocment($data['content_uz']),
-            'content_ru' => contentByDomDocment($data['content_ru']) ?? null,
-            'content_en' => contentByDomDocment($data['content_en']) ?? null,
+            'content_ru' => $data['content_ru'] ?? null,
+            'content_en' => $data['content_en'] ?? null,
             'images' => $this->uploads($data['images'], 'director'),
             'status' => true,
             'birth_date' => $data['birth_date']

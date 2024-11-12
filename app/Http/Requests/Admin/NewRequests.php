@@ -36,7 +36,9 @@ class NewRequests extends FormRequest
             'content_uz' => 'required',
             'content_ru' => 'nullable',
             'content_en' => 'nullable',
-            'images' => 'required|image|mimes:png,jpeg,jpg|max:2048'
+            'images' => 'required|image|mimes:png,jpeg,jpg|max:2048',
+            'new_category_id' => 'required|integer',
+            'status' => 'required'
         ];
     }
 }

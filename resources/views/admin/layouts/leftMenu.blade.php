@@ -23,8 +23,8 @@
         <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-header">MENUS</li>
-                    <li class="nav-item active">
-                        <a href="{{route('news.index')}}" class="nav-link">
+                    <li class="nav-item">
+                        <a href="{{route('news.index')}}" class="nav-link {{(request()->is('admin/news*'))?'active':''}}">
                             <i class="far fa-circle"></i>
                             <p class="text">Yangiliklar</p>
                             <span class="badge badge-primary right"></span>
@@ -32,14 +32,14 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{route('interview.index')}}" class="nav-link">
+                        <a href="{{route('interview.index')}}" class="nav-link {{(request()->is('admin/interview*'))?'active':''}}">
                             <i class="far fa-circle"></i>
                             <p class="text">Intervyu</p>
                             <span class="badge badge-primary right"></span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('portret.index')}}" class="nav-link">
+                        <a href="#" class="nav-link">
                             <i class="far fa-circle"></i>
                             <p class="text">Portret
                                 <i class="right fas fa-angle-left"></i>
@@ -48,7 +48,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{route('director.index')}}" class="nav-link">
+                                <a href="{{route('director.index')}}" class="nav-link {{(request()->is('admin/director*'))?'active':''}}">
                                     <i class="fa fa-users nav-icon"></i>
                                     <p>Rejissyorlar</p>
                                 </a>

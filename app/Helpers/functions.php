@@ -100,4 +100,17 @@ if(!function_exists('contentByDomDocment')) {
 
         return $dom->saveHTML($dom->documentElement);
     }
+
+}
+
+if (!function_exists('getInFolder'))
+{
+    function getInFolder($image)
+    {
+        $path = explode('storage/news/', $image);
+        if ($path){
+            return '/storage/news/'.$path[1];
+        }
+        return false;
+    }
 }

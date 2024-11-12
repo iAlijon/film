@@ -38,6 +38,7 @@
                             <th>F.I.O</th>
                             <th>Date</th>
                             <th>Description</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                         <tr>
@@ -54,6 +55,7 @@
                                     <input type="text" name="description_oz" class="form-control form-control-sm" value="{{request('description_oz')}}">
                                 </th>
                                 <th></th>
+                                <th></th>
                             </form>
                         </tr>
                     </thead>
@@ -64,6 +66,7 @@
                                 <td>{{$item->full_name_oz}}</td>
                                 <td>{{$item->birth_date}}</td>
                                 <td>{{$item->description_oz}}</td>
+                                <td></td>
                                 <td class="d-flex align-items-center justify-content-center">
                                     <a href="{{route('director.edit', $item->id)}}" class="btn btn-info btn-sm mr-1"><i class="fa fa-edit fa-sm"></i></a>
                                     <a href="{{route('director.show', $item->id)}}" class="btn btn-primary btn-sm mr-1"><i class="fa fa-eye fa-sm"></i></a>

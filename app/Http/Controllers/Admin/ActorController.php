@@ -93,6 +93,6 @@ class ActorController extends Controller
     public function destroy($id)
     {
         $this->repo->delete($id);
-        return redirect()->back();
+        return redirect()->route('actor.index');
     }
 }

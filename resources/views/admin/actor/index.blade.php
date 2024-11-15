@@ -71,14 +71,17 @@
                                         <div class="d-flex align-items-center justify-content-center">
                                             <a href="{{route('actor.edit', $item->id)}}" class="btn btn-info btn-sm mr-1"><i class="fa fa-edit"></i></a>
 {{--                                            <a href="{{route('actor.show', $item->id)}}" class="btn btn-primary btn-sm mr-1"><i class="fa fa-eye"></i></a>--}}
-                                            <form action="{{ route('actor.destroy',  $item->id) }}" method="post"
-                                                  onsubmit="return confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')">
+                                            <form action="{{ route('actor.destroy', $item->id) }}" method="post" id="deleteItem-{{$item->id}}">
                                                 @csrf
                                                 @method('delete')
-                                                <a type="submit" href="" class="btn btn-danger btn-sm">
-                                                    <span class="fa fa-trash-alt"></span>
-                                                </a>
+
                                             </form>
+                                            <a type="submit" class="btn btn-danger btn-sm"
+                                               onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
+                                                   document.getElementById('deleteItem-<?= $item->id ?>').submit();
+                                                   }">
+                                                <span class="fa fa-trash-alt"></span>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -92,6 +95,9 @@
                                 </tr>
                             @endforelse
                         </tbody>
+                        <tr class="text-right">
+                            {{$models->links()}}
+                        </tr>
                     </table>
                 </div>
             </div>

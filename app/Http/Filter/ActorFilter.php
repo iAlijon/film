@@ -18,9 +18,9 @@ class ActorFilter
 
     public function filter()
     {
-        if (isset($this->request->name_oz) && !empty($this->request->name_oz))
+        if (isset($this->request->full_name_oz) && !empty($this->request->full_name_oz))
         {
-            $this->model = $this->model->where('full_name_oz', 'ilike', '%'.$this->request->name_oz.'%');
+            $this->model = $this->model->where('full_name_oz', 'ilike', '%'.$this->request->full_name_oz.'%');
         }
         return $this->model;
     }

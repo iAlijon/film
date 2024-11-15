@@ -110,11 +110,12 @@
     </section>
     <!-- general form elements disabled -->
     <section class="content">
-        <div class="card card-warning">
+        <div class="card card-info">
             <div class="card-header">
-                <h3 class="card-title">Intervyu List</h3>
+{{--                <h3 class="card-title">Intervyu List</h3>--}}
+                <h3 class="card-title"></h3>
                 <div class="text-right">
-                    <a href="{{route('interview.create')}}" class="btn btn-success text-white"><i class="fa fa-plus"></i> Qo'shish</a>
+                    <a href="{{route('interview.create')}}" class="btn btn-success text-white">&plus; Qo'shish</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -165,20 +166,21 @@
                                     </label>
                                 </td>
                                 <td class="text-center">{{\Carbon\Carbon::parse($model->created_at)->format('d.m.Y')}}</td>
-                                <td class="project-actions text-right">
-                                    <a href="{{route('interview.edit', $model->id)}}" class="btn btn-info btn-sm"><i
-                                            class="fas fa-pencil-alt"></i>Edit</a>
-                                    <a href="{{route('interview.show', $model->id)}}" class="btn btn-primary btn-sm"><i
-                                            class="fas fa-folder"></i>View</a>
-                                    <form action="{{ route('interview.destroy',  $model->id) }}" method="post"
-                                          onsubmit="return confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')">
-                                        @csrf
-                                        @method('delete')
-                                        <a type="submit" class="btn btn-danger btn-sm">
-                                            <span class="fa fa-trash-alt"></span>
-                                            Delete
-                                        </a>
-                                      </form>
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <a href="{{route('interview.edit', $model->id)}}" class="btn btn-info btn-sm mr-1"><i
+                                                class="fas fa-pencil-alt"></i></a>
+                                        <a href="{{route('interview.show', $model->id)}}" class="btn btn-primary btn-sm mr-1"><i
+                                                class="fas fa-eye"></i></a>
+                                        <form action="{{ route('interview.destroy',  $model->id) }}" method="post"
+                                              onsubmit="return confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')">
+                                            @csrf
+                                            @method('delete')
+                                            <a type="submit" class="btn btn-danger btn-sm">
+                                                <span class="fa fa-trash-alt"></span>
+                                            </a>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

@@ -32,11 +32,31 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{route('interview.index')}}" class="nav-link {{(request()->is('admin/interview*'))?'active':''}}">
+                        <a href="#" class="nav-link">
                             <i class="far fa-circle"></i>
-                            <p class="text">Intervyu</p>
-                            <span class="badge badge-primary right"></span>
+                            <p class="text">Suxbatlar</p>
+                            <i class="right fas fa-angle-left"></i>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('actor.index')}}" class="nav-link" {{(request()->is('admin/actor*'))?'active':''}}>Aktyorlar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Rejissyorlar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Kinodramaturgiya</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Operatirlar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Kompozitor bastakorlar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Boshqa kino ijodkorlari</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">

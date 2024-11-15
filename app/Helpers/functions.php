@@ -105,11 +105,11 @@ if(!function_exists('contentByDomDocment')) {
 
 if (!function_exists('getInFolder'))
 {
-    function getInFolder($image)
+    function getInFolder($image, $folder)
     {
-        $path = explode('storage/news/', $image);
+        $path = explode('storage/'.$folder.'/', $image);
         if ($path){
-            return '/storage/news/'.$path[1];
+            return '/storage/'.$folder.'/'.$path[1];
         }
         return false;
     }

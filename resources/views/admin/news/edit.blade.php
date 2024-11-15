@@ -65,7 +65,7 @@
                                     <label>Rasm</label>
                                     @if($model->image)
                                         <div id="imageBox" style="width: 200px; height: 200px; margin-bottom: 30px">
-                                            <img src="{{getInFolder($model->image)}}" alt="" style="width: 100%; height: 100%">
+                                            <img src="{{getInFolder($model->image, 'news')}}" alt="" style="width: 100%; height: 100%">
                                             <p>
                                                 <a href="#" id="changeImage">O'zgartiring</a>
                                             </p>

@@ -20,7 +20,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
     Route::get('logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
     Route::resources([
         'news' => \App\Http\Controllers\Admin\NewsController::class,
-        'interview' => \App\Http\Controllers\Admin\InterViewController::class,
+//        'interview' => \App\Http\Controllers\Admin\InterViewController::class,
+        'actor' => \App\Http\Controllers\Admin\ActorController::class,
         'portret' => \App\Http\Controllers\Admin\PortretController::class,
         'director' => \App\Http\Controllers\Admin\DirectorController::class,
     ]);

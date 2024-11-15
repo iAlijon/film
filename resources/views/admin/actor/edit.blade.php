@@ -1,12 +1,11 @@
 @extends('admin.layouts.admin')
 
-
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Aktyorlar Qo'shish</h1>
+                    <h1>Aktyorlar</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -15,12 +14,11 @@
                     </ol>
                 </div>
             </div>
-        </div>
+        </div><!-- /.container-fluid -->
     </section>
-
-    <section class="content mb-5">
+    <section class="content">
         <div class="col-11 ml-auto mr-auto">
-            <div class="card card-info card-outline">
+            <div class="card card-outline card-info">
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                         <li class="nav-item">
@@ -46,41 +44,39 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('actor.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('actor.update', $model->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             {{----  oz  ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
-
                                 <div class="form-group">
-                                    <label>F.I.O (OZ)</label>
-                                    <input type="text" name="full_name_oz" class="form-control form-control-sm" placeholder="F.I.O">
+                                    <label for="full_name_oz">F.I.O (OZ)</label>
+                                    <input type="text" class="form-control form-control-sm" name="full_name_oz" value="{{$model->full_name_oz}}">
                                     <small class="text-danger">{{$errors->first('full_name_oz')}}</small>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="image">Rasm</label>
-                                    <input type="file" class="form-control form-control-sm" name="image">
-                                    <small class="text-danger">{{$errors->first('images')}}</small>
+                                    <input type="file" name="image" class="form-control form-control-sm">
+                                    <small class="text-danger">{{$errors->first('image')}}</small>
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="description_oz">Qisqacha ma'lumoq (OZ)</label>
-                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control form-control-sm"></textarea>
+                                    <label for="description_oz">Qisqacha ma'lumot (OZ)</label>
+                                    <textarea name="description_oz" class="form-control form-control-sm" id="description_oz" cols="30" rows="5">{{$model->description_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
                             </div>
                             {{----  uz  ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
-                                    <label>Ф.И.О (UZ)</label>
-                                    <input type="text" name="full_name_uz" class="form-control form-control-sm" placeholder="F.I.O">
+                                    <label for="full_name_uz">Ф.И.О (UZ)</label>
+                                    <input type="text" class="form-control form-control-sm" name="full_name_uz" value="{{$model->full_name_uz}}">
                                     <small class="text-danger">{{$errors->first('full_name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="description_uz">Қисқача маълумот (UZ)</label>
-                                    <textarea name="description_uz" cols="30" rows="5" class="form-control form-control-sm"></textarea>
+                                    <label for="description_oz">Қисқача маълумот (UZ)</label>
+                                    <textarea name="description_uz" class="form-control form-control-sm" cols="30" rows="5">{{$model->description_uz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
                             </div>

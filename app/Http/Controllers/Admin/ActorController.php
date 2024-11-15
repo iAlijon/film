@@ -67,7 +67,8 @@ class ActorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = $this->repo->findById($id);
+        return view('admin.actor.edit', compact('model'));
     }
 
     /**
@@ -79,7 +80,8 @@ class ActorController extends Controller
      */
     public function update(ActorCategoryRequest $request, $id)
     {
-        //
+        $this->repo->update($request->validated(), $id);
+        return redirect()->route('actor.index');
     }
 
     /**
@@ -90,6 +92,7 @@ class ActorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->repo->delete($id);
+        return redirect()->back();
     }
 }

@@ -95,10 +95,12 @@
                                 </tr>
                             @endforelse
                         </tbody>
-                        <tr class="text-right">
-                            {{$models->links()}}
-                        </tr>
                     </table>
+                </div>
+                <div class="card-footer">
+                    <div class="text-right">
+                        {{$models->links('pagination::bootstrap-4')}}
+                    </div>
                 </div>
             </div>
         </div>

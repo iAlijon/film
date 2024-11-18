@@ -198,12 +198,16 @@
                             </tr>
                         @endforelse
                         </tbody>
-                        <div class="text-right">
-                            {{$models->links()}}
-                        </div>
                     </table>
                 </div>
                 <!-- /.card-body -->
+                <div class="card-footer clearfix">
+                    <div class="col-sm-12 text-right">
+                        <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                            {{$models->links('vendor.pagination.bootstrap-4')}}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- /.container-fluid -->

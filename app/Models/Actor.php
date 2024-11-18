@@ -20,4 +20,9 @@ class Actor extends Model
         'description_en',
         'images'
     ];
+
+    public function actorConversation()
+    {
+        return $this->belongsTo(ActorConversation::class);
+    }
 }

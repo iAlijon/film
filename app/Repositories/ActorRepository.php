@@ -81,10 +81,11 @@ class ActorRepository extends BaseRepository
     public function delete($id)
     {
         $model = $this->findById($id);
-        if ($model->images){
-            $path = explode('storage/actor/', $model->images);
-            @unlink('storage/actor/'.$path[1]);
-        }
+//        if ($model->images){
+//            $path = explode('storage/actor/', $model->images);
+//            @unlink('storage/actor/'.$path[1]);
+//        }
+        $file = deleteFile($model->images);
         $model->delete();
         return true;
     }

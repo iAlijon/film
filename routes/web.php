@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'news' => \App\Http\Controllers\Admin\NewsController::class,
 //        'interview' => \App\Http\Controllers\Admin\InterViewController::class,
         'actor' => \App\Http\Controllers\Admin\ActorController::class,
+        'actor_conversation' => \App\Http\Controllers\Admin\ActorConversationController::class,
         'portret' => \App\Http\Controllers\Admin\PortretController::class,
         'director' => \App\Http\Controllers\Admin\DirectorController::class,
     ]);

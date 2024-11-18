@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-hover table-bordered table-sm">
+                    <table class="table table-striped table-hover table-bordered table-sm" id="paging">
                         <thead>
                         <tr class="text-center">
                             <th>#</th>
@@ -99,7 +99,7 @@
                 </div>
                 <div class="card-footer">
                     <div class="text-right">
-                        {{$models->links('pagination::bootstrap-4')}}
+                        {{$models->links('vendor.pagination.bootstrap-4')}}
                     </div>
                 </div>
             </div>

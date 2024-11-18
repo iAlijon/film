@@ -39,7 +39,15 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{route('actor.index')}}" class="nav-link" {{(request()->is('admin/actor*'))?'active':''}}>Aktyorlar</a>
+                                <a href="" class="nav-link"><i class="right fas fa-angle-left"></i>Aktyorlar</a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{route('actor.index')}}" class="nav-link" {{(request()->is('admin/actor*'))?'active':''}}>Aktyor qo'shish</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route('actor_conversation.index')}}" {{(request()->is('admin/actor*'))?'active':''}} class="nav-link">Aktyor bilan suxbat</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">Rejissyorlar</a>

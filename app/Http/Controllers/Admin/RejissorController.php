@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ActorConversationRequest;
-use App\Models\Actor;
-use App\Repositories\ActorConversationRepository;
+use App\Http\Requests\Admin\RejissorRequest;
+use App\Repositories\RejissorRepository;
 use Illuminate\Http\Request;
 
-class ActorConversationController extends Controller
+class RejissorController extends Controller
 {
     protected $repo;
-    public function __construct(ActorConversationRepository $repo)
+    public function __construct(RejissorRepository $repo)
     {
         $this->repo = $repo;
     }
@@ -24,7 +23,7 @@ class ActorConversationController extends Controller
     public function index(Request $request)
     {
         $models = $this->repo->index($request);
-        return view('admin.actor_conversation.index', compact('models'));
+        return view('admin.rejissor.index', compact('models'));
     }
 
     /**
@@ -34,8 +33,7 @@ class ActorConversationController extends Controller
      */
     public function create()
     {
-        $actors = Actor::all();
-        return view('admin.actor_conversation.create', compact('actors'));
+        return view('admin.rejissor.create');
     }
 
     /**
@@ -44,16 +42,14 @@ class ActorConversationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ActorConversationRequest $request)
+    public function store(RejissorRequest $request)
     {
-        $this->repo->create($request->validated());
-        return redirect()->route('actor_conversation.index');
+        return redirect()->route('rejissor.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -64,38 +60,31 @@ class ActorConversationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $actors = Actor::all();
-        $model = $this->repo->findById($id);
-        return view('admin.actor_conversation.edit', compact('model', 'actors'));
+        return view('admin.rejissor.edit');
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ActorConversationRequest $request, $id)
+    public function update(RejissorRequest $request, $id)
     {
-        $this->repo->update($request->validated(), $id);
-        return redirect()->route('actor_conversation.index');
+        return redirect()->route('admin.rejissor.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $this->repo->delete($id);
         return redirect()->back();
     }
 }

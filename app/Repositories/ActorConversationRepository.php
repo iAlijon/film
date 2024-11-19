@@ -22,6 +22,11 @@ class ActorConversationRepository extends BaseRepository
         return $filter->with('actor')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
+    public function findById($id)
+    {
+        return $this->model->find($id);
+    }
+
     public function create($data)
     {
         $model = $this->model->create([
@@ -38,7 +43,7 @@ class ActorConversationRepository extends BaseRepository
             'content_uz' => contentByDomDocment($data['content_uz']),
             'content_ru' => $data['content_ru']??null,
             'content_en' => $data['content_en']??null,
-            'status' => $data['data']??true,
+            'status' => $data['data'],
         ]);
         if ($model){
             return $model;
@@ -57,13 +62,13 @@ class ActorConversationRepository extends BaseRepository
             'name_en' => $data['name_en'] ?? null,
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
-            'description_ru' => $data['description_ru'],
-            'description_en' => $data['description_en'],
+            'description_ru' => $data['description_ru']??null,
+            'description_en' => $data['description_en']??null,
             'content_oz' => contentByDomDocment($data['content_oz']),
             'content_uz' => contentByDomDocment($data['content_uz']),
             'content_ru' => $data['content_ru']??null,
             'content_en' => $data['content_en']??null,
-            'status' => $data['data']??true,
+            'status' => $data['data'],
         ]);
         if ($model){
             return $model;

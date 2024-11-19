@@ -61,7 +61,7 @@
                                 <div class="form-group">
                                     <label for="image">Rasm</label>
                                     <input type="file" class="form-control form-control-sm" name="image">
-                                    <small class="text-danger">{{$errors->first('images')}}</small>
+                                    <small class="text-danger">{{$errors->first('image')}}</small>
                                 </div>
 
                                 <div class="form-group">

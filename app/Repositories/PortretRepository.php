@@ -9,7 +9,6 @@ use App\Traits\ImageUploads;
 
 class PortretRepository extends BaseRepository
 {
-    protected $model;
     use ImageUploads;
     public function __construct()
     {

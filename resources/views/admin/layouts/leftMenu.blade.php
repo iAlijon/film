@@ -32,25 +32,41 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-circle"></i>
+                        <a href="#" class="nav-link" >
+                            <i class="nav-icon fas fa-copy"></i>
                             <p class="text">Suxbatlar</p>
                             <i class="right fas fa-angle-left"></i>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="" class="nav-link"><i class="right fas fa-angle-left"></i>Aktyorlar</a>
+                                <li class="nav-item">
+                                <a href="" class="nav-link">
+                                    <i class="nav-icon fas fa-file"></i>
+                                    Aktyorlar
+                                    <i class="right fas fa-angle-left"></i>
+                                </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{route('actor.index')}}" class="nav-link" {{(request()->is('admin/actor*'))?'active':''}}>Aktyor qo'shish</a>
+                                        <a href="{{route('actor.index')}}" class="nav-link {{request()->is('admin/actor*')?'active':''}}"><i class="far fa-dot-circle nav-icon"></i>Aktyor qo'shish</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{route('actor_conversation.index')}}" {{(request()->is('admin/actor*'))?'active':''}} class="nav-link">Aktyor bilan suxbat</a>
+                                        <a href="{{route('actor_conversation.index')}}" class="nav-link {{request()->is('admin/actor_conversation*')?'active':''}}"><i class="far fa-dot-circle nav-icon"></i>Aktyor bilan suxbat</a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Rejissyorlar</a>
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-file"></i>
+                                    Rejissyorlar
+                                    <i class="right fas fa-angle-left"></i>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{route('rejissor.index')}}" class="nav-link" {{(request()->is('admin/rejissor*'))?'active':''}}>Rejissor qo'shish</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="" class="nav-link">Rejissor bilan suxbat</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">Kinodramaturgiya</a>

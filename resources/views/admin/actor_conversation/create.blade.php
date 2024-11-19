@@ -40,7 +40,7 @@
 
                                 <div class="form-group">
                                     <label>Aktyorni tanlang</label>
-                                    <select class="form-control" name="actor_id">
+                                    <select class="form-control form-control-sm" name="actor_id">
                                         <option value="">---</option>
                                         @foreach($actors as $actor)
                                             <option value="{{$actor->id}}">{{$actor->full_name_oz}}</option>
@@ -65,6 +65,15 @@
                                     <textarea name="content_oz" class="textarea form-control summernote"
                                               id="summernote"></textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select name="status" class="form-control form-control-sm">
+                                        <option value="">---</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">No active</option>
+                                    </select>
                                 </div>
 
                             </div>

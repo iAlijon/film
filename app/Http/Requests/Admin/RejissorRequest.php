@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ActorCategoryRequest extends FormRequest
+class RejissorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,22 +26,13 @@ class ActorCategoryRequest extends FormRequest
         return [
             'full_name_oz' => 'required|string',
             'full_name_uz' => 'required|string',
-            'full_name_ru' => 'nullable|string',
-            'full_name_en' => 'nullable|string',
+            'full_name_ru' => 'required|string',
+            'full_name_en' => 'required|string',
             'description_oz' => 'required',
             'description_uz' => 'required',
-            'description_ru' => 'nullable',
-            'description_en' => 'nullable',
-            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'image.mimes' => 'Ruxsat etilgan formatlar: jpg, jpeg, png',
-            'image.required' => 'To\'ldirilishi majburiy bo\'lgan maydon',
-            'image.max' => 'Rasm 2 megabaytdan oshmasligi kerak'
+            'description_ru' => 'required',
+            'description_en' => 'required',
+            'images' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ];
     }
 }

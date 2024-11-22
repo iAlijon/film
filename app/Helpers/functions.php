@@ -114,3 +114,13 @@ if (!function_exists('getInFolder'))
         return false;
     }
 }
+
+if (!function_exists('deleteImages'))
+{
+    function deleteImages($images, $folder){
+        $path = explode('storage/'.$folder.'/', $images);
+        if ($path){
+
+        }
+    }
+}

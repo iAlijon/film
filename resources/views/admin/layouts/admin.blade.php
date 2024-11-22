@@ -117,6 +117,30 @@
             $('.select2').select2()
         })
     </script>
+{{--    <script>--}}
+{{--        $(document).ready(function () {--}}
+{{--            // Persist sidebar state in localStorage--}}
+{{--            $('.nav-item > a').on('click', function () {--}}
+{{--                let parent = $(this).parent();--}}
+{{--                console.log(parent);--}}
+{{--                if (parent.hasClass('menu-open')) {--}}
+{{--                    localStorage.setItem('menu-' + parent.attr('id'), 'closed');--}}
+{{--                } else {--}}
+{{--                    localStorage.setItem('menu-' + parent.attr('id'), 'open');--}}
+{{--                }--}}
+{{--            });--}}
+
+{{--            // Restore sidebar state on page load--}}
+{{--            $('.nav-item').each(function () {--}}
+{{--                let id = $(this).attr('id');--}}
+{{--                console.log();--}}
+{{--                if (localStorage.getItem('menu-' + id) === 'open') {--}}
+{{--                    $(this).addClass('menu-open');--}}
+{{--                    $(this).find('> a').addClass('active');--}}
+{{--                }--}}
+{{--            });--}}
+{{--        });--}}
+{{--    </script>--}}
     @stack('js')
 </body>
 </html>

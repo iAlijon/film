@@ -39,46 +39,49 @@
                         </a>
                         <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                <a href="" class="nav-link">
-                                    <i class="nav-icon fas fa-file"></i>
+                                <a href="{{route('actor_conversation.index')}}" class="nav-link">
+                                    <i class="nav-icon far fa-circle"></i>
                                     Aktyorlar
-                                    <i class="right fas fa-angle-left"></i>
+{{--                                    <i class="right fas fa-angle-left"></i>--}}
                                 </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{route('actor.index')}}" class="nav-link {{request()->is('admin/actor*')?'active':''}}"><i class="far fa-dot-circle nav-icon"></i>Aktyor qo'shish</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{route('actor_conversation.index')}}" class="nav-link {{request()->is('admin/actor_conversation*')?'active':''}}"><i class="far fa-dot-circle nav-icon"></i>Aktyor bilan suxbat</a>
-                                    </li>
-                                </ul>
+{{--                                <ul class="nav nav-treeview">--}}
+{{--                                    <li class="nav-item">--}}
+{{--                                        <a href="{{route('actor.index')}}" class="nav-link {{request()->is('admin/actor*')?'active':''}}"><i class="far fa-dot-circle nav-icon"></i>Aktyor qo'shish</a>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="nav-item">--}}
+{{--                                        <a href="{{route('actor_conversation.index')}}" class="nav-link {{request()->is('admin/actor_conversation*')?'active':''}}"><i class="far fa-dot-circle nav-icon"></i>Aktyor bilan suxbat</a>--}}
+{{--                                    </li>--}}
+{{--                                </ul>--}}
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-file"></i>
+                                <a href="{{route('rejissor.index')}}" class="nav-link">
+                                    <i class="nav-icon far fa-circle"></i>
                                     Rejissyorlar
-                                    <i class="right fas fa-angle-left"></i>
+{{--                                    <i class="right fas fa-angle-left"></i>--}}
                                 </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{route('rejissor.index')}}" class="nav-link" {{(request()->is('admin/rejissor*'))?'active':''}}>Rejissor qo'shish</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="" class="nav-link">Rejissor bilan suxbat</a>
-                                    </li>
-                                </ul>
+{{--                                <ul class="nav nav-treeview">--}}
+{{--                                    <li class="nav-item">--}}
+{{--                                        <a href="{{route('rejissor.index')}}" class="nav-link {{(request()->is('admin/rejissor*'))?'active':''}}">Rejissor qo'shish</a>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="nav-item">--}}
+{{--                                        <a href="" class="nav-link">Rejissor bilan suxbat</a>--}}
+{{--                                    </li>--}}
+{{--                                </ul>--}}
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Kinodramaturgiya</a>
+                                <a href="#" class="nav-link"><i class="nav-icon far fa-circle"></i> Kinodramaturgiya</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Operatirlar</a>
+                                <a href="#" class="nav-link"><i class="nav-icon far fa-circle"></i> Operatirlar</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Kompozitor bastakorlar</a>
+                                <a href="#" class="nav-link"><i class="nav-icon far fa-circle"></i> Kompozitor bastakorlar</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Boshqa kino ijodkorlari</a>
+                                <a href="#" class="nav-link"><i class="nav-icon far fa-circle"></i> Boshqa kino ijodkorlari</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('people_film.index')}}" class="nav-link"><i class="nav-icon far fa-circle"></i> Kinoga tegishli odamlarni qo'shosh</a>
                             </li>
                         </ul>
                     </li>

@@ -21,8 +21,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
     Route::resources([
         'news' => \App\Http\Controllers\Admin\NewsController::class,
 //        'interview' => \App\Http\Controllers\Admin\InterViewController::class,
-        'actor' => \App\Http\Controllers\Admin\ActorController::class,
+//        'actor' => \App\Http\Controllers\Admin\ActorController::class,
         'actor_conversation' => \App\Http\Controllers\Admin\ActorConversationController::class,
+        'people_film' => \App\Http\Controllers\Admin\PeopleFilmController::class,
         'rejissor' => \App\Http\Controllers\Admin\RejissorController::class,
         'portret' => \App\Http\Controllers\Admin\PortretController::class,
         'director' => \App\Http\Controllers\Admin\DirectorController::class,

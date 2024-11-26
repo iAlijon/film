@@ -43,7 +43,7 @@ class ActorConversationRepository extends BaseRepository
             'content_uz' => contentByDomDocment($data['content_uz']),
             'content_ru' => $data['content_ru']??null,
             'content_en' => $data['content_en']??null,
-            'status' => $data['data'],
+            'status' => $data['status'],
         ]);
         if ($model){
             return $model;
@@ -68,7 +68,7 @@ class ActorConversationRepository extends BaseRepository
             'content_uz' => contentByDomDocment($data['content_uz']),
             'content_ru' => $data['content_ru']??null,
             'content_en' => $data['content_en']??null,
-            'status' => $data['data'],
+            'status' => $data['status'],
         ]);
         if ($model){
             return $model;

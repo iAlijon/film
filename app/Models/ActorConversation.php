@@ -12,6 +12,6 @@ class ActorConversation extends Model
 
     public function actor()
     {
-        return $this->hasOne(Actor::class, 'id', 'actor_id');
+        return $this->hasOne(PeopleFilmCategory::class, 'id', 'actor_id');
     }
 }

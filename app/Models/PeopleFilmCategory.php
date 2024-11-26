@@ -25,4 +25,9 @@ class PeopleFilmCategory extends Model
     {
         return $this->hasOne(PeopleAssociatedWithTheFilmCategory::class, 'id', 'people_associated_with_the_film_category_id')->select('id', 'name_oz');
     }
+
+    public function actor()
+    {
+        return $this->hasOne(ActorConversation::class);
+    }
 }

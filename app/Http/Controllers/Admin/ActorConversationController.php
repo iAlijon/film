@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ActorConversationRequest;
 use App\Models\Actor;
+use App\Models\PeopleFilmCategory;
 use App\Repositories\ActorConversationRepository;
 use Illuminate\Http\Request;
 
@@ -34,8 +35,8 @@ class ActorConversationController extends Controller
      */
     public function create()
     {
-        $actors = Actor::all();
-        return view('admin.actor_conversation.create', compact('actors'));
+        $actor_categories = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 1)->select('id', 'full_name_oz')->get();
+        return view('admin.actor_conversation.create', compact('actor_categories'));
     }
 
     /**
@@ -69,8 +70,8 @@ class ActorConversationController extends Controller
      */
     public function edit($id)
     {
-        $actors = Actor::all();
         $model = $this->repo->findById($id);
+        $actors = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 1)->select('id', 'full_name_oz')->get();
         return view('admin.actor_conversation.edit', compact('model', 'actors'));
     }
 

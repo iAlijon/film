@@ -31,7 +31,7 @@ return new class extends Migration
             $table->boolean('status')->default(true);
             $table->timestamps();
 
-            $table->foreign('actor_id')->references('id')->on('actors');
+            $table->foreign('actor_id')->references('id')->on('people_film_categories');
         });
     }
 

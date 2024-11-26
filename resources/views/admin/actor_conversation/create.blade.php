@@ -42,7 +42,7 @@
                                     <label>Aktyorni tanlang</label>
                                     <select class="form-control form-control-sm" name="actor_id">
                                         <option value="">---</option>
-                                        @foreach($actors as $actor)
+                                        @foreach($actor_categories as $actor)
                                             <option value="{{$actor->id}}">{{$actor->full_name_oz}}</option>
                                         @endforeach
                                     </select>

@@ -8,5 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class PeopleFilmCategory extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = [
+        'full_name_oz',
+        'full_name_uz',
+        'full_name_ru',
+        'full_name_en',
+        'description_oz',
+        'description_uz',
+        'description_ru',
+        'description_en',
+        'images',
+        'people_associated_with_the_film_category_id'
+    ];
+
+    public function category()
+    {
+        return $this->hasOne(PeopleAssociatedWithTheFilmCategory::class, 'id', 'people_associated_with_the_film_category_id')->select('id', 'name_oz');
+    }
 }

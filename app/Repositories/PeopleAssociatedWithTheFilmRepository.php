@@ -18,7 +18,12 @@ class PeopleAssociatedWithTheFilmRepository extends BaseRepository
 
     public function index()
     {
-        return $this->model->orderBy('id', 'desc')->paginate($this->limit);
+        return $this->model->with('category')->orderBy('id', 'desc')->paginate($this->limit);
+    }
+
+    public function findById($id)
+    {
+        return $this->model->where('id', $id)->first();
     }
 
     public function create($data)
@@ -30,9 +35,9 @@ class PeopleAssociatedWithTheFilmRepository extends BaseRepository
             'full_name_en' => $data['full_name_en']??null,
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
-            'description_ru' => $data['description_ru'],
-            'description_en' => $data['description_en'],
-            'people_associated_with_the_film_categories' => $data['profession_id'],
+            'description_ru' => $data['description_ru']??null,
+            'description_en' => $data['description_en']??null,
+            'people_associated_with_the_film_category_id' => $data['profession_id'],
             'images' => $this->uploads($data['images'], 'people_associated')
         ]);
         if ($model){
@@ -46,20 +51,19 @@ class PeopleAssociatedWithTheFilmRepository extends BaseRepository
         $model = $this->model->find($id);
         if ($model->images)
         {
-            $path = explode('storage/people_associated/', $model->images);
-            @unlink('storage/people_associated/'.$path[1]);
+            deleteImages($model->images, 'people_associated');
         }
         $model->update([
             'full_name_oz' => $data['full_name_oz'],
             'full_name_uz' => $data['full_name_uz'],
-            'full_name_ru' => $data['full_name_ru'],
-            'full_name_en' => $data['full_name_en'],
+            'full_name_ru' => $data['full_name_ru']??null,
+            'full_name_en' => $data['full_name_en']??null,
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
-            'description_ru' => $data['description_ru'],
-            'description_en' => $data['description_en'],
-            'people_associated_with_the_film_categories' => $data['profession_id'],
-            'images' => $data['images']
+            'description_ru' => $data['description_ru']??null,
+            'description_en' => $data['description_en']??null,
+            'people_associated_with_the_film_category_id' => $data['profession_id'],
+            'images' => $this->uploads($data['images'], 'people_associated')
         ]);
         if ($model){
             return $model;
@@ -73,8 +77,7 @@ class PeopleAssociatedWithTheFilmRepository extends BaseRepository
         $model = $this->model->find($id);
         if ($model->images)
         {
-            $path = explode('storage/people_associated/', $model->images);
-            @unlink('storage/people_associated/'.$path[1]);
+            deleteImages($model->images, 'people_associated');
         }
         $model->delete();
         return true;

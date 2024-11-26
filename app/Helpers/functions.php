@@ -120,7 +120,9 @@ if (!function_exists('deleteImages'))
     function deleteImages($images, $folder){
         $path = explode('storage/'.$folder.'/', $images);
         if ($path){
-
+            @unlink('storage/'.$folder.'/'.$path[1]);
+            return true;
         }
+        return false;
     }
 }

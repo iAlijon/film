@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PeopleAssociatedWithTheFilmRequest extends FormRequest
+class PeopleAssociatedRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,16 @@ class PeopleAssociatedWithTheFilmRequest extends FormRequest
     public function rules()
     {
         return [
-            'full_name_oz' => 'required|string',
-            'full_name_uz' => 'required|string',
-            'full_name_ru' => 'nullable|string',
-            'full_name_en' => 'nullable|string',
-            'images' => 'required|image|mimes:jpeg,jpg,png.svg',
+            'full_name_oz' => 'required',
+            'full_name_uz' => 'required',
+            'full_name_ru' => 'nullable',
+            'full_name_en' => 'nullable',
+            'images' => 'required|image|mimes:png,jpeg,jpg|max:2048',
             'description_oz' => 'required',
             'description_uz' => 'required',
-            'description_ru' => 'required',
-            'description_en' => 'required',
-            'profession_id' => 'required|integer|id'
+            'description_ru' => 'nullable',
+            'description_en' => 'nullable',
+            'profession_id' => 'required'
         ];
     }
 }

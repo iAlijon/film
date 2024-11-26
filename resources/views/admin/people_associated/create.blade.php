@@ -2,9 +2,11 @@
 
 
 @section('content')
-    <section class="content-header"></section>
+    <section class="content-header">
+
+    </section>
     <section class="content">
-        <div class="col-11">
+        <div class="col-12 col-sm-12">
             <div class="card card-info card-outline">
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -31,15 +33,15 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('people_film.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('people_film.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             {{---- oz ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
-                                    <label></label>
+                                    <label>Kategoriya</label>
                                     <select name="profession_id" class="form-control-sm form-control">
-                                        <option value="">----</option>
+                                        <option>----</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name_oz}}</option>
                                         @endforeach
@@ -70,7 +72,7 @@
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
                                     <label>Ф.И.О (UZ)</label>
-                                    <input type="text" name="full_name_oz" class="form-control form-control-sm" placeholder="F.I.O">
+                                    <input type="text" name="full_name_uz" class="form-control form-control-sm" placeholder="F.I.O">
                                     <small class="text-danger">{{$errors->first('full_name_uz')}}</small>
                                 </div>
 

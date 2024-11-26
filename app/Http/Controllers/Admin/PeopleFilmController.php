@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PeopleAssociatedWithTheFilmRequest;
+use App\Http\Requests\Admin\PeopleAssociatedRequest;
 use App\Models\PeopleAssociatedWithTheFilmCategory;
 use App\Repositories\PeopleAssociatedWithTheFilmRepository;
 use Illuminate\Http\Request;
@@ -45,9 +45,9 @@ class PeopleFilmController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PeopleAssociatedWithTheFilmRequest $request)
+    public function store(PeopleAssociatedRequest $request)
     {
-        $model = $this->repo->create($request->validated());
+        $this->repo->create($request->validated());
         return redirect()->route('people_film.index');
     }
 
@@ -70,7 +70,9 @@ class PeopleFilmController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = $this->repo->findById($id);
+        $categories = PeopleAssociatedWithTheFilmCategory::select('id', 'name_oz')->get();
+        return view('admin.people_associated.edit', compact('model', 'categories'));
     }
 
     /**
@@ -80,9 +82,10 @@ class PeopleFilmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PeopleAssociatedRequest $request, $id)
     {
-        //
+        $this->repo->update($request->validated(), $id);
+        return redirect()->route('people_film.index');
     }
 
     /**
@@ -93,6 +96,7 @@ class PeopleFilmController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->repo->delete($id);
+        return back();
     }
 }

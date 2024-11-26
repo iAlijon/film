@@ -1,5 +1,13 @@
 @extends('admin.layouts.admin')
 
+@push('css')
+    <style>
+        table td{
+            vertical-align: middle!important;
+        }
+    </style>
+@endpush
+
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
@@ -32,6 +40,7 @@
                             <th>Rasm</th>
                             <th>F.I.O</th>
                             <th>Qisqacha ma'lumot</th>
+                            <th>Kasbi</th>
                             <th></th>
                         </tr>
                         <tr>
@@ -44,14 +53,30 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                         @forelse($models as $k => $model)
                             <tr>
                                 <td>{{$k + 1}}</td>
-                                <td><img src="{{getInFolder($model->images, 'people_associated')}}" alt="errors"></td>
+                                <td>
+                                    <img src="{{getInFolder($model->images, 'people_associated')}}" class="profile-user-img img-fluid img-circle" alt="errors">
+                                </td>
                                 <td>{{$model->full_name_oz}}</td>
                                 <td>{{$model->description_oz}}</td>
-                                <td></td>
+                                <td>{{$model->category->name_oz}}</td>
+                                <td>
+                                    <a href="{{route('people_film.edit', $model->id)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                                    <form action="{{ route('people_film.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
+                                        @csrf
+                                        @method('delete')
+
+                                    </form>
+                                    <a type="submit" class="btn btn-danger btn-sm"
+                                       onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
+                                           document.getElementById('deleteItem-<?= $model->id ?>').submit();
+                                           }">
+                                        <span class="fa fa-trash-alt"></span>
+                                    </a>
+                                </td>
                             </tr>
                         @empty
                             <tr>

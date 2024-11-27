@@ -24,15 +24,20 @@ class RejissorRequest extends FormRequest
     public function rules()
     {
         return [
-            'full_name_oz' => 'required|string',
-            'full_name_uz' => 'required|string',
-            'full_name_ru' => 'required|string',
-            'full_name_en' => 'required|string',
+            'director_id' => 'required',
+            'name_oz' => 'required|string',
+            'name_uz' => 'required|string',
+            'name_ru' => 'nullable',
+            'name_en' => 'nullable',
             'description_oz' => 'required',
             'description_uz' => 'required',
-            'description_ru' => 'required',
-            'description_en' => 'required',
-            'images' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+            'description_ru' => 'nullable',
+            'description_en' => 'nullable',
+            'content_oz' => 'required',
+            'content_uz' => 'required',
+            'content_ru' => 'nullable',
+            'content_en' => 'nullable',
+            'status' => 'required|boolean'
         ];
     }
 }

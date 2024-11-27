@@ -8,30 +8,39 @@ use App\Models\Rejissor;
 
 class RejissorRepository extends BaseRepository
 {
-//    protected $request;
     public function __construct()
     {
-//        $this->request = $request;
         $this->model = new Rejissor();
     }
 
     public function index()
     {
 
-        return $this->model->orderBy('id', 'desc')->paginate($this->limit);
+        return $this->model->with('people_film_category')->orderBy('id', 'desc')->paginate($this->limit);
+    }
+
+    public function findById($id)
+    {
+        return $this->model->where('id', $id)->first();
     }
 
     public function create($data)
     {
         $model = $this->model->create([
-            'full_name_oz' => $data['full_name_oz'],
-            'full_name_uz' => $data['full_name_uz'],
-            'full_name_ru' => $data['full_name_ru']??null,
-            'full_name_en' => $data['full_name_en']??null,
+            'name_oz' => $data['name_oz'],
+            'name_uz' => $data['name_uz'],
+            'name_ru' => $data['name_ru']??null,
+            'name_en' => $data['name_en']??null,
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
             'description_ru' => $data['description_ru']??null,
             'description_en' => $data['description_en']??null,
+            'content_oz' => contentByDomDocment($data['content_oz']),
+            'content_uz' => contentByDomDocment($data['content_uz']),
+            'content_ru' => $data['content_ru']??null,
+            'content_en' => $data['content_en']??null,
+            'status' => $data['status'],
+            'people_film_category_id' => $data['director_id']
         ]);
         if ($model)
         {
@@ -44,14 +53,20 @@ class RejissorRepository extends BaseRepository
     {
         $model = $this->model->find($id);
         $model->update([
-            'full_name_oz' => $data['full_name_oz'],
-            'full_name_uz' => $data['full_name_uz'],
-            'full_name_ru' => $data['full_name_ru']??null,
-            'full_name_en' => $data['full_name_en']??null,
+            'name_oz' => $data['name_oz'],
+            'name_uz' => $data['name_uz'],
+            'name_ru' => $data['name_ru']??null,
+            'name_en' => $data['name_en']??null,
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
             'description_ru' => $data['description_ru']??null,
             'description_en' => $data['description_en']??null,
+            'content_oz' => contentByDomDocment($data['content_oz']),
+            'content_uz' => contentByDomDocment($data['content_uz']),
+            'content_ru' => $data['content_ru']??null,
+            'content_en' => $data['content_en']??null,
+            'status' => $data['status'],
+            'people_film_category_id' => $data['director_id']
         ]);
         if ($model)
         {

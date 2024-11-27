@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RejissorRequest;
+use App\Models\PeopleAssociatedWithTheFilmCategory;
+use App\Models\PeopleFilmCategory;
 use App\Repositories\RejissorRepository;
 use Illuminate\Http\Request;
 
@@ -22,8 +24,9 @@ class RejissorController extends Controller
      */
     public function index(Request $request)
     {
-        $models = $this->repo->index($request);
-        return view('admin.rejissor.index', compact('models'));
+        $models = $this->repo->index();
+        $directors = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 1)->select('id', 'full_name_oz')->get();
+        return view('admin.rejissor.index', compact('models', 'directors'));
     }
 
     /**
@@ -33,7 +36,8 @@ class RejissorController extends Controller
      */
     public function create()
     {
-        return view('admin.rejissor.create');
+        $directors = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 1)->select('id', 'full_name_oz')->get();
+        return view('admin.rejissor.create', compact('directors'));
     }
 
     /**
@@ -44,6 +48,7 @@ class RejissorController extends Controller
      */
     public function store(RejissorRequest $request)
     {
+        $this->repo->create($request->validated());
         return redirect()->route('rejissor.index');
     }
 
@@ -64,7 +69,9 @@ class RejissorController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.rejissor.edit');
+        $model = $this->repo->findById($id);
+        $directors = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 1)->select('id', 'full_name_oz')->get();
+        return view('admin.rejissor.edit', compact('model', 'directors'));
     }
 
     /**
@@ -75,7 +82,13 @@ class RejissorController extends Controller
      */
     public function update(RejissorRequest $request, $id)
     {
-        return redirect()->route('admin.rejissor.index');
+        $model = $this->repo->update($request->validated(), $id);
+        if ($model)
+        {
+            return redirect()->route('rejissor.index')->withSuccess('Successfully Update &check');
+        }else{
+            return redirect()->back()->withErrors('Not update ?');
+        }
     }
 
     /**

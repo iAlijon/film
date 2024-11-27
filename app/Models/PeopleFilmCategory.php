@@ -30,4 +30,9 @@ class PeopleFilmCategory extends Model
     {
         return $this->hasOne(ActorConversation::class);
     }
+
+    public function people_film_category()
+    {
+        return $this->hasOne(Rejissor::class);
+    }
 }

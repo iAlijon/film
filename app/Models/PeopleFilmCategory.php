@@ -35,4 +35,9 @@ class PeopleFilmCategory extends Model
     {
         return $this->hasOne(Rejissor::class);
     }
+
+    public function people_film_category_dramaturgy()
+    {
+        return $this->hasOne(Dramaturgy::class);
+    }
 }

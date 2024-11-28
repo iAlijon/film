@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\RejissorRequest;
-use App\Models\PeopleAssociatedWithTheFilmCategory;
+use App\Http\Requests\Admin\OperatorsRequest;
 use App\Models\PeopleFilmCategory;
-use App\Repositories\RejissorRepository;
+use App\Repositories\OperatorsRepository;
 use Illuminate\Http\Request;
 
-class RejissorController extends Controller
+class OperatorsController extends Controller
 {
     protected $repo;
-    public function __construct(RejissorRepository $repo)
+    public function __construct(OperatorsRepository $repo)
     {
         $this->repo = $repo;
     }
@@ -22,10 +21,10 @@ class RejissorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $models = $this->repo->index();
-        return view('admin.rejissor.index', compact('models'));
+        return view('admin.operator.index', compact('models'));
     }
 
     /**
@@ -35,8 +34,8 @@ class RejissorController extends Controller
      */
     public function create()
     {
-        $directors = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 1)->select('id', 'full_name_oz')->get();
-        return view('admin.rejissor.create', compact('directors'));
+        $categories = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 3)->select('id', 'full_name_oz')->get();
+        return view('admin.operator.create', compact('categories'));
     }
 
     /**
@@ -45,15 +44,16 @@ class RejissorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RejissorRequest $request)
+    public function store(OperatorsRequest $request)
     {
         $this->repo->create($request->validated());
-        return redirect()->route('rejissor.index');
+        return redirect()->route('operator.index');
     }
 
     /**
      * Display the specified resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -64,40 +64,38 @@ class RejissorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
+        $categories = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 3)->select('id', 'full_name_oz')->get();
         $model = $this->repo->findById($id);
-        $directors = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 1)->select('id', 'full_name_oz')->get();
-        return view('admin.rejissor.edit', compact('model', 'directors'));
+        return view('admin.operator.edit', compact('categories', 'model'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RejissorRequest $request, $id)
+    public function update(OperatorsRequest $request, $id)
     {
-        $model = $this->repo->update($request->validated(), $id);
-        if ($model)
-        {
-            return redirect()->route('rejissor.index')->withSuccess('Successfully Update &check');
-        }else{
-            return redirect()->back()->withErrors('Not update ?');
-        }
+        $this->repo->update($request->validated(), $id);
+        return redirect()->route('operator.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $this->repo->delete($id);
-        return redirect()->back()->withSuccess('Success Delete');
+        return redirect()->back();
     }
 }

@@ -69,7 +69,7 @@
 {{--                                </ul>--}}
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link"><i class="nav-icon far fa-circle"></i> Kinodramaturgiya</a>
+                                <a href="{{route('dramaturgy.index')}}" class="nav-link"><i class="nav-icon far fa-circle"></i> Kinodramaturgiya</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link"><i class="nav-icon far fa-circle"></i> Operatirlar</a>

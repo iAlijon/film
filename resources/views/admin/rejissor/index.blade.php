@@ -45,7 +45,20 @@
                                 <td>{{$model->description_oz}}</td>
                                 <td>{{($model->created_at)}}</td>
                                 <td>
-                                    <a href="{{route('rejissor.edit', $model->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{route('rejissor.edit', $model->id)}}" class="btn btn-info btn-sm mr-2"><i class="fa fa-edit"></i></a>
+                                        <form action="{{ route('actor_conversation.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
+                                            @csrf
+                                            @method('delete')
+
+                                        </form>
+                                        <a type="submit" class="btn btn-danger btn-sm"
+                                           onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
+                                               document.getElementById('deleteItem-<?= $model->id ?>').submit();
+                                               }">
+                                            <span class="fa fa-trash-alt"></span>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         @empty

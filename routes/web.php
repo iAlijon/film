@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'actor_conversation' => \App\Http\Controllers\Admin\ActorConversationController::class,
         'people_film' => \App\Http\Controllers\Admin\PeopleFilmController::class,
         'rejissor' => \App\Http\Controllers\Admin\RejissorController::class,
+        'dramaturgy' => \App\Http\Controllers\Admin\DramaturgyController::class,
+        'operator' => \App\Http\Controllers\Admin\OperatorsController::class,
         'portret' => \App\Http\Controllers\Admin\PortretController::class,
         'director' => \App\Http\Controllers\Admin\DirectorController::class,
     ]);

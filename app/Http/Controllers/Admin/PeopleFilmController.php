@@ -10,11 +10,8 @@ use Illuminate\Http\Request;
 
 class PeopleFilmController extends Controller
 {
-    protected $repo;
-    public function __construct(PeopleAssociatedWithTheFilmRepository $repo)
-    {
-        $this->repo = $repo;
-    }
+
+    public function __construct(protected PeopleAssociatedWithTheFilmRepository $repo, protected Request $request){}
 
     /**
      * Display a listing of the resource.
@@ -24,7 +21,7 @@ class PeopleFilmController extends Controller
     public function index()
     {
         $categories = PeopleAssociatedWithTheFilmCategory::query()->select('id', 'name_oz')->get();
-        $models = $this->repo->index();
+        $models = $this->repo->index($this->request);
         return view('admin.people_associated.index', compact('categories', 'models'));
     }
 

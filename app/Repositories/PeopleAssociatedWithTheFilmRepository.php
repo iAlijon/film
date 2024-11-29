@@ -7,6 +7,7 @@ namespace App\Repositories;
 use App\Models\PeopleAssociatedWithTheFilmCategory;
 use App\Models\PeopleFilmCategory;
 use App\Traits\ImageUploads;
+use Illuminate\Http\Request;
 
 class PeopleAssociatedWithTheFilmRepository extends BaseRepository
 {
@@ -16,8 +17,20 @@ class PeopleAssociatedWithTheFilmRepository extends BaseRepository
         $this->model = new PeopleFilmCategory();
     }
 
-    public function index()
+    public function index($request)
     {
+        if (isset($request->full_name_oz) && !empty($request->full_name_oz))
+        {
+            $this->model = $this->model->where('full_name_oz', 'ilike', '%'.$request->full_name_oz.'%');
+        }
+
+        if (isset($request->category_id) && !empty($request->category_id))
+        {
+            $category_id = $request->category_id;
+            $this->model = $this->model->whereHas('category', function ($q) use ($category_id){
+               $q->where('id', $category_id);
+            });
+        }
         return $this->model->with('category')->orderBy('id', 'desc')->paginate($this->limit);
     }
 

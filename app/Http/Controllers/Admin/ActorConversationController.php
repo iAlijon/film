@@ -35,7 +35,7 @@ class ActorConversationController extends Controller
      */
     public function create()
     {
-        $actor_categories = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 1)->select('id', 'full_name_oz')->get();
+        $actor_categories = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 6)->select('id', 'full_name_oz')->get();
         return view('admin.actor_conversation.create', compact('actor_categories'));
     }
 
@@ -71,7 +71,7 @@ class ActorConversationController extends Controller
     public function edit($id)
     {
         $model = $this->repo->findById($id);
-        $actors = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 1)->select('id', 'full_name_oz')->get();
+        $actors = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 6)->select('id', 'full_name_oz')->get();
         return view('admin.actor_conversation.edit', compact('model', 'actors'));
     }
 

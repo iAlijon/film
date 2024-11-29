@@ -9,6 +9,8 @@ class OtherPeople extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function other()
     {
         return $this->hasOne(PeopleFilmCategory::class, 'id', 'people_film_category_id');

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class OtherPeopleController extends Controller
 {
-    public function __construct(protected OtherPeopleRepository $repo){}
+    public function __construct(protected OtherPeopleRepository $repo,protected Request $request){}
 
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class OtherPeopleController extends Controller
      */
     public function index()
     {
-        $models = $this->repo->index();
+        $models = $this->repo->index($this->request);
         return view('admin.other.index', compact('models'));
     }
 

@@ -14,8 +14,12 @@ class OtherPeopleRepository extends BaseRepository
         $this->model = new OtherPeople();
     }
 
-    public function index()
+    public function index($request)
     {
+        if (isset($request->full_name_oz) && !empty($request->full_name_oz))
+        {
+            $this->model = $this->model->where('name_oz', 'like', '%'.$request->full_name_oz.'%');
+        }
         return $this->model->with('other')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
@@ -39,7 +43,7 @@ class OtherPeopleRepository extends BaseRepository
             'content_uz' => contentByDomDocment($data['content_uz']),
             'content_ru' => $data['content_ru']??null,
             'content_en' => $data['content_en']??null,
-            'composer_id' => $data['composer_id'],
+            'people_film_category_id' => $data['other_id'],
             'status' => $data['status']
         ]);
         if ($model)
@@ -65,7 +69,7 @@ class OtherPeopleRepository extends BaseRepository
             'content_uz' => contentByDomDocment($data['content_uz']),
             'content_ru' => $data['content_ru'],
             'content_en' => $data['content_en'],
-            'composer_id' => $data['composer_id'],
+            'people_film_category_id' => $data['other_id'],
             'status' => $data['status']
         ]);
         if ($model)

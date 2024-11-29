@@ -101,7 +101,11 @@
                             </tr>
                         @empty
                             <tr>
-
+                                <td colspan="9" class="text-center">
+                                    <div class="alert alert-default-warning">
+                                        Ma'lumot mavjud emas
+                                    </div>
+                                </td>
                             </tr>
                         @endforelse
                         <div class="text-right">

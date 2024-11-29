@@ -56,11 +56,11 @@
                         @forelse($models as $k => $model)
                             <tr>
                                 <td>{{$k + 1}}</td>
-                                <td>{{$model->people_film_category_dramaturgy->full_name_oz}}</td>
+                                <td>{{$model->other->full_name_oz}}</td>
                                 <td>{{$model->name_oz}}</td>
-                                <th>{{$model->description_oz}}</th>
+                                <td>{{$model->description_oz}}</td>
                                 <td>{{$model->created_at}}</td>
-                                <th>
+                                <td>
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{route('other.edit', $model->id)}}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
                                         <form action="{{ route('other.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
@@ -75,7 +75,7 @@
                                             <span class="fa fa-trash-alt"></span>
                                         </a>
                                     </div>
-                                </th>
+                                </td>
                             </tr>
                         @empty
                             <tr>

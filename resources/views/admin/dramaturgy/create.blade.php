@@ -34,6 +34,7 @@
                     <form action="{{route('dramaturgy.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="tab-content" id="custom-tabs-three-tabContent">
+                            {{----- oz -----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
                                     <label>Kategoriya</label>
@@ -74,6 +75,7 @@
                                     <small class="text-danger">{{$errors->first('status')}}</small>
                                 </div>
                             </div>
+                            {{----- uz -----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
                                     <label for="name_uz">Сухбат номи (UZ)</label>

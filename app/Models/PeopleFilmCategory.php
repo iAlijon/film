@@ -40,4 +40,9 @@ class PeopleFilmCategory extends Model
     {
         return $this->hasOne(Dramaturgy::class);
     }
+
+    public function operator()
+    {
+        return $this->hasOne(Operators::class);
+    }
 }

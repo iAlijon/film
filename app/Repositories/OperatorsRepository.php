@@ -16,7 +16,7 @@ class OperatorsRepository extends BaseRepository
 
     public function index()
     {
-        return $this->model->with('people_film_category_dramaturgy')->orderBy('id', 'desc')->paginate($this->limit);
+        return $this->model->with('operator')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
     public function findById($id)

@@ -30,68 +30,66 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('dramaturgy.update', $model->id)}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('operator.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
-                                    <label for="dramaturgy_id">Kategoriya</label>
-                                    <select name="dramaturgy_id" id="dramaturgy_id" class="form-control">
-                                        <option value="">----</option>
+                                    <label>Kategoriya</label>
+                                    <select name="operator_id" id="operator_id" class="form-control">
+                                        <option>----</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}" {{$category->id == $model->people_film_category_id?'selected':''}}>{{$category->full_name_oz}}</option>
+                                            <option value="{{$category->id}}">{{$category->full_name_oz}}</option>
                                         @endforeach
                                     </select>
-                                    <small class="text-danger">{{$errors->first('dramaturgy_id')}}</small>
+                                    <small class="text-danger">{{$errors->first('operator_id')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name_oz">Suxbat nomi (OZ)</label>
-                                    <input type="text" name="name_oz" class="form-control" value="{{$model->name_oz}}">
+                                    <input type="text" name="name_oz" class="form-control">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description_oz">Qisqacha mazmuni (OZ)</label>
-                                    <textarea name="description_oz" cols="30" rows="5" class="form-control form-control-sm">{{$model->description_oz}}</textarea>
+                                    <textarea name="description_oz" cols="30" rows="5" class="form-control form-control-sm"></textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_oz">To'liq mazmuni (OZ)</label>
                                     <textarea name="content_oz" class="textarea form-control summernote"
-                                              id="summernote">{{$model->content_oz}}</textarea>
+                                              id="summernote"></textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="status">Status</label>
-                                    <select name="status" id="status" class="form-control">
-                                        <option value="1" {{$model->status == true?'selected':''}}>Active</option>
-                                        <option value="0" {{$model->status == false?'selected':''}}>No Active</option>
+                                    <select name="status" id="status" class="form-control" >
+                                        <option value="1" selected>Active</option>
+                                        <option value="0">No Active</option>
                                     </select>
                                     <small class="text-danger">{{$errors->first('status')}}</small>
                                 </div>
                             </div>
-                            {{----  uz  ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
                                     <label for="name_uz">Сухбат номи (UZ)</label>
-                                    <input type="text" name="name_uz" class="form-control" value="{{$model->name_uz}}">
+                                    <input type="text" name="name_uz" class="form-control">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description_uz">Қисқача мазмуни (UZ)</label>
-                                    <textarea name="description_uz" cols="30" rows="5" class="form-control form-control-sm">{{$model->description_uz}}</textarea>
+                                    <textarea name="description_uz" cols="30" rows="5" class="form-control form-control-sm"></textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_uz">Тўлиқ мазмуни (UZ)</label>
                                     <textarea name="content_uz" class="textarea form-control summernote"
-                                              id="summernote">{{$model->content_uz}}</textarea>
+                                              id="summernote"></textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
                             </div>

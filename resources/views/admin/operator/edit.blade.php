@@ -30,20 +30,21 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('dramaturgy.update', $model->id)}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('operator.update', $model->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="tab-content" id="custom-tabs-three-tabContent">
+                            {{----  oz  ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
                                     <label for="dramaturgy_id">Kategoriya</label>
-                                    <select name="dramaturgy_id" id="dramaturgy_id" class="form-control">
+                                    <select name="operator_id" id="operator_id" class="form-control">
                                         <option value="">----</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}" {{$category->id == $model->people_film_category_id?'selected':''}}>{{$category->full_name_oz}}</option>
                                         @endforeach
                                     </select>
-                                    <small class="text-danger">{{$errors->first('dramaturgy_id')}}</small>
+                                    <small class="text-danger">{{$errors->first('operator_id')}}</small>
                                 </div>
 
                                 <div class="form-group">
@@ -89,7 +90,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="content_uz">Тўлиқ мазмуни (UZ)</label>
+                                        <label for="content_uz">Тўлиқ мазмуни (UZ)</label>
                                     <textarea name="content_uz" class="textarea form-control summernote"
                                               id="summernote">{{$model->content_uz}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>

@@ -1,38 +1,27 @@
 @extends('admin.layouts.admin')
 
+
+@section('title', 'Operators')
+
 @section('content')
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-6">
-                    <h1>Kinodramaturgiya</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('dramaturgy.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Kinodramaturgiya</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section class="content-header"></section>
     <section class="content">
         <div class="col-11 mr-auto ml-auto">
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Kinodramaturgiya  <i class="fa fa-users"></i></h3>
+                    <h3 class="card-title">Operatorlar  <i class="fa fa-users"></i></h3>
                     <div class="text-right">
-                        <a href="{{route('dramaturgy.create')}}" class="btn btn-success">&plus; Qo'shish</a>
+                        <a href="{{route('operator.create')}}" class="btn btn-success">&plus; Qo'shish</a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover table-striped text-center">
+                    <table class="table table-striped table-hover table-bordered text-center">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>F.I.O</th>
                                 <th>Suxbat nomi</th>
-                                <th>Qisqacha ma'lumot</th>
+                                <th>Qisqacha mazmuni</th>
                                 <th>Qo'shilgan vaqti</th>
                                 <th></th>
                             </tr>
@@ -55,14 +44,14 @@
                             @forelse($models as $k => $model)
                                 <tr>
                                     <td>{{$k + 1}}</td>
-                                    <td>{{$model->people_film_category_dramaturgy->full_name_oz}}</td>
+                                    <td>{{$model->operator->full_name_oz}}</td>
                                     <td>{{$model->name_oz}}</td>
                                     <th>{{$model->description_oz}}</th>
                                     <td>{{$model->created_at}}</td>
                                     <th>
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="{{route('dramaturgy.edit', $model->id)}}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
-                                            <form action="{{ route('dramaturgy.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
+                                            <a href="{{route('operator.edit', $model->id)}}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
+                                            <form action="{{ route('operator.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
                                                 @csrf
                                                 @method('delete')
 
@@ -95,3 +84,6 @@
         </div>
     </section>
 @endsection
+@push('js')
+
+@endpush

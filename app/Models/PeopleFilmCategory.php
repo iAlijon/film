@@ -45,4 +45,15 @@ class PeopleFilmCategory extends Model
     {
         return $this->hasOne(Operators::class);
     }
+
+    public function composer()
+    {
+        return $this->hasOne(Composer::class);
+    }
+
+    public function other()
+    {
+        return $this->hasOne(OtherPeople::class);
+    }
 }
+

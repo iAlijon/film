@@ -75,10 +75,10 @@
                                 <a href="{{route('operator.index')}}" class="nav-link"><i class="nav-icon far fa-circle"></i> Operatirlar</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link"><i class="nav-icon far fa-circle"></i> Kompozitor bastakorlar</a>
+                                <a href="{{route('composer.index')}}" class="nav-link"><i class="nav-icon far fa-circle"></i> Kompozitor bastakorlar</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link"><i class="nav-icon far fa-circle"></i> Boshqa kino ijodkorlari</a>
+                                <a href="{{route('other.index')}}" class="nav-link"><i class="nav-icon far fa-circle"></i> Boshqa kino ijodkorlari</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('people_film.index')}}" class="nav-link"><i class="nav-icon far fa-circle"></i> Kinoga tegishli odamlarni qo'shosh</a>

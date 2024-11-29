@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'rejissor' => \App\Http\Controllers\Admin\RejissorController::class,
         'dramaturgy' => \App\Http\Controllers\Admin\DramaturgyController::class,
         'operator' => \App\Http\Controllers\Admin\OperatorsController::class,
+        'composer' => \App\Http\Controllers\Admin\ComposersController::class,
+        'other' => \App\Http\Controllers\Admin\OtherPeopleController::class,
         'portret' => \App\Http\Controllers\Admin\PortretController::class,
         'director' => \App\Http\Controllers\Admin\DirectorController::class,
     ]);

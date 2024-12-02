@@ -87,15 +87,14 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="far fa-circle"></i>
-                            <p class="text">Portret
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p class="text">Shaxsiyatlar</p>
+                            <i class="right fas fa-angle-left"></i>
                             <span class="badge badge-primary right"></span>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{route('director.index')}}" class="nav-link {{(request()->is('admin/director*'))?'active':''}}">
+                                <a href="{{route('portret_rejissors.index')}}" class="nav-link">
                                     <i class="fa fa-users nav-icon"></i>
                                     <p>Rejissyorlar</p>
                                 </a>

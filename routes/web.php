@@ -22,6 +22,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'news' => \App\Http\Controllers\Admin\NewsController::class,
 //        'interview' => \App\Http\Controllers\Admin\InterViewController::class,
 //        'actor' => \App\Http\Controllers\Admin\ActorController::class,
+
+        // conversation
+
         'actor_conversation' => \App\Http\Controllers\Admin\ActorConversationController::class,
         'people_film' => \App\Http\Controllers\Admin\PeopleFilmController::class,
         'rejissor' => \App\Http\Controllers\Admin\RejissorController::class,
@@ -29,8 +32,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'operator' => \App\Http\Controllers\Admin\OperatorsController::class,
         'composer' => \App\Http\Controllers\Admin\ComposersController::class,
         'other' => \App\Http\Controllers\Admin\OtherPeopleController::class,
-        'portret' => \App\Http\Controllers\Admin\PortretController::class,
         'director' => \App\Http\Controllers\Admin\DirectorController::class,
+
+        //portret
+
+        'portret_rejissors' => \App\Http\Controllers\Admin\PortretRejissorsController::class
+//        'portret' => \App\Http\Controllers\Admin\PortretController::class,
     ]);
     Route::post('/new-status', [\App\Http\Controllers\Admin\NewsController::class, 'newStatus'])->name('new-status');
     Route::post('/interview-status', [\App\Http\Controllers\Admin\InterViewController::class, 'interviewStatus'])->name('interview-status');

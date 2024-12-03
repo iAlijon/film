@@ -112,13 +112,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{route('portrait_composer.index')}}" class="nav-link">
                                     <i class="fa fa-users nav-icon"></i>
                                     <p>Kompozitor-bastakorlar</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{route('portrait_artist.index')}}" class="nav-link">
                                     <i class="fa fa-users nav-icon"></i>
                                     <p>Рассомлар</p>
                                 </a>

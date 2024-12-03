@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Operator Qo'shish</h1>
+                    <h1>Kompozitor-bastakorlar Qo'shish</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('portrait_operator.index')}}">home</a></li>
-                        <li class="breadcrumb-item active">operator</li>
+                        <li class="breadcrumb-item"><a href="{{route('portrait_composer.index')}}">home</a></li>
+                        <li class="breadcrumb-item active">composer</li>
                     </ol>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('portrait_operator.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('portrait_composer.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             {{----  oz  ----}}

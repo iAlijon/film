@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Rejissor O'zgartirish</h1>
+                    <h1>Aktor O'zgartirish</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('portret_rejissors.index')}}">home</a></li>
-                        <li class="breadcrumb-item active">rejissor</li>
+                        <li class="breadcrumb-item"><a href="{{route('portrait_actor.index')}}">home</a></li>
+                        <li class="breadcrumb-item active">actor</li>
                     </ol>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('portret_rejissors.update', $item->id)}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('portrait_actor.update', $item->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="tab-content" id="custom-tabs-three-tabContent">
@@ -82,7 +82,7 @@
 
                                 <div class="form-group">
                                     <label for="status">Status</label>
-                                    <select name="status" id="status">
+                                    <select name="status" id="status" class="form-control">
                                         <option value="">----</option>
                                         <option value="1" {{$item->status == true?'selected':''}}>Active</option>
                                         <option value="0" {{$item->status == false?'selected':''}}>No Active</option>

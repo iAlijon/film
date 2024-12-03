@@ -36,7 +36,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
 
         //portret
 
-        'portret_rejissors' => \App\Http\Controllers\Admin\PortretRejissorsController::class
+        'portrait_rejissors' => \App\Http\Controllers\Admin\PortretRejissorsController::class,
+        'portrait_actor' => \App\Http\Controllers\Admin\PorTraitActorController::class
 //        'portret' => \App\Http\Controllers\Admin\PortretController::class,
     ]);
     Route::post('/new-status', [\App\Http\Controllers\Admin\NewsController::class, 'newStatus'])->name('new-status');

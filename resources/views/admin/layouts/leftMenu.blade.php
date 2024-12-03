@@ -94,13 +94,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{route('portret_rejissors.index')}}" class="nav-link">
+                                <a href="{{route('portrait_rejissors.index')}}" class="nav-link">
                                     <i class="fa fa-users nav-icon"></i>
                                     <p>Rejissyorlar</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{route('portrait_actor.index')}}" class="nav-link">
                                     <i class="fa fa-users nav-icon"></i>
                                     <p>Aktyorlar</p>
                                 </a>

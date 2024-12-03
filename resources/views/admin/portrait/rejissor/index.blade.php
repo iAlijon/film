@@ -5,6 +5,13 @@
         .table th{
             vertical-align: 0 !important;
         }
+
+        .profile-user-img{
+            object-fit: contain;
+        }
+
+        .hidden { display: none;}
+        .more { margin: 0 5px;}
     </style>
 @endpush
 
@@ -16,7 +23,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Rejissorlar  <i class="fa fa-users"></i></h3>
                     <div class="text-right">
-                        <a href="{{route('portret_rejissors.create')}}" class="btn btn-success btn-sm">&plus; Qo'shish</a>
+                        <a href="{{route('portrait_rejissors.create')}}" class="btn btn-success btn-sm">&plus; Qo'shish</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -53,13 +60,13 @@
                                 <td>{{$k + 1}}</td>
                                 <td><img src="{{getInFolder($item->images, 'portret_rejissor')}}" alt="error" class="profile-user-img img-fluid img-circle"></td>
                                 <td>{{$item->full_name_oz}}</td>
-                                <td>{{$item->description_oz}}</td>
+                                <td class="description">{{$item->description_oz}}</td>
                                 <td>{{$item->status == true?'Active':'No Active'}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <a href="{{route('portret_rejissors.edit', $item->id)}}" class="btn btn-info btn-sm mr-2"><i class="fas fa-edit"></i></a>
-                                        <form action="{{ route('portret_rejissors.destroy', $item->id) }}" method="post" id="deleteItem-{{$item->id}}">
+                                        <a href="{{route('portrait_rejissors.edit', $item->id)}}" class="btn btn-info btn-sm mr-2"><i class="fas fa-edit"></i></a>
+                                        <form action="{{ route('portrait_rejissors.destroy', $item->id) }}" method="post" id="deleteItem-{{$item->id}}">
                                             @csrf
                                             @method('delete')
 
@@ -83,9 +90,34 @@
                             </tr>
                         @endforelse
                         </tbody>
+                        <div class="text-right">
+                            {{$models->links('vendor.pagination.bootstrap-5')}}
+                        </div>
                     </table>
                 </div>
             </div>
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script>
+        $(function () {
+            var maxL = 100;
+            $('.description').each(function () {
+                var text = $(this).text();
+                if(text.length > maxL) {
+                    var begin = text.substr(0, maxL),
+                        end = text.substr(maxL);
+                    $(this).html(begin)
+                        .append($('<a class="more"/>').attr('href', '#').html('more...'))
+                        .append($('<div class="hidden" />').html(end));
+                }
+            });
+            $(document).on('click', '.more', function () {
+                // $(this).next('.readmore').fadeOut("400");
+                $(this).next('.hidden').slideToggle(400);
+            })
+        })
+    </script>
+@endpush

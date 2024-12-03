@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PortretRejissorRequest;
-use App\Models\PortretRejissor;
-use App\Repositories\PortretRejissorsRepository;
+use App\Http\Requests\Admin\PorTraitActorRequest;
+use App\Repositories\PorTraitActorRepository;
 use Illuminate\Http\Request;
 
-class PortretRejissorsController extends Controller
+class PorTraitActorController extends Controller
 {
-    public function __construct(protected PortretRejissorsRepository $repo,protected Request $request){}
+    public function __construct(protected PorTraitActorRepository $repo, protected Request $request)
+    {
+    }
 
     /**
      * Display a listing of the resource.
@@ -20,7 +21,7 @@ class PortretRejissorsController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        return view('admin.portrait.rejissor.index', compact('models'));
+        return view('admin.portrait.actor.index', compact('models'));
     }
 
     /**
@@ -30,7 +31,7 @@ class PortretRejissorsController extends Controller
      */
     public function create()
     {
-        return view('admin.portrait.rejissor.create');
+        return view('admin.portrait.actor.create');
     }
 
     /**
@@ -39,10 +40,10 @@ class PortretRejissorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PortretRejissorRequest $request)
+    public function store(PorTraitActorRequest $request)
     {
         $this->repo->create($request->validated());
-        return redirect()->route('portret_rejissors.index');
+        return redirect()->route('portrait_actor.index');
     }
 
     /**
@@ -64,8 +65,8 @@ class PortretRejissorsController extends Controller
      */
     public function edit($id)
     {
-        $item = $this->repo->findById($id);
-        return view('admin.portrait.rejissor.edit', compact('item'));
+        $model = $this->repo->findById($id);
+        return view('admin.portairt.actor.edit', compact('model'));
     }
 
     /**
@@ -75,10 +76,10 @@ class PortretRejissorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PortretRejissorRequest $request, $id)
+    public function update(PorTraitActorRequest $request, $id)
     {
         $this->repo->update($request->validated(), $id);
-        return redirect()->route('portret_rejissors.index');
+        return redirect()->route('portrait.index');
     }
 
     /**

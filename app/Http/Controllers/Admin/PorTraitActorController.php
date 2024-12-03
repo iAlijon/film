@@ -66,7 +66,7 @@ class PorTraitActorController extends Controller
     public function edit($id)
     {
         $model = $this->repo->findById($id);
-        return view('admin.portairt.actor.edit', compact('model'));
+        return view('admin.portrait.actor.edit', compact('model'));
     }
 
     /**

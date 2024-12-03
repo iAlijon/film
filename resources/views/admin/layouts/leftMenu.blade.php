@@ -106,7 +106,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{route('portrait_operator.index')}}" class="nav-link">
                                     <i class="fa fa-users nav-icon"></i>
                                     <p>Operatorlar</p>
                                 </a>

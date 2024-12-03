@@ -4,15 +4,15 @@
 namespace App\Repositories;
 
 
-use App\Models\PortraitActor;
+use App\Models\PortraitOperator;
 use App\Traits\ImageUploads;
 
-class PorTraitActorRepository extends BaseRepository
+class PortraitOperatorRepository extends BaseRepository
 {
     use ImageUploads;
     public function __construct()
     {
-        $this->model = new PortraitActor();
+        $this->model = new PortraitOperator();
     }
 
     public function index($request)
@@ -46,7 +46,7 @@ class PorTraitActorRepository extends BaseRepository
             'content_en' => $data['content_en']??null,
             'birth_date' => $data['birth_date'],
             'status' => $data['status'],
-            'images' => $this->uploads($data['image'], 'portrait_actor')
+            'images' => $this->uploads($data['image'], 'portrait_operator')
         ]);
         if ($model)
         {
@@ -60,7 +60,7 @@ class PorTraitActorRepository extends BaseRepository
         $model = $this->findById($id);
         if ($model->images)
         {
-            deleteImages($model->images, 'portrait_actor');
+            deleteImages($model->images, 'portrait_operator');
         }
         $model->update([
             'full_name_oz' => $data['full_name_oz'],
@@ -91,7 +91,7 @@ class PorTraitActorRepository extends BaseRepository
         $model = $this->findById($id);
         if ($model)
         {
-            deleteImages($model->images, 'portrait_actor');
+            deleteImages($model->images, 'portrait_operator');
         }
         if($model->delete()){
             return true;

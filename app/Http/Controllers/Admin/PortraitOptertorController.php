@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PorTraitActorRequest;
-use App\Repositories\PorTraitActorRepository;
+use App\Http\Requests\Admin\PortraitOperatorRequest;
+use App\Repositories\PortraitOperatorRepository;
 use Illuminate\Http\Request;
 
-class PorTraitActorController extends Controller
+class PortraitOptertorController extends Controller
 {
-    public function __construct(protected PorTraitActorRepository $repo, protected Request $request)
+    public function __construct(protected PortraitOperatorRepository $repo, protected Request $request)
     {
     }
 
@@ -21,7 +21,7 @@ class PorTraitActorController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        return view('admin.portrait.actor.index', compact('models'));
+        return view('admin.portrait.operator.index', compact('models'));
     }
 
     /**
@@ -31,7 +31,7 @@ class PorTraitActorController extends Controller
      */
     public function create()
     {
-        return view('admin.portrait.actor.create');
+        return view('admin.portrait.operator.create');
     }
 
     /**
@@ -40,10 +40,10 @@ class PorTraitActorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PorTraitActorRequest $request)
+    public function store(PortraitOperatorRequest $request)
     {
         $this->repo->create($request->validated());
-        return redirect()->route('portrait_actor.index');
+        return redirect()->route('portrait_operator.index');
     }
 
     /**
@@ -66,7 +66,7 @@ class PorTraitActorController extends Controller
     public function edit($id)
     {
         $model = $this->repo->findById($id);
-        return view('admin.portrait.actor.edit', compact('model'));
+        return view('admin.portrait.operator.edit', compact('model'));
     }
 
     /**
@@ -76,10 +76,10 @@ class PorTraitActorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PorTraitActorRequest $request, $id)
+    public function update(PortraitOperatorRequest $request, $id)
     {
         $this->repo->update($request->validated(), $id);
-        return redirect()->route('portrait_actor.index');
+        return redirect()->route('portrait_operator.index');
     }
 
     /**

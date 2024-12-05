@@ -26,8 +26,8 @@ class FilmDictionaryRequest extends FormRequest
         return [
             'name_oz' => 'required|string',
             'name_uz' => 'required|string',
-            'name_ru' => 'nullable|string',
-            'name_en' => 'nullable|string',
+            'name_ru' => 'nullable',
+            'name_en' => 'nullable',
             'description_oz' => 'required',
             'description_uz' => 'required',
             'description_ru' => 'nullable',
@@ -36,9 +36,9 @@ class FilmDictionaryRequest extends FormRequest
             'content_uz' => 'required',
             'content_ru' => 'nullable',
             'content_en' => 'nullable',
-            'images' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
             'status' => 'required|boolean',
-            'dictionary_id' => 'required'
+            'dictionary_id' => 'required|array'
         ];
     }
 }

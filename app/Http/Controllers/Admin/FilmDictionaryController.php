@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FilmDictionaryRequest;
+use App\Models\Dictionary;
 use App\Repositories\FilmDictionaryRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +21,7 @@ class FilmDictionaryController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
+        dd($models);
         return view('admin.dictionary.index', compact('models'));
     }
 
@@ -30,8 +32,7 @@ class FilmDictionaryController extends Controller
      */
     public function create()
     {
-        $dictionaries = DB::table('dictionary')->select('id', 'ru')->get();
-        dd($dictionaries);
+        $dictionaries = Dictionary::select('id', 'ru', 'oz')->orderBy('id', 'asc')->get();
         return view('admin.dictionary.create', compact('dictionaries'));
     }
 

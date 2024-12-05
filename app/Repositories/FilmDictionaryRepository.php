@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 
 use App\Models\FilmDictionary;
+use App\Models\FilmDictionaryCategory;
 use App\Traits\ImageUploads;
 
 class FilmDictionaryRepository extends BaseRepository
@@ -27,7 +28,7 @@ class FilmDictionaryRepository extends BaseRepository
             $this->model->where('name_oz', 'ilike', '%'.$request->name_oz.'%');
         }
 
-        return $this->model->orderBy('id', 'desc')->paginate($this->limit);
+        return $this->model->with('film_dictionary')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
     public function findById($id)
@@ -37,8 +38,12 @@ class FilmDictionaryRepository extends BaseRepository
 
     public function create($data)
     {
+        if (isset($data['image'])){
+            $images = $this->uploads($data['image'], 'dictionary');
+        }else{
+            $images = null;
+        }
         $model = $this->model->create([
-            'dictionary_id' => $data['dictionary_id'],
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
             'name_ru' => $data['name_ru']??null,
@@ -52,8 +57,14 @@ class FilmDictionaryRepository extends BaseRepository
             'content_ru' => $data['content_ru']??null,
             'content_en' => $data['content_en']??null,
             'status' => $data['status'],
-            'images' => $this->uploads($data['image'], 'dictionary'),
+            'images' => $images,
         ]);
+        foreach ($data['dictionary_id'] as $item){
+            FilmDictionaryCategory::create([
+                'dictionary_category_id' => $item,
+                'film_dictionary_id' => $model->id
+        ]);
+        }
         if ($model)
         {
             return $model;
@@ -69,7 +80,6 @@ class FilmDictionaryRepository extends BaseRepository
             deleteImages($model->images, 'dictionary');
         }
         $model->update([
-            'dictionary_id' => $data['dictionary_id'],
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
             'name_ru' => $data['name_ru'],

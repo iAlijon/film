@@ -28,15 +28,15 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-hover table-bordered">
+                    <table class="table table-striped table-hover table-bordered text-center">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Example</th>
-                                <th>Example</th>
-                                <th>Example</th>
-                                <th>Example</th>
-                                <th>Example</th>
+                                <th>Nomi</th>
+                                <th>Qisqacha ma'lumoti</th>
+                                <th>Qo'shilgan vaqti</th>
+                                <th>Status</th>
+                                <th></th>
                             </tr>
                             <tr>
                                 <form action="">
@@ -57,11 +57,11 @@
                             @forelse($models as $k=>$item)
                                 <tr>
                                     <td>{{$k + 1}}</td>
-                                    <td>{{$item}}</td>
-                                    <td>{{$item}}</td>
-                                    <td>{{$item}}</td>
-                                    <td>{{$item}}</td>
-                                    <td>{{$item}}</td>
+                                    <td>{{$item->name_oz}}</td>
+                                    <td>{{$item->description_oz}}</td>
+                                    <td>{{$item->created_at}}</td>
+                                    <td>{{$item->status == 1?'Active':'No Active'}}</td>
+                                    <td></td>
                                 </tr>
                             @empty
                                 <tr>

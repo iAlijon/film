@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('film_dictionaries', function (Blueprint $table) {
             $table->id();
-            $table->integer('dictionary_id');
             $table->string('name_oz');
             $table->string('name_uz');
             $table->string('name_ru')->nullable();
@@ -31,9 +30,6 @@ return new class extends Migration
             $table->text('content_ru')->nullable();
             $table->text('content_en')->nullable();
             $table->timestamps();
-
-
-            $table->foreign('dictionary_id')->references('id')->on('dictionary');
         });
     }
 

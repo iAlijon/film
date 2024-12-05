@@ -127,7 +127,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{route('film_dictionary.index')}}" class="nav-link">
                             <i class="far fa-circle"></i>
                             <p class="text">Kinolug‘at</p>
                             <span class="badge badge-primary right"></span>

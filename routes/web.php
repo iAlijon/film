@@ -40,9 +40,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'portrait_actor' => \App\Http\Controllers\Admin\PorTraitActorController::class,
         'portrait_operator' => \App\Http\Controllers\Admin\PortraitOptertorController::class,
         'portrait_composer' => \App\Http\Controllers\Admin\PortraitComposerController::class,
-        'portrait_artist' => \App\Http\Controllers\Admin\PortraitArtistController::class
+        'portrait_artist' => \App\Http\Controllers\Admin\PortraitArtistController::class,
 //        'portret' => \App\Http\Controllers\Admin\PortretController::class,
+
+        //film_dictionary
+        'film_dictionary' => \App\Http\Controllers\Admin\FilmDictionaryController::class,
     ]);
     Route::post('/new-status', [\App\Http\Controllers\Admin\NewsController::class, 'newStatus'])->name('new-status');
-    Route::post('/interview-status', [\App\Http\Controllers\Admin\InterViewController::class, 'interviewStatus'])->name('interview-status');
+//    Route::post('/interview-status', [\App\Http\Controllers\Admin\InterViewController::class, 'interviewStatus'])->name('interview-status');
 });

@@ -38,7 +38,14 @@ class FilmDictionaryRequest extends FormRequest
             'content_en' => 'nullable',
             'image' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
             'status' => 'required|boolean',
-            'dictionary_id' => 'required|array'
+            'dictionary_id' => 'required|array|unique:film_dictionary_categories,dictionary_category_id'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+          'dictionary_id.unique' => 'You have selected similar elements.'
         ];
     }
 }

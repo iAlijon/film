@@ -70,7 +70,8 @@ class FilmDictionaryController extends Controller
     public function edit($id)
     {
         $model = $this->repo->findById($id);
-        return view('admin.dictionary.index', compact('model'));
+        $dictionaries = Dictionary::select('id', 'ru', 'oz')->orderBy('id', 'asc')->get();
+        return view('admin.dictionary.edit', compact('model', 'dictionaries'));
     }
 
     /**

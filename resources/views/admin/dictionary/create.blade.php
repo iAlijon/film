@@ -14,7 +14,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('film_dictionary.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active"></li>
+                        <li class="breadcrumb-item active">Film Dictionary</li>
                     </ol>
                 </div>
             </div>
@@ -154,6 +154,5 @@
                 html: true
             });
         });
-
     </script>
 @endpush

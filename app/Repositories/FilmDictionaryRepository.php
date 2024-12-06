@@ -28,7 +28,7 @@ class FilmDictionaryRepository extends BaseRepository
             $this->model->where('name_oz', 'ilike', '%'.$request->name_oz.'%');
         }
 
-        return $this->model->with('film_dictionary')->orderBy('id', 'desc')->paginate($this->limit);
+        return $this->model->where('status', true)->with('film_dictionary_category')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
     public function findById($id)

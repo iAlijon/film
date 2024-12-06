@@ -26,13 +26,8 @@ class FilmDictionary extends Model
         'status',
     ];
 
-    public function dictionary()
+    public function film_dictionary_category()
     {
-        return $this->belongsTo(FilmdictionaryCategory::class);
-    }
-
-    public function film_dictionary()
-    {
-        return $this->hasOne(FilmDictionaryCategory::class);
+        return $this->hasMany(FilmDictionaryCategory::class);
     }
 }

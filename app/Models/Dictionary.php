@@ -10,8 +10,8 @@ class Dictionary extends Model
     use HasFactory;
     protected $table = 'dictionary';
 
-    public function dictionary()
+    public function film_dictionary_category()
     {
-        return $this->hasOne(FilmDictionaryCategory::class);
+        return $this->belongsTo(FilmDictionaryCategory::class);
     }
 }

@@ -14,11 +14,11 @@ class FilmDictionaryCategory extends Model
 
 
     public function film_dictionary(){
-        return $this->hasOne(FilmDictionary::class, 'id', 'film_dictionary_id');
+        return $this->belongsTo(FilmDictionary::class);
     }
 
     public function dictionary()
     {
-        return $this->hasOne(Dictionary::class, 'id', 'dictionary_category_id');
+        return $this->hasMany(Dictionary::class);
     }
 }

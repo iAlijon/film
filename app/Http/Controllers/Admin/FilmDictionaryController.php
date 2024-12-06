@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class FilmDictionaryController extends Controller
 {
-    public function __construct(protected FilmDictionaryRepository $repo, protected Request $request){}
+    public function __construct(protected FilmDictionaryRepository $repo, protected Request $request)
+    {
+    }
 
     /**
      * Display a listing of the resource.
@@ -21,8 +23,8 @@ class FilmDictionaryController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        dd($models);
-        return view('admin.dictionary.index', compact('models'));
+        $dictinaries = Dictionary::select('id', 'oz', 'ru')->get();
+        return view('admin.dictionary.index', compact('models', 'dictinaries'));
     }
 
     /**
@@ -39,19 +41,19 @@ class FilmDictionaryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(FilmDictionaryRequest $request)
     {
-       $this->repo->create($request->validated());
-       return redirect()->route('film_dictionary.index');
+        $this->repo->create($request->validated());
+        return redirect()->route('film_dictionary.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -62,7 +64,7 @@ class FilmDictionaryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -74,8 +76,8 @@ class FilmDictionaryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(FilmDictionaryRequest $request, $id)
@@ -87,7 +89,7 @@ class FilmDictionaryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

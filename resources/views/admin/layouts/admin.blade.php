@@ -34,6 +34,13 @@
     <link rel="stylesheet" href="{{asset('adminlte/plugins/summernote/summernote-bs4.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
+    <style>
+        .required:before{
+            content: '*';
+            color: red;
+            font-size: 20px;
+        }
+    </style>
     @stack('css')
 </head>
 <body>

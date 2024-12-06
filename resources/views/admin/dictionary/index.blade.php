@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Kino Lug'at</h1>
+                    <h1>Kinolug'at</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -22,7 +22,7 @@
         <div class="col-11 mr-auto ml-auto">
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Kino Lug'at  <i class="fa fa-users"></i></h3>
+                    <h3 class="card-title">Kinolug'at  <i class="fa fa-users"></i></h3>
                     <div class="text-right">
                         <a href="{{route('film_dictionary.create')}}" class="btn btn-success btn-sm">&plus; Qo'shish</a>
                     </div>
@@ -34,6 +34,7 @@
                                 <th>#</th>
                                 <th>Nomi</th>
                                 <th>Qisqacha ma'lumoti</th>
+                                <th>Lug'at</th>
                                 <th>Qo'shilgan vaqti</th>
                                 <th>Status</th>
                                 <th></th>
@@ -50,6 +51,7 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
+                                    <th></th>
                                 </form>
                             </tr>
                         </thead>
@@ -59,9 +61,22 @@
                                     <td>{{$k + 1}}</td>
                                     <td>{{$item->name_oz}}</td>
                                     <td>{{$item->description_oz}}</td>
+                                    <td>
+                                        @foreach($item->film_dictionary_category as $result)
+                                            @foreach($dictinaries as $param)
+                                                {{$result->dictionary_category_id == $param->id?json_decode($param->oz)->upper:''}}
+                                            @endforeach
+                                            ,
+                                        @endforeach
+                                    </td>
                                     <td>{{$item->created_at}}</td>
                                     <td>{{$item->status == 1?'Active':'No Active'}}</td>
-                                    <td></td>
+                                    <td>
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <a href="{{route('film_dictionary.edit', $item->id)}}" class="btn btn-info"><i class="fas fa-edit"></i></a>
+
+                                        </div>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>

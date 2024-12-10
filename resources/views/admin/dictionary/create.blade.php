@@ -56,11 +56,15 @@
 
                                 <div class="form-group required">
                                     <label for="dictionary_id">
-                                        <p data-toggle="popover" data-content="Kerakli beligni topa olamasangiz Kirilchadan qdirib ko'ring faqat bir tildagsni tanlang" class="mb-0">Lug'at</p>
+                                        <p data-toggle="popover"
+                                           data-content="Kerakli beligni topa olamasangiz Kirilchadan qdirib ko'ring faqat bir tildagsni tanlang"
+                                           class="mb-0">Lug'at</p>
                                     </label>
-                                    <select name="dictionary_id[]"  multiple="multiple" class="select2 form-control" data-placeholder="Lug'atni tanlang">
+                                    <select name="dictionary_id[]" id="dictionary" multiple="multiple"
+                                            class="select2 form-control" data-placeholder="Lug'atni tanlang">
                                         @foreach($dictionaries as $dictionary)
-                                            <option value="{{$dictionary->id}}">{{json_decode($dictionary->oz)->upper}}</option>
+                                            <option
+                                                value="{{$dictionary->id}}">{{json_decode($dictionary->oz)->upper}}</option>
                                         @endforeach
                                     </select>
                                     <small class="text-danger">{{$errors->first('dictionary_id')}}</small>
@@ -80,13 +84,16 @@
 
                                 <div class="form-group required">
                                     <label for="description_oz">Qisqacha ma'lumoti</label>
-                                    <textarea name="description_oz" class="form-control" cols="30" rows="5" required placeholder="Qisqacha ma'lumot"></textarea>
+                                    <textarea name="description_oz" class="form-control" cols="30" rows="5" required
+                                              placeholder="Qisqacha ma'lumot"></textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group required">
                                     <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" id="content_oz" cols="30" rows="10" class="form-control textarea" required placeholder="To'liq ma'lumot"></textarea>
+                                    <textarea name="content_oz" id="content_oz" cols="30" rows="10"
+                                              class="form-control textarea" required
+                                              placeholder="To'liq ma'lumot"></textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
@@ -104,11 +111,15 @@
 
                                 <div class="form-group required">
                                     <label for="dictionary_id">
-                                        <p data-toggle="popover" data-content="Керакли белигни топа оламасангиз Лотинчадан қдириб кўринг фақат бир тильдагсни танланг" class="mb-0">Луғат</p>
+                                        <p data-toggle="popover"
+                                           data-content="Керакли белигни топа оламасангиз Лотинчадан қдириб кўринг фақат бир тильдагсни танланг"
+                                           class="mb-0">Луғат</p>
                                     </label>
-                                    <select name="dictionary_id[]"  multiple="multiple" class="select2 form-control" data-placeholder="Луғатни танланг">
+                                    <select name="dictionary_id[]" multiple="multiple" class="select2 form-control"
+                                            data-placeholder="Луғатни танланг">
                                         @foreach($dictionaries as $dictionary)
-                                            <option value="{{$dictionary->id}}">{{json_decode($dictionary->ru)->upper}}</option>
+                                            <option
+                                                value="{{$dictionary->id}}">{{json_decode($dictionary->ru)->upper}}</option>
                                         @endforeach
                                     </select>
                                     <small class="text-danger">{{$errors->first('dictionary_id')}}</small>
@@ -122,13 +133,15 @@
 
                                 <div class="form-group required">
                                     <label for="description_uz">Қисқача маълумоти</label>
-                                    <textarea name="description_uz" id="description_uz" class="form-control" cols="30" rows="5" required placeholder="Қисқача маълумоти"></textarea>
+                                    <textarea name="description_uz" id="description_uz" class="form-control" cols="30"
+                                              rows="5" required placeholder="Қисқача маълумоти"></textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group required">
                                     <label for="content_uz">Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" id="content_uz" cols="30" rows="10" class="form-control textarea" required></textarea>
+                                    <textarea name="content_uz" id="content_uz" cols="30" rows="10"
+                                              class="form-control textarea" required></textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
 
@@ -148,11 +161,18 @@
 
 @push('js')
     <script>
-        $(document).ready(function(){
-            $('[data-toggle="popover"]').popover({
-                trigger: 'hover',
-                html: true
-            });
-        });
+        $(document).ready(function () {
+            $('#dictionary').on('select2:select', function (e){
+                let selected = e.params.data.id;
+                // let dictionary = document.getElementById('dictionary').value;
+                console.log(e.params);
+                if (selected){
+                    $(`#dictionary option[value="${selected}"]`).prop('disabled', true);
+                }else {
+                    $(`#dictionary option[value="${selected}"]`).prop('disabled', false);
+                }
+                $('#dictionary').select2();
+            })
+        })
     </script>
 @endpush

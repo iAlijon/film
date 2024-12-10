@@ -65,16 +65,25 @@
                                         @foreach($item->film_dictionary_category as $result)
                                             @foreach($dictinaries as $param)
                                                 {{$result->dictionary_category_id == $param->id?json_decode($param->oz)->upper:''}}
-                                            @endforeach
-                                            ,
+                                            @endforeach,
                                         @endforeach
                                     </td>
                                     <td>{{$item->created_at}}</td>
                                     <td>{{$item->status == 1?'Active':'No Active'}}</td>
                                     <td>
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a href="{{route('film_dictionary.edit', $item->id)}}" class="btn btn-info"><i class="fas fa-edit"></i></a>
+                                            <a href="{{route('film_dictionary.edit', $item->id)}}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
+                                            <form action="{{ route('film_dictionary.destroy', $item->id) }}" method="post" id="deleteItem-{{$item->id}}">
+                                                @csrf
+                                                @method('delete')
 
+                                            </form>
+                                            <a type="submit" class="btn btn-danger"
+                                               onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
+                                                   document.getElementById('deleteItem-<?= $item->id ?>').submit();
+                                                   }">
+                                                <span class="fa fa-trash-alt"></span>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -88,6 +97,9 @@
                                 </tr>
                             @endforelse
                         </tbody>
+                        <div class="text-right">
+                            {{$models->links('vendor.pagination.bootstrap-5')}}
+                        </div>
                     </table>
                 </div>
             </div>

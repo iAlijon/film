@@ -134,7 +134,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{route('cinema_fact.index')}}" class="nav-link">
                             <i class="far fa-circle"></i>
                             <p class="text">Kino fakt</p>
                             <span class="badge badge-primary right"></span>

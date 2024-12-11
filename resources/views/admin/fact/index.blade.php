@@ -18,6 +18,15 @@
     </section>
     <section class="content">
         <div class="col-11 ml-auto mr-auto">
+            @if(session()->has('success'))
+                <div class="alert alert-success d-flex align-items-center justify-content-between">{{session()->get('success')}}
+                    <p class="mb-0 pointer-event" onclick="handlerCancel()" style="cursor: pointer;font-size: 20px">&times;</p>
+                </div>
+            @endif
+            @if(session()->has('error'))
+                <div class="alert alert-danger">{{session()->get('error')}}</div>
+            @endif
+
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Kino Fakt  <i class="fa fa-users"></i></h3>
@@ -26,14 +35,14 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover table-striped">
+                    <table class="table table-bordered table-hover table-striped text-center">
                         <thead>
                         <tr>
                             <th>#</th>
                             <th>Nomi</th>
                             <th>Qisqacha ma'lumot</th>
-                            <th>Qo'shilgan vaqti</th>
                             <th>status</th>
+                            <th>Qo'shilgan vaqti</th>
                             <th></th>
                         </tr>
                         <tr>
@@ -42,22 +51,28 @@
                                 <button type="submit" class="d-none"></button>
                                 <th></th>
                                 <th>
-                                    <input type="text" class="form-control" name="name_oz" {{request()->is('name_oz')}}>
+                                    <input type="text" class="form-control" name="name_oz" value="{{request('name_oz')}}">
                                 </th>
                                 <th></th>
-                                <th></th>
+                                <th>
+{{--                                    <select name="status" id="" class="form-control" onchange="this.form.submit()">--}}
+{{--                                        <option value="{{ request('status') === null ? 'selected' : '' }}">----</option>--}}
+{{--                                        <option value="1" {{request('status') == 1?'selected':''}}>Active</option>--}}
+{{--                                        <option value="0" {{ request('status') === 0 ? 'selected' : '' }}>No Active</option>--}}
+{{--                                    </select>--}}
+                                </th>
                                 <th></th>
                                 <th></th>
                             </form>
                         </tr>
                         </thead>
-                        <tbody>
-                        @forelse($models as $k=>$item)
+                        <tbody class="text-center">
+                        @forelse($models as $k => $item)
                             <tr>
                                 <td>{{$k + 1}}</td>
                                 <td>{{$item->name_oz}}</td>
                                 <td>{{$item->description_oz}}</td>
-                                <td>{{$item->status}}</td>
+                                <td>{{$item->status == 1?'Active':'No Active'}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>
                                     <div class="d-flex align-items-center justify-content-center">
@@ -96,3 +111,11 @@
     </section>
 @endsection
 
+@push('js')
+    <script>
+        function handlerCancel() {
+            let element = document.getElementsByTagName('p');
+            console.log(element);
+        }
+    </script>
+@endpush

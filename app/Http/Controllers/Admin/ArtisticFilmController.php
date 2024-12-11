@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CinemaFactRequest;
-use App\Repositories\CinemaFactRepository;
+use App\Http\Requests\Admin\ArtisticRequest;
+use App\Repositories\ArtisticFilmRepository;
 use Illuminate\Http\Request;
 
-class CinemaFactController extends Controller
+class ArtisticFilmController extends Controller
 {
-    public function __construct(protected Request $request, protected CinemaFactRepository $repo){}
+    public function __construct(protected Request $request,protected ArtisticFilmRepository $repo){}
 
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class CinemaFactController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        return view('admin.fact.index', compact('models'));
+        return view('admin.artistic.index', compact('models'));
     }
 
     /**
@@ -29,7 +29,7 @@ class CinemaFactController extends Controller
      */
     public function create()
     {
-        return view('admin.fact.create');
+        return view('admin.artistic.create');
     }
 
     /**
@@ -38,16 +38,16 @@ class CinemaFactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CinemaFactRequest $request)
+    public function store(ArtisticRequest $request)
     {
         $model = $this->repo->create($request->validated());
         if ($model)
         {
             $request->session()->flash('success', 'Success');
-            return redirect()->route('cinema_fact.index');
+            return redirect()->route('artistic_film.index');
         }else{
             $request->session()->flash('error', 'Errors');
-            return back();
+            return redirect()->back();
         }
     }
 
@@ -70,8 +70,8 @@ class CinemaFactController extends Controller
      */
     public function edit($id)
     {
-        $model = $this->repo->findById($id);
-        return view('admin.fact.edit', compact('model'));
+        $model = $this->repo->model->find($id);
+        return view('admin.artistic.edit', compact('model'));
     }
 
     /**
@@ -81,10 +81,18 @@ class CinemaFactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CinemaFactRequest $request, $id)
+    public function update(ArtisticRequest $request, $id)
     {
-        $this->repo->update($id, $request->validated());
-        return redirect()->route('cinema_fact.index');
+        $model = $this->repo->model->find($id);
+        $result = $this->repo->update($request->validated(), $model->id);
+        if ($result)
+        {
+            $request->session()->flush('success', 'Success');
+            return redirect()->route('artistic_film.index');
+        }else{
+            $request->session()->flush('error', 'Errors');
+            return back();
+        }
     }
 
     /**
@@ -95,11 +103,6 @@ class CinemaFactController extends Controller
      */
     public function destroy($id)
     {
-        if($this->repo->delete($id))
-        {
-            return back();
-        }
-        return false;
-
+        //
     }
 }

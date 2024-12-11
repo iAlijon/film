@@ -45,8 +45,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
 
         //film_dictionary
         'film_dictionary' => \App\Http\Controllers\Admin\FilmDictionaryController::class,
-
         'cinema_fact' => \App\Http\Controllers\Admin\CinemaFactController::class,
+        'artistic_film' => \App\Http\Controllers\Admin\ArtisticFilmController::class,
     ]);
     Route::post('/new-status', [\App\Http\Controllers\Admin\NewsController::class, 'newStatus'])->name('new-status');
 //    Route::post('/interview-status', [\App\Http\Controllers\Admin\InterViewController::class, 'interviewStatus'])->name('interview-status');

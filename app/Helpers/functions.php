@@ -1,7 +1,7 @@
 <?php
 
 if(!function_exists('contentByDomDocment')) {
-    function contentByDomDocment($content)
+    function contentByDomDocment($content, $folder=null)
     {
         $dom = new \DomDocument();
         libxml_use_internal_errors(true);
@@ -19,7 +19,7 @@ if(!function_exists('contentByDomDocment')) {
                     list(, $data) = explode(',', $data);
                     $data = base64_decode($data);
 
-                    $directory =  "/uploads/news_content/images/" . date('Y') . "/" . date('m') . "/" . date('d')."/";
+                    $directory =  "/uploads/".$folder."/images/" . date('Y') . "/" . date('m') . "/" . date('d')."/";
                     $path = public_path() . $directory;
                     if(!is_dir($path)) {
                         mkdir($path, 0755, true);

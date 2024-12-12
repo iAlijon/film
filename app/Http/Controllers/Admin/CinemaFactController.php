@@ -97,9 +97,12 @@ class CinemaFactController extends Controller
     {
         if($this->repo->delete($id))
         {
+            session()->flash('success', 'Success delete');
+            return redirect()->back();
+        }else{
+            session()->flash('error', 'Errors delete');
             return back();
         }
-        return false;
 
     }
 }

@@ -103,6 +103,13 @@ class ArtisticFilmController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ($this->repo->delete($id))
+        {
+            session()->flash('success', 'Success');
+            return back();
+        }else{
+            session()->flash('error', 'Errors');
+            return back();
+        }
     }
 }

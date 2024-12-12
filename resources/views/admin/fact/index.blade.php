@@ -1,5 +1,38 @@
 @extends('admin.layouts.admin')
 
+@push('css')
+    <style>
+        .alert {
+            position: relative;
+        }
+
+        .alert-success {
+            color: #155724 !important;
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
+        }
+
+        .alert-danger {
+            color: #721c24 !important;
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+        }
+
+        .cancel {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .closer{
+            transition-duration: 5s;
+            display: none;
+        }
+    </style>
+@endpush
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
@@ -19,17 +52,20 @@
     <section class="content">
         <div class="col-11 ml-auto mr-auto">
             @if(session()->has('success'))
-                <div class="alert alert-success d-flex align-items-center justify-content-between">{{session()->get('success')}}
-                    <p class="mb-0 pointer-event" onclick="handlerCancel()" style="cursor: pointer;font-size: 20px">&times;</p>
+                <div class="alert alert-success" id="close">{{session()->get('success')}}
+                    <p class="cancel mb-0">&times;</p>
                 </div>
             @endif
             @if(session()->has('error'))
-                <div class="alert alert-danger">{{session()->get('error')}}</div>
+                <div class="alert alert-danger" id="close">
+                    {{session()->get('error')}}
+                    <p class="cancel mb-0">&times;</p>
+                </div>
             @endif
 
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Kino Fakt  <i class="fa fa-users"></i></h3>
+                    <h3 class="card-title">Kino Fakt <i class="fa fa-users"></i></h3>
                     <div class="text-right">
                         <a href="{{route('cinema_fact.create')}}" class="btn btn-success btn-sm">&plus; Qo'shish</a>
                     </div>
@@ -51,15 +87,16 @@
                                 <button type="submit" class="d-none"></button>
                                 <th></th>
                                 <th>
-                                    <input type="text" class="form-control" name="name_oz" value="{{request('name_oz')}}">
+                                    <input type="text" class="form-control" name="name_oz"
+                                           value="{{request('name_oz')}}">
                                 </th>
                                 <th></th>
                                 <th>
-{{--                                    <select name="status" id="" class="form-control" onchange="this.form.submit()">--}}
-{{--                                        <option value="{{ request('status') === null ? 'selected' : '' }}">----</option>--}}
-{{--                                        <option value="1" {{request('status') == 1?'selected':''}}>Active</option>--}}
-{{--                                        <option value="0" {{ request('status') === 0 ? 'selected' : '' }}>No Active</option>--}}
-{{--                                    </select>--}}
+                                    {{--                                    <select name="status" id="" class="form-control" onchange="this.form.submit()">--}}
+                                    {{--                                        <option value="{{ request('status') === null ? 'selected' : '' }}">----</option>--}}
+                                    {{--                                        <option value="1" {{request('status') == 1?'selected':''}}>Active</option>--}}
+                                    {{--                                        <option value="0" {{ request('status') === 0 ? 'selected' : '' }}>No Active</option>--}}
+                                    {{--                                    </select>--}}
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -76,8 +113,10 @@
                                 <td>{{$item->created_at}}</td>
                                 <td>
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <a href="{{route('cinema_fact.edit', $item->id)}}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
-                                        <form action="{{ route('cinema_fact.destroy', $item->id) }}" method="post" id="deleteItem-{{$item->id}}">
+                                        <a href="{{route('cinema_fact.edit', $item->id)}}" class="btn btn-info mr-2"><i
+                                                class="fas fa-edit"></i></a>
+                                        <form action="{{ route('cinema_fact.destroy', $item->id) }}" method="post"
+                                              id="deleteItem-{{$item->id}}">
                                             @csrf
                                             @method('delete')
 
@@ -113,9 +152,22 @@
 
 @push('js')
     <script>
-        function handlerCancel() {
-            let element = document.getElementsByTagName('p');
-            console.log(element);
-        }
+        $(document).ready(function () {
+            let timeout;
+            let clicked = false;
+            $('.cancel').click(function () {
+                clicked = true;
+                let check = $('.cancel').text().trim();
+                if (check !== 'x') {
+                    $("#close").addClass('closer');
+                }
+            })
+
+            timeout = setTimeout(function () {
+                if (!clicked) {
+                    $('#close').addClass('closer');
+                }
+            }, 5000)
+        })
     </script>
 @endpush

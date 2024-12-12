@@ -83,14 +83,13 @@ class ArtisticFilmController extends Controller
      */
     public function update(ArtisticRequest $request, $id)
     {
-        $model = $this->repo->model->find($id);
-        $result = $this->repo->update($request->validated(), $model->id);
+        $result = $this->repo->update($request->validated(), $id);
         if ($result)
         {
-            $request->session()->flush('success', 'Success');
+            $request->session()->flash('success', 'Success');
             return redirect()->route('artistic_film.index');
         }else{
-            $request->session()->flush('error', 'Errors');
+            $request->session()->flash('error', 'Errors');
             return back();
         }
     }

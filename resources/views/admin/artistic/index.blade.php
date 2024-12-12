@@ -60,18 +60,20 @@
                                 <td>{{$model->status}}</td>
                                 <td>{{$model->created_at}}</td>
                                 <td>
-                                    <a href="{{route('artistic_film.edit', $model->id)}}"><i class="fas fa-edit"></i></a>
-                                    <form action="{{ route('actor.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
-                                        @csrf
-                                        @method('delete')
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a href="{{route('artistic_film.edit', $model->id)}}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
+                                        <form action="{{ route('artistic_film.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
+                                            @csrf
+                                            @method('delete')
 
-                                    </form>
-                                    <a type="submit" class="btn btn-danger btn-sm"
-                                       onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
-                                           document.getElementById('deleteItem-<?= $model->id ?>').submit();
-                                           }">
-                                        <span class="fa fa-trash-alt"></span>
-                                    </a>
+                                        </form>
+                                        <a type="submit" class="btn btn-danger"
+                                           onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
+                                               document.getElementById('deleteItem-<?= $model->id ?>').submit();
+                                               }">
+                                            <span class="fa fa-trash-alt"></span>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         @empty

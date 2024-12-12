@@ -37,7 +37,7 @@ class ArtisticRequest extends FormRequest
             'content_ru' => 'nullable',
             'content_en' => 'nullable',
             'status' => 'required|boolean',
-            'images' => 'required|image|mimes:jpg,png,jpeg|max:2048'
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:2048'
         ];
     }
 }

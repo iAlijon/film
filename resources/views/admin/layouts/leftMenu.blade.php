@@ -155,13 +155,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('documentary.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Hujjatli filmlar</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('popular_science_film.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Ilmiy-ommabop filmlar</p>
                                 </a>

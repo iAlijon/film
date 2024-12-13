@@ -22,9 +22,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'news' => \App\Http\Controllers\Admin\NewsController::class,
 //        'interview' => \App\Http\Controllers\Admin\InterViewController::class,
 //        'actor' => \App\Http\Controllers\Admin\ActorController::class,
-
         // conversation
-
         'actor_conversation' => \App\Http\Controllers\Admin\ActorConversationController::class,
         'people_film' => \App\Http\Controllers\Admin\PeopleFilmController::class,
         'rejissor' => \App\Http\Controllers\Admin\RejissorController::class,
@@ -33,20 +31,20 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'composer' => \App\Http\Controllers\Admin\ComposersController::class,
         'other' => \App\Http\Controllers\Admin\OtherPeopleController::class,
         'director' => \App\Http\Controllers\Admin\DirectorController::class,
-
         //portrait
-
         'portrait_rejissors' => \App\Http\Controllers\Admin\PortretRejissorsController::class,
         'portrait_actor' => \App\Http\Controllers\Admin\PorTraitActorController::class,
         'portrait_operator' => \App\Http\Controllers\Admin\PortraitOptertorController::class,
         'portrait_composer' => \App\Http\Controllers\Admin\PortraitComposerController::class,
         'portrait_artist' => \App\Http\Controllers\Admin\PortraitArtistController::class,
 //        'portret' => \App\Http\Controllers\Admin\PortretController::class,
-
         //film_dictionary
         'film_dictionary' => \App\Http\Controllers\Admin\FilmDictionaryController::class,
+        //filmography
         'cinema_fact' => \App\Http\Controllers\Admin\CinemaFactController::class,
         'artistic_film' => \App\Http\Controllers\Admin\ArtisticFilmController::class,
+        'documentary' => \App\Http\Controllers\Admin\DocumentaryController::class,
+        'popular_science_film' => \App\Http\Controllers\Admin\PopularScienceFilmController::class
     ]);
     Route::post('/new-status', [\App\Http\Controllers\Admin\NewsController::class, 'newStatus'])->name('new-status');
 //    Route::post('/interview-status', [\App\Http\Controllers\Admin\InterViewController::class, 'interviewStatus'])->name('interview-status');

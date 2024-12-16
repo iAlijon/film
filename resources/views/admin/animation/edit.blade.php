@@ -1,20 +1,16 @@
 @extends('admin.layouts.admin')
 
-@push('css')
-
-@endpush
-
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Ilmiy Ommabop Filmlar</h1>
+                    <h1></h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('popular_science_film.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Popular_science_film</li>
+                        <li class="breadcrumb-item"><a href="{{route('animation.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Animation_films</li>
                     </ol>
                 </div>
             </div>
@@ -54,15 +50,16 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('popular_science_film.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('animation.update', $model->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             {{----  oz  ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
 
                                 <div class="form-group">
                                     <label for="name_oz">Nomi</label>
-                                    <input type="text" class="form-control" name="name_oz">
+                                    <input type="text" class="form-control" name="name_oz" value="{{$model->name_oz}}">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
@@ -74,21 +71,21 @@
 
                                 <div class="form-group">
                                     <label for="description_oz">Qisqacha ma'lumot</label>
-                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control">{{$model->description_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" id="" cols="30" rows="10" class="form-control textarea"></textarea>
+                                    <textarea name="content_oz" id="" cols="30" rows="10" class="form-control textarea">{{$model->content_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select name="status" id="status" class="form-control">
-                                        <option value="1" selected>Active</option>
-                                        <option value="0">No Active</option>
+                                        <option value="1" {{$model->status == 1?'selected':''}}>Active</option>
+                                        <option value="0" {{$model->status == 0?'selected':''}}>No Active</option>
                                     </select>
                                     <small class="text-danger">{{$errors->first('status')}}</small>
                                 </div>
@@ -98,19 +95,19 @@
 
                                 <div class="form-group">
                                     <label for="name_uz">Номи</label>
-                                    <input type="text" class="form-control" name="name_uz">
+                                    <input type="text" class="form-control" name="name_uz" value="{{$model->name_uz}}">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description_uz">Қисқача маълумот</label>
-                                    <textarea name="description_uz" id="" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_uz" id="" cols="30" rows="5" class="form-control">{{$model->description_uz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_uz">Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" id="" cols="30" rows="10" class="form-control textarea"></textarea>
+                                    <textarea name="content_uz" id="" cols="30" rows="10" class="form-control textarea">{{$model->content_uz}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
 
@@ -127,7 +124,3 @@
         </div>
     </section>
 @endsection
-
-@push('js')
-
-@endpush

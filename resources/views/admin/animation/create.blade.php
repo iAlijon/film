@@ -1,20 +1,16 @@
 @extends('admin.layouts.admin')
 
-@push('css')
-
-@endpush
-
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Ilmiy Ommabop Filmlar</h1>
+                    <h1>Animatsiyon filmlar</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('popular_science_film.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Popular_science_film</li>
+                        <li class="breadcrumb-item"><a href="{{route('animation.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Animation_films</li>
                     </ol>
                 </div>
             </div>
@@ -54,7 +50,7 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('popular_science_film.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('animation.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             {{----  oz  ----}}
@@ -127,7 +123,3 @@
         </div>
     </section>
 @endsection
-
-@push('js')
-
-@endpush

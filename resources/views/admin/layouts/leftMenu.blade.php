@@ -167,7 +167,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('animation.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Animatsiyali filmlar</p>
                                 </a>
@@ -175,7 +175,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{route('film_analysis.index')}}" class="nav-link">
                                 <i class="far fa-circle"></i>
                             <p>Kino tahlil</p>
                             <span class="badge badge-primary right"></span>

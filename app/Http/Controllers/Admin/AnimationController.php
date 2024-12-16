@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PopularScienceFilmRequest;
-use App\Repositories\PopularScienceFilmRepository;
+use App\Http\Requests\Admin\AnimationRequest;
+use App\Repositories\AnimationRepository;
 use Illuminate\Http\Request;
 
-class PopularScienceFilmController extends Controller
+class AnimationController extends Controller
 {
-    public function __construct(protected Request $request, protected PopularScienceFilmRepository $repo){}
+    public function __construct(protected Request $request, protected AnimationRepository $repo){}
 
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class PopularScienceFilmController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        return view('admin.popular_science.index', compact('models'));
+        return view('admin.animation.index', compact('models'));
     }
 
     /**
@@ -29,7 +29,7 @@ class PopularScienceFilmController extends Controller
      */
     public function create()
     {
-        return view('admin.popular_science.create');
+        return view('admin.animation.create');
     }
 
     /**
@@ -38,16 +38,16 @@ class PopularScienceFilmController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PopularScienceFilmRequest $request)
+    public function store(AnimationRequest $request)
     {
         $model = $this->repo->create($request->validated());
         if ($model)
         {
             $request->session()->flash('success', 'Success Create');
-            return redirect()->route('popular_science_film.index');
+            return redirect()->route('animation.index');
         }else{
             $request->session()->flash('error', 'Errors Create');
-            return redirect()->back();
+            return back();
         }
     }
 
@@ -71,7 +71,7 @@ class PopularScienceFilmController extends Controller
     public function edit($id)
     {
         $model = $this->repo->findById($id);
-        return view('admin.popular_science.edit', compact('model'));
+        return view('admin.animation.edit', compact('model'));
     }
 
     /**
@@ -81,17 +81,16 @@ class PopularScienceFilmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PopularScienceFilmRequest $request, $id)
+    public function update(AnimationRequest $request, $id)
     {
-        $model = $this->repo->update($request->validated(), $id);
+        $model = $this->repo->update($request->validated(),$id);
         if ($model)
         {
-            $request->session()->flash('success', 'Success Update');
-            return redirect()->route('popular_science_film.index');
+            $request->session()->flash('success', 'Success');
         }else{
-            $request->session()->flash('error', 'Errors Update');
-            return redirect()->back();
+            $request->session()->flash('error', 'Errors');
         }
+
     }
 
     /**
@@ -102,13 +101,11 @@ class PopularScienceFilmController extends Controller
      */
     public function destroy($id)
     {
-        if($this->repo->delete($id))
-        {
-            session()->flash('success', 'Success delete');
-            return back();
+        $model = $this->repo->delete($id);
+        if ($model){
+            session()->flash('success', 'Success');
         }else{
-            session()->flash('error', 'Errors delete');
-            return back();
+            session()->flash('error', 'Errors');
         }
     }
 }

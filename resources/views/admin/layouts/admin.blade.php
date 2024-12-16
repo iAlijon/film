@@ -40,6 +40,17 @@
             color: red;
             font-size: 20px;
         }
+        .cancel{
+            top: 50%;
+            transform: translate(-50%, -50%);
+            right: 0;
+            border: 0;
+            font-size: 20px;
+            background-color: transparent;
+        }
+        .cancel:hover{
+            background-color: transparent;
+        }
     </style>
     @stack('css')
 </head>
@@ -123,6 +134,11 @@
         $(function (){
             $('.select2').select2()
         })
+        $(function (){
+            $('.cancel').click(function (){
+                $('.alert').addClass('d-none');
+            });
+        });
     </script>
 {{--    <script>--}}
 {{--        $(document).ready(function () {--}}

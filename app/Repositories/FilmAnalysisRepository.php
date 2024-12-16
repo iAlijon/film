@@ -18,11 +18,11 @@ class FilmAnalysisRepository extends BaseRepository
     public function index($request)
     {
         if (isset($request->name_oz) && !empty($request->name_oz)) {
-            $this->model->where('name_oz', 'ilike', '%' . $request->name_oz . '%');
+            $this->model = $this->model->where('name_oz', 'ilike', '%' . $request->name_oz . '%');
         }
 
         if (isset($request->analysis_category_id) && !empty($request->analysis_category_id)) {
-            $this->model->where('analysis_category_id', $request->analysis_category_id);
+           $this->model =  $this->model->where('analysis_category', $request->analysis_category_id);
         }
 
         return $this->model->orderBy('id', 'desc')->paginate($this->limit);

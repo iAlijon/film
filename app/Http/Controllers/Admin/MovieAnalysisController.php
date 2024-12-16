@@ -70,7 +70,7 @@ class MovieAnalysisController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.analysis.edit');
     }
 
     /**
@@ -82,7 +82,7 @@ class MovieAnalysisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

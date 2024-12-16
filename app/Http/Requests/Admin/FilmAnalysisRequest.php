@@ -32,7 +32,7 @@ class FilmAnalysisRequest extends FormRequest
             'content_oz' => 'required',
             'content_uz' => 'required',
             'status' => 'required|boolean',
-            'images' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }
 }

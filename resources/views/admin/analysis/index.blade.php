@@ -35,10 +35,10 @@
                                     <input type="text" name="name_oz" class="form-control" value="{{request('name_oz')}}">
                                 </th>
                                 <th>
-                                    <select name="analysis_category" id="" class="form-control" onchange="this.form.submit()">
+                                    <select name="analysis_category_id" id="" class="form-control" onchange="this.form.submit()">
                                         <option value="">----</option>
-                                        <option value="1" {{request('analysis_category') == 1?'selected':''}}>Milliy filmlar tahlili</option>
-                                        <option value="2" {{request('analysis_category') == 2?'selected':''}}>Xorijiy filmlar tahlili</option>
+                                        <option value="1" {{request('analysis_category_id') == 1?'selected':''}}>Milliy filmlar tahlili</option>
+                                        <option value="2" {{request('analysis_category_id') == 2?'selected':''}}>Xorijiy filmlar tahlili</option>
                                     </select>
                                 </th>
                                 <th></th>
@@ -56,24 +56,33 @@
                                 <td>{{$model->analysis_category == 1?'Milliy filmlar tahlili':'Xorijiy filmlar tahlili'}}</td>
                                 <td>{{$model->description_oz}}</td>
                                 <td>{{$model->status == 1?'Active':'No Active'}}</td>
-                                <td>{{$model->create_at}}</td>
+                                <td>{{$model->created_at}}</td>
                                 <td>
-                                    <a href="{{route('analysis.index')}}" class="btn btn-info"><i class="fas fa-edit"></i></a>
-                                    <form action="{{ route('people_film.destroy', $model->id) }}" method="post"
-                                          id="deleteItem-{{$model->id}}">
-                                        @csrf
-                                        @method('delete')
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <a href="{{route('film_analysis.index')}}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
+                                        <form action="{{ route('film_analysis.destroy', $model->id) }}" method="post"
+                                              id="deleteItem-{{$model->id}}">
+                                            @csrf
+                                            @method('delete')
 
-                                    </form>
-                                    <a type="submit" class="btn btn-danger btn-sm"
-                                       onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
-                                           document.getElementById('deleteItem-<?= $model->id ?>').submit();
-                                           }">
-                                        <span class="fa fa-trash-alt"></span>
-                                    </a>
+                                        </form>
+                                        <a type="submit" class="btn btn-danger"
+                                           onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
+                                               document.getElementById('deleteItem-<?= $model->id ?>').submit();
+                                               }">
+                                            <span class="fa fa-trash-alt"></span>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
+                            <tr>
+                                <td colspan="9" class="text-center">
+                                    <div class="alert alert-default-warning">
+                                        Ma'lumot mavjud emas
+                                    </div>
+                                </td>
+                            </tr>
                         @endforelse
                         </tbody>
                     </table>

@@ -18,6 +18,12 @@
     </section>
     <section class="content">
         <div class="col-11 ml-auto mr-auto">
+            @if(session()->has('success'))
+                <div class="alert alert-success position-relative">
+                    {{session()->get('success')}}
+                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                </div>
+            @endif
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Kitoblar <i class="fas fa-users"></i></h3>
@@ -105,12 +111,17 @@
                         </tr>
                         @empty
                             <tr>
-
+                                <td colspan="9" class="text-center">
+                                    <div class="alert alert-default-warning">
+                                        Ma'lumot mavjud emas
+                                    </div>
+                                </td>
                             </tr>
                         @endforelse
                         </tbody>
                     </table>
                 </div>
+                <div class="text-right">{{$models->links('vendor.pagination.bootstrap-5')}}</div>
             </div>
         </div>
     </section>

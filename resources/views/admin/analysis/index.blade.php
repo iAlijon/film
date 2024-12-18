@@ -105,6 +105,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="text-right">
+                    {{$models->links('vendor.pagination.bootstrap-5')}}
+                </div>
             </div>
         </div>
     </section>

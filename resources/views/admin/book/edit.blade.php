@@ -24,7 +24,7 @@
                     <button class="btn btn-danger position-absolute cancel">&times;</button>
                 </div>
             @endif
-            <div class="card card-info card-outline">
+            <div class="card card-outline card-info">
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                         <li class="nav-item">
@@ -50,8 +50,9 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('book.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('book.update', $model->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             {{---- oz ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
@@ -59,17 +60,17 @@
                                     <label for="Kategoriya">Kategoriya</label>
                                     <select name="book_category" id="" class="form-control">
                                         <option value="">----</option>
-                                        <option value="1">Badiiy kino</option>
-                                        <option value="2">Xorijiiy kino</option>
-                                        <option value="3">Animatsiya</option>
-                                        <option value="4">Desertatsiya</option>
+                                        <option value="1" {{$model->book_category == 1?'selected':''}}>Badiiy kino</option>
+                                        <option value="2" {{$model->book_category == 2?'selected':''}}>Xorijiiy kino</option>
+                                        <option value="3" {{$model->book_category == 3?'selected':''}}>Animatsiya</option>
+                                        <option value="4" {{$model->book_category == 4?'selected':''}}>Desertatsiya</option>
                                     </select>
                                     <small class="text-danger">{{$errors->first('book_category')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name_oz">Nomi</label>
-                                    <input type="text" name="name_oz" class="form-control">
+                                    <input type="text" name="name_oz" class="form-control" value="{{$model->name_oz}}">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
@@ -87,21 +88,21 @@
 
                                 <div class="form-group">
                                     <label for="description_oz">Qisqqcha ma'lumot</label>
-                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control">{{$model->description_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" id="" cols="30" rows="10" class="form-control textarea"></textarea>
+                                    <textarea name="content_oz" id="" cols="30" rows="10" class="form-control textarea">{{$model->content_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select name="status" id="" class="form-control">
-                                        <option value="1" selected>Active</option>
-                                        <option value="0">No Active</option>
+                                        <option value="1" {{$model->status == 1?'selected':''}}>Active</option>
+                                        <option value="0" {{$model->status == 0?'selected':''}}>No Active</option>
                                     </select>
                                 </div>
 
@@ -110,19 +111,19 @@
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
                                     <label for="name_uz">Номи</label>
-                                    <input type="text" name="name_uz" class="form-control">
+                                    <input type="text" name="name_uz" class="form-control" value="{{$model->name_uz}}">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description_uz">Қисқача маълумот</label>
-                                    <textarea name="description_uz" id="description_uz" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_uz" id="description_uz" cols="30" rows="5" class="form-control">{{$model->description_uz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_uz">Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" id="content_uz" cols="30" rows="10" class="form-control textarea"></textarea>
+                                    <textarea name="content_uz" id="content_uz" cols="30" rows="10" class="form-control textarea">{{$model->content_uz}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
                             </div>

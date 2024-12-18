@@ -61,7 +61,7 @@ class FilmAnalysisRepository extends BaseRepository
             deleteImages($item->images, 'analysis');
         }
         $model = $item->update([
-            'analysis_category' => $data['analysis_category'],
+            'analysis_category' => $data['analysis_category_id'],
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
             'description_oz' => $data['description_oz'],

@@ -1,21 +1,16 @@
 @extends('admin.layouts.admin')
 
+@push('css')
+    <style>
+        .images img{
+            width: 250px;
+            height: 250px;
+        }
+    </style>
+@endpush
+
 @section('content')
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Kino Tahlil</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('film_analysis.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Film_analysis</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section class="content-header"></section>
     <section class="content">
         <div class="col-11 ml-auto mr-auto">
             @if(session()->has('error'))
@@ -50,8 +45,9 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('film_analysis.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('film_analysis.update', $model->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             {{---- oz ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
@@ -59,41 +55,56 @@
                                     <label for="analysis_category_id">Tahlil kategoriyasi</label>
                                     <select name="analysis_category_id" id="" class="form-control">
                                         <option value="">----</option>
-                                        <option value="1">Milliy filmlar tahlili</option>
-                                        <option value="2">Xorijiy filmlar tahlili</option>
+                                        <option value="1" {{$model->analysis_category == 1?'selected':''}}>Milliy filmlar tahlili</option>
+                                        <option value="2" {{$model->analysis_category == 2?'selected':''}}>Xorijiy filmlar tahlili</option>
                                     </select>
                                     <small class="text-danger">{{$errors->first('analysis_category_id')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name_oz">Nomi</label>
-                                    <input type="text" class="form-control" name="name_oz">
+                                    <input type="text" class="form-control" name="name_oz" value="{{$model->name_oz}}">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="image">Rasm</label>
-                                    <input type="file" class="form-control" name="image" accept="image/jpeg,png,jpg">
+                                    @if($model->image)
+                                        <div id="imageBox" style="width: 200px; height: 200px; margin-bottom: 30px">
+                                            <img src="{{getInFolder($model->images, 'analysis')}}" alt="" style="width: 100%; height: 100%">
+                                            <p>
+                                                <a href="#" id="changeImage">O'zgartiring</a>
+                                            </p>
+                                        </div>
+                                        <div id="fileInput" style="display: none">
+                                            <input type="file" class="form-control" name="images">
+                                            <p>
+                                                <a href="" id="cancelChangeImage">Bekor qilish</a>
+                                            </p>
+                                        </div>
+                                    @else
+                                        <input type="file" class="form-control" name="image" accept="image/jpeg,png,jpg" maxlength="2048">
+                                    @endif
                                     <small class="text-danger">{{$errors->first('image')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description_oz">Qisqacha ma'lumot</label>
-                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control">{{$model->description_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" id="" cols="30" rows="10" class="form-control textarea"></textarea>
+                                    <textarea name="content_oz" id="" cols="30" rows="10" class="form-control textarea">{{$model->content_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select name="status" id="status" class="form-control">
-                                        <option value="1" selected>Active</option>
-                                        <option value="0">No Active</option>
+                                        <option value="1" {{$model->status == 1?'selected':''}}>Active</option>
+                                        <option value="0" {{$model->status == 0?'selected':''}}>No Active</option>
                                     </select>
                                 </div>
 
@@ -103,19 +114,19 @@
 
                                 <div class="form-group">
                                     <label for="name_uz">Номи</label>
-                                    <input type="text" class="form-control" name="name_uz">
+                                    <input type="text" class="form-control" name="name_uz" value="{{$model->name_uz}}">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description_uz">Қисқача маълумот</label>
-                                    <textarea name="description_uz" id="description_uz" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_uz" id="description_uz" cols="30" rows="5" class="form-control">{{$model->description_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_uz">Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" id="content_uz" cols="30" rows="10" class="form-control textarea"></textarea>
+                                    <textarea name="content_uz" id="content_uz" cols="30" rows="10" class="form-control textarea">{{$model->content_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
 
@@ -130,3 +141,15 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function (){
+            let cancel = document.getElementsByClassName('image');
+            // let selectFile = document.getElementsByName('image');
+            $('#replace').click(function (){
+                console.log('click')
+            })
+        })
+    </script>
+@endpush

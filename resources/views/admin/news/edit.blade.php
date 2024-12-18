@@ -57,8 +57,9 @@
                                     <small class="text-danger">{{$errors->first('new_category_id')}}</small>
                                 </div>
                                 <div class="form-group">
-                                    <label>Name(OZ)</label>
+                                    <label>Nomi</label>
                                     <input type="text" class="form-control" name="name_oz" value="{{$model->name_oz}}">
+                                    <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
@@ -78,17 +79,20 @@
                                         </div>
                                     @else
                                         <input type="file" class="form-control" name="images">
+                                        <small class="text-danger">{{$errors->first('images')}}</small>
                                     @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Qisqacha malumot (OZ)</label>
+                                    <label>Qisqacha malumot</label>
                                     <textarea name="description_oz" cols="30" rows="5" class="form-control">{{$model->description_oz}}</textarea>
+                                    <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>To'liq malumot(OZ)</label>
+                                    <label>To'liq malumot</label>
                                     <textarea name="content_oz" class="textarea form-control summernote" id="summernote">{{$model->content_oz}}</textarea>
+                                    <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
 {{--                                <div class="form-group">--}}
@@ -102,18 +106,21 @@
                             {{----  uz  ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
-                                    <label>Name(UZ)</label>
+                                    <label>Номи</label>
                                     <input type="text" class="form-control" name="name_uz" value="{{$model->name_uz}}">
+                                    <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Қисқача маълумот(UZ)</label>
                                     <textarea name="description_uz" cols="30" rows="5" class="form-control">{{$model->description_uz}}</textarea>
+                                    <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Тўлиқ маълумот(UZ)</label>
                                     <textarea name="content_uz" class="textarea form-control summernote" id="summernote">{{$model->content_uz}}</textarea>
+                                    <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
                             </div>
                             <div class="text-right">

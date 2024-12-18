@@ -3,10 +3,28 @@
 
 @section('content')
     <section class="content-header">
-
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Kino Tahlil</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('film_analysis.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Film_analysis</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
     </section>
     <section class="content">
         <div class="col-11 ml-auto mr-auto">
+            @if(session()->has('success'))
+                <div class="alert alert-success position-relative">
+                    {{session()->get('success')}}
+                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                </div>
+            @endif
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Kino tahlil <i class="fas fa-users"></i></h3>
@@ -59,7 +77,7 @@
                                 <td>{{$model->created_at}}</td>
                                 <td>
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <a href="{{route('film_analysis.index')}}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
+                                        <a href="{{route('film_analysis.edit', $model->id)}}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
                                         <form action="{{ route('film_analysis.destroy', $model->id) }}" method="post"
                                               id="deleteItem-{{$model->id}}">
                                             @csrf

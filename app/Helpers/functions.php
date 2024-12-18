@@ -126,3 +126,14 @@ if (!function_exists('deleteImages'))
         return false;
     }
 }
+
+if (!function_exists('getFile'))
+{
+    function getFile($file){
+        $files = public_path('files/book/').$file;
+        if (file_exists($files))
+        {
+            return '/files/book/'.$file;
+        }
+    }
+}

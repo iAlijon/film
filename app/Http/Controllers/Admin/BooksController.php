@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\FilmAnalysisRequest;
-use App\Repositories\FilmAnalysisRepository;
+use App\Http\Requests\Admin\BooksRequest;
+use App\Repositories\BooksRepository;
 use Illuminate\Http\Request;
 
-class MovieAnalysisController extends Controller
+class BooksController extends Controller
 {
-    public function __construct(protected Request $request, protected FilmAnalysisRepository $repo){}
+    public function __construct(protected Request $request, protected BooksRepository $repo){}
 
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class MovieAnalysisController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        return view('admin.analysis.index', compact('models'));
+        return view('admin.book.index', compact('models'));
     }
 
     /**
@@ -29,7 +29,7 @@ class MovieAnalysisController extends Controller
      */
     public function create()
     {
-        return view('admin.analysis.create');
+        return view('admin.book.create');
     }
 
     /**
@@ -38,13 +38,13 @@ class MovieAnalysisController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FilmAnalysisRequest $request)
+    public function store(BooksRequest $request)
     {
         $model = $this->repo->create($request->validated());
         if ($model)
         {
             $request->session()->flash('success', 'Success');
-            return redirect()->route('film_analysis.index');
+            return redirect()->route('book.index');
         }else{
             $request->session()->flash('error', 'Errors');
             return back();
@@ -70,8 +70,8 @@ class MovieAnalysisController extends Controller
      */
     public function edit($id)
     {
-        $model = $this->repo->findById($id);
-        return view('admin.analysis.edit', compact('model'));
+        $model = $this->repo->edit($id);
+        return view('admin.book.edit', compact('model'));
     }
 
     /**
@@ -81,13 +81,13 @@ class MovieAnalysisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FilmAnalysisRequest $request, $id)
+    public function update(BooksRequest $request, $id)
     {
         $model = $this->repo->update($request->validated(), $id);
         if ($model)
         {
             $request->session()->flash('success', 'Success');
-            return redirect()->route('film_analysis.index');
+            return redirect()->route('book.index');
         }else{
             $request->session()->flash('error', 'Errors');
             return back();
@@ -102,13 +102,17 @@ class MovieAnalysisController extends Controller
      */
     public function destroy($id)
     {
-        $model = $this->repo->delete($id);
-        if ($model) {
-            session()->flash('success', 'Success');
-            return back();
+        //
+    }
+
+    public function download($id)
+    {
+        $model = $this->repo->download($id);
+        if ($model)
+        {
+            return $model;
         }else{
-            session()->flash('error', 'Errors');
-            return back();
+            return null;
         }
     }
 }

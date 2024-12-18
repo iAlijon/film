@@ -181,6 +181,14 @@
                             <span class="badge badge-primary right"></span>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{route('book.index')}}" class="nav-link">
+                            <i class="far fa-circle"></i>
+                            <p>Kitoblar</p>
+                            <span class="badge badge-primary right"></span>
+                        </a>
+                    </li>
                 </ul>
         </nav>
         <!-- /.sidebar-menu -->

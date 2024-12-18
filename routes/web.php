@@ -46,8 +46,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'documentary' => \App\Http\Controllers\Admin\DocumentaryController::class,
         'popular_science_film' => \App\Http\Controllers\Admin\PopularScienceFilmController::class,
         'animation' => \App\Http\Controllers\Admin\AnimationController::class,
-        'film_analysis' => \App\Http\Controllers\Admin\MovieAnalysisController::class
+        'film_analysis' => \App\Http\Controllers\Admin\MovieAnalysisController::class,
+        'book' => \App\Http\Controllers\Admin\BooksController::class
     ]);
     Route::post('/new-status', [\App\Http\Controllers\Admin\NewsController::class, 'newStatus'])->name('new-status');
+    Route::get('/book/download/{id}', [\App\Http\Controllers\Admin\BooksController::class, 'download'])->name('download');
 //    Route::post('/interview-status', [\App\Http\Controllers\Admin\InterViewController::class, 'interviewStatus'])->name('interview-status');
 });

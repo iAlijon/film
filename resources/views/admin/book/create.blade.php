@@ -1,29 +1,9 @@
 @extends('admin.layouts.admin')
 
 @section('content')
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Kino Tahlil</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('film_analysis.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Film_analysis</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section class="content-header"></section>
     <section class="content">
-        <div class="col-11 ml-auto mr-auto">
-            @if(session()->has('error'))
-                <div class="alert alert-danger position-relative">
-                    {{session()->get('error')}}
-                    <button class="btn btn-danger position-absolute cancel">&times;</button>
-                </div>
-            @endif
+        <div class="col-11 mr-auto ml-auto">
             <div class="card card-info card-outline">
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -50,35 +30,43 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('film_analysis.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('book.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             {{---- oz ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
-                                    <label for="analysis_category_id">Tahlil kategoriyasi</label>
-                                    <select name="analysis_category_id" id="" class="form-control">
+                                    <label for="Kategoriya">Kategoriya</label>
+                                    <select name="book_category" id="" class="form-control">
                                         <option value="">----</option>
-                                        <option value="1">Milliy filmlar tahlili</option>
-                                        <option value="2">Xorijiy filmlar tahlili</option>
+                                        <option value="1">Badiiy kino</option>
+                                        <option value="2">Xorijiiy kino</option>
+                                        <option value="3">Animatsiya</option>
+                                        <option value="4">Desertatsiya</option>
                                     </select>
-                                    <small class="text-danger">{{$errors->first('analysis_category_id')}}</small>
+                                    <small class="text-danger">{{$errors->first('book_category')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name_oz">Nomi</label>
-                                    <input type="text" class="form-control" name="name_oz">
+                                    <input type="text" name="name_oz" class="form-control">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="image">Rasm</label>
-                                    <input type="file" class="form-control" name="image" accept="image/jpeg,png,jpg">
+                                    <input type="file" name="image" class="form-control" accept="image/jpeg,png,jpg">
                                     <small class="text-danger">{{$errors->first('image')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="description_oz">Qisqacha ma'lumot</label>
+                                    <label for="file">Fayillar</label>
+                                    <input type="file" name="file" class="form-control">
+                                    <small class="text-danger">{{$errors->first('file')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description_oz">Qisqqcha ma'lumot</label>
                                     <textarea name="description_oz" id="" cols="30" rows="5" class="form-control"></textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
@@ -91,7 +79,7 @@
 
                                 <div class="form-group">
                                     <label for="status">Status</label>
-                                    <select name="status" id="status" class="form-control">
+                                    <select name="status" id="" class="form-control">
                                         <option value="1" selected>Active</option>
                                         <option value="0">No Active</option>
                                     </select>
@@ -100,10 +88,9 @@
                             </div>
                             {{---- uz ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
-
                                 <div class="form-group">
                                     <label for="name_uz">Номи</label>
-                                    <input type="text" class="form-control" name="name_uz">
+                                    <input type="text" name="name_uz" class="form-control">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
@@ -118,7 +105,6 @@
                                     <textarea name="content_uz" id="content_uz" cols="30" rows="10" class="form-control textarea"></textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
-
                             </div>
                             <div class="text-right">
                                 <button class="btn btn-success">&check;Saqlash</button>

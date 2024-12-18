@@ -83,6 +83,23 @@ class BooksRepository extends BaseRepository
         return false;
     }
 
+    public function delete($id)
+    {
+        $model = $this->model->find($id);
+        if ($model->images){
+            deleteImages($model->images, 'book');
+        }
+        if ($model->files)
+        {
+            @unlink(public_path('files/book/').$model->files);
+        }
+        if ($model->delete())
+        {
+            return true;
+        }
+        return false;
+    }
+
     public function download($id)
     {
         $model = $this->model->find($id);

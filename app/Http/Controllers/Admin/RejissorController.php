@@ -11,20 +11,16 @@ use Illuminate\Http\Request;
 
 class RejissorController extends Controller
 {
-    protected $repo;
-    public function __construct(RejissorRepository $repo)
-    {
-        $this->repo = $repo;
-    }
+    public function __construct(protected RejissorRepository $repo, protected Request $request){}
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $models = $this->repo->index();
+        $models = $this->repo->index($this->request);
         return view('admin.rejissor.index', compact('models'));
     }
 
@@ -47,8 +43,14 @@ class RejissorController extends Controller
      */
     public function store(RejissorRequest $request)
     {
-        $this->repo->create($request->validated());
-        return redirect()->route('rejissor.index');
+        $model = $this->repo->create($request->validated());
+        if ($model){
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('rejissor.index');
+        }else{
+            $request->session()->flash('error', 'Errors');
+            return back();
+        }
     }
 
     /**
@@ -82,10 +84,11 @@ class RejissorController extends Controller
     public function update(RejissorRequest $request, $id)
     {
         $model = $this->repo->update($request->validated(), $id);
-        if ($model)
-        {
-            return redirect()->route('rejissor.index')->withSuccess('Successfully Update &check');
+        if ($model) {
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('rejissor.index');
         }else{
+            $request->session()->flash('error', 'Errors');
             return redirect()->back()->withErrors('Not update ?');
         }
     }

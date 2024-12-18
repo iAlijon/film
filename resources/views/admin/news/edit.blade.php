@@ -7,13 +7,25 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Yangilikni O'zgartirish</h1>
+                    <h1>Yangiliklar</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('news.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">News</li>
+                    </ol>
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
     <section class="content">
-        <div class="col-sm-12">
+        <div class="col-11  ml-auto mr-auto">
+            @if(session()->has('error'))
+                <div class="alert alert-danger position-relative">
+                    {{session()->get('error')}}
+                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                </div>
+            @endif
             <div class="card card-primary card-outline">
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">

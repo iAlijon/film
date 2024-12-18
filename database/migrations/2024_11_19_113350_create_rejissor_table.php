@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('rejissor', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name_oz');
-            $table->string('full_name_uz');
-            $table->string('full_name_ru')->nullable();
-            $table->string('full_name_en')->nullable();
+            $table->string('name_oz');
+            $table->string('name_uz');
+            $table->string('name_ru')->nullable();
+            $table->string('name_en')->nullable();
             $table->longText('description_oz');
             $table->longText('description_uz');
             $table->longText('description_ru')->nullable();

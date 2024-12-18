@@ -102,7 +102,14 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $model = $this->repo->delete($id);
+        if ($model){
+            session()->flash('success', 'Success');
+            return redirect()->back();
+        }else{
+            session()->flash('error', 'Errors');
+            return back();
+        }
     }
 
     public function download($id)

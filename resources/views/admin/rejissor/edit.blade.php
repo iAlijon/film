@@ -2,10 +2,28 @@
 
 @section('content')
     <section class="content-header">
-
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-6">
+                    <h1>Rejissorlar</h1>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('rejissor.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Rejissor</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
     </section>
     <section class="content">
         <div class="col-11 ml-auto mr-auto">
+            @if(session()->has('error'))
+                <div class="alert alert-danger position-relative">
+                    {{session()->get('error')}}
+                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                </div>
+            @endif
             <div class="card card-outline card-info">
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -32,15 +50,6 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    @if (session()->has('success'))
-                        <div class="alert alert-success">
-                            {{session()->get('success')}}
-                        </div>
-                    @elseif(session()->has('errors'))
-                        <div class="alert alert-danger">
-                            {{session()->get('errors')}}
-                        </div>
-                    @endif
                     <form action="{{route('rejissor.update', $model->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -50,7 +59,7 @@
 
                                 <div class="form-group">
                                     <label>Rejissorni tanlang</label>
-                                    <select class="form-control form-control-sm" name="director_id">
+                                    <select class="form-control" name="director_id">
                                         <option value="">---</option>
                                         @foreach($directors as $director)
                                             <option value="{{$director->id}}" {{$model->people_film_category_id == $director->id?'selected':''}}>
@@ -58,23 +67,24 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    <small class="text-danger">{{$errors->first('director_id')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Suxbat nomi (OZ)</label>
-                                    <input type="text" name="name_oz" class="form-control form-control-sm" value="{{$model->name_oz}}">
+                                    <label>Suxbat nomi</label>
+                                    <input type="text" name="name_oz" class="form-control" value="{{$model->name_oz}}">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="description_oz">Qisqacha mazmuni (OZ)</label>
-                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control form-control-sm"
+                                    <label for="description_oz">Qisqacha mazmuni</label>
+                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control"
                                     >{{$model->description_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>To'liq ma'mazmuni (OZ)</label>
+                                    <label>To'liq ma'mazmuni</label>
                                     <textarea name="content_oz" class="textarea form-control summernote"
                                               id="summernote">{{$model->content_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
@@ -82,32 +92,32 @@
 
                                 <div class="form-group">
                                     <label>Status</label>
-                                    <select name="status" class="form-control form-control-sm">
-                                        <option value="">---</option>
+                                    <select name="status" class="form-control">
                                         <option value="1" {{$model->status == 1?'selected':''}}>Active</option>
                                         <option value="0" {{$model->status == 0?'selected':''}}>No active</option>
                                     </select>
+                                    <small class="text-danger">{{$errors->first('status')}}</small>
                                 </div>
 
                             </div>
                             {{----  uz  ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
-                                    <label>Сухбат номи (UZ)</label>
-                                    <input type="text" name="name_uz" class="form-control form-control-sm" placeholder="" value="{{$model->name_uz}}">
+                                    <label>Сухбат номи</label>
+                                    <input type="text" name="name_uz" class="form-control" placeholder="" value="{{$model->name_uz}}">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="description_uz">Қисқача мазмуни (UZ)</label>
-                                    <textarea name="description_uz" cols="30" rows="5" class="form-control form-control-sm">
+                                    <label for="description_uz">Қисқача мазмуни</label>
+                                    <textarea name="description_uz" cols="30" rows="5" class="form-control">
                                         {{$model->description_uz}}
                                     </textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Тўлиқ мазмуни (UZ)</label>
+                                    <label>Тўлиқ мазмуни</label>
                                     <textarea name="content_uz" class="textarea form-control summernote"
                                               id="summernote">{{$model->content_uz }}</textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>

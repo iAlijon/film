@@ -7,13 +7,25 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Yangiliklar Qo'shish</h1>
+                    <h1>Yangiliklar</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('news.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">News</li>
+                    </ol>
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
     <section class="content">
-        <div class="col-sm-12">
+        <div class="col-11 mr-auto ml-auto">
+            @if(session()->has('error'))
+                <div class="alert alert-danger position-relative">
+                    {{session()->get('error')}}
+                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                </div>
+            @endif
             <div class="card card-primary card-outline" >
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -57,7 +69,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Name(OZ)</label>
+                                    <label>Nomi</label>
                                     <input type="text" class="form-control" name="name_oz">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
@@ -69,19 +81,19 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Qisqacha malumot (OZ)</label>
+                                    <label>Qisqacha ma'lumot</label>
                                     <textarea name="description_oz" cols="30" rows="5" class="form-control"></textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>To'liq malumot(OZ)</label>
+                                    <label>To'liq ma'lumot</label>
                                     <textarea name="content_oz" class="textarea form-control summernote" id="summernote"></textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Holati</label>
+                                    <label>Status</label>
                                     <select name="status" class="form-control form-control-sm">
                                         <option value="active">Active</option>
                                         <option value="no_active">No Active</option>
@@ -91,19 +103,19 @@
                             {{----  uz  ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
-                                    <label>Name(UZ)</label>
+                                    <label>Номи</label>
                                     <input type="text" class="form-control" name="name_uz">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Қисқача маълумот(UZ)</label>
+                                    <label>Қисқача маълумот</label>
                                     <textarea name="description_uz" cols="30" rows="5" class="form-control"></textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Тўлиқ маълумот(UZ)</label>
+                                    <label>Тўлиқ маълумот</label>
                                     <textarea name="content_uz" class="textarea form-control summernote" id="summernote"></textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>

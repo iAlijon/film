@@ -29,7 +29,7 @@ class NewFilter
         }
 
         if (isset($this->request['new_category_id']) && !empty($this->request['new_category_id'])) {
-            $this->news = $this->news->where('category_id', $this->request['new_category_id']);
+            $this->news = $this->news->where('new_category_id', $this->request['new_category_id']);
         }
         return $this->news;
     }

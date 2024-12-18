@@ -13,9 +13,12 @@ class RejissorRepository extends BaseRepository
         $this->model = new Rejissor();
     }
 
-    public function index()
+    public function index($request)
     {
-
+        if (isset($request->name_oz) && !empty($request->name_oz))
+        {
+            $this->model = $this->model->where('name_oz', 'ilike', '%'.$request->name_oz.'%');
+        }
         return $this->model->with('people_film_category')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
@@ -35,8 +38,8 @@ class RejissorRepository extends BaseRepository
             'description_uz' => $data['description_uz'],
             'description_ru' => $data['description_ru']??null,
             'description_en' => $data['description_en']??null,
-            'content_oz' => contentByDomDocment($data['content_oz']),
-            'content_uz' => contentByDomDocment($data['content_uz']),
+            'content_oz' => contentByDomDocment($data['content_oz'], 'rejissor'),
+            'content_uz' => contentByDomDocment($data['content_uz'], 'rejissor'),
             'content_ru' => $data['content_ru']??null,
             'content_en' => $data['content_en']??null,
             'status' => $data['status'],
@@ -61,8 +64,8 @@ class RejissorRepository extends BaseRepository
             'description_uz' => $data['description_uz'],
             'description_ru' => $data['description_ru']??null,
             'description_en' => $data['description_en']??null,
-            'content_oz' => contentByDomDocment($data['content_oz']),
-            'content_uz' => contentByDomDocment($data['content_uz']),
+            'content_oz' => contentByDomDocment($data['content_oz'], 'rejissor'),
+            'content_uz' => contentByDomDocment($data['content_uz'], 'rejissor'),
             'content_ru' => $data['content_ru']??null,
             'content_en' => $data['content_en']??null,
             'status' => $data['status'],

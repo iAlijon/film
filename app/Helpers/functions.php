@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 if(!function_exists('contentByDomDocment')) {
     function contentByDomDocment($content, $folder=null)
     {
@@ -25,7 +27,7 @@ if(!function_exists('contentByDomDocment')) {
                         mkdir($path, 0755, true);
                     }
 
-                    $file_name = str_random(10) . $k . '.jpg';
+                    $file_name = Str::random(10) . $k . '.jpg';
                     $file_path = $directory . $file_name;
 
                     file_put_contents($path.$file_name, $data);
@@ -72,7 +74,7 @@ if(!function_exists('contentByDomDocment')) {
                         mkdir($path, 0755, true);
                     }
 
-                    $file_name = str_random(10) . $k . $file_type;
+                    $file_name = Str::random(10) . $k . $file_type;
                     $file_path = $directory . $file_name;
 
                     file_put_contents($path.$file_name, $dataFile);

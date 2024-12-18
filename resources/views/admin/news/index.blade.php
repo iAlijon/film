@@ -99,28 +99,42 @@
                 <div class="col-sm-6">
                     <h1>Yangiliklar</h1>
                 </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('news.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">News</li>
+                    </ol>
+                </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
 
     <!-- Main content -->
     <section class="content">
-        <div class="container-fluid">
+        <div class="col-11 ml-auto mr-auto">
+            @if(session()->has('success'))
+                <div class="alert alert-success position-relative">
+                    {{session()->get('success')}}
+                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                </div>
+            @endif
             <div class="card card-info">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3 class="card-title">News List</h3>
-                    <a href="{{route('news.create')}}" class="btn btn-success ml-auto">&plus; Qo'shish</a>
+                <div class="card-header">
+                    <h3 class="card-title">News List <i class="fas fa-newspaper"></i></h3>
+                    <div class="text-right">
+                        <a href="{{route('news.create')}}" class="btn btn-success">&plus; Qo'shish</a>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover table-striped">
                         <thead>
                         <tr class="text-center">
                             <th class="text-center">#</th>
-                            <th>Name</th>
-                            <th>Description</th>
+                            <th>Nomi</th>
+                            <th>Qisqacha ma'lumot</th>
                             <th>Kategoriya</th>
                             <th>Status</th>
-                            <th>Created</th>
+                            <th>Qo'shilgan vaqti</th>
                             <th></th>
                         </tr>
                         <tr>
@@ -129,15 +143,12 @@
                                 <button type="submit" class="d-none"></button>
                                 <th></th>
                                 <th class="w-25">
-                                    <input type="text" class="form-control form-control-sm" name="name_oz"
+                                    <input type="text" class="form-control" name="name_oz"
                                            value="{{request('name_oz')}}">
                                 </th>
-                                <th class="w-25">
-                                    <input type="text" class="form-control form-control-sm" name="description_oz"
-                                           value="{{request('description_oz')}}">
-                                </th>
+                                <th></th>
                                 <th>
-                                    <select name="new_category_id" class="form-control form-control-sm" id="new_category_id" onchange="this.form.submit()">
+                                    <select name="new_category_id" class="form-control" id="new_category_id" onchange="this.form.submit()">
                                         <option value="">----</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}" {{request('new_category_id') == $category->id ?'selected':''}}>{{$category->name_oz}}</option>
@@ -170,16 +181,14 @@
                                 <td class="text-center">{{\Carbon\Carbon::parse($model->created_at)->format('d.m.Y')}}</td>
                                 <td>
                                     <div class="project-actions">
-                                        <a href="{{route('news.edit', $model->id)}}" class="btn btn-info btn-sm mr-1"><i
+                                        <a href="{{route('news.edit', $model->id)}}" class="btn btn-info mr-1"><i
                                                 class="fas fa-pencil-alt"></i></a>
-                                        <a href="{{route('news.show', $model->id)}}" class="btn btn-primary btn-sm mr-1"><i
-                                                class="fas fa-eye"></i></a>
                                         <form action="{{ route('news.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
                                             @csrf
                                             @method('delete')
 
                                         </form>
-                                        <a type="submit" class="btn btn-danger btn-sm"
+                                        <a type="submit" class="btn btn-danger"
                                            onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
                                                document.getElementById('deleteItem-<?= $model->id ?>').submit();
                                                }">
@@ -204,7 +213,7 @@
                 <div class="card-footer clearfix">
                     <div class="col-sm-12 text-right">
                         <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                            {{$models->links('vendor.pagination.bootstrap-4')}}
+                            {{$models->links('vendor.pagination.bootstrap-5')}}
                         </div>
                     </div>
                 </div>

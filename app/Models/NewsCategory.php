@@ -11,7 +11,7 @@ class NewsCategory extends Model
     protected $guarded = [];
     public $timestamps = false;
 
-    public function news()
+    public function new_category()
     {
         return $this->belongsTo(News::class);
     }

@@ -43,13 +43,13 @@ class NewsRepository extends BaseRepository
             'description_uz' => $data['description_uz'],
             'description_ru' => $data['description_ru'] ?? null,
             'description_en' => $data['description_en'] ?? null,
-            'content_oz' => contentByDomDocment($data['content_oz']),
-            'content_uz' => contentByDomDocment($data['content_uz']),
+            'content_oz' => contentByDomDocment($data['content_oz'], 'news'),
+            'content_uz' => contentByDomDocment($data['content_uz'], 'news'),
             'content_ru' => $data['content_ru'] ?? null,
             'content_en' => $data['content_en'] ?? null,
             'status' => $data['status'] == 'active' ? true : false,
             'image' => $this->uploads($data['images'], 'news'),
-            'category_id' => $data['new_category_id']
+            'new_category_id' => $data['new_category_id']
         ]);
         if ($model) {
             return $model;
@@ -60,7 +60,6 @@ class NewsRepository extends BaseRepository
 
     public function update($data, $id)
     {
-        dd($data);
         $model = $this->model->find($id);
         if ($model->image)
         {
@@ -76,13 +75,13 @@ class NewsRepository extends BaseRepository
             'description_uz' => $data['description_uz'],
             'description_ru' => $data['description_ru'] ?? null,
             'description_en' => $data['description_en'] ?? null,
-            'content_oz' => contentByDomDocment($data['content_oz']),
-            'content_uz' => contentByDomDocment($data['content_uz']),
+            'content_oz' => contentByDomDocment($data['content_oz'], 'news'),
+            'content_uz' => contentByDomDocment($data['content_uz'], 'news'),
             'content_ru' => $data['content_ru'] ?? null,
             'content_en' => $data['content_en'] ?? null,
             'status' => $data['status'] == 'active' ? true:false,
             'image' => $this->uploads($data['images'], 'news'),
-            'category_id' => $data['new_category_id']
+            'new_category_id' => $data['new_category_id']
         ]);
         if ($model) {
             return $model;

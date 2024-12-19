@@ -14,8 +14,14 @@ class OperatorsRepository extends BaseRepository
         $this->model = new Operators();
     }
 
-    public function index()
+    public function index($request)
     {
+        if (isset($request->name_oz) && !empty($request->name_oz)){
+            $this->model = $this->model->where('name_oz', 'ilike','%'.$request->name_oz.'%');
+        }
+        if (isset($request->operator_id) && !empty($request->operator_id)){
+            $this->model = $this->model->where('people_film_category_id', $request->operator_id);
+        }
         return $this->model->with('operator')->orderBy('id', 'desc')->paginate($this->limit);
     }
 

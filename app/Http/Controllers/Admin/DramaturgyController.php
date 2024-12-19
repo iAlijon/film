@@ -10,11 +10,7 @@ use Illuminate\Http\Request;
 
 class DramaturgyController extends Controller
 {
-    protected $repo;
-    public function __construct(DramaturgyRepository $repo)
-    {
-        $this->repo = $repo;
-    }
+    public function __construct(protected DramaturgyRepository $repo, protected Request $request){}
 
     /**
      * Display a listing of the resource.
@@ -23,8 +19,9 @@ class DramaturgyController extends Controller
      */
     public function index()
     {
-        $models = $this->repo->index();
-        return view('admin.dramaturgy.index', compact('models'));
+        $categories = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 2)->select('id', 'full_name_oz')->get();
+        $models = $this->repo->index($this->request);
+        return view('admin.dramaturgy.index', compact('models', 'categories'));
     }
 
     /**
@@ -46,8 +43,15 @@ class DramaturgyController extends Controller
      */
     public function store(DramaturgyRequest $request)
     {
-        $this->repo->create($request->validated());
-        return redirect()->route('dramaturgy.index');
+        $model = $this->repo->create($request->validated());
+        if ($model)
+        {
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('dramaturgy.index');
+        }else{
+            $request->session()->flash('error', 'Errors');
+            return back();
+        }
     }
 
     /**
@@ -83,8 +87,14 @@ class DramaturgyController extends Controller
      */
     public function update(DramaturgyRequest $request, $id)
     {
-        $this->repo->update($request->validated(), $id);
-        return redirect()->route('dramaturgy.index');
+        $model = $this->repo->update($request->validated(), $id);
+        if ($model){
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('dramaturgy.index');
+        }else{
+            $request->session()->flash('error', 'Errors');
+            return back();
+        }
     }
 
     /**

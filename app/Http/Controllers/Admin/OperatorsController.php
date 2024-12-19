@@ -10,11 +10,7 @@ use Illuminate\Http\Request;
 
 class OperatorsController extends Controller
 {
-    protected $repo;
-    public function __construct(OperatorsRepository $repo)
-    {
-        $this->repo = $repo;
-    }
+    public function __construct(protected OperatorsRepository $repo, protected Request $request){}
 
     /**
      * Display a listing of the resource.
@@ -23,8 +19,9 @@ class OperatorsController extends Controller
      */
     public function index()
     {
-        $models = $this->repo->index();
-        return view('admin.operator.index', compact('models'));
+        $categories = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 3)->select('id', 'full_name_oz')->get();
+        $models = $this->repo->index($this->request);
+        return view('admin.operator.index', compact('models', 'categories'));
     }
 
     /**

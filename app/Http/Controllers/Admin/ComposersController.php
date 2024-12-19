@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class ComposersController extends Controller
 {
-    public function __construct(protected ComposersRepository $repo)
+    public function __construct(protected ComposersRepository $repo, protected Request $request)
     {
 
     }
@@ -22,8 +22,9 @@ class ComposersController extends Controller
      */
     public function index()
     {
-        $models = $this->repo->index();
-        return view('admin.composer.index', compact('models'));
+        $categories = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 4)->select('id', 'full_name_oz')->get();
+        $models = $this->repo->index($this->request);
+        return view('admin.composer.index', compact('models', 'categories'));
     }
 
     /**

@@ -101,6 +101,6 @@ class RejissorController extends Controller
     public function destroy($id)
     {
         $this->repo->delete($id);
-        return redirect()->back()->withSuccess('Success Delete');
+        return redirect()->route('rejissor.index');
     }
 }

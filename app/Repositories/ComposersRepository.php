@@ -13,8 +13,14 @@ class ComposersRepository extends BaseRepository
         $this->model = new Composer();
     }
 
-    public function index()
+    public function index($request)
     {
+        if (isset($request->name_oz) && !empty($request->name_oz)){
+            $this->model = $this->model->where('name_oz', 'ilike', '%'.$request->name_oz.'$');
+        }
+        if (isset($request->composer_id) && !empty($request->composer_id)){
+            $this->model = $this->model->where('people_film_category_id', $request->composer_id);
+        }
         return $this->model->with('composer')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
@@ -38,7 +44,7 @@ class ComposersRepository extends BaseRepository
             'content_uz' => contentByDomDocment($data['content_uz']),
             'content_ru' => $data['content_ru']??null,
             'content_en' => $data['content_en']??null,
-            'composer_id' => $data['composer_id'],
+            'people_film_category_id' => $data['composer_id'],
             'status' => $data['status']
         ]);
         if ($model)
@@ -64,7 +70,7 @@ class ComposersRepository extends BaseRepository
             'content_uz' => contentByDomDocment($data['content_uz']),
             'content_ru' => $data['content_ru'],
             'content_en' => $data['content_en'],
-            'composer_id' => $data['composer_id'],
+            'people_film_category_id' => $data['composer_id'],
             'status' => $data['status']
         ]);
         if ($model)

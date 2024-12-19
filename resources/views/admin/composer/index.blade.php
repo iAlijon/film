@@ -1,9 +1,29 @@
 @extends('admin.layouts.admin')
 
 @section('content')
-    <section class="content-header"></section>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Kompazitor-bastakorlar</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('composer.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Composer</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="content">
         <div class="col-11 mr-auto ml-auto">
+            @if(session()->has('success'))
+                <div class="alert alert-success position-relative">
+                    {{session()->get('success')}}
+                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                </div>
+            @endif
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Kompazitor-bastakorlar  <i class="fa fa-users"></i></h3>
@@ -19,6 +39,7 @@
                             <th>F.I.O</th>
                             <th>Suxbat nomi</th>
                             <th>Qisqacha mazmuni</th>
+                            <th>Status</th>
                             <th>Qo'shilgan vaqti</th>
                             <th></th>
                         </tr>
@@ -28,7 +49,15 @@
                                 <button type="submit" class="d-none"></button>
                                 <th></th>
                                 <th>
-                                    <input type="text" name="full_name_oz" class="form-control">
+                                    <select name="composer_id" id="composer_id" class="form-control">
+                                        <option value="">----</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}" {{$category->id == request('composer_id')?'selected':''}}>{{$category->full_name_oz}}</option>
+                                        @endforeach
+                                    </select>
+                                </th>
+                                <th>
+                                    <input type="text" name="name_oz" class="form-control" value="{{request('name_oz')}}">
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -41,11 +70,12 @@
                         @forelse($models as $k => $model)
                             <tr>
                                 <td>{{$k + 1}}</td>
-                                <td>{{$model->operator->full_name_oz}}</td>
+                                <td>{{$model->composer->full_name_oz}}</td>
                                 <td>{{$model->name_oz}}</td>
-                                <th>{{$model->description_oz}}</th>
+                                <td>{{$model->description_oz}}</td>
+                                <td>{{$model->status == 1?'Active':'No Active'}}</td>
                                 <td>{{$model->created_at}}</td>
-                                <th>
+                                <td>
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{route('composer.edit', $model->id)}}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
                                         <form action="{{ route('composer.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
@@ -60,7 +90,7 @@
                                             <span class="fa fa-trash-alt"></span>
                                         </a>
                                     </div>
-                                </th>
+                                </td>
                             </tr>
                         @empty
                             <tr>
@@ -73,7 +103,7 @@
                         @endforelse
                         </tbody>
                         <div class="text-right">
-                            {{$models->links()}}
+                            {{$models->links('vendor.pagination.bootstrap-5')}}
                         </div>
                     </table>
                 </div>

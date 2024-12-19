@@ -42,8 +42,8 @@ class OperatorsRepository extends BaseRepository
             'description_uz' => $data['description_uz'],
             'description_ru' => $data['description_ru']??null,
             'description_en' => $data['description_en']??null,
-            'content_oz' => contentByDomDocment($data['content_oz']),
-            'content_uz' => contentByDomDocment($data['content_uz']),
+            'content_oz' => contentByDomDocment($data['content_oz'], 'operator'),
+            'content_uz' => contentByDomDocment($data['content_uz'], 'operator'),
             'content_ru' => $data['content_ru']??null,
             'content_en' => $data['content_en']??null,
             'status' => $data['status']
@@ -68,8 +68,8 @@ class OperatorsRepository extends BaseRepository
             'description_uz' => $data['description_uz'],
             'description_ru' => $data['description_ru']??null,
             'description_en' => $data['description_en']??null,
-            'content_oz' => contentByDomDocment($data['content_oz']),
-            'content_uz' => contentByDomDocment($data['content_uz']),
+            'content_oz' => contentByDomDocment($data['content_oz'], 'operator'),
+            'content_uz' => contentByDomDocment($data['content_uz'], 'operator'),
             'content_ru' => $data['content_ru']??null,
             'content_en' => $data['content_en']??null,
             'status' => $data['status']

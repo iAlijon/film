@@ -1,9 +1,29 @@
 @extends('admin.layouts.admin')
 
 @section('content')
-    <section class="content-header"></section>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <h1>Boshqa kino ijodkorlar</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('other.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Other_filmmarkers </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="content">
         <div class="col-11 mr-auto ml-auto">
+            @if(session()->has('error'))
+                <div class="alert alert-danger position-relative">
+                    {{session()->get('error')}}
+                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                </div>
+            @endif
             <div class="card card-outline card-info">
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -48,19 +68,19 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name_oz">Suxbat nomi (OZ)</label>
+                                    <label for="name_oz">Suxbat nomi</label>
                                     <input type="text" name="name_oz" class="form-control" value="{{$model->name_oz}}">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="description_oz">Qisqacha mazmuni (OZ)</label>
-                                    <textarea name="description_oz" cols="30" rows="5" class="form-control form-control-sm">{{$model->description_oz}}</textarea>
+                                    <label for="description_oz">Qisqacha mazmuni</label>
+                                    <textarea name="description_oz" cols="30" rows="5" class="form-control">{{$model->description_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="content_oz">To'liq mazmuni (OZ)</label>
+                                    <label for="content_oz">To'liq mazmuni</label>
                                     <textarea name="content_oz" class="textarea form-control summernote"
                                               id="summernote">{{$model->content_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
@@ -78,19 +98,19 @@
                             {{----  uz  ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
-                                    <label for="name_uz">Сухбат номи (UZ)</label>
+                                    <label for="name_uz">Сухбат номи</label>
                                     <input type="text" name="name_uz" class="form-control" value="{{$model->name_uz}}">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="description_uz">Қисқача мазмуни (UZ)</label>
-                                    <textarea name="description_uz" cols="30" rows="5" class="form-control form-control-sm">{{$model->description_uz}}</textarea>
+                                    <label for="description_uz">Қисқача мазмуни</label>
+                                    <textarea name="description_uz" cols="30" rows="5" class="form-control">{{$model->description_uz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="content_uz">Тўлиқ мазмуни (UZ)</label>
+                                    <label for="content_uz">Тўлиқ мазмуни</label>
                                     <textarea name="content_uz" class="textarea form-control summernote"
                                               id="summernote">{{$model->content_uz}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>

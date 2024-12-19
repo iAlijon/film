@@ -18,7 +18,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('people_film.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Film</li>
+                        <li class="breadcrumb-item active">People_film</li>
                     </ol>
                 </div>
             </div>
@@ -26,6 +26,12 @@
     </section>
     <section class="content">
         <div class="col-11 mr-auto ml-auto">
+            @if(session()->has('success'))
+                <div class="alert alert-success position-relative">
+                    {{session()->get('success')}}
+                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                </div>
+            @endif
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Kino tegishli odamlar <i class="fa fa-users"></i></h3>
@@ -83,14 +89,14 @@
                                 <td>
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{route('people_film.edit', $model->id)}}"
-                                           class="btn btn-info btn-sm mr-2"><i class="fas fa-edit"></i></a>
+                                           class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
                                         <form action="{{ route('people_film.destroy', $model->id) }}" method="post"
                                               id="deleteItem-{{$model->id}}">
                                             @csrf
                                             @method('delete')
 
                                         </form>
-                                        <a type="submit" class="btn btn-danger btn-sm"
+                                        <a type="submit" class="btn btn-danger"
                                            onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
                                                document.getElementById('deleteItem-<?= $model->id ?>').submit();
                                                }">
@@ -108,11 +114,11 @@
                                 </td>
                             </tr>
                         @endforelse
-                        <div class="text-right">
-                            {{$models->links('vendor.pagination.bootstrap-5')}}
-                        </div>
                         </tbody>
                     </table>
+                    <div class="text-right mt-2">
+                        {{$models->links('vendor.pagination.bootstrap-5')}}
+                    </div>
                 </div>
             </div>
         </div>

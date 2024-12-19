@@ -10,8 +10,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('dramaturgy.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">other_filmmarkers </li>
+                        <li class="breadcrumb-item"><a href="{{route('other.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Other_filmmarkers </li>
                     </ol>
                 </div>
             </div>
@@ -19,6 +19,12 @@
     </section>
     <section class="content">
         <div class="col-11 mr-auto ml-auto">
+            @if(session()->has('success'))
+                <div class="alert alert-success position-relative">
+                    {{session()->get('success')}}
+                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                </div>
+            @endif
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Boshqa kino ijodkorlar  <i class="fa fa-users"></i></h3>
@@ -34,6 +40,7 @@
                             <th>F.I.O</th>
                             <th>Suxbat nomi</th>
                             <th>Qisqacha ma'lumot</th>
+                            <th>Status</th>
                             <th>Qo'shilgan vaqti</th>
                             <th></th>
                         </tr>
@@ -43,7 +50,15 @@
                                 <button type="submit" class="d-none"></button>
                                 <th></th>
                                 <th>
-                                    <input type="text" name="full_name_oz" class="form-control">
+                                    <select name="other_id" id="" class="form-control">
+                                        <option value="">----</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}" {{$category->id == request('other_id')?'selected':''}}>{{$category->full_name_oz}}</option>
+                                        @endforeach
+                                    </select>
+                                </th>
+                                <th>
+                                    <input type="text" name="name_oz" class="form-control" value="{{request('name_oz')}}">
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -59,6 +74,7 @@
                                 <td>{{$model->other->full_name_oz}}</td>
                                 <td>{{$model->name_oz}}</td>
                                 <td>{{$model->description_oz}}</td>
+                                <td>{{$model->status == 1?'Active':'No Active'}}</td>
                                 <td>{{$model->created_at}}</td>
                                 <td>
                                     <div class="d-flex align-items-center justify-content-center">
@@ -88,7 +104,7 @@
                         @endforelse
                         </tbody>
                         <div class="text-right">
-                            {{$models->links()}}
+                            {{$models->links('vendor.pagination.bootstrap-5')}}
                         </div>
                     </table>
                 </div>

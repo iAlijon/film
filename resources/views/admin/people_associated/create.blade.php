@@ -3,10 +3,28 @@
 
 @section('content')
     <section class="content-header">
-
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Kino tegishli odamlar</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('people_film.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">People_film</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
     </section>
     <section class="content">
-        <div class="col-12 col-sm-12">
+        <div class="col-11 ml-auto mr-auto">
+            @if(session()->has('error'))
+                <div class="alert alert-danger position-relative">
+                    {{session()->get('error')}}
+                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                </div>
+            @endif
             <div class="card card-info card-outline">
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -40,7 +58,7 @@
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
                                     <label>Kategoriya</label>
-                                    <select name="profession_id" class="form-control-sm form-control">
+                                    <select name="profession_id" class="form-control">
                                         <option>----</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name_oz}}</option>
@@ -51,34 +69,34 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>F.I.O (OZ)</label>
-                                    <input type="text" name="full_name_oz" class="form-control form-control-sm" placeholder="F.I.O">
+                                    <label>F.I.O</label>
+                                    <input type="text" name="full_name_oz" class="form-control" placeholder="F.I.O">
                                     <small class="text-danger">{{$errors->first('full_name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Rasm</label>
-                                    <input type="file" class="form-control form-control-sm" name="images">
+                                    <input type="file" class="form-control" name="images">
                                     <small class="text-danger">{{$errors->first('images')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Qisqacha ma'lumot (OZ)</label>
-                                    <textarea name="description_oz" cols="30" rows="5" class="form-control form-control-sm"></textarea>
+                                    <label>Qisqacha ma'lumot</label>
+                                    <textarea name="description_oz" cols="30" rows="5" class="form-control"></textarea>
                                     <small>{{$errors->first('description_oz')}}</small>
                                 </div>
                             </div>
                             {{---- uz ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
-                                    <label>Ф.И.О (UZ)</label>
-                                    <input type="text" name="full_name_uz" class="form-control form-control-sm" placeholder="F.I.O">
+                                    <label>Ф.И.О</label>
+                                    <input type="text" name="full_name_uz" class="form-control" placeholder="F.I.O">
                                     <small class="text-danger">{{$errors->first('full_name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Қисқача маълумот (UZ)</label>
-                                    <textarea name="description_uz" cols="30" rows="5" class="form-control form-control-sm"></textarea>
+                                    <label>Қисқача маълумот</label>
+                                    <textarea name="description_uz" cols="30" rows="5" class="form-control"></textarea>
                                     <small>{{$errors->first('description_uz')}}</small>
                                 </div>
                             </div>

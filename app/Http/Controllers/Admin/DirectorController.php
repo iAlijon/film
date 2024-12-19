@@ -10,20 +10,16 @@ use Illuminate\Http\Request;
 
 class DirectorController extends Controller
 {
-    protected $repo;
-    public function __construct(DirectorRepository $repo)
-    {
-        $this->repo = $repo;
-    }
+    public function __construct(protected DirectorRepository $repo, protected Request $request){}
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $models = $this->repo->index($request);
+        $models = $this->repo->index($this->request);
         return view('admin.director.index', compact('models'));
     }
 

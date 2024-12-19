@@ -19,8 +19,9 @@ class OtherPeopleController extends Controller
      */
     public function index()
     {
+        $categories = PeopleFilmCategory::where('people_associated_with_the_film_category_id', 6)->select('id', 'full_name_oz')->get();
         $models = $this->repo->index($this->request);
-        return view('admin.other.index', compact('models'));
+        return view('admin.other.index', compact('models', 'categories'));
     }
 
     /**

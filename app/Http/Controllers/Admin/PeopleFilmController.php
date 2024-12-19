@@ -44,8 +44,14 @@ class PeopleFilmController extends Controller
      */
     public function store(PeopleAssociatedRequest $request)
     {
-        $this->repo->create($request->validated());
-        return redirect()->route('people_film.index');
+        $model = $this->repo->create($request->validated());
+        if ($model){
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('people_film.index');
+        }else{
+            $request->session()->flash('error', 'Errors');
+            return back();
+        }
     }
 
     /**
@@ -81,7 +87,14 @@ class PeopleFilmController extends Controller
      */
     public function update(PeopleAssociatedRequest $request, $id)
     {
-        $this->repo->update($request->validated(), $id);
+        $model = $this->repo->update($request->validated(), $id);
+        if ($model){
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('people_film.index');
+        }else{
+            $request->session()->flash('error', 'Errors');
+            return back();
+        }
         return redirect()->route('people_film.index');
     }
 
@@ -94,6 +107,6 @@ class PeopleFilmController extends Controller
     public function destroy($id)
     {
         $this->repo->delete($id);
-        return back();
+        return redirect()->route('people_film.index');
     }
 }

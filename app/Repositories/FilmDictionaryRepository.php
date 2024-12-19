@@ -20,14 +20,17 @@ class FilmDictionaryRepository extends BaseRepository
     public function index($request)
     {
         if (isset($request->dictionary_id) && !empty($request->dictionary_id)) {
-            $this->model->where('id', $request->dictionary_id);
+            $dictionary_id = $request->dictionary_id;
+            $this->model = $this->model->whereHas('film_dictionary_category', function ($q) use ($dictionary_id){
+                $q->where('dictionary_category_id', $dictionary_id);
+            });
         }
 
         if (isset($request->name_oz) && !empty($request->name_oz)) {
-            $this->model->where('name_oz', 'ilike', '%' . $request->name_oz . '%');
+            $this->model = $this->model->where('name_oz', 'ilike', '%' . $request->name_oz . '%');
         }
 
-        return $this->model->where('status', true)->with('film_dictionary_category')->orderBy('id', 'desc')->paginate($this->limit);
+        return $this->model->with('film_dictionary_category')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
     public function findById($id)
@@ -51,8 +54,8 @@ class FilmDictionaryRepository extends BaseRepository
             'description_uz' => $data['description_uz'],
             'description_ru' => $data['description_ru'] ?? null,
             'description_en' => $data['description_en'] ?? null,
-            'content_oz' => contentByDomDocment($data['content_oz']),
-            'content_uz' => contentByDomDocment($data['content_uz']),
+            'content_oz' => contentByDomDocment($data['content_oz'], 'dictionary'),
+            'content_uz' => contentByDomDocment($data['content_uz'], 'dictionary'),
             'content_ru' => $data['content_ru'] ?? null,
             'content_en' => $data['content_en'] ?? null,
             'status' => $data['status'],
@@ -72,7 +75,6 @@ class FilmDictionaryRepository extends BaseRepository
 
     public function update($data, $id)
     {
-//        dd(array_unique(array_filter($data['dictionary_id'])));
         $model = $this->findById($id);
         if ($model->images) {
             deleteImages($model->images, 'dictionary');
@@ -91,8 +93,8 @@ class FilmDictionaryRepository extends BaseRepository
             'description_uz' => $data['description_uz'],
             'description_ru' => $data['description_ru'] ?? null,
             'description_en' => $data['description_en'] ?? null,
-            'content_oz' => contentByDomDocment($data['content_oz']),
-            'content_uz' => contentByDomDocment($data['content_uz']),
+            'content_oz' => contentByDomDocment($data['content_oz'], 'dictionary'),
+            'content_uz' => contentByDomDocment($data['content_uz'], 'dictionary'),
             'content_ru' => $data['content_ru'] ?? null,
             'content_en' => $data['content_en'] ?? null,
             'status' => $data['status'],

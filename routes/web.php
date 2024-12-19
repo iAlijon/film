@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         //portrait
         'portrait_rejissors' => \App\Http\Controllers\Admin\PortretRejissorsController::class,
         'portrait_actor' => \App\Http\Controllers\Admin\PorTraitActorController::class,
-        'portrait_operator' => \App\Http\Controllers\Admin\PortraitOptertorController::class,
+        'portrait_operator' => \App\Http\Controllers\Admin\PortraitOperatorController::class,
         'portrait_composer' => \App\Http\Controllers\Admin\PortraitComposerController::class,
         'portrait_artist' => \App\Http\Controllers\Admin\PortraitArtistController::class,
 //        'portret' => \App\Http\Controllers\Admin\PortretController::class,

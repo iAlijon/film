@@ -40,8 +40,14 @@ class PortraitArtistController extends Controller
      */
     public function store(PortraitArtistRequest $request)
     {
-        $this->repo->create($request->validated());
-        return redirect()->route('portrait_artist.index');
+        $model = $this->repo->create($request->validated());
+        if ($model){
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('portrait_artist.index');
+        }else{
+            $request->session()->flash('error', 'Errors');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -76,7 +82,14 @@ class PortraitArtistController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->repo->update($request->validated(), $id);
+        $model = $this->repo->update($request->validated(), $id);
+        if ($model){
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('portrait_artist.index');
+        }else{
+            $request->session()->flash('error', 'Errors');
+            return redirect()->back();
+        }
         return redirect()->route('portrait_artist.index');
     }
 

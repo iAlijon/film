@@ -9,8 +9,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('portrait_actor.index')}}">home</a></li>
-                        <li class="breadcrumb-item active">actor</li>
+                        <li class="breadcrumb-item"><a href="{{route('portrait_actor.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Actor</li>
                     </ol>
                 </div>
             </div>
@@ -18,6 +18,12 @@
     </section>
     <section class="content">
         <div class="col-11 mr-auto ml-auto">
+            @if(session()->has('error'))
+                <div class="alert alert-danger position-relative">
+                    {{session()->get('error')}}
+                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                </div>
+            @endif
             <div class="card card-outline card-info">
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -75,7 +81,7 @@
 
                                 <div class="form-group">
                                     <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" class="textarea form-control summernote w3-right-align" cols="30" rows="6" placeholder="To'liq ma'lumot"></textarea>
+                                    <textarea name="content_oz" class="textarea form-control w3-right-align" cols="30" rows="6" placeholder="To'liq ma'lumot"></textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
@@ -105,7 +111,7 @@
 
                                 <div class="form-group">
                                     <label for="content_uz">Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" class="textarea form-control summernote" cols="30" rows="6" placeholder="Тўлиқ маълумот"></textarea>
+                                    <textarea name="content_uz" class="textarea form-control" cols="30" rows="6" placeholder="Тўлиқ маълумот"></textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
                             </div>

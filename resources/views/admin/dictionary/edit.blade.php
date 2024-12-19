@@ -177,11 +177,18 @@
 @endsection
 @push('js')
     <script>
-        $(document).ready(function(){
-            $('[data-toggle="popover"]').popover({
-                trigger: 'hover',
-                html: true
-            });
-        });
+        $(document).ready(function () {
+            $('#dictionary').on('select2:select', function (e){
+                let selected = e.params.data.id;
+                // let dictionary = document.getElementById('dictionary').value;
+                console.log(e.params);
+                if (selected){
+                    $(`#dictionary option[value="${selected}"]`).prop('disabled', true);
+                }else {
+                    $(`#dictionary option[value="${selected}"]`).prop('disabled', false);
+                }
+                $('#dictionary').select2();
+            })
+        })
     </script>
 @endpush

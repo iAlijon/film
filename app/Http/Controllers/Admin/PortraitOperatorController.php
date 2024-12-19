@@ -7,7 +7,7 @@ use App\Http\Requests\Admin\PortraitOperatorRequest;
 use App\Repositories\PortraitOperatorRepository;
 use Illuminate\Http\Request;
 
-class PortraitOptertorController extends Controller
+class PortraitOperatorController extends Controller
 {
     public function __construct(protected PortraitOperatorRepository $repo, protected Request $request)
     {
@@ -42,8 +42,14 @@ class PortraitOptertorController extends Controller
      */
     public function store(PortraitOperatorRequest $request)
     {
-        $this->repo->create($request->validated());
-        return redirect()->route('portrait_operator.index');
+        $model = $this->repo->create($request->validated());
+        if ($model){
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('portrait_operator.index');
+        }else{
+            $request->session()->flash('error', 'Errors');
+            return back();
+        }
     }
 
     /**
@@ -78,8 +84,14 @@ class PortraitOptertorController extends Controller
      */
     public function update(PortraitOperatorRequest $request, $id)
     {
-        $this->repo->update($request->validated(), $id);
-        return redirect()->route('portrait_operator.index');
+        $model = $this->repo->update($request->validated(), $id);
+        if ($model){
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('portrait_operator.index');
+        }else{
+            $request->session()->flash('error', 'Errors');
+            return redirect()->back();
+        }
     }
 
     /**

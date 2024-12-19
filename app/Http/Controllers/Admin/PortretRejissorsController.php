@@ -41,8 +41,14 @@ class PortretRejissorsController extends Controller
      */
     public function store(PortretRejissorRequest $request)
     {
-        $this->repo->create($request->validated());
-        return redirect()->route('portret_rejissors.index');
+        $model = $this->repo->create($request->validated());
+        if ($model){
+            $request->session()->flash('error', 'Success');
+            return redirect()->route('portret_rejissors.index');
+        }else{
+            $request->session()->flash('error', 'Errors');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -77,7 +83,14 @@ class PortretRejissorsController extends Controller
      */
     public function update(PortretRejissorRequest $request, $id)
     {
-        $this->repo->update($request->validated(), $id);
+        $model = $this->repo->update($request->validated(), $id);
+        if ($model){
+            $request->session()->flash('error', 'Success');
+            return redirect()->route('portret_rejissors.index');
+        }else{
+            $request->session()->flash('error', 'Errors');
+            return redirect()->back();
+        }
         return redirect()->route('portret_rejissors.index');
     }
 

@@ -11,20 +11,16 @@ use Illuminate\Http\Request;
 
 class ActorConversationController extends Controller
 {
-    protected $repo;
-    public function __construct(ActorConversationRepository $repo)
-    {
-        $this->repo = $repo;
-    }
+    public function __construct(protected ActorConversationRepository $repo, protected Request $request){}
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $models = $this->repo->index($request);
+        $models = $this->repo->index($this->request);
         return view('admin.actor_conversation.index', compact('models'));
     }
 

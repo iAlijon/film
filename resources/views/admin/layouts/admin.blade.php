@@ -51,6 +51,9 @@
         .cancel:hover{
             background-color: transparent;
         }
+        table td{
+            vertical-align: middle!important;
+        }
     </style>
     @stack('css')
 </head>

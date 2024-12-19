@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Rejissor O'zgartirish</h1>
+                    <h1>Rejissor</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('portret_rejissors.index')}}">home</a></li>
-                        <li class="breadcrumb-item active">rejissor</li>
+                        <li class="breadcrumb-item"><a href="{{route('portrait_rejissors.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Rejissors</li>
                     </ol>
                 </div>
             </div>
@@ -18,6 +18,12 @@
     </section>
     <section class="content">
         <div class="col-11 mr-auto ml-auto">
+            @if(session()->has('error'))
+                <div class="alert alert-danger position-relative">
+                    {{session()->get('error')}}
+                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                </div>
+            @endif
             <div class="card card-outline card-info">
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">

@@ -11,8 +11,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('film_dictionary.index')}}">home</a></li>
-                        <li class="breadcrumb-item active">film_dictionary</li>
+                        <li class="breadcrumb-item"><a href="{{route('film_dictionary.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Dictionary</li>
                     </ol>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Kinolug'at  <i class="fa fa-users"></i></h3>
                     <div class="text-right">
-                        <a href="{{route('film_dictionary.create')}}" class="btn btn-success btn-sm">&plus; Qo'shish</a>
+                        <a href="{{route('film_dictionary.create')}}" class="btn btn-success">&plus; Qo'shish</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -45,10 +45,17 @@
                                     <button type="submit" class="d-none"></button>
                                     <th></th>
                                     <th>
-                                        <input type="text" class="form-control" name="example">
+                                        <input type="text" class="form-control" name="name_oz" value="{{request('name_oz')}}">
                                     </th>
                                     <th></th>
-                                    <th></th>
+                                    <th>
+                                        <select name="dictionary_id" id="" class="form-control" onchange="this.form.submit()">
+                                            <option value="">----</option>
+                                            @foreach($dictionaries as $dictionary)
+                                                <option value="{{$dictionary->id}}" {{$dictionary->id == request('dictionary_id')?'selected':''}}>{{json_decode($dictionary->ru)->upper}}</option>
+                                            @endforeach
+                                        </select>
+                                    </th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -63,7 +70,7 @@
                                     <td>{{$item->description_oz}}</td>
                                     <td>
                                         @foreach($item->film_dictionary_category as $result)
-                                            @foreach($dictinaries as $param)
+                                            @foreach($dictionaries as $param)
                                                 {{$result->dictionary_category_id == $param->id?json_decode($param->oz)->upper:''}}
                                             @endforeach,
                                         @endforeach

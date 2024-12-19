@@ -23,8 +23,8 @@ class FilmDictionaryController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        $dictinaries = Dictionary::select('id', 'oz', 'ru')->get();
-        return view('admin.dictionary.index', compact('models', 'dictinaries'));
+        $dictionaries = Dictionary::orderBy('id', 'asc')->select('id', 'oz', 'ru')->get();
+        return view('admin.dictionary.index', compact('models', 'dictionaries'));
     }
 
     /**

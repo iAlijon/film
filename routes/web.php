@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('login', [\App\Http\Controllers\AuthController::class, 'loginShowForm'])->name('login');
 Route::post('login', [\App\Http\Controllers\AuthController::class, 'login'])->name('adm.login');
 
+
+
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
     Route::get('/', [\App\Http\Controllers\Admin\Dashboard::class, 'index'])->name('dashboard');
     Route::get('logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
@@ -30,7 +32,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'operator' => \App\Http\Controllers\Admin\OperatorsController::class,
         'composer' => \App\Http\Controllers\Admin\ComposersController::class,
         'other' => \App\Http\Controllers\Admin\OtherPeopleController::class,
-        'director' => \App\Http\Controllers\Admin\DirectorController::class,
+//        'director' => \App\Http\Controllers\Admin\DirectorController::class,
         //portrait
         'portrait_rejissors' => \App\Http\Controllers\Admin\PortretRejissorsController::class,
         'portrait_actor' => \App\Http\Controllers\Admin\PorTraitActorController::class,

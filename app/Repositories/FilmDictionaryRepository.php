@@ -100,23 +100,24 @@ class FilmDictionaryRepository extends BaseRepository
             'status' => $data['status'],
             'images' => $images,
         ]);
-        $unique = array_unique(array_filter($data['dictionary_id']));
+        $dictionaries = array_unique(array_filter($data['dictionary_id']));
         $results = FilmDictionaryCategory::where('film_dictionary_id', $model->id)->get();
-        if (!$results->isEmpty())
+        if (!empty($result))
         {
 
             foreach ($results as $result)
             {
                 $result->delete();
-                foreach ($unique as $k => $item) {
-                    FilmDictionaryCategory::create([
-                        'dictionary_category_id' => $item,
-                        'film_dictionary_id' => $model->id
-                    ]);
-                }
+            }
+
+            foreach ($dictionaries as $k => $item) {
+                FilmDictionaryCategory::create([
+                    'dictionary_category_id' => $item,
+                    'film_dictionary_id' => $model->id
+                ]);
             }
         }else{
-            foreach ($unique as $item) {
+            foreach ($dictionaries as $item) {
                 FilmDictionaryCategory::create([
                     'dictionary_category_id' => $item,
                     'film_dictionary_id' => $model->id

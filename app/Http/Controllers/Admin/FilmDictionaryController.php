@@ -46,8 +46,14 @@ class FilmDictionaryController extends Controller
      */
     public function store(FilmDictionaryRequest $request)
     {
-        $this->repo->create($request->validated());
-        return redirect()->route('film_dictionary.index');
+        $model = $this->repo->create($request->validated());
+        if ($model){
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('film_dictionary.index');
+        }else{
+            $request->session()->flash('error', 'Errors');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -83,8 +89,14 @@ class FilmDictionaryController extends Controller
      */
     public function update(FilmDictionaryRequest $request, $id)
     {
-        $this->repo->update($request->validated(), $id);
-        return redirect()->route('film_dictionary.index');
+        $model = $this->repo->update($request->validated(), $id);
+        if ($model){
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('film_dictionary.index');
+        }else{
+            $request->session()->flash('error', 'Errors');
+            return redirect()->back();
+        }
     }
 
     /**

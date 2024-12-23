@@ -23,23 +23,43 @@ class FilmDictionaryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name_oz' => 'required|string',
-            'name_uz' => 'required|string',
-            'name_ru' => 'nullable',
-            'name_en' => 'nullable',
-            'description_oz' => 'required',
-            'description_uz' => 'required',
-            'description_ru' => 'nullable',
-            'description_en' => 'nullable',
-            'content_oz' => 'required',
-            'content_uz' => 'required',
-            'content_ru' => 'nullable',
-            'content_en' => 'nullable',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
-            'status' => 'required|boolean',
-            'dictionary_id' => 'required|array|unique:film_dictionary_categories,dictionary_category_id'
-        ];
+        if ($this->isMethod('post')){
+            return [
+                'name_oz' => 'required|string',
+                'name_uz' => 'required|string',
+                'name_ru' => 'nullable',
+                'name_en' => 'nullable',
+                'description_oz' => 'required',
+                'description_uz' => 'required',
+                'description_ru' => 'nullable',
+                'description_en' => 'nullable',
+                'content_oz' => 'required',
+                'content_uz' => 'required',
+                'content_ru' => 'nullable',
+                'content_en' => 'nullable',
+                'image' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+                'status' => 'required|boolean',
+                'dictionary_id' => 'required|array|unique:film_dictionary_categories,dictionary_category_id'
+            ];
+        }else{
+            return [
+                'name_oz' => 'required|string',
+                'name_uz' => 'required|string',
+                'name_ru' => 'nullable',
+                'name_en' => 'nullable',
+                'description_oz' => 'required',
+                'description_uz' => 'required',
+                'description_ru' => 'nullable',
+                'description_en' => 'nullable',
+                'content_oz' => 'required',
+                'content_uz' => 'required',
+                'content_ru' => 'nullable',
+                'content_en' => 'nullable',
+                'image' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+                'status' => 'required|boolean',
+                'dictionary_id' => 'required|array'
+            ];
+        }
     }
 
     public function messages()

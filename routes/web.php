@@ -16,6 +16,10 @@ Route::get('login', [\App\Http\Controllers\AuthController::class, 'loginShowForm
 Route::post('login', [\App\Http\Controllers\AuthController::class, 'login'])->name('adm.login');
 
 
+Route::group(['prefix' => 'oz'], function (){
+    Route::get('/', [\App\Http\Controllers\HomeController::class, 'home'])->name('home');
+});
+
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
     Route::get('/', [\App\Http\Controllers\Admin\Dashboard::class, 'index'])->name('dashboard');

@@ -23,11 +23,11 @@ class News extends Model
         'content_en',
         'status',
         'image',
-        'new_category_id'
+        'category_id'
     ];
 
     public function new_category()
     {
-        return $this->hasOne(NewsCategory::class, 'id', 'new_category_id');
+        return $this->hasOne(NewsCategory::class, 'id', 'category_id');
     }
 }

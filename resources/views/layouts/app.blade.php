@@ -57,10 +57,9 @@
 <script>
 
     function adjustHeightOfPage(pageNo) {
-
+        console.log('pageNo',pageNo)
         var offset = 80;
         var pageContentHeight = $(".cd-hero-slider li:nth-of-type(" + pageNo + ") .js-tm-page-content").height();
-
         if($(window).width() >= 992) { offset = 120; }
         else if($(window).width() < 480) { offset = 40; }
 
@@ -89,7 +88,7 @@
             // if visible - we are not on a mobile device
             var videoUrl = videoWrapper.data('video'),
 
-                video = $('<video autoplay loop><source src="'+videoUrl+'.mp4" type="video/mp4" /></video>');
+            video = $('<video autoplay loop><source src="'+videoUrl+'.mp4" type="front/video/mp4" /></video>');
             video.appendTo(videoWrapper);
 
             // play video if first slide
@@ -135,7 +134,7 @@
         -----------------------------------------*/
         $( window ).resize(function() {
             var currentPageNo = $(".cd-hero-slider li.selected .js-tm-page-content").data("page-no");
-
+            console.log('currentPageNo',    currentPageNo)
             // wait 3 seconds
             setTimeout(function() {
                 adjustHeightOfPage( currentPageNo );

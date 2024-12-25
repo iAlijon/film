@@ -18,6 +18,7 @@ Route::post('login', [\App\Http\Controllers\AuthController::class, 'login'])->na
 
 Route::group(['prefix' => 'oz'], function (){
     Route::get('/', [\App\Http\Controllers\HomeController::class, 'home'])->name('home');
+    Route::get('/news/{category_id}', [\App\Http\Controllers\NewsController::class, 'index'])->name('news');
 });
 
 

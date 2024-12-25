@@ -49,7 +49,7 @@ class NewsRepository extends BaseRepository
             'content_en' => $data['content_en'] ?? null,
             'status' => $data['status'] == 'active' ? true : false,
             'image' => $this->uploads($data['images'], 'news'),
-            'new_category_id' => $data['new_category_id']
+            'category_id' => $data['new_category_id']
         ]);
         if ($model) {
             return $model;
@@ -81,7 +81,7 @@ class NewsRepository extends BaseRepository
             'content_en' => $data['content_en'] ?? null,
             'status' => $data['status'] == 'active' ? true:false,
             'image' => $this->uploads($data['images'], 'news'),
-            'new_category_id' => $data['new_category_id']
+            'category_id' => $data['new_category_id']
         ]);
         if ($model) {
             return $model;

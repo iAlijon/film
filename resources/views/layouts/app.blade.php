@@ -57,7 +57,6 @@
 <script>
 
     function adjustHeightOfPage(pageNo) {
-        console.log('pageNo',pageNo)
         var offset = 80;
         var pageContentHeight = $(".cd-hero-slider li:nth-of-type(" + pageNo + ") .js-tm-page-content").height();
         if($(window).width() >= 992) { offset = 120; }
@@ -127,14 +126,13 @@
         $('#tmNavbar a').click(function(){
             $('#tmNavbar').collapse('hide');
 
-            adjustHeightOfPage($(this).data("no")); // Adjust page height
+            console.log('adjustHeightOfPage',adjustHeightOfPage($(this).data("no"))); // Adjust page height
         });
 
         /* Browser resized
         -----------------------------------------*/
         $( window ).resize(function() {
             var currentPageNo = $(".cd-hero-slider li.selected .js-tm-page-content").data("page-no");
-            console.log('currentPageNo',    currentPageNo)
             // wait 3 seconds
             setTimeout(function() {
                 adjustHeightOfPage( currentPageNo );

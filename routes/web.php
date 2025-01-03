@@ -60,3 +60,27 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
     Route::get('/book/download/{id}', [\App\Http\Controllers\Admin\BooksController::class, 'download'])->name('download');
 //    Route::post('/interview-status', [\App\Http\Controllers\Admin\InterViewController::class, 'interviewStatus'])->name('interview-status');
 });
+
+Route::get('/', function () {
+    return view('home');
+})->name('home');
+
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/gallery', function () {
+    return view('gallery');
+})->name('gallery');
+
+Route::get('/contacts', function () {
+    return view('contacts');
+})->name('contacts');
+
+Route::get('/child1', function () {
+    return view('home');
+})->name('child1');
+
+Route::get('/child2', function () {
+    return view('home');
+})->name('child2');

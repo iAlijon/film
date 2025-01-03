@@ -6,7 +6,17 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kino Tahlil</title>
-
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .dropdown:hover > .dropdown-menu {
+            display: block;
+            margin-top: 0; /* ensures dropdown stays connected */
+        }
+        .dropdown-menu {
+            position: absolute !important; /* Ensures it overlays correctly */
+        }
+    </style>
     <!-- load stylesheets -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
     <!-- Google web font "Open Sans" -->
@@ -18,6 +28,7 @@
     <!-- Magnific popup style (http://dimsemenov.com/plugins/magnific-popup/) -->
     <link rel="stylesheet" href="{{asset('front/css/tooplate-style.css')}}">
     <!-- Tooplate style -->
+    <link rel="stylesheet" href="{{ asset('front/css/features.css') }}">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,18 +37,25 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body>        
+    <div class="cd-hero">
+        @include('components.navbar')
+    </div>
+
     <div class="cd-bg-video-wrapper" data-video="video/bangkok-city">
         <!-- video element will be loaded using jQuery -->
-    </div> <!-- .cd-bg-video-wrapper -->
+    </div>
 
     <!-- Content -->
     <div class="cd-hero">
-        @include('header')
-        <ul class="cd-hero-slider">  <!-- autoplay -->
-            @yield('content')
+        @include('components.navbar')
+
+        <ul class="cd-hero-slider">
+            <li class="selected">
+                @yield('content')
+            </li>
         </ul>
-        @include('footer')
+        @include('components.footer')
     </div>
 
     <!-- Preloader, https://ihatetomatoes.net/create-custom-preloading-screen/ -->
@@ -54,31 +72,8 @@
 <script src="{{asset('front/js/bootstrap.min.js')}}"></script>             <!-- Bootstrap js (v4-alpha.getbootstrap.com/) -->
 <script src="{{asset('front/js/hero-slider-main.js')}}"></script>          <!-- Hero slider (https://codyhouse.co/gem/hero-slider/) -->
 <script src="{{asset('front/js/jquery.magnific-popup.min.js')}}"></script> <!-- Magnific popup (http://dimsemenov.com/plugins/magnific-popup/) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>  
 <script>
-
-    function adjustHeightOfPage(pageNo) {
-        var offset = 80;
-        var pageContentHeight = $(".cd-hero-slider li:nth-of-type(" + pageNo + ") .js-tm-page-content").height();
-        if($(window).width() >= 992) { offset = 120; }
-        else if($(window).width() < 480) { offset = 40; }
-
-        // Get the page height
-        var totalPageHeight = 335 + $('.cd-slider-nav').height()
-            + pageContentHeight + offset
-            + $('.tm-footer').height();
-
-        // Adjust layout based on page height and window height
-        if(totalPageHeight > $(window).height())
-        {
-            $('.cd-hero-slider').addClass('small-screen');
-            $('.cd-hero-slider li:nth-of-type(' + pageNo + ')').css("min-height", totalPageHeight + "px");
-        }
-        else
-        {
-            $('.cd-hero-slider').removeClass('small-screen');
-            $('.cd-hero-slider li:nth-of-type(' + pageNo + ')').css("min-height", "100%");
-        }
-    }
 
     function uploadVideo() {
 
@@ -97,8 +92,6 @@
 
     // Everything is loaded including images.
     $(window).load(function(){
-
-        adjustHeightOfPage(1); // Adjust page height
 
         // Background Video
         if($( window ).width() > 800) {
@@ -123,20 +116,12 @@
 
         /* Collapse menu after click
         -----------------------------------------*/
-        $('#tmNavbar a').click(function(){
-            $('#tmNavbar').collapse('hide');
-
-            console.log('adjustHeightOfPage',adjustHeightOfPage($(this).data("no"))); // Adjust page height
-        });
 
         /* Browser resized
         -----------------------------------------*/
         $( window ).resize(function() {
             var currentPageNo = $(".cd-hero-slider li.selected .js-tm-page-content").data("page-no");
             // wait 3 seconds
-            setTimeout(function() {
-                adjustHeightOfPage( currentPageNo );
-            }, 3000);
 
             if($( window ).width() > 800) {
                 uploadVideo();

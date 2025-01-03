@@ -1,0 +1,31 @@
+.navbar-container {
+	position: absolute;
+	width: 100%;
+	z-index: 2;
+	text-align: center;
+	background-color: rgba(0, 1, 1, 0.5);
+}
+.dropdown-menu {
+	min-width: 160px;
+	padding: 5px 0;
+	font-size: 1rem;
+	color: #fff;
+	text-align: left;
+	list-style: none;
+	background-color: rgba(0, 1, 1, 0.5);
+	border: none;
+	border-radius: .25rem;
+}
+.dropdown-item {
+	display: block;
+	width: 100%;
+	padding: 14px 20px;
+	clear: both;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #fff;
+	text-align: inherit;
+	white-space: nowrap;
+	background: 0 0;
+	border: 0;
+}

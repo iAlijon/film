@@ -3,7 +3,8 @@
 	width: 100%;
 	z-index: 2;
 	text-align: center;
-	background-color: rgba(0, 1, 1, 0.5);
+    background-color: rgba(42, 59, 85, 0.8);
+
 }
 .dropdown-menu {
 	min-width: 160px;
@@ -12,12 +13,17 @@
 	color: #fff;
 	text-align: left;
 	list-style: none;
-	background-color: rgba(0, 1, 1, 0.5);
 	border: none;
-	border-radius: .25rem;
+    /*background-color: rgba(0, 1, 1, 0.5);*/
+    background-color: rgba(42, 59, 85, 0.8);
+    border-radius: .25rem;
+}
+.navbar-brand{
+    font-size: 25px;
 }
 .dropdown-item {
 	display: block;
+    font-size: 15px;
 	width: 100%;
 	padding: 14px 20px;
 	clear: both;

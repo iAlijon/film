@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kino Tahlil</title>
-    
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .dropdown:hover > .dropdown-menu {
@@ -37,12 +37,12 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>        
+<body>
     <div class="cd-hero">
         @include('components.navbar')
     </div>
 
-    <div class="cd-bg-video-wrapper" data-video="video/bangkok-city">
+    <div class="cd-bg-video-wrapper" data-video="../video/bangkok-city">
         <!-- video element will be loaded using jQuery -->
     </div>
 
@@ -72,7 +72,7 @@
 <script src="{{asset('front/js/bootstrap.min.js')}}"></script>             <!-- Bootstrap js (v4-alpha.getbootstrap.com/) -->
 <script src="{{asset('front/js/hero-slider-main.js')}}"></script>          <!-- Hero slider (https://codyhouse.co/gem/hero-slider/) -->
 <script src="{{asset('front/js/jquery.magnific-popup.min.js')}}"></script> <!-- Magnific popup (http://dimsemenov.com/plugins/magnific-popup/) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script>
 
     function uploadVideo() {
@@ -80,9 +80,9 @@
         var videoWrapper = $('.cd-bg-video-wrapper');
         if( videoWrapper.is(':visible') ) {
             // if visible - we are not on a mobile device
-            var videoUrl = videoWrapper.data('video'),
-
-            video = $('<video autoplay loop><source src="'+videoUrl+'.mp4" type="front/video/mp4" /></video>');
+            var videoUrl = videoWrapper.data('video');
+            console.log(videoUrl)
+            video = $('<video autoplay loop><source src="'+videoUrl+'.mp4" type="../video/mp4" /></video>');
             video.appendTo(videoWrapper);
 
             // play video if first slide

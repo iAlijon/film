@@ -7,8 +7,8 @@
                 <div class="card large-card">
                     <img src="{{getInFolder($news->first()['image'], 'news')}}" alt="" style="width:100%; height:100%;">
                     <span class="news-info">
-                <span class="news-title">{{$news[0]['name_oz']}}</span>
-                <span class="news-date">Kecha, 14:59</span>
+                <span class="news-title">{{$news->first()['name_oz']}}</span>
+                <span class="news-date">{{$news->first()->created_at->format('H:i')}}</span>
             </span>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                     <img src="{{getInFolder($new['image'], 'news')}}" alt="" style="width:100%; height:100%;">
                     <span class="news-info">
                     <span class="news-title">{{$new->name_oz}}</span>
-                    <span class="news-date">Kecha, 12:26</span>
+                    <span class="news-date">{{$new->created_at->format('H:i')}}</span>
                 </span>
                 </div>
             @endforeach
@@ -45,7 +45,7 @@
         }
 
         .news .card {
-            border: 1px solid #ddd;
+            border: 0 solid #ddd;
             padding: 20px;
             border-radius: 5px;
             text-align: left;
@@ -53,7 +53,7 @@
         }
 
         .news .large-card {
-            height: 420px;
+            height: 423px;
             font-size: 24px;
             background-color: #f7f7f7;
             padding: 0 !important;
@@ -78,7 +78,7 @@
 
         .large-card .news-date {
             display: block;
-            font-size: 22px;
+            font-size: 12px;
             color: #000;
         }
 

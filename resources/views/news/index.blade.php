@@ -53,7 +53,7 @@
         }
 
         .news .large-card {
-            height: 420px;
+            height: 424px;
             font-size: 24px;
             background-color: #f7f7f7;
             padding: 0 !important;

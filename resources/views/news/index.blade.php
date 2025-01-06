@@ -3,25 +3,30 @@
 @section('content')
     <div class="news container news-container tm-section-margin-t">
         @if($news->first())
-            <div class="left">
-                <div class="card large-card">
-                    <img src="{{getInFolder($news->first()['image'], 'news')}}" alt="" style="width:100%; height:100%;">
-                    <span class="news-info">
+            <a href="{{route('show', ['id' => $news->first()->id])}}">
+                <div class="left">
+                    <div class="card large-card">
+                        <img src="{{getInFolder($news->first()['image'], 'news')}}" alt="" style="width:100%; height:100%;">
+                        <span class="news-info">
                 <span class="news-title">{{$news->first()['name_oz']}}</span>
                 <span class="news-date">{{$news->first()->created_at->format('H:i')}}</span>
             </span>
+                    </div>
                 </div>
-            </div>
+            </a>
         @endif
         <div class="right">
             @foreach($news->slice(1) as $new)
-                <div class="card small-card">
-                    <img src="{{getInFolder($new['image'], 'news')}}" alt="" style="width:100%; height:100%;">
-                    <span class="news-info">
-                    <span class="news-title">{{$new->name_oz}}</span>
-                    <span class="news-date">{{$new->created_at->format('H:i')}}</span>
-                </span>
-                </div>
+                <a href="{{route('show', ['id' => $new->id])}}">
+                    <div class="card small-card">
+                        <img src="{{getInFolder($new['image'], 'news')}}" alt=""
+                             style="width:100%; height:100%;">
+                        <span class="news-info">
+                                <span class="news-title">{{$new->name_oz}}</span>
+                                <span class="news-date">{{$new->created_at->format('H:i')}}</span>
+                        </span>
+                    </div>
+                </a>
             @endforeach
         </div>
     </div>

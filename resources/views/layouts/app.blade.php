@@ -35,7 +35,7 @@
         @include('components.navbar')
     </div>
 
-    <div class="cd-bg-video-wrapper" data-video="../video/bangkok-city">
+    <div class="cd-bg-video-wrapper" data-video="/front/video/bangkok-city">
         <!-- video element will be loaded using jQuery -->
     </div>
 
@@ -75,7 +75,8 @@
             // if visible - we are not on a mobile device
             var videoUrl = videoWrapper.data('video');
             console.log(videoUrl)
-            video = $('<video autoplay loop><source src="'+videoUrl+'.mp4" type="../video/mp4" /></video>');
+            var videoPath = videoUrl+'.mp4';
+            video = $('<video autoplay loop><source src="'+videoPath+'" type="video/mp4" /></video>');
             video.appendTo(videoWrapper);
 
             // play video if first slide

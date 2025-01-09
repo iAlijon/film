@@ -23,6 +23,15 @@
         <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-header">MENUS</li>
+
+                    <li class="nav-item">
+                        <a href="{{route('aphorism.index')}}" class="nav-link {{(request()->is('admin/aphorism*'))?'active':''}}">
+                            <i class="far fa-circle"></i>
+                            <p class="text">Afarizmlar</p>
+                            <span class="badge badge-primary right"></span>
+                        </a>
+                    </li>
+
                     <li class="nav-item">
                         <a href="{{route('news.index')}}" class="nav-link {{(request()->is('admin/news*'))?'active':''}}">
                             <i class="far fa-circle"></i>

@@ -55,33 +55,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'popular_science_film' => \App\Http\Controllers\Admin\PopularScienceFilmController::class,
         'animation' => \App\Http\Controllers\Admin\AnimationController::class,
         'film_analysis' => \App\Http\Controllers\Admin\MovieAnalysisController::class,
-        'book' => \App\Http\Controllers\Admin\BooksController::class
+        'book' => \App\Http\Controllers\Admin\BooksController::class,
+        'aphorism' => \App\Http\Controllers\Admin\AphorismController::class
     ]);
     Route::post('/new-status', [\App\Http\Controllers\Admin\NewsController::class, 'newStatus'])->name('new-status');
     Route::get('/book/download/{id}', [\App\Http\Controllers\Admin\BooksController::class, 'download'])->name('download');
 //    Route::post('/interview-status', [\App\Http\Controllers\Admin\InterViewController::class, 'interviewStatus'])->name('interview-status');
 });
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
-
-Route::get('/gallery', function () {
-    return view('gallery');
-})->name('gallery');
-
-Route::get('/contacts', function () {
-    return view('contacts');
-})->name('contacts');
-
-Route::get('/child1', function () {
-    return view('home');
-})->name('child1');
-
-Route::get('/child2', function () {
-    return view('home');
-})->name('child2');

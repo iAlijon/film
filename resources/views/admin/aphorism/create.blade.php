@@ -60,7 +60,7 @@
                                     <label>Rasm</label>
                                     <input type="file" class="form-control" name="image"
                                            accept="image/jpeg, image/jpg, image/png, image/gif">
-                                    <small class="text-danger">{{$errors->first('images')}}</small>
+                                    <small class="text-danger">{{$errors->first('image')}}</small>
                                 </div>
 
 
@@ -87,7 +87,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="button" class="btn btn-primary mt-3 btn-block ml-auto" id="add-form-btn_oz" style="width: 11%">Add Another Task</button>
+                                            <button type="button" class="btn btn-primary mt-3 btn-block ml-auto" id="add-form-btn_oz" style="width: 9%">Qo'shish</button>
                                             <!-- First Form -->
                                         </div>
                                     </div>
@@ -135,7 +135,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="button" class="btn btn-primary mt-3 btn-block ml-auto" id="add-form-btn_uz" style="width: 11%">Add Another Task</button>
+                                            <button type="button" class="btn btn-primary mt-3 btn-block ml-auto" id="add-form-btn_uz" style="width: 9%">Қўшиш</button>
                                             <!-- First Form -->
                                         </div>
                                     </div>
@@ -153,155 +153,72 @@
 @endsection
 
 @push('js')
-{{--    <script>--}}
-{{--        // JavaScript to dynamically add forms--}}
-{{--        let formIndex = 1; // To track form indexes--}}
-{{--        document.getElementById('add-form-btn_oz').addEventListener('click', function () {--}}
-{{--            const dynamicForms = document.getElementById('dynamic-forms_oz');--}}
 
-{{--            // Create a new form group--}}
-{{--            const newForm = document.createElement('div');--}}
-{{--            newForm.classList.add('form-group', 'dynamic-form', 'mt-3');--}}
-{{--            newForm.innerHTML = `--}}
-{{--                <div class="card">--}}
-{{--                    <div class="card-header d-flex align-items-center justify-content-between">--}}
-{{--                        <label>${formIndex}</label>--}}
-{{--                        <button type="button" class="remove-form-btn btn btn-danger"><i class="fas fa-trash"></i></button>--}}
-{{--                    </div>--}}
-{{--                    <div class="card-body">--}}
-{{--                        <label for="description">Forma ${formIndex}</label>--}}
-{{--                        <textarea name="calendar[${formIndex}][description_oz]" class="form-control" placeholder="Enter description"></textarea>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            `;--}}
-
-{{--            // Append the new form group--}}
-{{--            const addFormButton = document.getElementById('add-form-btn_oz');--}}
-{{--            addFormButton.parentNode.insertBefore(newForm, addFormButton);--}}
-
-
-
-{{--            // Increment form index for unique input names--}}
-{{--            formIndex++;--}}
-
-{{--            // Handle removal of form--}}
-{{--            newForm.querySelector('.remove-form-btn').addEventListener('click', function () {--}}
-{{--                newForm.remove();--}}
-{{--                reindexForms(); // Reindex forms after one is removed--}}
-{{--            });--}}
-
-{{--            // Function to reindex all forms--}}
-{{--            function reindexForms() {--}}
-{{--                const forms = document.querySelectorAll('.dynamic-form');--}}
-{{--                forms.forEach((form, index) => {--}}
-{{--                    const descriptionTextarea = form.querySelector('textarea[name^="calendar"]');--}}
-{{--                    if (descriptionTextarea) {--}}
-{{--                        descriptionTextarea.setAttribute('name', `calendar[${index}][description_oz]`);--}}
-{{--                        form.querySelector('label').textContent = `Forma ${index + 1}`; // Update label--}}
-{{--                    }--}}
-{{--                });--}}
-
-{{--                // Update the formIndex to the next available index--}}
-{{--                formIndex = forms.length + 1;--}}
-{{--            }--}}
-{{--        });--}}
-
-{{--        let formIndex2 = 1--}}
-{{--        document.getElementById('add-form-btn_uz').addEventListener('click', function () {--}}
-{{--            const dynamicForms = document.getElementById('dynamic-forms_uz');--}}
-
-{{--            // Create a new form group--}}
-{{--            const newForm = document.createElement('div');--}}
-{{--            newForm.classList.add('form-group', 'dynamic-form', 'mt-3');--}}
-{{--            newForm.innerHTML = `--}}
-{{--                <div class="card">--}}
-{{--                    <div class="card-header">--}}
-{{--                    <label>${formIndex2}</label>--}}
-{{--                    <button type="button" class="remove-form-btn btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>--}}
-{{--                </div>--}}
-{{--                    <div class="card-body">--}}
-{{--                        <label for="description">Форма ${formIndex2}</label>--}}
-{{--                        <textarea name="calendar[${formIndex2}][description_uz]" class="form-control" placeholder="Enter description"></textarea>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            `;--}}
-
-{{--            // Append the new form group--}}
-{{--            const addFormButton = document.getElementById('add-form-btn_uz');--}}
-{{--            addFormButton.parentNode.insertBefore(newForm, addFormButton);--}}
-
-{{--            // Increment form index for unique input names--}}
-{{--            formIndex2++;--}}
-{{--        });--}}
-{{--    </script>--}}
 <script>
-    let formIndexes = { oz: 1, uz: 2 }; // Track form indexes for both sections
-
-    function addForm(section) {
-        console.log(section)
-        const dynamicForms = document.getElementById(`dynamic-forms_${section}`);
-        const formIndex = formIndexes[section];
-
-        // Create a new form group
-        const newForm = document.createElement('div');
-        newForm.classList.add('form-group', 'dynamic-form', 'mt-3');
-        newForm.innerHTML = `
+        let formIndexes = { oz: 1, uz: 1 }; // Track form indexes for both sections
+        function addForm(section) {
+            const dynamicForms = document.getElementById(`dynamic-forms_${section}`);
+            let formIndex = formIndexes[section];
+            console.log(formIndex)
+            // Create a new form group
+            const newForm = document.createElement('div');
+            newForm.classList.add('form-group', 'dynamic-form', 'mt-3');
+            newForm.innerHTML = `
                 <div class="card">
                             <div class="card-header">
                                 <label>${formIndex}</label>
                                 <button type="button" class="remove-form-btn btn btn-danger float-right"><i class="fas fa-trash"></i></button>
                             </div>
                             <div class="card-body">
-                                <label for="description">Forma ${formIndex}</label>
+                                <label>Forma ${formIndex}</label>
                                 <textarea name="calendar[${formIndex}][description_${section}]" class="form-control" placeholder="Enter description"></textarea>
                             </div>
                 </div>
         `;
 
-        // Append the new form group before the add button
-        const addFormButton = document.getElementById(`add-form-btn_${section}`);
-        addFormButton.parentNode.insertBefore(newForm, addFormButton);
+            // Append the new form group before the add button
+            const addFormButton = document.getElementById(`add-form-btn_${section}`);
+            addFormButton.parentNode.insertBefore(newForm, addFormButton);
 
-        // Increment form index
-        formIndexes[section]++;
-    }
+            // Increment form index
+            formIndexes[section]++;
+        }
 
-    function reindexForms(section) {
-        const forms = document.querySelectorAll(`#dynamic-forms_${section} .dynamic-form`);
-        forms.forEach((form, index) => {
-            console.log(form, index);
-            // Update the `name` attributes for each input and textarea
-            const descriptionTextarea = form.querySelector(`textarea[name^="calendar"]`);
-            if (descriptionTextarea) {
-                descriptionTextarea.setAttribute('name', `calendar[${index + 1}][description_${section}]`);
-            }
-
-            // Update label text
-            const label = form.querySelector('label');
-            if (label) {
-                label.textContent = `Form ${index + 1}`;
-            }
-        });
-
-        // Update the form index tracker
-        formIndexes[section] = forms.length + 1;
-    }
-
-    // Add event listeners for adding forms
-    ['oz', 'uz'].forEach((section) => {
-        document.getElementById(`add-form-btn_${section}`).addEventListener('click', () => addForm(section));
-
-        // Delegate click event for remove buttons
-        document.getElementById(`dynamic-forms_${section}`).addEventListener('click', (e) => {
-            if (e.target.classList.contains('remove-form-btn')) {
-                const formGroup = e.target.closest('.dynamic-form')
-                if (formGroup){
-                    formGroup.remove()
-                    reindexForms(section); // Reindex forms after one is removed
+        function reindexForms(section) {
+            const forms = document.querySelectorAll(`#dynamic-forms_${section} .dynamic-form`);
+            forms.forEach((form, index) => {
+                // Update the `name` attributes for each input and textarea
+                const descriptionTextarea = form.querySelector(`textarea[name^="calendar"]`);
+                if (descriptionTextarea) {
+                    descriptionTextarea.setAttribute('name', `calendar[${index + 1}][description_${section}]`);
                 }
-            }
+
+                // Update label text
+                const label = form.querySelector('label');
+                if (label) {
+                    label.textContent = `Form ${index + 1}`;
+                }
+            });
+
+            // Update the form index tracker
+            formIndexes[section] = forms.length + 1;
+        }
+
+        // Add event listeners for adding forms
+        ['oz', 'uz'].forEach((section) => {
+            document.getElementById(`add-form-btn_${section}`).addEventListener('click', () => addForm(section));
+
+            // Delegate click event for remove buttons
+            document.getElementById(`dynamic-forms_${section}`).addEventListener('click', (e) => {
+                if (e.target.classList.contains('remove-form-btn')) {
+                    const formGroup = e.target.closest('.dynamic-form')
+                    if (formGroup){
+                        formGroup.remove()
+                        reindexForms(section); // Reindex forms after one is removed
+                    }
+                }
+            });
         });
-    });
 
 </script>
 @endpush

@@ -34,4 +34,12 @@ class AphorismRequest extends FormRequest
             'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'calendar.*.description_oz.required' => 'The form oz field is required',
+            'calendar.*.description_uz.required' => 'The form uz field is required'
+        ];
+    }
 }

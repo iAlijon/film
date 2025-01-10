@@ -67,7 +67,7 @@ class AphorismRepository extends BaseRepository
             'images' => $this->uploads($data['image'], 'aphorism'),
             'status' => $data['status']
         ]);
-        $items = Calendar::where('aphorism', $model->id)->get();
+        $items = Calendar::where('aphorism_id', $model->id)->get();
         foreach ($items as $item)
         {
             $item->delete();

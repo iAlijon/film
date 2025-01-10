@@ -86,11 +86,11 @@ class AphorismRepository extends BaseRepository
     public function delete($id)
     {
         $model = $this->findById($id);
-        $items = Calendar::where('aphorism', $model->id)->get();
         if ($model->images)
         {
             deleteImages($model->images, 'aphorism');
         }
+        $items = Calendar::where('aphorism_id', $model->id)->get();
         foreach ($items as $item) {
             $item->delete();
         }

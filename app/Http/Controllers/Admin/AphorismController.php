@@ -104,7 +104,7 @@ class AphorismController extends Controller
     public function destroy($id)
     {
         $this->repo->delete($id);
-        return true;
+        return redirect()->route('aphorism.index');
 
     }
 }

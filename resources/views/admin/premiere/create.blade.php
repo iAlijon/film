@@ -1,17 +1,16 @@
 @extends('admin.layouts.admin')
 
-
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-6">
-                    <h1>Boshqa kino ijodkorlar</h1>
+                    <h1>Premyera</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('other.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Other_filmmarkers </li>
+                        <li class="breadcrumb-item active">Premiere</li>
                     </ol>
                 </div>
             </div>
@@ -51,36 +50,41 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('other.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('premiere.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             {{----- oz -----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
                                     <label>Kategoriya</label>
-                                    <select name="other_id" id="other_id" class="form-control">
+                                    <select name="premiere_category" id="premiere_category" class="form-control">
                                         <option>----</option>
-                                        @foreach($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->full_name_oz}}</option>
-                                        @endforeach
+                                        <option value="1">Milliy premyera</option>
+                                        <option value="2">Jaxon premyera</option>
                                     </select>
-                                    <small class="text-danger">{{$errors->first('other_id')}}</small>
+                                    <small class="text-danger">{{$errors->first('premiere_category')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name_oz">Suxbat nomi</label>
+                                    <label for="name_oz">Premyera nomi</label>
                                     <input type="text" name="name_oz" class="form-control">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="description_oz">Qisqacha mazmuni</label>
+                                    <label for="image">Rasm</label>
+                                    <input type="file" name="image" class="form-control" accept="image/jpeg,png,jpg">
+                                    <small class="text-danger">{{$errors->first('image')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description_oz">Qisqacha ma'lumot</label>
                                     <textarea name="description_oz" cols="30" rows="5" class="form-control"></textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="content_oz">To'liq mazmuni</label>
+                                    <label for="content_oz">To'liq ma'lumot</label>
                                     <textarea name="content_oz" class="textarea form-control summernote"
                                               id="summernote"></textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
@@ -98,19 +102,19 @@
                             {{----- uz -----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
-                                    <label for="name_uz">Сухбат номи</label>
+                                    <label for="name_uz">Премьера номи</label>
                                     <input type="text" name="name_uz" class="form-control">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="description_uz">Қисқача мазмуни</label>
+                                    <label for="description_uz">Қисқача маълумот</label>
                                     <textarea name="description_uz" cols="30" rows="5" class="form-control"></textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="content_uz">Тўлиқ мазмуни</label>
+                                    <label for="content_uz">Тўлиқ маълумот</label>
                                     <textarea name="content_uz" class="textarea form-control summernote"
                                               id="summernote"></textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>

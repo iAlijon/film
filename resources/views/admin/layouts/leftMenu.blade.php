@@ -41,6 +41,14 @@
                     </li>
 
                     <li class="nav-item">
+                        <a href="{{route('premiere.index')}}" class="nav-link {{(request()->is('admin/premiere*'))?'active':''}}">
+                            <i class="far fa-circle"></i>
+                            <p class="text">Premyera</p>
+                            <span class="badge badge-primary right"></span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a href="#" class="nav-link" >
                             <i class="nav-icon fas fa-copy"></i>
                             <p class="text">Suxbatlar</p>

@@ -16,11 +16,11 @@ Route::get('login', [\App\Http\Controllers\AuthController::class, 'loginShowForm
 Route::post('login', [\App\Http\Controllers\AuthController::class, 'login'])->name('adm.login');
 
 
-Route::group(['prefix' => 'oz'], function (){
-    Route::get('/', [\App\Http\Controllers\HomeController::class, 'home'])->name('home');
-    Route::get('/news/{category_id}', [\App\Http\Controllers\NewsController::class, 'index'])->name('news');
-    Route::get('/news_show/{id}', [\App\Http\Controllers\NewsController::class, 'show'])->name('show');
-});
+//Route::group(['prefix' => 'oz'], function (){
+//    Route::get('/', [\App\Http\Controllers\HomeController::class, 'home'])->name('home');
+//    Route::get('/news/{category_id}', [\App\Http\Controllers\NewsController::class, 'index'])->name('news');
+//    Route::get('/news_show/{id}', [\App\Http\Controllers\NewsController::class, 'show'])->name('show');
+//});
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
@@ -56,7 +56,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'animation' => \App\Http\Controllers\Admin\AnimationController::class,
         'film_analysis' => \App\Http\Controllers\Admin\MovieAnalysisController::class,
         'book' => \App\Http\Controllers\Admin\BooksController::class,
-        'aphorism' => \App\Http\Controllers\Admin\AphorismController::class
+        'aphorism' => \App\Http\Controllers\Admin\AphorismController::class,
+        'premiere' => \App\Http\Controllers\Admin\PremiereController::class
     ]);
     Route::post('/new-status', [\App\Http\Controllers\Admin\NewsController::class, 'newStatus'])->name('new-status');
     Route::get('/book/download/{id}', [\App\Http\Controllers\Admin\BooksController::class, 'download'])->name('download');

@@ -68,7 +68,7 @@
                                 <td>
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{route('premiere.edit', $model->id)}}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
-                                        <form action="{{ route('other.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
+                                        <form action="{{ route('premiere.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
                                             @csrf
                                             @method('delete')
 

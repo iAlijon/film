@@ -12,6 +12,6 @@ class Aphorism extends Model
 
     public function calendar()
     {
-        return $this->hasOne(Calendar::class, 'aphorism_id', 'id');
+        return $this->hasMany(Calendar::class, 'aphorism_id', 'id');
     }
 }

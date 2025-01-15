@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActorConversation;
+use App\Models\Aphorism;
 use App\Models\Composer;
 use App\Models\Dramaturgy;
 use App\Models\News;
@@ -12,6 +13,7 @@ use App\Models\OtherPeople;
 use App\Models\PortraitActor;
 use App\Models\PortraitOperator;
 use App\Models\PortretRejissor;
+use App\Models\Premiere;
 use App\Models\Rejissor;
 use Illuminate\Http\Request;
 
@@ -26,16 +28,18 @@ class Dashboard extends Controller
     {
         $menus = [
             'news' => News::count(),
-            'actor_conversation' => ActorConversation::count(),
-            'rejissor' => Rejissor::count(),
+            'aphorism' => Aphorism::count(),
+            'premiere' => Premiere::count(),
             'dramaturgy' => Dramaturgy::count(),
-            'operator' => Operators::count(),
-            'composer' => Composer::count(),
-            'other' => OtherPeople::count(),
-            'portrait_rejissors' => PortretRejissor::count(),
-            'portrait_actor' => PortraitActor::count(),
-            'portrait_operator' => PortraitOperator::count(),
+//            'operator' => Operators::count(),
+//            'composer' => Composer::count(),
+//            'other' => OtherPeople::count(),
+//            'portrait_rejissors' => PortretRejissor::count(),
+//            'portrait_actor' => PortraitActor::count(),
+//            'portrait_operator' => PortraitOperator::count(),
         ];
-        return view('admin.index', compact('menus'));
+
+        $news = News::orderBy('id', 'desc')->paginate(10);
+        return view('admin.index', compact('menus', 'news'));
     }
 }

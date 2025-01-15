@@ -120,7 +120,7 @@
             @endif
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">News List <i class="fas fa-newspaper"></i></h3>
+                    <h3 class="card-title">Yangiliklar <i class="fas fa-newspaper"></i></h3>
                     <div class="text-right">
                         <a href="{{route('news.create')}}" class="btn btn-success">&plus; Qo'shish</a>
                     </div>

@@ -31,12 +31,6 @@ class Dashboard extends Controller
             'aphorism' => Aphorism::count(),
             'premiere' => Premiere::count(),
             'dramaturgy' => Dramaturgy::count(),
-//            'operator' => Operators::count(),
-//            'composer' => Composer::count(),
-//            'other' => OtherPeople::count(),
-//            'portrait_rejissors' => PortretRejissor::count(),
-//            'portrait_actor' => PortraitActor::count(),
-//            'portrait_operator' => PortraitOperator::count(),
         ];
 
         $news = News::orderBy('id', 'desc')->paginate(10);

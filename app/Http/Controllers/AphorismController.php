@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 
 class AphorismController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $items = Aphorism::where('status', true)->orderBy('id', 'desc')->with('calendar:id,aphorism_id,description_oz,description_uz,created_at')
-            ->select('id', 'full_name_oz', 'full_name_uz', 'images', 'description_oz', 'description_uz', 'status', 'created_at')->first();
+        $lang = $request->header('lang', 'oz');
+        $items = Aphorism::where('status', true)->orderBy('id', 'desc')->with('calendar:id,aphorism_id,created_at,description_'.$lang.' as description')
+            ->select('id', 'full_name_'.$lang.' as full_name', 'images', 'description_'.$lang.' as description', 'created_at')->first();
         if ($items){
             return response()->json(['success'=>true, 'data' => $items, 'message'=>'ok']);
         }

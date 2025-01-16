@@ -9,4 +9,9 @@ class Premiere extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    protected $casts = [
+      'premiere_category' => 'integer'
+    ];
+
 }

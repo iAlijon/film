@@ -22,11 +22,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('aphorism', [\App\Http\Controllers\AphorismController::class, 'index'])->name('aphorism');
 Route::get('news', [\App\Http\Controllers\NewsController::class, 'main'])->name('news.main');
 Route::get('premiere', [\App\Http\Controllers\PremiereController::class, 'premiere'])->name('premiere');
-Route::get('premiere/{premiere_id}', [\App\Http\Controllers\PremiereController::class, 'premierCategoryList']);
 Route::get('premiere_item/{id}', [\App\Http\Controllers\PremiereController::class, 'premiereItem']);
 Route::get('movie_analysis', [\App\Http\Controllers\FilmAnalysisController::class, 'movieList'])->name('list');
-Route::get('movie_analysis/{category_id}', [\App\Http\Controllers\FilmAnalysisController::class, 'movieCategoryList'])->name('category_list');
 Route::get('movie_item/{item_id}', [\App\Http\Controllers\FilmAnalysisController::class,'movieItem'])->name('movie.item');
+Route::get('movie_category', [\App\Http\Controllers\FilmAnalysisController::class, 'category']);
 Route::get('interview', [\App\Http\Controllers\InterviewController::class, 'interview'])->name('interview');
 
 

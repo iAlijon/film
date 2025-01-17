@@ -7,29 +7,21 @@ use Illuminate\Http\Request;
 
 class PremiereController extends Controller
 {
-    public function premiere()
+    public function premiere(Request $request)
     {
-        $premieres = Premiere::where('status', true)->orderBy('id', 'desc')
-            ->select('id','premiere_category','images','created_at')
-            ->paginate(6);
-        if ($premieres)
-        {
+        $lang = $request->header('lang', 'oz');
+        $premiere_id = $request->all();
+        if ($request['premiere_id']) {
+            $premieres = Premiere::where('premiere_category', $premiere_id)->where('status', true)
+                ->orderBy('id', 'desc')
+                ->select('id','premiere_category','images','created_at','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content')
+                ->paginate(6);
             return response()->json(['success' => true,'data' => $premieres,'message'=>'ok']);
-        }
-        return response()->json(['success' => false,'data' => '','message'=>'ok']);
-    }
-
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function premierCategoryList($premiere_id)
-    {
-        $items = Premiere::where('premiere_category', $premiere_id)
-            ->select('id','premiere_category','images','created_at')
-            ->paginate(6);
-        if ($items)
-        {
-            return response()->json(['success' => true,'data' => $items,'message'=>'ok']);
+        }else{
+            $premieres = Premiere::where('status', true)->orderBy('id', 'desc')
+                ->select('id','premiere_category','images','created_at','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content')
+                ->paginate(6);
+            return response()->json(['success' => true,'data' => $premieres,'message'=>'ok']);
         }
         return response()->json(['success' => false,'data' => '','message'=>'ok']);
     }

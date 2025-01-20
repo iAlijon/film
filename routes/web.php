@@ -28,16 +28,18 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
     Route::get('logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
     Route::resources([
         'news' => \App\Http\Controllers\Admin\NewsController::class,
-//        'interview' => \App\Http\Controllers\Admin\InterViewController::class,
+
 //        'actor' => \App\Http\Controllers\Admin\ActorController::class,
-        // conversation
-        'actor_conversation' => \App\Http\Controllers\Admin\ActorConversationController::class,
-        'people_film' => \App\Http\Controllers\Admin\PeopleFilmController::class,
-        'rejissor' => \App\Http\Controllers\Admin\RejissorController::class,
-        'dramaturgy' => \App\Http\Controllers\Admin\DramaturgyController::class,
-        'operator' => \App\Http\Controllers\Admin\OperatorsController::class,
-        'composer' => \App\Http\Controllers\Admin\ComposersController::class,
-        'other' => \App\Http\Controllers\Admin\OtherPeopleController::class,
+        // interview
+//        'actor_conversation' => \App\Http\Controllers\Admin\ActorConversationController::class,
+//        'people_film' => \App\Http\Controllers\Admin\PeopleFilmController::class,
+//        'rejissor' => \App\Http\Controllers\Admin\RejissorController::class,
+//        'dramaturgy' => \App\Http\Controllers\Admin\DramaturgyController::class,
+//        'operator' => \App\Http\Controllers\Admin\OperatorsController::class,
+//        'composer' => \App\Http\Controllers\Admin\ComposersController::class,
+//        'other' => \App\Http\Controllers\Admin\OtherPeopleController::class,
+        'interview_peoples' => \App\Http\Controllers\Admin\InterviewPeoplesController::class,
+        'interview_category' => \App\Http\Controllers\Admin\InterviewCategoryController::class,
 //        'director' => \App\Http\Controllers\Admin\DirectorController::class,
         //portrait
         'portrait_rejissors' => \App\Http\Controllers\Admin\PortretRejissorsController::class,

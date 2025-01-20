@@ -27,5 +27,7 @@ Route::get('movie_analysis', [\App\Http\Controllers\FilmAnalysisController::clas
 Route::get('movie_item/{item_id}', [\App\Http\Controllers\FilmAnalysisController::class,'movieItem'])->name('movie.item');
 Route::get('movie_category', [\App\Http\Controllers\FilmAnalysisController::class, 'category']);
 Route::get('interview', [\App\Http\Controllers\InterviewController::class, 'interview'])->name('interview');
+Route::get('interview_category', [\App\Http\Controllers\InterviewController::class, 'interviewCategory'])->name('interview.category');
+Route::get('interview_category_filter', [\App\Http\Controllers\InterviewController::class, 'interviewCategoryFilter'])->name('interview.category.filter');
 
 

@@ -24,32 +24,17 @@ class InterviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_oz' => 'required|string',
-            'name_uz' => 'required|string',
-            'name_ru' => 'nullable|string',
-            'name_en' => 'nullable|string',
+            'interview_category_id' => 'required',
+            'full_name_oz' => 'required',
+            'full_name_uz' => 'required',
+            'interview_oz' => 'required|string',
+            'interview_uz' => 'required|string',
             'description_oz' => 'required',
             'description_uz' => 'required',
-            'description_ru' => 'nullable',
-            'description_en' => 'nullable',
             'content_oz' => 'required',
             'content_uz' => 'required',
-            'content_ru' => 'nullable',
-            'content_en' => 'nullable',
             'images' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'name_oz' => 'Name(OZ) maydonini to\'ldirish majburiy',
-            'name_uz' => 'Name(UZ) maydonini to\'ldirish majburiy',
-            'description_oz' => 'Description(OZ) maydonini to\'ldirish majburiy',
-            'description_uz' => 'Description(UZ) maydonini to\'ldirish majburiy',
-            'images' => 'Rasm maydonini to\'ldirish majburiy',
-            'content_oz' => 'Content(OZ) maydonini to\'ldirish majburiy',
-            'content_uz' => 'Content(UZ) maydonini to\'ldirish majburiy',
+            'status' => 'required|boolean'
         ];
     }
 }

@@ -19,7 +19,7 @@ class RejissorRepository extends BaseRepository
         {
             $this->model = $this->model->where('name_oz', 'ilike', '%'.$request->name_oz.'%');
         }
-        return $this->model->with('people_film_category')->orderBy('id', 'desc')->paginate($this->limit);
+        return $this->model->with('director')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
     public function findById($id)

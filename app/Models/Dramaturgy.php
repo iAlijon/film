@@ -26,7 +26,7 @@ class Dramaturgy extends Model
         'status'
     ];
 
-    public function people_film_category_dramaturgy()
+    public function dramaturgy()
     {
         return $this->hasOne(PeopleFilmCategory::class, 'id', 'people_film_category_id');
     }

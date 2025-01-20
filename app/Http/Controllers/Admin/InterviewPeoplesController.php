@@ -4,26 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InterviewRequest;
-use App\Models\InterView;
-use App\Repositories\InterViewRepository;
+use App\Repositories\InterviewPeoplesRepository;
 use Illuminate\Http\Request;
 
-class InterViewController extends Controller
+class InterviewPeoplesController extends Controller
 {
-    protected $repo;
-    public function __construct(InterViewRepository $repo)
-    {
-        $this->repo = $repo;
-    }
+    public function __construct(protected Request $request, protected InterviewPeoplesRepository $repo){}
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $models = $this->repo->index($request);
+        $models = $this->repo->index($this->request);
         return view('admin.interview.index', compact('models'));
     }
 
@@ -45,10 +40,7 @@ class InterViewController extends Controller
      */
     public function store(InterviewRequest $request)
     {
-        $model = $this->repo->create($request->validated());
-        if ($model)
-            return redirect()->route('interview.index');
-        return back()->with(['message' => 'Intervyu success create']);
+
     }
 
     /**
@@ -59,7 +51,7 @@ class InterViewController extends Controller
      */
     public function show($id)
     {
-        return view('admin.interview.show');
+        //
     }
 
     /**
@@ -70,8 +62,7 @@ class InterViewController extends Controller
      */
     public function edit($id)
     {
-        $model = $this->repo->findById($id);
-        return view('admin.interview.edit', compact('model'));
+        //
     }
 
     /**
@@ -83,11 +74,7 @@ class InterViewController extends Controller
      */
     public function update(InterviewRequest $request, $id)
     {
-        $model = $this->repo->update($request, $id);
-        if ($model){
-            return redirect()->route('interview.index');
-        }
-        return false;
+        //
     }
 
     /**
@@ -98,18 +85,6 @@ class InterViewController extends Controller
      */
     public function destroy($id)
     {
-        $this->repo->delete($id);
-        return redirect()->route('interview.index');
-    }
-
-    public function interviewStatus(Request $request)
-    {
-        $result = $request->all();
-        $model = $this->repo->findById($result['id']);
-        $model->update(['status' => $result['status']]);
-        if ($model){
-            return $model;
-        }
-        return false;
+        //
     }
 }

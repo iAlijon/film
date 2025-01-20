@@ -57,7 +57,7 @@
                         @forelse($models as $k => $model)
                             <tr>
                                 <td>{{$k + 1}}</td>
-                                <td>{{$model->people_film_category->full_name_oz}}</td>
+                                <td>{{$model->director->full_name_oz}}</td>
                                 <td>{{$model->name_oz}}</td>
                                 <td>{{$model->description_oz}}</td>
                                 <td>{{$model->status == 1?'Active':'No Active'}}</td>

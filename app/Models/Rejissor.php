@@ -26,7 +26,7 @@ class Rejissor extends Model
         'status'
     ];
 
-    public function people_film_category()
+    public function director()
     {
         return $this->hasOne(PeopleFilmCategory::class, 'id', 'people_film_category_id');
     }

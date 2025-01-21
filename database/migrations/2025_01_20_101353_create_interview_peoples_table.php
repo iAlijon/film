@@ -15,7 +15,21 @@ return new class extends Migration
     {
         Schema::create('interview_peoples', function (Blueprint $table) {
             $table->id();
+            $table->integer('interview_category_id');
+            $table->string('full_name_oz');
+            $table->string('full_name_uz');
+            $table->string('full_name_ru')->nullable();
+            $table->string('full_name_en')->nullable();
+            $table->string('images');
+            $table->longText('description_oz');
+            $table->longText('description_uz');
+            $table->longText('description_ru')->nullable();
+            $table->longText('description_en')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
+
+
+            $table->foreign('interview_category_id')->references('id')->on('people_associated_with_the_film_categories')->cascadeOnDelete();
         });
     }
 

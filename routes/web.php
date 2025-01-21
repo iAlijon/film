@@ -38,8 +38,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
 //        'operator' => \App\Http\Controllers\Admin\OperatorsController::class,
 //        'composer' => \App\Http\Controllers\Admin\ComposersController::class,
 //        'other' => \App\Http\Controllers\Admin\OtherPeopleController::class,
-        'interview_peoples' => \App\Http\Controllers\Admin\InterviewPeoplesController::class,
         'interview_category' => \App\Http\Controllers\Admin\InterviewCategoryController::class,
+        'interview_peoples' => \App\Http\Controllers\Admin\InterviewPeoplesController::class,
+        'interview' => \App\Http\Controllers\Admin\InterviewController::class,
+
 //        'director' => \App\Http\Controllers\Admin\DirectorController::class,
         //portrait
         'portrait_rejissors' => \App\Http\Controllers\Admin\PortretRejissorsController::class,

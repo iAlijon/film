@@ -15,4 +15,9 @@ class PeopleAssociatedWithTheFilmCategory extends Model
     {
         return $this->belongsTo(PeopleFilmCategory::class);
     }
+
+    public function interview_category()
+    {
+        return $this->hasMany(InterviewPeoples::class, 'id', 'interview_category_id');
+    }
 }

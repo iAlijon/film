@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\InterviewPeopleRequest;
 use App\Http\Requests\Admin\InterviewRequest;
+use App\Models\PeopleAssociatedWithTheFilmCategory;
 use App\Repositories\InterviewPeoplesRepository;
 use Illuminate\Http\Request;
 
@@ -19,7 +21,8 @@ class InterviewPeoplesController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        return view('admin.interview.index', compact('models'));
+        $categories = PeopleAssociatedWithTheFilmCategory::select('id','name_oz')->get();
+        return view('admin.interview_people.index', compact('models', 'categories'));
     }
 
     /**
@@ -29,7 +32,8 @@ class InterviewPeoplesController extends Controller
      */
     public function create()
     {
-        return view('admin.interview.create');
+        $categories = PeopleAssociatedWithTheFilmCategory::select('id','name_oz')->get();
+        return view('admin.interview_people.create', compact('categories'));
     }
 
     /**
@@ -38,9 +42,16 @@ class InterviewPeoplesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InterviewRequest $request)
+    public function store(InterviewPeopleRequest $request)
     {
-
+        $model = $this->repo->create($request->validated());
+        if ($model) {
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('interview_peoples.index');
+        }else {
+            $request->session()->flash('error', 'Errors');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -62,7 +73,9 @@ class InterviewPeoplesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = PeopleAssociatedWithTheFilmCategory::select('id','name_oz')->get();
+        $model = $this->repo->findById($id);
+        return view('admin.interview_people.edit', compact('model','categories'));
     }
 
     /**
@@ -72,9 +85,16 @@ class InterviewPeoplesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(InterviewRequest $request, $id)
+    public function update(InterviewPeopleRequest $request, $id)
     {
-        //
+        $model = $this->repo->update($request->validated(),$id);
+        if ($model) {
+            $request->session()->flash('success','Success');
+            return redirect()->route('interview_peoples.index');
+        }else {
+            $request->session()->flash('error','Errors');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -85,6 +105,7 @@ class InterviewPeoplesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->repo->delete($id);
+        return redirect()->route('interview_peoples.index');
     }
 }

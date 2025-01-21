@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class InterviewRequest extends FormRequest
+class InterviewPeopleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,13 @@ class InterviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'interview_category_id' => 'required',
-            'interview_people_id' => 'required',
-            'interview_oz' => 'required|string',
-            'interview_uz' => 'required|string',
+            'interview_category_id' => 'required|integer',
+            'full_name_oz' => 'required',
+            'full_name_uz' => 'required',
             'description_oz' => 'required',
             'description_uz' => 'required',
-            'content_oz' => 'required',
-            'content_uz' => 'required',
-            'images' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-            'status' => 'required|boolean'
+            'status' => 'required|boolean',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ];
     }
 }

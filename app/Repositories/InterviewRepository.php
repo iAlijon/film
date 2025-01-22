@@ -1,0 +1,85 @@
+<?php
+
+
+namespace App\Repositories;
+
+
+use App\Models\Interview;
+use App\Models\PeopleAssociatedWithTheFilmCategory;
+
+class InterviewRepository extends BaseRepository
+{
+    public function __construct()
+    {
+        $this->model = new Interview();
+    }
+
+    public function index($request)
+    {
+        if (isset($request->interview_oz) && !empty($request->interview_oz)) {
+            $this->model = $this->model->where('interview_oz', 'ilike', '%'.$request->interview_oz.'%');
+        }
+        if (isset($request->category_id) && !empty($request->category_id)) {
+            $this->model = $this->model->where('interview_category_id', $request->category_id);
+        }
+        if (isset($request->people_id) && !empty($request->people_id)) {
+            $this->model = $this->model->where('interview_people_id', $request->people_id);
+        }
+        return $this->model->with('category', 'people')->orderBy('created_at', 'desc')->paginate($this->limit);
+    }
+
+    public function findById($id)
+    {
+        return $this->model->find($id);
+    }
+
+    public function create($data)
+    {
+        $anchor = PeopleAssociatedWithTheFilmCategory::where('id', $data['interview_category_id'])->first();
+        $model = $this->model->create([
+            'interview_category_id' => $data['interview_category_id'],
+            'interview_people_id' => $data['interview_people_id'],
+            'interview_oz' => $data['interview_oz'],
+            'interview_uz' => $data['interview_uz'],
+            'description_oz' => $data['description_oz'],
+            'description_uz' => $data['description_uz'],
+            'content_oz' => contentByDomDocment($data['content_oz'], 'interview'),
+            'content_uz' => contentByDomDocment($data['content_uz'], 'interview'),
+            'anchor' => $anchor->name_oz,
+            'status' => $data['status'],
+        ]);
+        if ($model) {
+            return $model;
+        }
+        return false;
+    }
+
+    public function update($data, $id)
+    {
+        $model = $this->findById($id);
+        $model->update([
+            'interview_category_id' => $data['interview_category_id'],
+            'interview_people_id' => $data['interview_people_id'],
+            'interview_oz' => $data['interview_oz'],
+            'interview_uz' => $data['interview_uz'],
+            'description_oz' => $data['description_oz'],
+            'description_uz' => $data['description_uz'],
+            'content_oz' => contentByDomDocment($data['content_oz'], 'interview'),
+            'content_uz' => contentByDomDocment($data['content_uz'], 'interview'),
+            'status' => $data['status'],
+        ]);
+        if ($model) {
+            return $model;
+        }
+        return false;
+    }
+
+    public function delete($id)
+    {
+        $model = $this->findById($id);
+        if ($model->delete()) {
+            return true;
+        }
+        return false;
+    }
+}

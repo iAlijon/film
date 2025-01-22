@@ -14,4 +14,9 @@ class InterviewPeoples extends Model
     {
         return $this->belongsTo(PeopleAssociatedWithTheFilmCategory::class);
     }
+
+    public function interview()
+    {
+        return $this->belongsTo(Interview::class);
+    }
 }

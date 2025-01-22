@@ -1,222 +1,118 @@
 @extends('admin.layouts.admin')
 
-@section('title', 'Intervyu')
-@push('css')
-    <style>
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-        }
-
-        .switch input {
-            display: none;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ca2222;
-            -webkit-transition: .4s;
-            transition: .4s;
-            border-radius: 34px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 16px;
-            width: 16px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: #2ab934;
-        }
-
-        input:focus + .slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
-
-        input:checked + .slider:before {
-            -webkit-transform: translateX(18px);
-            -ms-transform: translateX(18px);
-            transform: translateX(26px);
-        }
-
-        /*------ ADDED CSS ---------*/
-        .slider:after {
-            content: 'OFF';
-            color: white;
-            display: block;
-            position: absolute;
-            transform: translate(-50%, -50%);
-            top: 50%;
-            left: 70%;
-            font-size: 10px;
-            font-family: Verdana, sans-serif;
-        }
-
-        input:checked + .slider:after {
-            content: 'ON';
-            color: white;
-            display: block;
-            position: absolute;
-            transform: translate(-50%, -50%);
-            top: 50%;
-            left: 30%;
-            font-size: 10px;
-            font-family: Verdana, sans-serif;
-        }
-        .project-actions{
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Har bir elementni teng kenglikda qilish */
-            gap: 10px; /* elementlar orasidagi masofa */
-            height: 100%;
-        }
-        .project-actions a{
-            width: 100%;
-        }
-        /*--------- END --------*/
-
-    </style>
-@endpush
 @section('content')
-    <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Intervyu</h1>
+                    <h1>Suxbatlar</h1>
                 </div>
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
+                    <ul class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('interview.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Intervyu</li>
-                    </ol>
+                        <li class="breadcrumb-item active">Interview</li>
+                    </ul>
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
-    <!-- general form elements disabled -->
     <section class="content">
-        <div class="card card-info">
-            <div class="card-header">
-{{--                <h3 class="card-title">Intervyu List</h3>--}}
-                <h3 class="card-title"></h3>
-                <div class="text-right">
-                    <a href="{{route('interview.create')}}" class="btn btn-success text-white">&plus; Qo'shish</a>
+        <div class="col-11 mr-auto ml-auto">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Suxbatlar  <i class="fa fa-users"></i></h3>
+                    <div class="text-right">
+                        <a href="{{route('interview.create')}}" class="btn btn-success">&plus; Qo'shish</a>
+                    </div>
                 </div>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <table class="table table-hover table-bordered">
-                    <thead>
+                <div class="card-body">
+                    <table class="table table-striped table-bordered table-hover text-center">
+                        <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Description</th>
+                            <th>Kategoriya</th>
+                            <th>F.I.O</th>
+                            <th>Nomi</th>
+                            <th>Qisqacha ma'lumot</th>
                             <th>Status</th>
-                            <th>Create</th>
+                            <th>Qo'shilgan sanasi</th>
                             <th></th>
                         </tr>
                         <tr>
                             <form action="">
-                                <input type="hidden" name="from_filter" value="true">
-                                <button type="submit" class="d-none"></button>
+                                <input type="hidden" value="true" name="form_filter">
+                                <button class="d-none" type="submit"></button>
                                 <th></th>
-                                <th class="w-25">
-                                    <input type="text" class="form-control form-control-sm" name="name_oz"
-                                           value="{{request('name_oz')}}">
+                                <th>
+                                    <select name="category_id" id="" class="form-control" onchange="this.form.submit()">
+                                        <option value="">---</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}" {{$category->id == request('category_id')?'selected':''}}>{{$category->name_oz}}</option>
+                                        @endforeach
+                                    </select>
                                 </th>
-                                <th class="w-25">
-                                    <input type="text" class="form-control form-control-sm" name="description_oz"
-                                           value="{{request('description_oz')}}">
+                                <th>
+                                    <select name="people_id" id="" class="form-control" onchange="this.form.submit()">
+                                        <option value="">---</option>
+                                        @foreach($peoples as $people)
+                                            <option value="{{$people->id}}" {{$people->id == request('people_id')?'selected':''}}>{{$people->full_name_oz}}</option>
+                                        @endforeach
+                                    </select>
                                 </th>
+                                <th>
+                                    <input type="text" name="interview_oz" class="form-control" value="{{request('interview_oz')}}">
+                                </th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                             </form>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($models as $k => $model)
-                            <tr>
-                                <td>{{$k + 1}}</td>
-                                <td>{{$model->name_oz}}</td>
-                                <td>{{$model->description_oz}}</td>
-                                <td class="text-center">
-                                    <label class="switch">
-                                        <input type="checkbox"
-                                               class="status-toggle"
-                                               data-id="{{$model->id}}"
-                                            {{$model->status == true ? 'checked':false}}
-                                        >
-                                        <div class="slider round"></div>
-                                    </label>
-                                </td>
-                                <td class="text-center">{{\Carbon\Carbon::parse($model->created_at)->format('d.m.Y')}}</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a href="{{route('interview.edit', $model->id)}}" class="btn btn-info btn-sm mr-1"><i
-                                                class="fas fa-pencil-alt"></i></a>
-                                        <a href="{{route('interview.show', $model->id)}}" class="btn btn-primary btn-sm mr-1"><i
-                                                class="fas fa-eye"></i></a>
-                                        <form action="{{ route('interview.destroy',  $model->id) }}" method="post"
-                                              onsubmit="return confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')">
-                                            @csrf
-                                            @method('delete')
-                                            <a type="submit" class="btn btn-danger btn-sm">
+                        </thead>
+                        <tbody>
+                            @forelse($models as $k => $model)
+                                <tr>
+                                    <td>{{$k + 1}}</td>
+                                    <td>{{$model->category->name_oz}}</td>
+                                    <td>{{$model->people->full_name_oz}}</td>
+                                    <td>{{$model->interview_oz}}</td>
+                                    <td>{{$model->description_oz}}</td>
+                                    <td>{{$model->status == 1?'Active':'No Active'}}</td>
+                                    <td>{{$model->created_at}}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <a href="{{route('interview.edit', $model->id)}}" class="btn btn-info mr-1"><i class="fa fa-edit"></i></a>
+                                            <form action="{{ route('interview.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
+                                                @csrf
+                                                @method('delete')
+                                            </form>
+                                            <a type="submit" class="btn btn-danger"
+                                               onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
+                                                   document.getElementById('deleteItem-<?= $model->id ?>').submit();
+                                                   }">
                                                 <span class="fa fa-trash-alt"></span>
                                             </a>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="9" class="text-center">
+                                        <div class="alert alert-default-warning">
+                                            Ma'lumot mavjud emas
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <div class="text-right">
+                        {{$models->links('vendor.pagination.bootstrap-5')}}
+                    </div>
+                </div>
             </div>
-            <!-- /.card-body -->
         </div>
     </section>
 @endsection
-@push('js')
-    <script>
-        $(document).ready(function () {
-            $('.status-toggle').change(function () {
-                const checkbox = $(this);
-                const itemId = checkbox.data('id');
-                const newStatus = checkbox.is(':checked') ? true : false;
-                $.ajax({
-                    url: "{{route('interview-status')}}",
-                    method: "POST",
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        status: newStatus,
-                        id:itemId
-                    },
-                    success: function (data) {
-                        console.log(data)
-                        location.reload()
-                    },
-                    error: function (error) {
-                        console.log(error)
-                        alert('ID' + ' ' + itemId + ' ' + 'm\'alumotni holati o\'zgarmadi')
-                    }
-                })
-
-            });
-        });
-    </script>
-@endpush

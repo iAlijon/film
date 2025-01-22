@@ -32,8 +32,7 @@ class InterviewRequest extends FormRequest
             'description_uz' => 'required',
             'content_oz' => 'required',
             'content_uz' => 'required',
-            'images' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-            'status' => 'required|boolean'
+            'status' => 'required|boolean',
         ];
     }
 }

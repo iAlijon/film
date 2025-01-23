@@ -14,45 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('login', [\App\Http\Controllers\AuthController::class, 'loginShowForm'])->name('login');
 Route::post('login', [\App\Http\Controllers\AuthController::class, 'login'])->name('adm.login');
-
-
-//Route::group(['prefix' => 'oz'], function (){
-//    Route::get('/', [\App\Http\Controllers\HomeController::class, 'home'])->name('home');
-//    Route::get('/news/{category_id}', [\App\Http\Controllers\NewsController::class, 'index'])->name('news');
-//    Route::get('/news_show/{id}', [\App\Http\Controllers\NewsController::class, 'show'])->name('show');
-//});
-
-
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
     Route::get('/', [\App\Http\Controllers\Admin\Dashboard::class, 'index'])->name('dashboard');
     Route::get('logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
     Route::resources([
         'news' => \App\Http\Controllers\Admin\NewsController::class,
-
-//        'actor' => \App\Http\Controllers\Admin\ActorController::class,
-        // interview
-//        'actor_conversation' => \App\Http\Controllers\Admin\ActorConversationController::class,
-//        'people_film' => \App\Http\Controllers\Admin\PeopleFilmController::class,
-//        'rejissor' => \App\Http\Controllers\Admin\RejissorController::class,
-//        'dramaturgy' => \App\Http\Controllers\Admin\DramaturgyController::class,
-//        'operator' => \App\Http\Controllers\Admin\OperatorsController::class,
-//        'composer' => \App\Http\Controllers\Admin\ComposersController::class,
-//        'other' => \App\Http\Controllers\Admin\OtherPeopleController::class,
         'interview_category' => \App\Http\Controllers\Admin\InterviewCategoryController::class,
         'interview_peoples' => \App\Http\Controllers\Admin\InterviewPeoplesController::class,
         'interview' => \App\Http\Controllers\Admin\InterviewController::class,
-
-//        'director' => \App\Http\Controllers\Admin\DirectorController::class,
-        //portrait
         'portrait_rejissors' => \App\Http\Controllers\Admin\PortretRejissorsController::class,
         'portrait_actor' => \App\Http\Controllers\Admin\PorTraitActorController::class,
         'portrait_operator' => \App\Http\Controllers\Admin\PortraitOperatorController::class,
         'portrait_composer' => \App\Http\Controllers\Admin\PortraitComposerController::class,
         'portrait_artist' => \App\Http\Controllers\Admin\PortraitArtistController::class,
-//        'portret' => \App\Http\Controllers\Admin\PortretController::class,
-        //film_dictionary
         'film_dictionary' => \App\Http\Controllers\Admin\FilmDictionaryController::class,
-        //filmography
         'cinema_fact' => \App\Http\Controllers\Admin\CinemaFactController::class,
         'artistic_film' => \App\Http\Controllers\Admin\ArtisticFilmController::class,
         'documentary' => \App\Http\Controllers\Admin\DocumentaryController::class,

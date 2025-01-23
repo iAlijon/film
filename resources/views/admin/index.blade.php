@@ -160,14 +160,13 @@
                 <!-- small box -->
                 <div class="small-box bg-dark">
                     <div class="inner">
-                        <h3>{{$menus['dramaturgy']}}</h3>
-                        <p>Kinodramaturgiya suxbat</p>
+                        <h3>{{$menus['interview']}}</h3>
+                        <p>Suxbatlar</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-users"></i>
                     </div>
-{{--                    {{route('dramaturgy.index')}}--}}
-                    <a href="#" class="small-box-footer">
+                    <a href="{{route('interview.index')}}" class="small-box-footer">
                         More info <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>

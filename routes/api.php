@@ -34,3 +34,4 @@ Route::get('person_director', [\App\Http\Controllers\PersonDirectorController::c
 Route::get('director/{id}', [\App\Http\Controllers\PersonDirectorController::class, 'directorItem']);
 
 
+

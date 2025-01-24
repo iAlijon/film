@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('portrait_operators', function (Blueprint $table) {
+        Schema::create('people', function (Blueprint $table) {
             $table->id();
-            $table->string('images');
-            $table->date('birth_date');
+            $table->integer('person_category_id');
             $table->string('full_name_oz');
             $table->string('full_name_uz');
             $table->string('full_name_ru')->nullable();
@@ -29,8 +28,12 @@ return new class extends Migration
             $table->text('content_uz');
             $table->text('content_ru')->nullable();
             $table->text('content_en')->nullable();
+            $table->string('images');
             $table->boolean('status')->default(true);
+            $table->date('birth_date');
             $table->timestamps();
+
+            $table->foreign('person_category_id')->references('id')->on('person_categories')->cascadeOnDelete();
         });
     }
 
@@ -41,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('portrait_operators');
+        Schema::dropIfExists('people');
     }
 };

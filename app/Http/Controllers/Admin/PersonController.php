@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PortretRejissorRequest;
-use App\Models\PortretRejissor;
-use App\Repositories\PortretRejissorsRepository;
+use App\Http\Requests\Admin\PersonCategoryRequest;
+use App\Http\Requests\Admin\PersonRequest;
+use App\Models\PersonCategory;
+use App\Repositories\PersonRepository;
 use Illuminate\Http\Request;
 
-class PortretRejissorsController extends Controller
+class PersonController extends Controller
 {
-    public function __construct(protected PortretRejissorsRepository $repo,protected Request $request){}
+    public function __construct(protected Request $request, protected PersonRepository $repo){}
 
     /**
      * Display a listing of the resource.
@@ -20,7 +21,8 @@ class PortretRejissorsController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        return view('admin.portrait.rejissor.index', compact('models'));
+        $categories = PersonCategory::where('status', true)->get();
+        return view('admin.person.index', compact('models', 'categories'));
     }
 
     /**
@@ -30,7 +32,8 @@ class PortretRejissorsController extends Controller
      */
     public function create()
     {
-        return view('admin.portrait.rejissor.create');
+        $categories = PersonCategory::where('status', true)->get();
+        return view('admin.person.create', compact('categories'));
     }
 
     /**
@@ -39,13 +42,13 @@ class PortretRejissorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PortretRejissorRequest $request)
+    public function store(PersonRequest $request)
     {
         $model = $this->repo->create($request->validated());
-        if ($model){
-            $request->session()->flash('error', 'Success');
-            return redirect()->route('portret_rejissors.index');
-        }else{
+        if ($model) {
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('person.index');
+        }else {
             $request->session()->flash('error', 'Errors');
             return redirect()->back();
         }
@@ -70,8 +73,8 @@ class PortretRejissorsController extends Controller
      */
     public function edit($id)
     {
-        $item = $this->repo->findById($id);
-        return view('admin.portrait.rejissor.edit', compact('item'));
+        $model = $this->repo->findById($id);
+        return view('admin.person.edit', compact('model'));
     }
 
     /**
@@ -81,17 +84,16 @@ class PortretRejissorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PortretRejissorRequest $request, $id)
+    public function update(PersonRequest $request, $id)
     {
         $model = $this->repo->update($request->validated(), $id);
-        if ($model){
-            $request->session()->flash('error', 'Success');
-            return redirect()->route('portret_rejissors.index');
-        }else{
+        if ($model) {
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('person.index');
+        }else {
             $request->session()->flash('error', 'Errors');
             return redirect()->back();
         }
-        return redirect()->route('portret_rejissors.index');
     }
 
     /**
@@ -103,6 +105,6 @@ class PortretRejissorsController extends Controller
     public function destroy($id)
     {
         $this->repo->delete($id);
-        return back();
+        return redirect()->route('person.index');
     }
 }

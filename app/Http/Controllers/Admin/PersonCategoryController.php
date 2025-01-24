@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PortraitArtistRequest;
-use App\Repositories\PortraitArtistRepository;
+use App\Http\Requests\Admin\PersonCategoryRequest;
+use App\Repositories\PersonCategoryRepository;
+use App\Repositories\PersonRepository;
 use Illuminate\Http\Request;
 
-class PortraitArtistController extends Controller
+class PersonCategoryController extends Controller
 {
-    public function __construct(protected Request $request, protected PortraitArtistRepository $repo){}
+    public function __construct(protected Request $request, protected PersonCategoryRepository $repo){}
 
     /**
      * Display a listing of the resource.
@@ -18,8 +19,8 @@ class PortraitArtistController extends Controller
      */
     public function index()
     {
-        $models = $this->repo->index($this->request);
-        return view('admin.portrait.artist.index', compact('models'));
+        $models = $this->repo->index();
+        return view('admin.person_cate.index', compact('models'));
     }
 
     /**
@@ -29,7 +30,7 @@ class PortraitArtistController extends Controller
      */
     public function create()
     {
-        return view('admin.portrait.artist.create');
+        return view('admin.person_cate.create');
     }
 
     /**
@@ -38,13 +39,13 @@ class PortraitArtistController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PortraitArtistRequest $request)
+    public function store(PersonCategoryRequest $request)
     {
         $model = $this->repo->create($request->validated());
-        if ($model){
+        if ($model) {
             $request->session()->flash('success', 'Success');
-            return redirect()->route('portrait_artist.index');
-        }else{
+            return redirect()->route('person_category.index');
+        }else {
             $request->session()->flash('error', 'Errors');
             return redirect()->back();
         }
@@ -70,7 +71,7 @@ class PortraitArtistController extends Controller
     public function edit($id)
     {
         $model = $this->repo->findById($id);
-        return view('admin.portrait.artist.edit', compact('model'));
+        return view('admin.person_cate.edit', compact('model'));
     }
 
     /**
@@ -80,17 +81,16 @@ class PortraitArtistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PersonCategoryRequest $request, $id)
     {
         $model = $this->repo->update($request->validated(), $id);
-        if ($model){
+        if ($model) {
             $request->session()->flash('success', 'Success');
-            return redirect()->route('portrait_artist.index');
-        }else{
+            return redirect()->route('person_category.index');
+        }else {
             $request->session()->flash('error', 'Errors');
             return redirect()->back();
         }
-        return redirect()->route('portrait_artist.index');
     }
 
     /**
@@ -102,6 +102,6 @@ class PortraitArtistController extends Controller
     public function destroy($id)
     {
         $this->repo->delete($id);
-        return back();
+        return redirect()->route('person_category.index');
     }
 }

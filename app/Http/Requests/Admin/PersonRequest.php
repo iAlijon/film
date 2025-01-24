@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PortraitOperatorRequest extends FormRequest
+class PersonRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,21 +24,16 @@ class PortraitOperatorRequest extends FormRequest
     public function rules()
     {
         return [
-            'full_name_oz' => 'required|string',
-            'full_name_uz' => 'required|string',
-            'full_name_ru' => 'nullable',
-            'full_name_en' => 'nullable',
+            'category_id' => 'required',
+            'full_name_oz' => 'required',
+            'full_name_uz' => 'required',
             'description_oz' => 'required',
             'description_uz' => 'required',
-            'description_ru' => 'nullable',
-            'description_en' => 'nullable',
-            'birth_date' => 'required|date',
-            'image' => 'required|image|mimes:jpeg,jpg,png|max:2048',
             'content_oz' => 'required',
             'content_uz' => 'required',
-            'content_ru' => 'nullable',
-            'content_en' => 'nullable',
-            'status' => 'required|boolean'
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'status' => 'required|boolean',
+            'birth_date' => 'required|date'
         ];
     }
 }

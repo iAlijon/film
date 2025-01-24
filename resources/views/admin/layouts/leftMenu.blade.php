@@ -79,56 +79,6 @@
                                 Kategoriya
                             </a>
                         </li>
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('actor_conversation.index')}}" class="nav-link">--}}
-{{--                                <i class="nav-icon far fa-circle"></i>--}}
-{{--                                Aktyorlar--}}
-{{--                                --}}{{--                                    <i class="right fas fa-angle-left"></i>--}}
-{{--                            </a>--}}
-{{--                            --}}{{--                                <ul class="nav nav-treeview">--}}
-{{--                            --}}{{--                                    <li class="nav-item">--}}
-{{--                            --}}{{--                                        <a href="{{route('actor.index')}}" class="nav-link {{request()->is('admin/actor*')?'active':''}}"><i class="far fa-dot-circle nav-icon"></i>Aktyor qo'shish</a>--}}
-{{--                            --}}{{--                                    </li>--}}
-{{--                            --}}{{--                                    <li class="nav-item">--}}
-{{--                            --}}{{--                                        <a href="{{route('actor_conversation.index')}}" class="nav-link {{request()->is('admin/actor_conversation*')?'active':''}}"><i class="far fa-dot-circle nav-icon"></i>Aktyor bilan suxbat</a>--}}
-{{--                            --}}{{--                                    </li>--}}
-{{--                            --}}{{--                                </ul>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('rejissor.index')}}" class="nav-link">--}}
-{{--                                <i class="nav-icon far fa-circle"></i>--}}
-{{--                                Rejissyorlar--}}
-{{--                                --}}{{--                                    <i class="right fas fa-angle-left"></i>--}}
-{{--                            </a>--}}
-{{--                            --}}{{--                                <ul class="nav nav-treeview">--}}
-{{--                            --}}{{--                                    <li class="nav-item">--}}
-{{--                            --}}{{--                                        <a href="{{route('rejissor.index')}}" class="nav-link {{(request()->is('admin/rejissor*'))?'active':''}}">Rejissor qo'shish</a>--}}
-{{--                            --}}{{--                                    </li>--}}
-{{--                            --}}{{--                                    <li class="nav-item">--}}
-{{--                            --}}{{--                                        <a href="" class="nav-link">Rejissor bilan suxbat</a>--}}
-{{--                            --}}{{--                                    </li>--}}
-{{--                            --}}{{--                                </ul>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('dramaturgy.index')}}" class="nav-link"><i--}}
-{{--                                    class="nav-icon far fa-circle"></i> Kinodramaturgiya</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('operator.index')}}" class="nav-link"><i--}}
-{{--                                    class="nav-icon far fa-circle"></i> Operatirlar</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('composer.index')}}" class="nav-link"><i--}}
-{{--                                    class="nav-icon far fa-circle"></i> Kompozitor bastakorlar</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('other.index')}}" class="nav-link"><i class="nav-icon far fa-circle"></i>--}}
-{{--                                Boshqa kino ijodkorlari</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('people_film.index')}}" class="nav-link"><i--}}
-{{--                                    class="nav-icon far fa-circle"></i> Kinoga tegishli odamlarni qo'shosh</a>--}}
-{{--                        </li>--}}
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -140,36 +90,18 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('portrait_rejissors.index')}}" class="nav-link">
+                            <a href="{{route('person_category.index')}}" class="nav-link">
                                 <i class="fa fa-users nav-icon"></i>
-                                <p>Rejissyorlar</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('portrait_actor.index')}}" class="nav-link">
-                                <i class="fa fa-users nav-icon"></i>
-                                <p>Aktyorlar</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('portrait_operator.index')}}" class="nav-link">
-                                <i class="fa fa-users nav-icon"></i>
-                                <p>Operatorlar</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('portrait_composer.index')}}" class="nav-link">
-                                <i class="fa fa-users nav-icon"></i>
-                                <p>Kompozitor-bastakorlar</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('portrait_artist.index')}}" class="nav-link">
-                                <i class="fa fa-users nav-icon"></i>
-                                <p>Рассомлар</p>
+                                <p>Shaxs kategoriyasi</p>
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="{{route('person.index')}}" class="nav-link">
+                                <i class="fa fa-users nav-icon"></i>
+                                <p>Shaxsiyatlar</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">

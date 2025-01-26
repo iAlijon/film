@@ -45,11 +45,21 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('artistic_film.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('filmography.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             {{----  oz  ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
+
+                                <div class="form-group required">
+                                    <label for="">Mazular</label>
+                                    <select name="category_id" id="" class="form-control">
+                                        <option value="">---</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->name_oz}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
                                 <div class="form-group required">
                                     <label for="name_oz">Nomi</label>

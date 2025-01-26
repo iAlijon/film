@@ -127,29 +127,41 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('artistic_film.index')}}" class="nav-link">
+                            <a href="{{route('filmographygroup.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Badiiy filmlar</p>
+                                <p>Filmografiya Mazulari</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('documentary.index')}}" class="nav-link">
+                            <a href="{{route('filmography.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Hujjatli filmlar</p>
+                                <p>Filmografiya</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('popular_science_film.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Ilmiy-ommabop filmlar</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('animation.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Animatsiyali filmlar</p>
-                            </a>
-                        </li>
+{{--                        <li class="nav-item">--}}
+{{--                            <a href="{{route('artistic_film.index')}}" class="nav-link">--}}
+{{--                                <i class="far fa-circle nav-icon"></i>--}}
+{{--                                <p>Badiiy filmlar</p>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a href="{{route('documentary.index')}}" class="nav-link">--}}
+{{--                                <i class="far fa-circle nav-icon"></i>--}}
+{{--                                <p>Hujjatli filmlar</p>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a href="{{route('popular_science_film.index')}}" class="nav-link">--}}
+{{--                                <i class="far fa-circle nav-icon"></i>--}}
+{{--                                <p>Ilmiy-ommabop filmlar</p>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a href="{{route('animation.index')}}" class="nav-link">--}}
+{{--                                <i class="far fa-circle nav-icon"></i>--}}
+{{--                                <p>Animatsiyali filmlar</p>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
                     </ul>
                 </li>
                 <li class="nav-item">

@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('artistic_film.index')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('filmography.index')}}">Home</a></li>
                         <li class="breadcrumb-item active">artistic</li>
                     </ol>
                 </div>
@@ -22,7 +22,7 @@
                 <div class="card-header">
                     <h3 class="card-title"><i class="fa fa-users"></i></h3>
                     <div class="text-right">
-                        <a href="{{route('artistic_film.create')}}" class="btn btn-success">&plus; Qo'shish</a>
+                        <a href="{{route('filmography.create')}}" class="btn btn-success">&plus; Qo'shish</a>
                     </div>
                 </div>
                 <div class="card-body text-center">
@@ -30,6 +30,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>Mazular</th>
                             <th>Nomi</th>
                             <th>Qisqacha ma'lumoti</th>
                             <th>status</th>
@@ -41,6 +42,14 @@
                                 <input type="hidden" name="from_filter" value="true">
                                 <button type="submit" class="d-none"></button>
                                 <th></th>
+                                <th>
+                                    <select name="category_id" id="" class="form-control" onchange="this.form.submit()">
+                                        <option value="">---</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}" {{$category->id == request('category_id')?'selected':''}}>{{$category->name_oz}}</option>
+                                        @endforeach
+                                    </select>
+                                </th>
                                 <th>
                                     <input type="text" class="form-control" name="name_oz" value="{{request('name_oz')}}" placeholder="Search">
                                 </th>
@@ -55,14 +64,15 @@
                         @forelse($models as $k=>$model)
                             <tr>
                                 <td>{{$k + 1}}</td>
+                                <td>{{$model->filmographygroup->name_oz??''}}</td>
                                 <td>{{$model->name_oz}}</td>
                                 <td>{{$model->description_oz}}</td>
                                 <td>{{$model->status==1?'Active':'No Active'}}</td>
                                 <td>{{$model->created_at}}</td>
                                 <td>
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <a href="{{route('artistic_film.edit', $model->id)}}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
-                                        <form action="{{ route('artistic_film.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
+                                        <a href="{{route('filmography.edit', $model->id)}}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
+                                        <form action="{{ route('filmography.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
                                             @csrf
                                             @method('delete')
 

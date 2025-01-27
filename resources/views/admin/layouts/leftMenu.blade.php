@@ -173,11 +173,29 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{route('book.index')}}" class="nav-link">
-                        <i class="far fa-circle"></i>
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
                         <p>Kitoblar</p>
+                        <i class="right fas fa-angle-left"></i>
                         <span class="badge badge-primary right"></span>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('book.index')}}" class="nav-link">
+                                <i class="far fa-circle"></i>
+                                <p>Kitob</p>
+                                <span class="badge badge-primary right"></span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('book_category.index')}}" class="nav-link">
+                                <i class="far fa-circle"></i>
+                                <p>Kitoblar Mavzular</p>
+                                <span class="badge badge-primary right"></span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>

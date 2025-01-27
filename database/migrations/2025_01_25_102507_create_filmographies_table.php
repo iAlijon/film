@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('filmographies', function (Blueprint $table) {
             $table->id();
-            $table->integer('filmography_group_id');
             $table->string('name_oz');
             $table->string('name_uz');
             $table->string('name_ru')->nullable();
@@ -32,7 +31,7 @@ return new class extends Migration
             $table->boolean('status')->default(true);
             $table->timestamps();
 
-            $table->foreign('filmography_group_id')->references('id')->on('filmography_groups')->cascadeOnDelete();
+            $table->foreignId('filmography_group_id')->constrained()->cascadeOnDelete();
         });
     }
 

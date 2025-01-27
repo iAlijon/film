@@ -23,18 +23,21 @@ class FilmographyController extends Controller
     public function index(Request $request)
     {
         $result = $request->all();
-        if ($result) {
+        if (isset($result['name_oz']) && !empty($result['name_oz'] || isset($result['category_id']) && !empty($result['category_id']))) {
             if (isset($result['name_oz']) && !empty($result['name_oz'])) {
                 $model = Filmography::where('name_oz', 'ilike','%'.$result['name_oz'].'%');
             }
             if (isset($result['category_id']) && !empty($result['category_id'])) {
-                $model = Filmography::where('category_id', $result['category_id']);
+                $model = Filmography::where('filmography_group_id', $result['category_id']);
             }
         }else {
             $model = Filmography::query();
         }
         $categories = FilmographyGroup::where('status', true)->select('id','name_oz')->get();
-        $models = $model->with('filmography')->orderBy('created_at', 'desc')->paginate(20);
+        $models = $model->select('id','filmography_group_id','name_oz','name_uz','description_oz','description_uz','content_oz','content_uz','images','created_at','updated_at')
+            ->with('filmography')
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
         return view('admin.filmography.index', compact('models', 'categories'));
     }
 

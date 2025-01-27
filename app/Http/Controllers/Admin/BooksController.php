@@ -41,8 +41,7 @@ class BooksController extends Controller
     public function store(BooksRequest $request)
     {
         $model = $this->repo->create($request->validated());
-        if ($model)
-        {
+        if ($model) {
             $request->session()->flash('success', 'Success');
             return redirect()->route('book.index');
         }else{

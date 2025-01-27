@@ -64,7 +64,13 @@
                         @forelse($models as $k=>$model)
                             <tr>
                                 <td>{{$k + 1}}</td>
-                                <td>{{$model->filmographygroup->name_oz??''}}</td>
+                                <td>
+                                    @foreach($categories as $category)
+                                        @if($category->id == $model->filmography_group_id)
+                                           {{$category->name_oz}}
+                                        @endif
+                                    @endforeach
+                                </td>
                                 <td>{{$model->name_oz}}</td>
                                 <td>{{$model->description_oz}}</td>
                                 <td>{{$model->status==1?'Active':'No Active'}}</td>

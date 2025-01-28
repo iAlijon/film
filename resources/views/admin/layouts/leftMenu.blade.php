@@ -189,7 +189,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{route('book_category.index')}}" class="nav-link">
+                            <a href="{{route('bookgroup.index')}}" class="nav-link">
                                 <i class="far fa-circle"></i>
                                 <p>Kitoblar Mavzular</p>
                                 <span class="badge badge-primary right"></span>

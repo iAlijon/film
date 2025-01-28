@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FilmographyGroup extends Model
+class Bookgroup extends Model
 {
     use HasFactory;
     protected $guarded = [];
 
-
-    public function filmography()
+    public function book()
     {
-        return $this->hasOne(Filmography::class, 'filmography_group_id');
+        return $this->hasOne(Books::class, 'book_category');
     }
 }

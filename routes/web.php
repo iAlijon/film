@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
 //        'popular_science_film' => \App\Http\Controllers\Admin\PopularScienceFilmController::class,
 //        'animation' => \App\Http\Controllers\Admin\AnimationController::class,
         'film_analysis' => \App\Http\Controllers\Admin\MovieAnalysisController::class,
-        'book_category' => \App\Http\Controllers\Admin\BookCategoryController::class,
+        'bookgroup' => \App\Http\Controllers\Admin\BookCategoryController::class,
         'book' => \App\Http\Controllers\Admin\BooksController::class,
         'aphorism' => \App\Http\Controllers\Admin\AphorismController::class,
         'premiere' => \App\Http\Controllers\Admin\PremiereController::class

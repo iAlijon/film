@@ -30,8 +30,11 @@ Route::get('interview', [\App\Http\Controllers\InterviewController::class, 'inte
 Route::get('interview_category', [\App\Http\Controllers\InterviewController::class, 'interviewCategory'])->name('interview.category');
 Route::get('interview_category_filter', [\App\Http\Controllers\InterviewController::class, 'interviewByCategoryFilter'])->name('interview.category.filter');
 Route::get('interview_item_filter/{id}', [\App\Http\Controllers\InterviewController::class, 'interviewItemFilter']);
-Route::get('person_director', [\App\Http\Controllers\PersonDirectorController::class, 'personDirector'])->name('person.director');
-Route::get('director/{id}', [\App\Http\Controllers\PersonDirectorController::class, 'directorItem']);
+Route::get('person_filter', [\App\Http\Controllers\PersonDirectorController::class, 'personFilter'])->name('person.filter');
+Route::get('person_group', [\App\Http\Controllers\PersonDirectorController::class, 'personGroup'])->name('person.group');
+Route::get('person/{id}', [\App\Http\Controllers\PersonDirectorController::class, 'person'])->name('person');
+Route::get('film_dictionary', [\App\Http\Controllers\DictionaryController::class, 'dictionary'])->name('dictionary');
+
 
 
 

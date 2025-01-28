@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Kitoblar</h1>
+                    <h1>Kitob Mavzulari</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('book.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Books</li>
+                        <li class="breadcrumb-item"><a href="{{route('bookgroup.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Bookgroup</li>
                     </ol>
                 </div>
             </div>
@@ -18,13 +18,7 @@
     </section>
     <section class="content">
         <div class="col-11 mr-auto ml-auto">
-            @if(session()->has('error'))
-                <div class="alert alert-danger position-relative">
-                    {{session()->get('error')}}
-                    <button class="btn btn-danger position-absolute cancel">&times;</button>
-                </div>
-            @endif
-            <div class="card card-info card-outline">
+            <div class="card card-outline card-info">
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                         <li class="nav-item">
@@ -50,50 +44,16 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('book.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('bookgroup.store')}}" method="post">
                         @csrf
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             {{---- oz ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
-                                <div class="form-group">
-                                    <label for="Kategoriya">Kategoriya</label>
-                                    <select name="book_category" id="" class="form-control">
-                                        <option value="">----</option>
-                                        @foreach($categories as $k=>$category)
-                                            <option value="{{$category->id}}">{{$category->name_oz}}</option>
-                                        @endforeach
-                                    </select>
-                                    <small class="text-danger">{{$errors->first('book_category')}}</small>
-                                </div>
 
                                 <div class="form-group">
                                     <label for="name_oz">Nomi</label>
                                     <input type="text" name="name_oz" class="form-control">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="image">Rasm</label>
-                                    <input type="file" name="image" class="form-control" accept="image/jpeg,png,jpg">
-                                    <small class="text-danger">{{$errors->first('image')}}</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="file">Fayillar</label>
-                                    <input type="file" name="file" class="form-control">
-                                    <small class="text-danger">{{$errors->first('file')}}</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="description_oz">Qisqqcha ma'lumot</label>
-                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control"></textarea>
-                                    <small class="text-danger">{{$errors->first('description_oz')}}</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" id="" cols="30" rows="10" class="form-control textarea"></textarea>
-                                    <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
@@ -111,18 +71,6 @@
                                     <label for="name_uz">Номи</label>
                                     <input type="text" name="name_uz" class="form-control">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="description_uz">Қисқача маълумот</label>
-                                    <textarea name="description_uz" id="description_uz" cols="30" rows="5" class="form-control"></textarea>
-                                    <small class="text-danger">{{$errors->first('description_uz')}}</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="content_uz">Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" id="content_uz" cols="30" rows="10" class="form-control textarea"></textarea>
-                                    <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
                             </div>
                             <div class="text-right">

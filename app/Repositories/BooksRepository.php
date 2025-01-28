@@ -25,7 +25,7 @@ class BooksRepository extends BaseRepository
             $this->model = $this->model->where('book_category', $request->book_category);
         }
 
-        return $this->model->orderBy('id', 'desc')->paginate($this->limit);
+        return $this->model->with('bookgroup')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
     public function edit($id)

@@ -13,6 +13,6 @@ class Filmography extends Model
 
     public function filmography()
     {
-        return $this->belongsTo(FilmographyGroup::class);
+        return $this->belongsTo(FilmographyGroup::class, 'filmography_group_id');
     }
 }

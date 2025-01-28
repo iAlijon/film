@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('dictionary', function (Blueprint $table) {
             $table->id();
-            $table->jsonb('oz');
-            $table->jsonb('ru');
+            $table->jsonb('name_oz');
+            $table->jsonb('name_ru');
             $table->timestamps();
         });
     }

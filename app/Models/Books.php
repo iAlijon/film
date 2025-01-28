@@ -9,4 +9,9 @@ class Books extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function bookgroup()
+    {
+        return $this->belongsTo(Bookgroup::class, 'book_category');
+    }
 }

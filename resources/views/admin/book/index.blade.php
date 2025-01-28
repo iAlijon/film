@@ -52,10 +52,9 @@
                                 <th>
                                     <select name="book_category" id="book_category" onchange="this.form.submit()" class="form-control">
                                         <option value="">----</option>
-                                        <option value="1" {{request('book_category') == 1?'selected':''}}>Badiiy</option>
-                                        <option value="2" {{request('book_category') == 2?'selected':''}}>Xorijiiy</option>
-                                        <option value="3" {{request('book_category') == 3?'selected':''}}>Animatsiya</option>
-                                        <option value="4" {{request('book_category') == 4?'selected':''}}>Dessertatsiya</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->name_oz}}</option>
+                                        @endforeach
                                     </select>
                                 </th>
                                 <th>
@@ -73,15 +72,7 @@
                         @forelse($models as $k => $model)
                         <tr>
                             <td>{{$k + 1}}</td>
-                            @if($model->book_category == 1)
-                                <td>Badiiy kino</td>
-                            @elseif($model->book_category == 2)
-                                <td>Xorijiiy kino</td>
-                            @elseif($model->book_category == 3)
-                                <td>Animatsion</td>
-                            @elseif($model->book_category == 4)
-                                <td>Desertatsiya</td>
-                            @endif
+                            <td>{{$model->bookgroup->name_oz}}</td>
                             <td>{{$model->name_oz}}</td>
                             <td>{{$model->description_oz}}</td>
                             <td>{{$model->status == 1?'Active':'No Active'}}</td>

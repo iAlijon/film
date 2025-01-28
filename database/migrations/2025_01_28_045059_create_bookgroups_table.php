@@ -13,8 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('book_categories', function (Blueprint $table) {
+        Schema::create('bookgroups', function (Blueprint $table) {
             $table->id();
+            $table->string('name_oz');
+            $table->string('name_uz');
+            $table->string('name_ru')->nullable();
+            $table->string('name_en')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_categories');
+        Schema::dropIfExists('bookgroups');
     }
 };

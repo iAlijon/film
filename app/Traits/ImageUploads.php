@@ -24,10 +24,11 @@ trait ImageUploads
 
     public function fileUploads($file, $folder)
     {
+        $app_url = config('app.url');
         $file_name = time().'_'.$file->getClientOriginalName();
         $path = public_path('files/').$folder;
         if ($file->move($path, $file_name)){
-            return $file_name;
+            return $app_url.'/public/files/'.$folder.'/'.$file_name;
         }else{
             return null;
         }

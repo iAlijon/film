@@ -31,4 +31,17 @@ class BookCantroller extends Controller
         }
         return response()->json(['success'=>false,'data'=>'','message'=>'ok']);
     }
+
+    public function bookItem(Request $request, $id)
+    {
+        $lang = $request->header('lang', 'oz');
+        $params = Books::where('book_category', $id)
+            ->select('id','images','files','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','book_category','created_at','updated_at')
+            ->first();
+        if ($params) {
+            return response()->json(['success'=>true,'data'=>$params,'message'=>'ok']);
+        }
+        return response()->json(['success'=>false,'data'=>'','message'=>'ok']);
+
+    }
 }

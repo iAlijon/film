@@ -19,10 +19,10 @@ class Dictionary extends Model
         return $this->belongsTo(FilmDictionaryCategory::class);
     }
 
-    public function getNameByLangAttribute()
-    {
-        $lang = app()->getLocale(); // Laravelda tanlangan til
-        return $this->name[$lang] ?? $this->name['oz']; // Tanlangan til bo'lmasa, default 'en' qaytariladi
-    }
+//    public function getNameByLangAttribute()
+//    {
+//        $lang = app()->getLocale(); // Laravelda tanlangan til
+//        return $this->name[$lang] ?? $this->name['oz']; // Tanlangan til bo'lmasa, default 'en' qaytariladi
+//    }
 
 }

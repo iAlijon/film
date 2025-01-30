@@ -41,6 +41,7 @@ Route::get('filmography', [\App\Http\Controllers\FilmographyController::class, '
 Route::get('filmography_item/{id}', [\App\Http\Controllers\FilmographyController::class, 'filmographyItem'])->name('filmography.item');
 Route::get('book', [\App\Http\Controllers\BookCantroller::class, 'index'])->name('book');
 Route::get('book_filter', [\App\Http\Controllers\BookCantroller::class, 'bookFilter'])->name('book.filter');
+Route::get('book_item/{id}', [\App\Http\Controllers\BookCantroller::class, 'bookItem'])->name('book.item');
 
 
 

@@ -34,7 +34,8 @@ Route::get('person_filter', [\App\Http\Controllers\PersonDirectorController::cla
 Route::get('person_group', [\App\Http\Controllers\PersonDirectorController::class, 'personGroup'])->name('person.group');
 Route::get('person/{id}', [\App\Http\Controllers\PersonDirectorController::class, 'person'])->name('person');
 Route::get('film_dictionary', [\App\Http\Controllers\DictionaryController::class, 'dictionary'])->name('dictionary');
-Route::get('dictionary_item', [\App\Http\Controllers\DictionaryController::class, 'dictionaryItem'])->name('dictionary.item');
+Route::get('dictionary_item_list', [\App\Http\Controllers\DictionaryController::class, 'dictionaryItemList'])->name('dictionary.item,list');
+Route::get('dictionary_item/{id}', [\App\Http\Controllers\DictionaryController::class, 'dictionaryItem'])->name('dictionary.item');
 Route::get('cinema_fact', [\App\Http\Controllers\FilmFactController::class, 'index'])->name('cinema.fact');
 Route::get('filmography_category', [\App\Http\Controllers\FilmographyController::class, 'filmographyGroup'])->name('filmography.category');
 Route::get('filmography', [\App\Http\Controllers\FilmographyController::class, 'filmography'])->name('filmography');

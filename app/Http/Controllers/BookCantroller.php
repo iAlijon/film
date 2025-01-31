@@ -45,6 +45,5 @@ class BookCantroller extends Controller
             return response()->json(['success' => true, 'data' => $params, 'message' => 'ok']);
         }
         return response()->json(['success' => false, 'data' => '', 'message' => 'ok']);
-
     }
 }

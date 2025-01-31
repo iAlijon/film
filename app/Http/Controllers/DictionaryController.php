@@ -12,6 +12,18 @@ class DictionaryController extends Controller
     public function dictionary(Request $request)
     {
         $lang = $request->header('lang', 'oz');
+        if ($lang == 'uz'){
+            $data = Dictionary::select('id','name_ru as name')->orderBy('id', 'asc')->get();
+            $items = json_decode($data, true);
+            $arr = [];
+            foreach ($items as $item) {
+                $arr[] = [
+                    'id' => $item['id'],
+                    'name' => json_decode($item['name'], true)['upper'],
+                ];
+            }
+            return response()->json(['success' => true,'data' => $arr,'message' => 'ok']);
+        }
         $data = Dictionary::select('id','name_'.$lang.' as name')->orderBy('id', 'asc')->get();
         $items = json_decode($data, true);
         $arr = [];
@@ -24,7 +36,7 @@ class DictionaryController extends Controller
         return response()->json(['success' => true,'data' => $arr,'message' => 'ok']);
     }
 
-    public function dictionaryItem(Request $request)
+    public function dictionaryItemList(Request $request)
     {
         $lang = $request->header('lang', 'oz');
         $input = $request->all();
@@ -48,5 +60,15 @@ class DictionaryController extends Controller
             return response()->json(['success' => true, 'data' => $arr, 'message' => 'ok']);
         }
         return response()->json(['success' => false, 'data' => $params, 'message' => 'ok']);
+    }
+
+    public function dictionaryItem(Request $request,$id)
+    {
+        $lang = $request->header('lang', 'oz');
+        $model = FilmDictionary::where('id',$id)
+            ->select('id','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','created_at','updated_at')
+            ->first();
+        if ($model) return response()->json(['success'=>true,'data'=>$model,'message'=>'ok']);
+         return response()->json(['success'=>false,'data'=>'','message'=>'ok']);
     }
 }

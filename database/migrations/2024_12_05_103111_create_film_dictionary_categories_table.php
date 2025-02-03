@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('dictionary_category_id');
             $table->timestamps();
 
-            $table->foreign('fim_dictionary_id')->references('id')->on('film_dictionaries');
+            $table->foreign('film_dictionary_id')->references('id')->on('film_dictionaries');
             $table->foreign('dictionary_category_id')->references('id')->on('dictionary');
         });
     }

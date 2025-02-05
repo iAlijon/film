@@ -19,10 +19,11 @@ class AuthController extends Controller
         $request->validate([
            'username' => 'required|string',
             'password' => 'required|string'
-        ]);
+	]);
+	
         if (Auth::attempt($request->only('username', 'password')))
-        {
-            return redirect()->route('dashboard');
+	{
+		return redirect()->route('dashboard');
         }
 
         throw ValidationException::withMessages(['username' => 'Login yoki Parol noto\'g\'ri qayta tekshiring']);

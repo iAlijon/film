@@ -23,7 +23,7 @@ class FilmDictionaryController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        $dictionaries = Dictionary::orderBy('id', 'asc')->select('id', 'oz', 'ru')->get();
+        $dictionaries = Dictionary::orderBy('id', 'asc')->select('id', 'name_oz', 'name_ru')->get();
         return view('admin.dictionary.index', compact('models', 'dictionaries'));
     }
 
@@ -34,7 +34,7 @@ class FilmDictionaryController extends Controller
      */
     public function create()
     {
-        $dictionaries = Dictionary::select('id', 'ru', 'oz')->orderBy('id', 'asc')->get();
+        $dictionaries = Dictionary::select('id', 'name_ru', 'name_oz')->orderBy('id', 'asc')->get();
         return view('admin.dictionary.create', compact('dictionaries'));
     }
 
@@ -76,7 +76,7 @@ class FilmDictionaryController extends Controller
     public function edit($id)
     {
         $model = $this->repo->findById($id);
-        $dictionaries = Dictionary::select('id', 'ru', 'oz')->orderBy('id', 'asc')->get();
+        $dictionaries = Dictionary::select('id', 'name_ru', 'name_oz')->orderBy('id', 'asc')->get();
         return view('admin.dictionary.edit', compact('model', 'dictionaries'));
     }
 

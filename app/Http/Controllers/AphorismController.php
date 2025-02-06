@@ -9,6 +9,7 @@ class AphorismController extends Controller
 {
     public function index(Request $request)
     {
+
         $lang = $request->header('lang', 'oz');
         $items = Aphorism::where('status', true)->orderBy('id', 'desc')->with('calendar:id,aphorism_id,created_at,description_'.$lang.' as description')
             ->select('id', 'full_name_'.$lang.' as full_name', 'images', 'description_'.$lang.' as description', 'created_at')->first();

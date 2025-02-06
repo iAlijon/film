@@ -64,7 +64,7 @@
                                             class="select2 form-control" data-placeholder="Lug'atni tanlang">
                                         @foreach($dictionaries as $dictionary)
                                             <option
-                                                value="{{$dictionary->id}}">{{json_decode($dictionary->oz)->upper}}</option>
+                                                value="{{$dictionary->id}}">{{$dictionary->name_oz['upper']}}</option>
                                         @endforeach
                                     </select>
                                     <small class="text-danger">{{$errors->first('dictionary_id')}}</small>
@@ -119,7 +119,7 @@
                                             data-placeholder="Луғатни танланг">
                                         @foreach($dictionaries as $dictionary)
                                             <option
-                                                value="{{$dictionary->id}}">{{json_decode($dictionary->ru)->upper}}</option>
+                                                value="{{$dictionary->id}}">{{json_decode($dictionary->name_ru)->upper}}</option>
                                         @endforeach
                                     </select>
                                     <small class="text-danger">{{$errors->first('dictionary_id')}}</small>

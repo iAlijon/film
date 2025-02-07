@@ -24,7 +24,7 @@ class InterviewPeopleRequest extends FormRequest
     public function rules()
     {
         return [
-            'interview_category_id' => 'required|integer',
+            'category_id' => 'required|integer',
             'full_name_oz' => 'required',
             'full_name_uz' => 'required',
             'description_oz' => 'required',

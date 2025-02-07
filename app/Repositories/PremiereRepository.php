@@ -20,6 +20,9 @@ class PremiereRepository extends BaseRepository
         if (isset($request->name_oz) && !empty($request->name_oz)) {
             $this->model = $this->model->where('name_oz', 'ilike', '%' . $request->name_oz . '%');
         }
+        if (isset($request->category_id) && !empty($request->category_id)) {
+            $this->model = $this->model->where('category_id', $request->category_id);
+        }
         return $this->model->orderBy('id', 'desc')->paginate($this->limit);
     }
 
@@ -31,7 +34,7 @@ class PremiereRepository extends BaseRepository
     public function create($data)
     {
         $model = $this->model->create([
-            'premiere_category' => $data['premiere_category'],
+            'category_id' => $data['category_id'],
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
             'description_oz' => $data['description_oz'],
@@ -51,7 +54,7 @@ class PremiereRepository extends BaseRepository
             deleteImages($model->images, 'premiere');
         }
         $model->update([
-            'premiere_category' => $data['premiere_category'],
+            'category_id' => $data['category_id'],
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
             'description_oz' => $data['description_oz'],

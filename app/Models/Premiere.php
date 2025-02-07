@@ -10,8 +10,9 @@ class Premiere extends Model
     use HasFactory;
     protected $guarded = [];
 
-    protected $casts = [
-      'premiere_category' => 'integer'
-    ];
+    public function category()
+    {
+        return $this->belongsTo(PersonCategory::class);
+    }
 
 }

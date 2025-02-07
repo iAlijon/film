@@ -81,28 +81,22 @@
                         </li>
                     </ul>
                 </li>
+{{--                <li class="nav-item">--}}
+{{--                    <a href="#" class="nav-link">--}}
+{{--                        <i class="nav-icon fas fa-copy"></i>--}}
+{{--                        <p class="text">Shaxsiyatlar</p>--}}
+{{--                        <i class="right fas fa-angle-left"></i>--}}
+{{--                        <span class="badge badge-primary right"></span>--}}
+{{--                    </a>--}}
+{{--                    <ul class="nav nav-treeview">--}}
+{{--                        --}}
+{{--                    </ul>--}}
+{{--                </li>--}}
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p class="text">Shaxsiyatlar</p>
-                        <i class="right fas fa-angle-left"></i>
-                        <span class="badge badge-primary right"></span>
+                    <a href="{{route('person.index')}}" class="nav-link">
+                        <i class="fa fa-users nav-icon"></i>
+                        <p>Shaxsiyatlar</p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('person_category.index')}}" class="nav-link">
-                                <i class="fa fa-users nav-icon"></i>
-                                <p>Shaxs kategoriyasi</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{route('person.index')}}" class="nav-link">
-                                <i class="fa fa-users nav-icon"></i>
-                                <p>Shaxsiyatlar</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('film_dictionary.index')}}" class="nav-link">
@@ -138,30 +132,6 @@
                                 <p>Filmografiya</p>
                             </a>
                         </li>
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('artistic_film.index')}}" class="nav-link">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>Badiiy filmlar</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('documentary.index')}}" class="nav-link">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>Hujjatli filmlar</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('popular_science_film.index')}}" class="nav-link">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>Ilmiy-ommabop filmlar</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('animation.index')}}" class="nav-link">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>Animatsiyali filmlar</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -196,6 +166,12 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('categories.index')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Kategoriyalar</p>
+                    </a>
                 </li>
             </ul>
         </nav>

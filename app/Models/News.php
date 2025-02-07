@@ -8,26 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class News extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name_oz',
-        'name_uz',
-        'name_ru',
-        'name_en',
-        'description_oz',
-        'description_uz',
-        'description_ru',
-        'description_en',
-        'content_oz',
-        'content_uz',
-        'content_ru',
-        'content_en',
-        'status',
-        'image',
-        'category_id'
-    ];
+    protected $guarded = [];
 
-    public function new_category()
+    public function category()
     {
-        return $this->hasOne(NewsCategory::class, 'id', 'category_id');
+        return $this->belongsTo(PersonCategory::class);
     }
 }

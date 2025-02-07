@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PersonCategoryRequest;
+use App\Models\PersonCategory;
 use App\Repositories\PersonCategoryRepository;
 use App\Repositories\PersonRepository;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class PersonCategoryController extends Controller
      */
     public function index()
     {
-        $models = $this->repo->index();
+        $models = $this->repo->index($this->request);
         return view('admin.person_cate.index', compact('models'));
     }
 
@@ -44,7 +45,7 @@ class PersonCategoryController extends Controller
         $model = $this->repo->create($request->validated());
         if ($model) {
             $request->session()->flash('success', 'Success');
-            return redirect()->route('person_category.index');
+            return redirect()->route('categories.index');
         }else {
             $request->session()->flash('error', 'Errors');
             return redirect()->back();
@@ -86,7 +87,7 @@ class PersonCategoryController extends Controller
         $model = $this->repo->update($request->validated(), $id);
         if ($model) {
             $request->session()->flash('success', 'Success');
-            return redirect()->route('person_category.index');
+            return redirect()->route('categories.index');
         }else {
             $request->session()->flash('error', 'Errors');
             return redirect()->back();
@@ -102,6 +103,6 @@ class PersonCategoryController extends Controller
     public function destroy($id)
     {
         $this->repo->delete($id);
-        return redirect()->route('person_category.index');
+        return redirect()->route('categories.index');
     }
 }

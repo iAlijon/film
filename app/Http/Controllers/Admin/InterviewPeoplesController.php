@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InterviewPeopleRequest;
 use App\Http\Requests\Admin\InterviewRequest;
 use App\Models\PeopleAssociatedWithTheFilmCategory;
+use App\Models\PersonCategory;
 use App\Repositories\InterviewPeoplesRepository;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class InterviewPeoplesController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        $categories = PeopleAssociatedWithTheFilmCategory::select('id','name_oz')->get();
+        $categories = PersonCategory::query()->where('status', true)->where('type', 'interview')->get();
         return view('admin.interview_people.index', compact('models', 'categories'));
     }
 
@@ -32,7 +33,7 @@ class InterviewPeoplesController extends Controller
      */
     public function create()
     {
-        $categories = PeopleAssociatedWithTheFilmCategory::select('id','name_oz')->get();
+        $categories = PersonCategory::query()->where('status', true)->where('type', 'interview')->get();
         return view('admin.interview_people.create', compact('categories'));
     }
 
@@ -73,7 +74,7 @@ class InterviewPeoplesController extends Controller
      */
     public function edit($id)
     {
-        $categories = PeopleAssociatedWithTheFilmCategory::select('id','name_oz')->get();
+        $categories = PersonCategory::query()->where('status', true)->where('type', 'interview')->get();
         $model = $this->repo->findById($id);
         return view('admin.interview_people.edit', compact('model','categories'));
     }

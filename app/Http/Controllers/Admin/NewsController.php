@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\NewRequests;
 use App\Models\News;
 use App\Models\NewsCategory;
+use App\Models\PersonCategory;
 use Illuminate\Http\Request;
 use App\Repositories\NewsRepository;
 
@@ -24,7 +25,7 @@ class NewsController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = NewsCategory::select('id', 'name_oz', 'name_uz')->get();
+        $categories = PersonCategory::select('id', 'name_oz', 'name_uz')->where('type', 'news')->get();
         $models = $this->repo->index($request);
         return view('admin.news.index', compact('models', 'categories'));
     }
@@ -36,7 +37,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        $categories = NewsCategory::select('id', 'name_oz')->get();
+        $categories = PersonCategory::select('id', 'name_oz')->where('type', 'news')->get();
        return view('admin.news.create', compact('categories'));
     }
 
@@ -80,7 +81,7 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        $categories = NewsCategory::select('id', 'name_oz', 'name_uz')->get();
+        $categories = PersonCategory::select('id', 'name_oz')->where('type', 'news')->get();
         $model = $this->repo->findById($id);
         return view('admin.news.edit', compact('model', 'categories'));
     }

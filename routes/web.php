@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'interview_category' => \App\Http\Controllers\Admin\InterviewCategoryController::class,
         'interview_peoples' => \App\Http\Controllers\Admin\InterviewPeoplesController::class,
         'interview' => \App\Http\Controllers\Admin\InterviewController::class,
-        'person_category' => \App\Http\Controllers\Admin\PersonCategoryController::class,
+        'categories' => \App\Http\Controllers\Admin\PersonCategoryController::class,
         'person' => \App\Http\Controllers\Admin\PersonController::class,
         'film_dictionary' => \App\Http\Controllers\Admin\FilmDictionaryController::class,
         'cinema_fact' => \App\Http\Controllers\Admin\CinemaFactController::class,
@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'bookgroup' => \App\Http\Controllers\Admin\BookCategoryController::class,
         'book' => \App\Http\Controllers\Admin\BooksController::class,
         'aphorism' => \App\Http\Controllers\Admin\AphorismController::class,
-        'premiere' => \App\Http\Controllers\Admin\PremiereController::class
+        'premiere' => \App\Http\Controllers\Admin\PremiereController::class,
     ]);
     Route::post('/new-status', [\App\Http\Controllers\Admin\NewsController::class, 'newStatus'])->name('new-status');
     Route::get('/book/download/{id}', [\App\Http\Controllers\Admin\BooksController::class, 'download'])->name('download');

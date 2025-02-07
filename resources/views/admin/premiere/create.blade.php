@@ -57,10 +57,11 @@
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
                                     <label>Kategoriya</label>
-                                    <select name="premiere_category" id="premiere_category" class="form-control">
+                                    <select name="category_id" id="category_id" class="form-control">
                                         <option>----</option>
-                                        <option value="1">Milliy premyera</option>
-                                        <option value="2">Jaxon premyera</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->name_oz}}</option>
+                                        @endforeach
                                     </select>
                                     <small class="text-danger">{{$errors->first('premiere_category')}}</small>
                                 </div>

@@ -32,7 +32,7 @@ class PremiereRequest extends FormRequest
             'content_uz' => 'required',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
             'status' => 'required|boolean',
-            'premiere_category' => 'required'
+            'category_id' => 'required'
         ];
     }
 }

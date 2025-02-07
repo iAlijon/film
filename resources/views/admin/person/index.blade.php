@@ -70,7 +70,7 @@
                         @forelse($models as $k => $item)
                             <tr>
                                 <td>{{$k + 1}}</td>
-                                <td>{{$item->person_category->name_oz}}</td>
+                                <td>{{$item->category->name_oz}}</td>
                                 <td>{{$item->full_name_oz}}</td>
                                 <td>{{$item->description_oz}}</td>
                                 <td>{{$item->status == true?'Active':'No Active'}}</td>

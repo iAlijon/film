@@ -5,27 +5,28 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Shaxsiyatlar</h1>
+                    <h1>Kategoriyalar</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('person_category.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Person Category</li>
+                        <li class="breadcrumb-item"><a href="{{route('categories.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Category</li>
                     </ol>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
     <section class="content">
+
         <div class="col-11 ml-auto mr-auto">
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">
-                        Shaxsiyatlar Kategoriyasi
+                        Kategoriyalar
                         <i class="fas fa-users"></i>
                     </h3>
                     <div class="text-right">
-                        <a href="{{route('person_category.create')}}" class="btn btn-success text-white">&plus; Qo'shish</a>
+                        <a href="{{route('categories.create')}}" class="btn btn-success text-white">&plus; Qo'shish</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -38,6 +39,19 @@
                             <th>Qo'shilgan sanasi</th>
                             <th></th>
                         </tr>
+                        <tr>
+                            <form action="">
+                                <input type="hidden" name="form_filter" value="true">
+                                <button class="d-none" type="submit"></button>
+                                <th></th>
+                                <th>
+                                    <input type="text" name="name_oz" class="form-control" placeholder="Name filter" value="{{request('name_oz')}}">
+                                </th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </form>
+                        </tr>
                         </thead>
                         <tbody>
                         @forelse($models as $k=>$model)
@@ -48,12 +62,11 @@
                                 <td>{{$model->created_at}}</td>
                                 <td>
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <a href="{{route('interview_category.edit', $model->id)}}" class="btn btn-info mr-1"><i
+                                        <a href="{{route('categories.edit', $model->id)}}" class="btn btn-info mr-1"><i
                                                 class="fas fa-pencil-alt"></i></a>
-                                        <form action="{{ route('interview_category.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
+                                        <form action="{{ route('categories.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">
                                             @csrf
                                             @method('delete')
-
                                         </form>
                                         <a type="submit" class="btn btn-danger"
                                            onclick="if (confirm('Siz rostdan ham ushbu ma\'lumotni o\'chirishni xoxlaysizmi ?')){
@@ -75,6 +88,9 @@
                         @endforelse
                         </tbody>
                     </table>
+                </div>
+                <div class="float-right">
+                    {{$models->links('vendor.pagination.bootstrap-5')}}
                 </div>
             </div>
         </div>

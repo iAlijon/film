@@ -24,7 +24,7 @@ class NewsRepository extends BaseRepository
     {
         $filter = new NewFilter($request);
         $filter = $filter->filter();
-        return $filter->with('new_category')->orderBy('id', 'desc')->paginate($this->limit);
+        return $filter->with('category')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
     public function findById($id)
@@ -49,7 +49,7 @@ class NewsRepository extends BaseRepository
             'content_en' => $data['content_en'] ?? null,
             'status' => $data['status'] == 'active' ? true : false,
             'image' => $this->uploads($data['images'], 'news'),
-            'category_id' => $data['new_category_id']
+            'category_id' => $data['category_id']
         ]);
         if ($model) {
             return $model;
@@ -81,7 +81,7 @@ class NewsRepository extends BaseRepository
             'content_en' => $data['content_en'] ?? null,
             'status' => $data['status'] == 'active' ? true:false,
             'image' => $this->uploads($data['images'], 'news'),
-            'category_id' => $data['new_category_id']
+            'category_id' => $data['category_id']
         ]);
         if ($model) {
             return $model;

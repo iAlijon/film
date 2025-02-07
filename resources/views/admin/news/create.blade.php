@@ -59,7 +59,7 @@
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
                                     <label>Yangiliklar kategoriyasi</label>
-                                    <select name="new_category_id" class="form-control" id="new_category_id">
+                                    <select name="category_id" class="form-control" id="category_id">
                                         <option>----</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name_oz}}</option>
@@ -95,8 +95,8 @@
                                 <div class="form-group">
                                     <label>Status</label>
                                     <select name="status" class="form-control form-control-sm">
-                                        <option value="active">Active</option>
-                                        <option value="no_active">No Active</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">No Active</option>
                                     </select>
                                 </div>
                             </div>

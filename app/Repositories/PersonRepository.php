@@ -26,15 +26,15 @@ class PersonRepository extends BaseRepository
             $this->model = $this->model->where('full_name_oz', 'ilike', '%'.$request->full_name_oz.'%');
         }
         if (isset($request->category_id) && !empty($request->category_id)) {
-            $this->model = $this->model->where('person_category_id', $request->category_id);
+            $this->model = $this->model->where('category_id', $request->category_id);
         }
-        return $this->model->with('person_category')->orderBy('created_at', 'desc')->paginate($this->limit);
+        return $this->model->with('category')->orderBy('created_at', 'desc')->paginate($this->limit);
     }
 
     public function create($data)
     {
         $model = $this->model->create([
-            'person_category_id' => $data['category_id'],
+            'category_id' => $data['category_id'],
             'full_name_oz' => $data['full_name_oz'],
             'full_name_uz' => $data['full_name_uz'],
             'description_oz' => $data['description_oz'],
@@ -59,7 +59,7 @@ class PersonRepository extends BaseRepository
             deleteImages($model->images, 'person');
         }
         $model->update([
-            'person_category_id' => $data['category_id'],
+            'category_id' => $data['category_id'],
             'full_name_oz' => $data['full_name_oz'],
             'full_name_uz' => $data['full_name_uz'],
             'description_oz' => $data['description_oz'],

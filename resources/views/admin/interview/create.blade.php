@@ -54,13 +54,14 @@
 
                                 <div class="form-group">
                                     <label for="">Kategoriya</label>
-                                    <select name="interview_category_id" id="interview_category_id"8
+                                    <select name="category_id" id="category_id"8
                                             class="form-control">
                                         <option value="">---</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name_oz}}</option>
                                         @endforeach
                                     </select>
+                                    <small class="text-danger">{{$errors->first('category_id')}}</small>
                                 </div>
 
                                 <div class="form-group">
@@ -71,6 +72,7 @@
                                             <option value="{{$people->id}}">{{$people->full_name_oz}}</option>
                                         @endforeach
                                     </select>
+                                    <small class="text-danger">{{$errors->first('interview_people_id')}}</small>
                                 </div>
 
                                 <div class="form-group">
@@ -135,13 +137,13 @@
 @push('js')
     <script>
         $(document).ready(function () {
-            $('#interview_category_id').on('change', function () {
-                let interview_category_id = $(this).val();
+            $('#category_id').on('change', function () {
+                let category_id = $(this).val();
                 let interview_people_id = $('#interview_people_id')
                 $.ajax({
                     url: '{{ route("interview-status") }}',
                     type: 'GET',
-                    data: {category_id: interview_category_id},
+                    data: {category_id: category_id},
                     success: function (data) {
                         $('#interview_people_id').empty(); // Eski sub-kategoriyalarni o'chirish
                         $('#interview_people_id').append('<option>---</option>');

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('people', function (Blueprint $table) {
             $table->id();
-            $table->integer('person_category_id');
+            $table->integer('category_id');
             $table->string('full_name_oz');
             $table->string('full_name_uz');
             $table->string('full_name_ru')->nullable();
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->date('birth_date');
             $table->timestamps();
 
-            $table->foreign('person_category_id')->references('id')->on('person_categories')->cascadeOnDelete();
+            $table->foreign('category_id')->references('id')->on('person_categories')->cascadeOnDelete();
         });
     }
 

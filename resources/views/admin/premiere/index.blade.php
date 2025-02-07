@@ -37,6 +37,7 @@
                         <tr>
                             <th>#</th>
                             <th>Nomi</th>
+                            <th>Kategoriya</th>
                             <th>Qisqacha malumot</th>
                             <th>Status</th>
                             <th>Qo'shilgan vaqti</th>
@@ -50,6 +51,14 @@
                                 <th>
                                     <input type="text" name="name_oz" class="form-control" value="{{request()->is('name_oz')}}">
                                 </th>
+                                <th>
+                                    <select name="category_id" id="" onchange="this.form.submit()" class="form-control">
+                                        <option value="">---</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->name_oz}}</option>
+                                        @endforeach
+                                    </select>
+                                </th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -62,6 +71,7 @@
                             <tr>
                                 <td>{{$k + 1}}</td>
                                 <td>{{$model->name_oz}}</td>
+                                <td>{{$model->category->name_oz}}</td>
                                 <td>{{$model->description_oz}}</td>
                                 <td>{{$model->status == 1?'Active':'No Active'}}</td>
                                 <td>{{$model->created_at}}</td>

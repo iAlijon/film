@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InterviewRequest;
 use App\Models\InterviewPeoples;
 use App\Models\PeopleAssociatedWithTheFilmCategory;
+use App\Models\PersonCategory;
 use App\Repositories\InterviewRepository;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class InterviewController extends Controller
      */
     public function index()
     {
-        $categories = PeopleAssociatedWithTheFilmCategory::query()->select('id','name_oz')->get();
+        $categories = PersonCategory::query()->where('status', true)->where('type', 'interview')->get();
         $peoples = InterviewPeoples::select('id', 'full_name_oz')->get();
         $models = $this->repo->index($this->request);
         return view('admin.interview.index', compact('models', 'peoples', 'categories'));
@@ -33,7 +34,7 @@ class InterviewController extends Controller
      */
     public function create()
     {
-        $categories = PeopleAssociatedWithTheFilmCategory::query()->select('id','name_oz')->get();
+        $categories = PersonCategory::query()->where('status', true)->where('type', 'interview')->get();
         $peoples = InterviewPeoples::query()->select('id', 'full_name_oz')->get();
         return view('admin.interview.create', compact('peoples', 'categories'));
     }
@@ -75,7 +76,7 @@ class InterviewController extends Controller
      */
     public function edit($id)
     {
-        $categories = PeopleAssociatedWithTheFilmCategory::query()->select('id','name_oz')->get();
+        $categories = PersonCategory::query()->where('status', true)->where('type', 'interview')->get();
         $peoples = InterviewPeoples::query()->select('id', 'full_name_oz')->get();
         $model = $this->repo->findById($id);
         return view('admin.interview.edit', compact('categories', 'peoples', 'model'));
@@ -119,10 +120,10 @@ class InterviewController extends Controller
     {
         $result = $request->all();
         if ($result['category_id']) {
-            $params = InterviewPeoples::where('interview_category_id', $result['category_id'])->select('id', 'interview_category_id','full_name_oz')->get();
+            $params = InterviewPeoples::where('category_id', $result['category_id'])->select('id', 'category_id','full_name_oz')->get();
 
         }else{
-            $params = InterviewPeoples::select('id','interview_category_id','full_name_oz')->get();
+            $params = InterviewPeoples::select('id','category_id','full_name_oz')->get();
         }
         return $params;
 

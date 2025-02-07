@@ -28,8 +28,8 @@ class NewFilter
             $this->news = $this->news->where('description_oz', 'ilike', '%' . $this->request['description_oz'] . '%');
         }
 
-        if (isset($this->request['new_category_id']) && !empty($this->request['new_category_id'])) {
-            $this->news = $this->news->where('category_id', $this->request['new_category_id']);
+        if (isset($this->request['category_id']) && !empty($this->request['category_id'])) {
+            $this->news = $this->news->where('category_id', $this->request['category_id']);
         }
         return $this->news;
     }

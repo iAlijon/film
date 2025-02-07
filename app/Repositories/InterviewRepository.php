@@ -20,7 +20,7 @@ class InterviewRepository extends BaseRepository
             $this->model = $this->model->where('interview_oz', 'ilike', '%'.$request->interview_oz.'%');
         }
         if (isset($request->category_id) && !empty($request->category_id)) {
-            $this->model = $this->model->where('interview_category_id', $request->category_id);
+            $this->model = $this->model->where('category_id', $request->category_id);
         }
         if (isset($request->people_id) && !empty($request->people_id)) {
             $this->model = $this->model->where('interview_people_id', $request->people_id);
@@ -35,9 +35,9 @@ class InterviewRepository extends BaseRepository
 
     public function create($data)
     {
-        $anchor = PeopleAssociatedWithTheFilmCategory::where('id', $data['interview_category_id'])->first();
+
         $model = $this->model->create([
-            'interview_category_id' => $data['interview_category_id'],
+            'category_id' => $data['category_id'],
             'interview_people_id' => $data['interview_people_id'],
             'interview_oz' => $data['interview_oz'],
             'interview_uz' => $data['interview_uz'],
@@ -45,7 +45,7 @@ class InterviewRepository extends BaseRepository
             'description_uz' => $data['description_uz'],
             'content_oz' => contentByDomDocment($data['content_oz'], 'interview'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'interview'),
-            'anchor' => $anchor->name_oz,
+            'anchor' => null,
             'status' => $data['status'],
         ]);
         if ($model) {
@@ -58,7 +58,7 @@ class InterviewRepository extends BaseRepository
     {
         $model = $this->findById($id);
         $model->update([
-            'interview_category_id' => $data['interview_category_id'],
+            'category_id' => $data['category_id'],
             'interview_people_id' => $data['interview_people_id'],
             'interview_oz' => $data['interview_oz'],
             'interview_uz' => $data['interview_uz'],

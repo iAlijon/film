@@ -12,9 +12,12 @@ class PersonCategoryRepository extends BaseRepository
         $this->model = new PersonCategory();
     }
 
-    public function index()
+    public function index($request)
     {
-        return $this->model->orderBy('created_at', 'desc')->get();
+        if (isset($request->name_oz) && !empty($request->name_oz)) {
+            $this->model = $this->model->where('name_oz', 'ilike','%'.$request->name_oz.'%');
+        }
+        return $this->model->orderBy('created_at', 'desc')->paginate($this->limit);
     }
 
     public function findById($id)
@@ -27,7 +30,8 @@ class PersonCategoryRepository extends BaseRepository
         $model = $this->model->create([
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
-            'status' => $data['status']
+            'status' => $data['status'],
+            'type' => $data['type'],
         ]);
         if ($model) {
             return $model;
@@ -41,7 +45,8 @@ class PersonCategoryRepository extends BaseRepository
         $model->update([
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
-            'status' => $data['status']
+            'status' => $data['status'],
+            'type' => $data['type'],
         ]);
     }
 

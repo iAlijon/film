@@ -49,10 +49,10 @@
                                     <input type="text" class="form-control" value="{{request()->is('full_name_oz')}}" name="full_name_oz">
                                 </th>
                                 <th>
-                                    <select class="form-control" name="interview_category_id" id="" onchange="this.form.submit()">
+                                    <select class="form-control" name="category_id" id="" onchange="this.form.submit()">
                                         <option value="">---</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}" {{$category->id == request('interview_category_id')?'selected':''}}>{{$category->name_oz}}</option>
+                                            <option value="{{$category->id}}" {{$category->id == request('category_id')?'selected':''}}>{{$category->name_oz}}</option>
                                         @endforeach
                                     </select>
                                 </th>
@@ -67,7 +67,7 @@
                             <tr>
                                 <td>{{$k + 1}}</td>
                                 <td>{{$model->full_name_oz}}</td>
-                                <td>{{$model->interview_category->name_oz}}</td>
+                                <td>{{$model->category->name_oz}}</td>
                                 <td>{{$model->status == 1?'Active':'No Active'}}</td>
                                 <td>{{$model->created_at}}</td>
                                 <td>

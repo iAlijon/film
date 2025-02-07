@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Shaxs Kategoriyasi</h1>
+                    <h1>Kategoriyalar</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('person_category.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Person Category</li>
+                        <li class="breadcrumb-item"><a href="{{route('categories.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Category</li>
                     </ol>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('person_category.update',$model->id)}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('categories.update',$model->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="tab-content" id="custom-tabs-three-tabContent">
@@ -58,11 +58,18 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="">Type</label>
+                                    <input type="text" name="type" class="form-control" value="{{$model->type}}" placeholder="Type">
+                                    <small class="text-danger">{{$errors->first('type')}}</small>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="">Status</label>
                                     <select name="status" id="status" class="form-control">
                                         <option value="1" {{$model->status == 1?'selected':''}}>Active</option>
                                         <option value="0" {{$model->status == 0?'selected':''}}>No Active</option>
                                     </select>
+                                    <small class="text-danger">{{$errors->first('status')}}</small>
                                 </div>
                             </div>
                             {{----  uz  ----}}

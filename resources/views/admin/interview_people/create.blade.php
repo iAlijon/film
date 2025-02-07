@@ -51,13 +51,13 @@
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
                                     <label>Kategoriya Nomi</label>
-                                    <select name="interview_category_id" id="" class="form-control">
+                                    <select name="category_id" id="category_id" class="form-control">
                                         <option value="">---</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name_oz}}</option>
                                         @endforeach
                                     </select>
-                                    <small class="text-danger">{{$errors->first('interview_category_id')}}</small>
+                                    <small class="text-danger">{{$errors->first('category_id')}}</small>
                                 </div>
 
                                 <div class="form-group">

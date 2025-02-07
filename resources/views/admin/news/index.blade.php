@@ -87,6 +87,9 @@
        .table{
            text-align: center;
        }
+       label{
+           margin-bottom: 0;
+       }
         /*--------- END --------*/
 
     </style>
@@ -148,10 +151,10 @@
                                 </th>
                                 <th></th>
                                 <th>
-                                    <select name="new_category_id" class="form-control" id="new_category_id" onchange="this.form.submit()">
+                                    <select name="category_id" class="form-control" id="new_category_id" onchange="this.form.submit()">
                                         <option value="">----</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}" {{request('new_category_id') == $category->id ?'selected':''}}>{{$category->name_oz}}</option>
+                                            <option value="{{$category->id}}" {{request('category_id') == $category->id ?'selected':''}}>{{$category->name_oz}}</option>
                                         @endforeach
                                     </select>
                                 </th>
@@ -167,7 +170,7 @@
                                 <td class="text-center">{{$k + 1}}</td>
                                 <td>{{$model->name_oz}}</td>
                                 <td>{{$model->description_oz}}</td>
-                                <td>{{$model->new_category->name_oz}}</td>
+                                <td>{{$model->category->name_oz}}</td>
                                 <td class="text-center">
                                     <label class="switch">
                                         <input type="checkbox"

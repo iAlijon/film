@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PremiereRequest;
+use App\Models\PersonCategory;
 use App\Repositories\PremiereRepository;
 use Illuminate\Http\Request;
 
@@ -18,8 +19,9 @@ class PremiereController extends Controller
      */
     public function index()
     {
+        $categories = PersonCategory::where('status', true)->where('type', 'premiere')->get();
         $models = $this->repo->index($this->request);
-        return view('admin.premiere.index', compact('models'));
+        return view('admin.premiere.index', compact('models', 'categories'));
     }
 
     /**
@@ -29,7 +31,8 @@ class PremiereController extends Controller
      */
     public function create()
     {
-        return view('admin.premiere.create');
+        $categories = PersonCategory::where('status', true)->where('type', 'premiere')->get();
+        return view('admin.premiere.create', compact('categories'));
     }
 
     /**

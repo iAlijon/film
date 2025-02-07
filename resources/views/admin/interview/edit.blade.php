@@ -55,11 +55,11 @@
 
                                 <div class="form-group">
                                     <label for="">Kategoriya</label>
-                                    <select name="interview_category_id" id="interview_category_id"8
+                                    <select name="category_id" id="category_id"8
                                             class="form-control">
                                         <option value="">---</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}" {{$category->id == $model->interview_category_id?'selected':''}}>{{$category->name_oz}}</option>
+                                            <option value="{{$category->id}}" {{$category->id == $model->category_id?'selected':''}}>{{$category->name_oz}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -136,13 +136,13 @@
 @push('js')
     <script>
         $(document).ready(function () {
-            $('#interview_category_id').on('change', function () {
-                let interview_category_id = $(this).val();
+            $('#category_id').on('change', function () {
+                let category_id = $(this).val();
                 let interview_people_id = $('#interview_people_id')
                 $.ajax({
                     url: '{{ route("interview-status") }}',
                     type: 'GET',
-                    data: {category_id: interview_category_id},
+                    data: {category_id: category_id},
                     success: function (data) {
                         $('#interview_people_id').empty(); // Eski sub-kategoriyalarni o'chirish
                         $('#interview_people_id').append('<option>---</option>');

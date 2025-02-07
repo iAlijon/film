@@ -17,13 +17,13 @@ class InterviewPeoplesRepository extends BaseRepository
 
     public function index($request)
     {
-        if (isset($request->interview_category_id) && !empty($request->interview_category_id)) {
-            $this->model = $this->model->where('interview_category_id', $request->interview_category_id);
+        if (isset($request->category_id) && !empty($request->category_id)) {
+            $this->model = $this->model->where('category_id', $request->category_id);
         }
         if (isset($request->full_name_oz) && !empty($request->full_name_oz)) {
             $this->model = $this->model->where('full_name_oz', 'ilike', '%'.$request->full_name_oz.'%');
         }
-        return $this->model->with('interview_category')->orderBy('created_at', 'desc')->paginate($this->limit);
+        return $this->model->with('category')->orderBy('created_at', 'desc')->paginate($this->limit);
     }
 
     public function findById($id)
@@ -34,7 +34,7 @@ class InterviewPeoplesRepository extends BaseRepository
     public function create($data)
     {
         $model = $this->model->create([
-            'interview_category_id' => $data['interview_category_id'],
+            'category_id' => $data['category_id'],
             'full_name_oz' => $data['full_name_oz'],
             'full_name_uz' => $data['full_name_uz'],
             'images' => $this->uploads($data['image'], 'interview_people'),
@@ -56,7 +56,7 @@ class InterviewPeoplesRepository extends BaseRepository
             deleteImages($model->images, 'interview_people');
         }
         $model->update([
-            'interview_category_id' => $data['interview_category_id'],
+            'category_id' => $data['category_id'],
             'full_name_oz' => $data['full_name_oz'],
             'full_name_uz' => $data['full_name_uz'],
             'images' => $this->uploads($data['image'], 'interview_people'),

@@ -10,9 +10,9 @@ class InterviewPeoples extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function interview_category()
+    public function category()
     {
-        return $this->belongsTo(PeopleAssociatedWithTheFilmCategory::class);
+        return $this->belongsTo(PersonCategory::class);
     }
 
     public function interview()

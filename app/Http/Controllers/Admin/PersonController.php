@@ -21,7 +21,7 @@ class PersonController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        $categories = PersonCategory::where('status', true)->get();
+        $categories = PersonCategory::where('status', true)->where('type', 'person')->get();
         return view('admin.person.index', compact('models', 'categories'));
     }
 
@@ -32,7 +32,7 @@ class PersonController extends Controller
      */
     public function create()
     {
-        $categories = PersonCategory::where('status', true)->get();
+        $categories = PersonCategory::where('status', true)->where('type', 'person')->get();
         return view('admin.person.create', compact('categories'));
     }
 

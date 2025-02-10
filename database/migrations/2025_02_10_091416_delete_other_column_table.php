@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::drop('filmography_groups');
         Schema::drop('bookgroups');
         Schema::drop('people_associated_with_the_film_categories');
+        Schema::drop('news_categories');
+        Schema::drop('user_info_categories');
+        Schema::drop('user_categories');
     }
 
     /**

@@ -11,12 +11,12 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-//        Schema::drop('news_categories');
-//        Schema::drop('user_info_categories');
-        Schema::drop('user_categories');
-    }
+    // public function up()
+    // {
+    //     Schema::drop('news_categories');
+    //     Schema::drop('user_info_categories');
+    //     Schema::drop('user_categories');
+    // }
 
     /**
      * Reverse the migrations.

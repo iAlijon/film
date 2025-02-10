@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Badiiy Film O'zgartirish</h1>
+                    <h1>Filmografiya</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('artistic_film.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">artistic</li>
+                        <li class="breadcrumb-item"><a href="{{route('filmography.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Filmography</li>
                     </ol>
                 </div>
             </div>
@@ -44,12 +44,24 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('artistic_film.update', $model->id)}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('filmography.update', $model->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             {{----  oz  ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
+
+                                <div class="form-group required">
+                                    <label for="">Mazular</label>
+                                    <select name="category_id" id="" class="form-control">
+                                        <option value="">---</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}" {{$category->id == $model->category_id?'selected':''}}>
+                                                {{$category->name_oz}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
                                 <div class="form-group required">
                                     <label for="name_oz">Nomi</label>

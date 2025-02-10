@@ -10,8 +10,8 @@ class Books extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function bookgroup()
+    public function category()
     {
-        return $this->belongsTo(Bookgroup::class, 'book_category');
+        return $this->belongsTo(PersonCategory::class);
     }
 }

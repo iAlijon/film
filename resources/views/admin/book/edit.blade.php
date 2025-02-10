@@ -57,13 +57,12 @@
                             {{---- oz ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
-                                    <label for="Kategoriya">Kategoriya</label>
-                                    <select name="book_category" id="" class="form-control">
+                                    <label>Kategoriya</label>
+                                    <select name="category_id" id="" class="form-control">
                                         <option value="">----</option>
-                                        <option value="1" {{$model->book_category == 1?'selected':''}}>Badiiy kino</option>
-                                        <option value="2" {{$model->book_category == 2?'selected':''}}>Xorijiiy kino</option>
-                                        <option value="3" {{$model->book_category == 3?'selected':''}}>Animatsiya</option>
-                                        <option value="4" {{$model->book_category == 4?'selected':''}}>Desertatsiya</option>
+                                       @foreach($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->name_oz}}</option>
+                                        @endforeach
                                     </select>
                                     <small class="text-danger">{{$errors->first('book_category')}}</small>
                                 </div>

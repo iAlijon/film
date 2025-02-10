@@ -42,8 +42,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('cinema_fact.index')}}">home</a></li>
-                        <li class="breadcrumb-item active">cinema_fact</li>
+                        <li class="breadcrumb-item"><a href="{{route('cinema_fact.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Cinema Fact</li>
                     </ol>
                 </div>
             </div>
@@ -140,10 +140,10 @@
                             </tr>
                         @endforelse
                         </tbody>
-                        <div class="text-right">
-                            {{$models->links('vendor.pagination.bootstrap-5')}}
-                        </div>
                     </table>
+                    <div class="text-right mt-2">
+                        {{$models->links('vendor.pagination.bootstrap-5')}}
+                    </div>
                 </div>
             </div>
         </div>

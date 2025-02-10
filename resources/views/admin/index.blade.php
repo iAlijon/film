@@ -7,6 +7,7 @@
             display: inline-block;
             width: 50px;
             height: 24px;
+            vertical-align: text-top;
         }
 
         .switch input {
@@ -195,7 +196,7 @@
                                     <td>{{$k + 1}}</td>
                                     <td>{{$new->name_oz}}</td>
                                     <td>{{$new->description_oz}}</td>
-                                    <td>{{$new->new_category->name_oz}}</td>
+                                    <td>{{$new->category->name_oz}}</td>
                                     <td>
                                         <label class="switch">
                                             <input type="checkbox"

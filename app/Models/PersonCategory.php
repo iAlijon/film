@@ -35,4 +35,14 @@ class PersonCategory extends Model
     {
         return $this->hasOne(InterviewPeoples::class, 'category_id', 'id');
     }
+
+    public function filmography()
+    {
+        return $this->hasOne(Filmography::class, 'category_id', 'id');
+    }
+
+    public function book()
+    {
+        return $this->hasOne(Books::class, 'category_id', 'id');
+    }
 }

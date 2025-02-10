@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('portret_rejissors');
-        Schema::dropIfExists('portrait_actors');
-        Schema::dropIfExists('portrait_operators');
-        Schema::dropIfExists('portrait_composers');
-        Schema::dropIfExists('portrait_artists');
+        Schema::drop('filmography_groups');
+        Schema::drop('bookgroups');
+        Schema::drop('people_associated_with_the_film_categories');
     }
 
     /**

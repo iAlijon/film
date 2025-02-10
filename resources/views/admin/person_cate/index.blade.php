@@ -88,9 +88,9 @@
                         @endforelse
                         </tbody>
                     </table>
-                </div>
-                <div class="float-right">
-                    {{$models->links('vendor.pagination.bootstrap-5')}}
+                    <div class="float-right mt-2">
+                        {{$models->links('vendor.pagination.bootstrap-5')}}
+                    </div>
                 </div>
             </div>
         </div>

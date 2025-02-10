@@ -72,29 +72,11 @@
                                 Suxbat o'tkaziladigan odamlar
                             </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a href="{{route('interview_category.index')}}" class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
-                                Kategoriya
-                            </a>
-                        </li>
                     </ul>
                 </li>
-{{--                <li class="nav-item">--}}
-{{--                    <a href="#" class="nav-link">--}}
-{{--                        <i class="nav-icon fas fa-copy"></i>--}}
-{{--                        <p class="text">Shaxsiyatlar</p>--}}
-{{--                        <i class="right fas fa-angle-left"></i>--}}
-{{--                        <span class="badge badge-primary right"></span>--}}
-{{--                    </a>--}}
-{{--                    <ul class="nav nav-treeview">--}}
-{{--                        --}}
-{{--                    </ul>--}}
-{{--                </li>--}}
                 <li class="nav-item">
                     <a href="{{route('person.index')}}" class="nav-link">
-                        <i class="fa fa-users nav-icon"></i>
+                        <i class="far fa-circle"></i>
                         <p>Shaxsiyatlar</p>
                     </a>
                 </li>
@@ -113,26 +95,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p class="text">Filmografiya</p>
-                        <i class="right fas fa-angle-left"></i>
+                    <a href="{{route('filmography.index')}}" class="nav-link">
+                        <i class="far fa-circle"></i>
+                        <p>Filmografiya</p>
                         <span class="badge badge-primary right"></span>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('filmographygroup.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Filmografiya Mazulari</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('filmography.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Filmografiya</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('film_analysis.index')}}" class="nav-link">
@@ -143,33 +110,15 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>Kitoblar</p>
-                        <i class="right fas fa-angle-left"></i>
+                    <a href="{{route('book.index')}}" class="nav-link">
+                        <i class="far fa-circle"></i>
+                        <p>Kitob</p>
                         <span class="badge badge-primary right"></span>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('book.index')}}" class="nav-link">
-                                <i class="far fa-circle"></i>
-                                <p>Kitob</p>
-                                <span class="badge badge-primary right"></span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{route('bookgroup.index')}}" class="nav-link">
-                                <i class="far fa-circle"></i>
-                                <p>Kitoblar Mavzular</p>
-                                <span class="badge badge-primary right"></span>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('categories.index')}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-circle"></i>
                         <p>Kategoriyalar</p>
                     </a>
                 </li>

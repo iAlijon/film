@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('film_analyses', function (Blueprint $table) {
             $table->id();
-            $table->integer('analysis_category')->comment('1 => Milliy filmlar tahlili, 2 => Xorijiy filmlar tahlili');
+            $table->integer('category_id')->comment('1 => Milliy filmlar tahlili, 2 => Xorijiy filmlar tahlili');
             $table->string('name_oz');
             $table->string('name_uz');
             $table->string('name_ru')->nullable();
@@ -31,6 +31,8 @@ return new class extends Migration
             $table->string('images');
             $table->boolean('status')->default(true);
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

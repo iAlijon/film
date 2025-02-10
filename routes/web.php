@@ -19,17 +19,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
     Route::get('logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
     Route::resources([
         'news' => \App\Http\Controllers\Admin\NewsController::class,
-        'interview_category' => \App\Http\Controllers\Admin\InterviewCategoryController::class,
         'interview_peoples' => \App\Http\Controllers\Admin\InterviewPeoplesController::class,
         'interview' => \App\Http\Controllers\Admin\InterviewController::class,
         'categories' => \App\Http\Controllers\Admin\PersonCategoryController::class,
         'person' => \App\Http\Controllers\Admin\PersonController::class,
         'film_dictionary' => \App\Http\Controllers\Admin\FilmDictionaryController::class,
         'cinema_fact' => \App\Http\Controllers\Admin\CinemaFactController::class,
-        'filmographygroup' => \App\Http\Controllers\Admin\FilmographyGroupController::class,
         'filmography' => \App\Http\Controllers\Admin\FilmographyController::class,
         'film_analysis' => \App\Http\Controllers\Admin\MovieAnalysisController::class,
-        'bookgroup' => \App\Http\Controllers\Admin\BookCategoryController::class,
         'book' => \App\Http\Controllers\Admin\BooksController::class,
         'aphorism' => \App\Http\Controllers\Admin\AphorismController::class,
         'premiere' => \App\Http\Controllers\Admin\PremiereController::class,

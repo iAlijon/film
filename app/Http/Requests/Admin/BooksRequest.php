@@ -24,7 +24,7 @@ class BooksRequest extends FormRequest
     public function rules()
     {
         return [
-            'book_category' => 'required',
+            'category_id' => 'required|integer',
             'name_oz' => 'required',
             'name_uz' => 'required',
             'description_oz' => 'required',

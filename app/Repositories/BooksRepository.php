@@ -21,11 +21,11 @@ class BooksRepository extends BaseRepository
             $this->model = $this->model->where('name_oz', 'ilike', '%'.$request->name_oz.'%');
         }
 
-        if (isset($request->book_category) && !empty($request->book_category)){
-            $this->model = $this->model->where('book_category', $request->book_category);
+        if (isset($request->category_id) && !empty($request->category_id)){
+            $this->model = $this->model->where('category_id', $request->category_id);
         }
 
-        return $this->model->with('bookgroup')->orderBy('id', 'desc')->paginate($this->limit);
+        return $this->model->with('category')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
     public function edit($id)
@@ -45,7 +45,7 @@ class BooksRepository extends BaseRepository
              'images' => $this->uploads($data['image'], 'book'),
              'status' => $data['status'],
              'files' => $this->fileUploads($data['file'], 'book'),
-             'book_category' => $data['book_category']
+             'category_id' => $data['category_id']
          ]);
          if ($model)
          {
@@ -73,7 +73,7 @@ class BooksRepository extends BaseRepository
             'images' => $this->uploads($data['image'], 'book'),
             'status' => $data['status'],
             'files' => $this->fileUploads($data['file'], 'book'),
-            'book_category' => $data['book_category']
+            'category_id' => $data['category_id']
         ]);
 
         if ($model)

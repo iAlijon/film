@@ -50,7 +50,7 @@
                                 <button class="d-none" type="submit"></button>
                                 <th></th>
                                 <th>
-                                    <select name="book_category" id="book_category" onchange="this.form.submit()" class="form-control">
+                                    <select name="category_id" id="category_id" onchange="this.form.submit()" class="form-control">
                                         <option value="">----</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name_oz}}</option>
@@ -72,7 +72,7 @@
                         @forelse($models as $k => $model)
                         <tr>
                             <td>{{$k + 1}}</td>
-                            <td>{{$model->bookgroup->name_oz}}</td>
+                            <td>{{$model->category->name_oz}}</td>
                             <td>{{$model->name_oz}}</td>
                             <td>{{$model->description_oz}}</td>
                             <td>{{$model->status == 1?'Active':'No Active'}}</td>

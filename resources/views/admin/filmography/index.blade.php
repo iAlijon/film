@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Badiiy Filmlar</h1>
+                    <h1>Filmografiya</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -64,10 +64,10 @@
                         @forelse($models as $k=>$model)
                             <tr>
                                 <td>{{$k + 1}}</td>
-                                <td>{{$model->filmography->name_oz}}</td>
+                                <td>{{$model->category->name_oz}}</td>
                                 <td>{{$model->name_oz}}</td>
                                 <td>{{$model->description_oz}}</td>
-                                <td>{{$model->status==1?'Active':'No Active'}}</td>
+                                <td>{{$model->status == 1?'Active':'No Active'}}</td>
                                 <td>{{$model->created_at}}</td>
                                 <td>
                                     <div class="d-flex justify-content-center align-items-center">

@@ -60,8 +60,11 @@
                                     <label>Kategoriya</label>
                                     <select name="premiere_category" id="premiere_category" class="form-control">
                                         <option>----</option>
-                                        <option value="1" {{$model->premiere_category == 1?'selected':''}}>Milliy premyera</option>
-                                        <option value="2" {{$model->premiere_category == 2?'selected':''}}>Jaxon premyera</option>
+                                        @foreach($categories as $category)
+                                        <option value="{{$category->id}}" {{$model->category_id == $category->id?'selected':''}}>
+                                            {{$category->name_oz}}
+                                        </option>
+                                        @endforeach
                                     </select>
                                     <small class="text-danger">{{$errors->first('premiere_category')}}</small>
                                 </div>

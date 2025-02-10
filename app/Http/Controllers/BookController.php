@@ -6,7 +6,7 @@ use App\Models\Bookgroup;
 use App\Models\Books;
 use Illuminate\Http\Request;
 
-class BookCantroller extends Controller
+class BookController extends Controller
 {
     public function index(Request $request)
     {
@@ -22,8 +22,8 @@ class BookCantroller extends Controller
     {
         $lang = $request->header('lang', 'oz');
         $result = $request->all();
-        $params = Books::where('book_category', $result['category_id'])->where('status', true)
-            ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'book_category', 'created_at', 'updated_at')
+        $params = Books::where('category_id', $result['category_id'])->where('status', true)
+            ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'category_id', 'created_at', 'updated_at')
             ->orderBy('created_at', 'desc')
             ->paginate(6);
         if ($params) {
@@ -36,7 +36,7 @@ class BookCantroller extends Controller
     {
         $lang = $request->header('lang', 'oz');
         $params = Books::where('id', $id)
-            ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'book_category', 'created_at', 'updated_at')
+            ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'category_id', 'created_at', 'updated_at')
             ->first();
         if ($params) {
             if ($params->files) {

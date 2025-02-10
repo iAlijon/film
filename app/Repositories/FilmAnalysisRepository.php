@@ -21,8 +21,8 @@ class FilmAnalysisRepository extends BaseRepository
             $this->model = $this->model->where('name_oz', 'ilike', '%' . $request->name_oz . '%');
         }
 
-        if (isset($request->analysis_category_id) && !empty($request->analysis_category_id)) {
-           $this->model =  $this->model->where('analysis_category', $request->analysis_category_id);
+        if (isset($request->category_id) && !empty($request->category_id)) {
+           $this->model =  $this->model->where('category_id', $request->category_id);
         }
 
         return $this->model->orderBy('id', 'desc')->paginate($this->limit);
@@ -36,7 +36,7 @@ class FilmAnalysisRepository extends BaseRepository
     public function create($data)
     {
         $model = $this->model->create([
-            'analysis_category' => $data['analysis_category_id'],
+            'category_id' => $data['category_id'],
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
             'description_oz' => $data['description_oz'],
@@ -61,7 +61,7 @@ class FilmAnalysisRepository extends BaseRepository
             deleteImages($item->images, 'analysis');
         }
         $model = $item->update([
-            'analysis_category' => $data['analysis_category_id'],
+            'category_id' => $data['category_id'],
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
             'description_oz' => $data['description_oz'],

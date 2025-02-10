@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BooksRequest;
 use App\Models\Bookgroup;
+use App\Models\PersonCategory;
 use App\Repositories\BooksRepository;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class BooksController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        $categories = Bookgroup::all();
+        $categories = PersonCategory::where('status', true)->where('type', 'book')->get();
         return view('admin.book.index', compact('models','categories'));
     }
 
@@ -31,7 +32,7 @@ class BooksController extends Controller
      */
     public function create()
     {
-        $categories = Bookgroup::all();
+        $categories = PersonCategory::where('status', true)->where('type', 'book')->get();
         return view('admin.book.create', compact('categories'));
     }
 
@@ -73,7 +74,7 @@ class BooksController extends Controller
     public function edit($id)
     {
         $model = $this->repo->edit($id);
-        $categories = Bookgroup::all();
+        $categories = PersonCategory::where('status', true)->where('type', 'book')->get();
         return view('admin.book.edit', compact('model', 'categories'));
     }
 

@@ -8,16 +8,6 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function index(Request $request)
-    {
-        $lang = $request->header('lang', 'oz');
-        $params = Bookgroup::where('status', true)->select('id', 'name_' . $lang . ' as name')->orderBy('created_at', 'asc')->get();
-        if ($params) {
-            return response()->json(['success' => true, 'data' => $params, 'message' => 'ok']);
-        }
-        return response()->json(['success' => false, 'data' => '', 'message' => 'ok']);
-    }
-
     public function bookFilter(Request $request)
     {
         $lang = $request->header('lang', 'oz');

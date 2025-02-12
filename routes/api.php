@@ -23,7 +23,7 @@ Route::get('aphorism', [\App\Http\Controllers\AphorismController::class, 'index'
 
 // news
 Route::get('news', [\App\Http\Controllers\NewsController::class, 'main'])->name('news.main');
-Route::get('news_category_filter', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.index');
+Route::get('news_category_filter', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.api.index');
 Route::get('news_item/{id}', [\App\Http\Controllers\NewsController::class, 'newsItem'])->name('news.item');
 
 //premiere

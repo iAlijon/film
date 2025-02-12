@@ -18,6 +18,12 @@
     </section>
     <section class="content">
         <div class="col-11 ml-auto mr-auto">
+            @if(session()->has('error'))
+                <div class="alert alert-danger" id="close">
+                    {{session()->get('error')}}
+                    <p class="cancel mb-0">&times;</p>
+                </div>
+            @endif
             <div class="card card-outline card-info">
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">

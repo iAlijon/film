@@ -73,8 +73,9 @@ class PersonController extends Controller
      */
     public function edit($id)
     {
+        $categories = PersonCategory::where('status', true)->where('type', 'person')->get();
         $model = $this->repo->findById($id);
-        return view('admin.person.edit', compact('model'));
+        return view('admin.person.edit', compact('model', 'categories'));
     }
 
     /**

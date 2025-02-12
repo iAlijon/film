@@ -56,13 +56,6 @@
                     <p class="cancel mb-0">&times;</p>
                 </div>
             @endif
-            @if(session()->has('error'))
-                <div class="alert alert-danger" id="close">
-                    {{session()->get('error')}}
-                    <p class="cancel mb-0">&times;</p>
-                </div>
-            @endif
-
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Kino Fakt <i class="fa fa-users"></i></h3>

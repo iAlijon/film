@@ -19,6 +19,11 @@
     </section>
     <section class="content">
         <div class="col-11 mr-auto ml-auto">
+            @if(session()->has('success'))
+                <div class="alert alert-success" id="close">{{session()->get('success')}}
+                    <p class="cancel mb-0">&times;</p>
+                </div>
+            @endif
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Animatsiyali filmlar <i class="fas fa-users"></i></h3>

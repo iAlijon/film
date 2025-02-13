@@ -61,7 +61,6 @@ Route::get('book/{id}', [\App\Http\Controllers\BookController::class, 'show'])->
 Route::get('categories', [\App\Http\Controllers\CategoriesController::class, 'index'])->name('category');
 
 
-//Route::apiResource('news_api', \App\Http\Controllers\TestNewsController::class);
 
 
 

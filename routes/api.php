@@ -22,45 +22,46 @@ use Illuminate\Support\Facades\Route;
 Route::get('aphorism', [\App\Http\Controllers\AphorismController::class, 'index'])->name('aphorism');
 
 // news
-Route::get('news', [\App\Http\Controllers\NewsController::class, 'main'])->name('news.main');
-Route::get('news_category_filter', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.api.index');
-Route::get('news_item/{id}', [\App\Http\Controllers\NewsController::class, 'newsItem'])->name('news.item');
+Route::get('news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.api.index');
+Route::get('news/{id}', [\App\Http\Controllers\NewsController::class, 'show'])->name('news.api.show');
 
 //premiere
-Route::get('premiere', [\App\Http\Controllers\PremiereController::class, 'premiere'])->name('premiere');
-Route::get('premiere_item/{id}', [\App\Http\Controllers\PremiereController::class, 'premiereItem']);
+Route::get('premiere', [\App\Http\Controllers\PremiereController::class, 'index'])->name('premiere.api.index');
+Route::get('premiere/{id}', [\App\Http\Controllers\PremiereController::class, 'show'])->name('premiere.api.show');
 
 //analysis
-Route::get('movie_analysis', [\App\Http\Controllers\FilmAnalysisController::class, 'movieList'])->name('list');
-Route::get('movie_item/{item_id}', [\App\Http\Controllers\FilmAnalysisController::class,'movieItem'])->name('movie.item');
+Route::get('movie_analysis', [\App\Http\Controllers\FilmAnalysisController::class, 'index'])->name('movie_analysis.api.index');
+Route::get('movie_analysis/{id}', [\App\Http\Controllers\FilmAnalysisController::class,'show'])->name('movie_analysis.api.show');
 
 //interview
-Route::get('interview', [\App\Http\Controllers\InterviewController::class, 'interview'])->name('interview');
-Route::get('interview_item_filter/{id}', [\App\Http\Controllers\InterviewController::class, 'interviewItemFilter']);
+Route::get('interview', [\App\Http\Controllers\InterviewController::class, 'index'])->name('interview.api.index');
+Route::get('interview/{id}', [\App\Http\Controllers\InterviewController::class, 'show'])->name('interview.api.show');
 
 //person
-Route::get('persons', [\App\Http\Controllers\PersonDirectorController::class, 'personFilter'])->name('person.filter');
-Route::get('person/{id}', [\App\Http\Controllers\PersonDirectorController::class, 'person'])->name('person');
+Route::get('persons', [\App\Http\Controllers\PersonDirectorController::class, 'index'])->name('person.api.index');
+Route::get('person/{id}', [\App\Http\Controllers\PersonDirectorController::class, 'show'])->name('person.api.show');
 
 //film_dictionary
 Route::get('film_dictionary', [\App\Http\Controllers\DictionaryController::class, 'dictionary'])->name('dictionary');
-Route::get('dictionary_item_list', [\App\Http\Controllers\DictionaryController::class, 'dictionaryItemList'])->name('dictionary.item.list');
-Route::get('dictionary_item/{id}', [\App\Http\Controllers\DictionaryController::class, 'dictionaryItem'])->name('dictionary.item');
+Route::get('dictionary', [\App\Http\Controllers\DictionaryController::class, 'index'])->name('dictionary.api.index');
+Route::get('dictionary/{id}', [\App\Http\Controllers\DictionaryController::class, 'show'])->name('dictionary.api.show');
 
 //fact
-Route::get('cinema_fact', [\App\Http\Controllers\FilmFactController::class, 'index'])->name('cinema.fact');
+Route::get('cinema_fact', [\App\Http\Controllers\FilmFactController::class, 'index'])->name('cinema.api.index');
 
 //filmography
-Route::get('filmography', [\App\Http\Controllers\FilmographyController::class, 'filmography'])->name('filmography');
-Route::get('filmography_item/{id}', [\App\Http\Controllers\FilmographyController::class, 'filmographyItem'])->name('filmography.item');
+Route::get('filmography', [\App\Http\Controllers\FilmographyController::class, 'index'])->name('filmography.api.index');
+Route::get('filmography/{id}', [\App\Http\Controllers\FilmographyController::class, 'show'])->name('filmography.api.show');
 
 //book
-Route::get('book_filter', [\App\Http\Controllers\BookController::class, 'bookFilter'])->name('book.filter');
-Route::get('book_item/{id}', [\App\Http\Controllers\BookController::class, 'bookItem'])->name('book.item');
+Route::get('book', [\App\Http\Controllers\BookController::class, 'index'])->name('book.api.index');
+Route::get('book/{id}', [\App\Http\Controllers\BookController::class, 'show'])->name('book.api.show');
 
 //category
 Route::get('categories', [\App\Http\Controllers\CategoriesController::class, 'index'])->name('category');
 
+
+//Route::apiResource('news_api', \App\Http\Controllers\TestNewsController::class);
 
 
 

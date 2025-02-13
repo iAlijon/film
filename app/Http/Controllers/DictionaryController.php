@@ -36,10 +36,11 @@ class DictionaryController extends Controller
         return response()->json(['success' => true,'data' => $arr,'message' => 'ok']);
     }
 
-    public function dictionaryItemList(Request $request)
+    public function index(Request $request)
     {
         $lang = $request->header('lang', 'oz');
         $input = $request->all();
+        $per_page = $result['per_page']??6;
         if (isset($input['dictionary_id'])) {
             $result = FilmDictionaryCategory::where('dictionary_category_id', $input['dictionary_id'])->get();
             $arr = [];
@@ -47,14 +48,14 @@ class DictionaryController extends Controller
                 $params = FilmDictionary::where('id', $item['film_dictionary_id'])
                     ->select('id', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'created_at', 'updated_at')
                     ->orderBy('created_at', 'desc')
-                    ->paginate(10);
+                    ->paginate($per_page);
                 $arr[] = $params;
             }
         }else {
             $arr = FilmDictionary::query()->where('status', true)
                 ->select('id', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'created_at', 'updated_at')
                 ->orderBy('created_at', 'desc')
-                ->paginate(10);
+                ->paginate($per_page);
         }
         if ($arr != []) {
             return response()->json(['success' => true, 'data' => $arr, 'message' => 'ok']);
@@ -62,7 +63,7 @@ class DictionaryController extends Controller
         return response()->json(['success' => false, 'data' => $params, 'message' => 'ok']);
     }
 
-    public function dictionaryItem(Request $request,$id)
+    public function show(Request $request,$id)
     {
         $lang = $request->header('lang', 'oz');
         $model = FilmDictionary::where('id',$id)

@@ -8,32 +8,35 @@ use Illuminate\Http\Request;
 
 class InterviewController extends Controller
 {
-    public function interview(Request $request)
+    public function index(Request $request)
     {
         $lang = $request->header('lang', 'oz');
         $result = $request->all();
+        $per_page = $result['per_page']??6;
         if (isset($result['category_id']) && !empty($result['category_id']))
         {
             $data = Interview::where('category_id', $result['category_id'])
                 ->select('id', 'interview_people_id' ,'interview_'.$lang.' as interview', 'description_'.$lang.' as description', 'content_'.$lang.' as content','created_at')
                 ->with('people:id,images,full_name_'.$lang.' as full_name')
                 ->orderBy('created_at', 'desc')
-                ->paginate(4);
-            return response()->json(['success' => true, 'data' => $data, 'message'=>'ok']);
+                ->paginate($per_page);
         }else {
             $data = Interview::where('status', true)
                 ->select('id', 'interview_people_id' ,'interview_'.$lang.' as interview', 'description_'.$lang.' as description', 'content_'.$lang.' as content','created_at')
                 ->with('people:id,images,full_name_'.$lang.' as full_name')
                 ->orderBy('created_at', 'desc')
-                ->paginate(4);
+                ->paginate($per_page);
+        }
+        if ($data['items']) {
             return response()->json(['success' => true, 'data' => $data, 'message'=>'ok']);
         }
+        return response()->json(['success' => false, 'data' => '', 'message'=>'ok']);
 
     }
 
-    public function interviewItemFilter($id)
+    public function interviewItemFilter(Request $request,$id)
     {
-        $lang = \request()->header('lang', 'oz');
+        $lang = $request->header('lang', 'oz');
         $data = Interview::where('id', $id)
             ->select('id', 'interview_people_id' ,'interview_'.$lang.' as interview', 'description_'.$lang.' as description', 'content_'.$lang.' as content','created_at')
             ->with('people:id,images,full_name_'.$lang.' as full_name')

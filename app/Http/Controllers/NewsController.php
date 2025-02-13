@@ -7,36 +7,29 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function main(Request $request)
-    {
-        $lang = $request->header('lang', 'oz');
-        $news = News::where('status', true)->orderBy('id', 'desc')
-            ->select('id','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','category_id','created_at')->paginate(3);
-        if ($news) {
-            return response()->json(['success' => true, 'data' => $news, 'message' => 'ok']);
-        }
-        return response()->json(['success' => false, 'data' => '', 'message' => 'ok']);
-    }
-
     public function index(Request $request)
     {
         $lang = $request->header('lang', 'oz');
         $result = $request->all();
+        $per_page = $result['per_page']??6;
         if (isset($result['category_id']) && !empty($result['category_id'])) {
             $news = News::where('category_id', $result['category_id'])->where('status', true)
-                ->select('id','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','category_id','created_at')
+                ->select('id','category_id','image','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','created_at','status')
                 ->orderBy('created_at' ,'desc')
-                ->paginate(6);
+                ->paginate($per_page);
         }else {
             $news = News::where('status', true)
-                ->select('id','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','category_id','created_at')
+                ->select('id','category_id','image','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','created_at','status')
                 ->orderBy('created_at' ,'desc')
-                ->paginate(6);
+                ->paginate($per_page);
         }
-        return response()->json(['success' => true,'data' => $news, 'message' => 'ok']);
+        if ($news) {
+            return response()->json(['success' => true,'data' => $news, 'message' => 'ok']);
+        }
+        return response()->json(['success' => false,'data' => '', 'message' => 'ok']);
     }
 
-    public function newsItem($id)
+    public function show($id)
     {
         $lang = \request()->header('lang', 'oz');
         $new = News::where('id', $id)

@@ -86,13 +86,13 @@
 
                                         </div>
                                         <div id="fileInput" style="display: none">
-                                            <input type="file" class="form-control" name="images">
+                                            <input type="file" class="form-control" name="images" accept="image/jpeg,png,jpg">
                                             <p>
                                                 <a href="" id="cancelChangeImage">Bekor qilish</a>
                                             </p>
                                         </div>
                                     @else
-                                        <input type="file" class="form-control" name="images">
+                                        <input type="file" class="form-control" name="images" accept="image/jpeg,png,jpg">
                                         <small class="text-danger">{{$errors->first('images')}}</small>
                                     @endif
                                 </div>

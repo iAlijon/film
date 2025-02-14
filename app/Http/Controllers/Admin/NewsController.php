@@ -53,7 +53,7 @@ class NewsController extends Controller
         if ($modal)
         {
             $request->session()->flash('success', 'Success');
-            return redirect()->route('news.index');
+            return redirect()->route('news.show', $modal->id);
         }else
         {
             $request->session()->flash('error', 'Errors');
@@ -97,9 +97,12 @@ class NewsController extends Controller
     {
         $model = $this->repo->update($request->validated(), $id);
         if ($model){
+            $request->session()->flash('success', 'Success');
+            return redirect()->route('news.show', $model->id);
+        }else {
+            $request->session()->flash('error', 'Errors');
             return redirect()->route('news.index');
         }
-        return false;
     }
 
     /**

@@ -112,8 +112,8 @@
                                 <div class="form-group">
                                     <label>Status</label>
                                     <select name="status" class="form-control form-control-sm">
-                                        <option value="active" {{$model->status == 1?'selected':''}}>Active</option>
-                                        <option value="no_active" {{$model->status == 0?'selected':''}}>No Active</option>
+                                        <option value="1" {{$model->status == 1?'selected':''}}>Active</option>
+                                        <option value="0" {{$model->status == 0?'selected':''}}>No Active</option>
                                     </select>
                                 </div>
                             </div>

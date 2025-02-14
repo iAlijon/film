@@ -47,7 +47,7 @@ class NewsRepository extends BaseRepository
             'content_uz' => contentByDomDocment($data['content_uz'], 'news'),
             'content_ru' => $data['content_ru'] ?? null,
             'content_en' => $data['content_en'] ?? null,
-            'status' => $data['status'] == 'active' ? true : false,
+            'status' => $data['status'],
             'image' => $this->uploads($data['images'], 'news'),
             'category_id' => $data['category_id']
         ]);
@@ -79,7 +79,7 @@ class NewsRepository extends BaseRepository
             'content_uz' => contentByDomDocment($data['content_uz'], 'news'),
             'content_ru' => $data['content_ru'] ?? null,
             'content_en' => $data['content_en'] ?? null,
-            'status' => $data['status'] == 'active' ? true:false,
+            'status' => $data['status'],
             'image' => $this->uploads($data['images'], 'news'),
             'category_id' => $data['category_id']
         ]);

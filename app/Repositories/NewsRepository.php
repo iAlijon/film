@@ -62,6 +62,7 @@ class NewsRepository extends BaseRepository
     {
         $model = $this->model->find($id);
         if (isset($data['images'])){
+            deleteImages($model->images, 'news');
             $image = $this->uploads($data['images'], 'news');
         }else {
             $image = $model->image;

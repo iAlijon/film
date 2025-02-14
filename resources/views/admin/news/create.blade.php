@@ -76,7 +76,7 @@
 
                                 <div class="form-group">
                                     <label>Rasm</label>
-                                    <input type="file" class="form-control" name="images">
+                                    <input type="file" class="form-control" name="images" required>
                                     <small class="text-danger">{{$errors->first('images')}}</small>
                                 </div>
 

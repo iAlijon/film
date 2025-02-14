@@ -61,10 +61,10 @@ class NewsRepository extends BaseRepository
     public function update($data, $id)
     {
         $model = $this->model->find($id);
-        if ($model->image)
-        {
-            $path = explode('storage/news/', $model->image);
-            @unlink('storage/news/'.$path[1]);
+        if (isset($data['images'])){
+            $image = $this->uploads($data['images'], 'news');
+        }else {
+            $image = $model->image;
         }
         $model->update([
             'name_oz' => $data['name_oz'],
@@ -80,7 +80,7 @@ class NewsRepository extends BaseRepository
             'content_ru' => $data['content_ru'] ?? null,
             'content_en' => $data['content_en'] ?? null,
             'status' => $data['status'],
-            'image' => $this->uploads($data['images'], 'news'),
+            'image' => $image,
             'category_id' => $data['category_id']
         ]);
         if ($model) {

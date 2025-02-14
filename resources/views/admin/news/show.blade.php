@@ -102,7 +102,7 @@
                                     <td>{{$model->name_uz}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Rasm</th>
+                                    <th>Расм</th>
                                     <td><img src="{{getInFolder($model->image, 'news')}}" alt="error"></td>
                                 </tr>
                                 <tr>

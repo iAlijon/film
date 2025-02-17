@@ -22,7 +22,7 @@ class PremiereController extends Controller
                 ->select('id','category_id','images','created_at','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content')
                 ->paginate($per_page);
         }
-        if (!empty($data['items'])) {
+        if ($data) {
             return response()->json(['success' => true,'data' => $data,'message'=>'ok']);
         }
         return response()->json(['success' => false,'data' => '','message'=>'ok']);

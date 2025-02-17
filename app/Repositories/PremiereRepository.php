@@ -23,7 +23,7 @@ class PremiereRepository extends BaseRepository
         if (isset($request->category_id) && !empty($request->category_id)) {
             $this->model = $this->model->where('category_id', $request->category_id);
         }
-        return $this->model->orderBy('id', 'desc')->paginate($this->limit);
+        return $this->model->with('category')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
     public function findById($id)

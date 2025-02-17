@@ -12,16 +12,17 @@ class PersonDirectorController extends Controller
     {
         $lang = $request->header('lang', 'oz');
         $result = $request->all();
+        $per_page = $result['per_page']??6;
         if (isset($result['category_id']) && !empty($result['category_id'])) {
             $data = Person::where('category_id', $result['category_id'])
                 ->select('id', 'category_id', 'images', 'birth_date', 'full_name_' . $lang . ' as full_name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content','created_at')
                 ->orderBy('created_at', 'desc')
-                ->paginate($result['per_page']);
+                ->paginate($per_page);
         }else {
             $data = Person::where('status', true)
                 ->select('id', 'category_id', 'images', 'birth_date', 'full_name_' . $lang . ' as full_name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content','created_at')
                 ->orderBy('created_at', 'desc')
-                ->paginate($result['per_page']);
+                ->paginate($per_page);
         }
         if ($data) {
             return response()->json(['success' => true, 'data' => $data, 'message' => 'ok']);

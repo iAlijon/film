@@ -34,7 +34,7 @@ if(!function_exists('contentByDomDocment')) {
                     $file_path = $data;
                 }
                 $img->removeAttribute('src');
-                $img->setAttribute('src', config('app.url').'/public'.$file_path);
+                $img->setAttribute('src', $file_path);
             }
         }
 

@@ -51,16 +51,33 @@
                             {{----  oz  ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
+                                    <label for="">Menu</label>
+                                    <select name="menu_id" id="" class="form-control">
+                                        <option value="">---</option>
+                                        <option value="1">Yangiliklar</option>
+                                        <option value="2">Premyaerlar</option>
+                                        <option value="3">Kino Tahlil</option>
+                                        <option value="4">Suxbatlar</option>
+                                        <option value="5">Shaxsiyatlar</option>
+                                        <option value="6">Kino Lug'at</option>
+                                        <option value="7">Kino Fakt</option>
+                                        <option value="8">Filmografiya</option>
+                                        <option value="9">Kitoblar</option>
+                                    </select>
+                                    <small class="text-danger">{{$errors->first('menu_id')}}</small>
+                                </div>
+
+                                <div class="form-group">
                                     <label>Kategoriya Nomi</label>
                                     <input type="text" class="form-control" name="name_oz" placeholder="Name">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="">Type</label>
-                                    <input type="text" class="form-control" name="type" placeholder="Type">
-                                    <small class="text-danger">{{$errors->first('type')}}</small>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="">Type</label>--}}
+{{--                                    <input type="text" class="form-control" name="type" placeholder="Type">--}}
+{{--                                    <small class="text-danger">{{$errors->first('type')}}</small>--}}
+{{--                                </div>--}}
 
                                 <div class="form-group">
                                     <label for="">Status</label>

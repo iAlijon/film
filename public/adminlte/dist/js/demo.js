@@ -14,14 +14,14 @@
     if (window.___browserSync___ === undefined && Number(localStorage.getItem('AdminLTE:Demo:MessageShowed')) < Date.now()) {
       localStorage.setItem('AdminLTE:Demo:MessageShowed', (Date.now()) + (15 * 60 * 1000))
       // eslint-disable-next-line no-alert
-        chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-            if (message.action === "doSomething") {
-                someAsyncOperation()
-                    .then(result => sendResponse({ success: true, data: result }))
-                    .catch(error => sendResponse({ success: false, error: error.message }));
-                return true; // Asinxron javob uchun kanalni ochiq qoldiradi
-            }
-        });
+      //   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      //       if (message.action === "doSomething") {
+      //           someAsyncOperation()
+      //               .then(result => sendResponse({ success: true, data: result }))
+      //               .catch(error => sendResponse({ success: false, error: error.message }));
+      //           return true; // Asinxron javob uchun kanalni ochiq qoldiradi
+      //       }
+      //   });
 
         alert('You load AdminLTE\'s "demo.js", \nthis file is only created for testing purposes!')
     }

@@ -27,7 +27,7 @@ class PersonCategoryRequest extends FormRequest
             'name_oz' => 'required',
             'name_uz' => 'required',
             'status' => 'required|boolean',
-            'menu' => 'required|integer',
+            'menu' => 'required|string',
         ];
     }
 }

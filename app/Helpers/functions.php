@@ -21,7 +21,7 @@ if(!function_exists('contentByDomDocment')) {
                     list(, $data) = explode(',', $data);
                     $data = base64_decode($data);
 
-                    $directory =  "/uploads/".$folder."/images/" . date('Y') . "/" . date('m') . "/" . date('d')."/";
+                    $directory =  "/uploads/images/".$folder."/";
                     $path = public_path() . $directory;
                     if(!is_dir($path)) {
                         mkdir($path, 0755, true);
@@ -29,13 +29,12 @@ if(!function_exists('contentByDomDocment')) {
 
                     $file_name = Str::random(10) . $k . '.jpg';
                     $file_path = $directory . $file_name;
-
                     file_put_contents($path.$file_name, $data);
                 } else {
                     $file_path = $data;
                 }
                 $img->removeAttribute('src');
-                $img->setAttribute('src', $file_path);
+                $img->setAttribute('src', config('app.url').'/public'.$file_path);
             }
         }
 
@@ -68,7 +67,7 @@ if(!function_exists('contentByDomDocment')) {
                     }
 
                     $dataFile = base64_decode($dataFile);
-                    $directory =  "/uploads/news_content/files/" . date('Y') . "/" . date('m') . "/" . date('d')."/";
+                    $directory =  "/uploads/files/" . $folder ."/";
                     $path = public_path() . $directory;
                     if(!is_dir($path)) {
                         mkdir($path, 0755, true);

@@ -119,7 +119,7 @@
                                 </tr>
                                 <tr>
                                     <th>Тўлиқ маълумот</th>
-                                    <td>{!! $model->content_uz !!}</td>
+                                    <td> <?= $model->content_uz ?></td>
                                 </tr>
                                 </tbody>
                             </table>

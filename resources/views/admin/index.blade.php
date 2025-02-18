@@ -179,7 +179,7 @@
                         <h3 class="card-title">Yangiliklar <i class="fas fa-newspaper"></i></h3>
                     </div>
                     <div class="card-body">
-                        <table class="table table-hover table-bordered table-striped text-center">
+                        <table class="table table-hover table-bordered table-striped text-center table-sm">
                             <thead>
                                 <tr>
                                     <th>#</th>

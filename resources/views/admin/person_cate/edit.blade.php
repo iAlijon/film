@@ -53,17 +53,17 @@
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
                                     <label for="">Menu</label>
-                                    <select name="menu_id" id="" class="form-control">
+                                    <select name="menu" id="" class="form-control">
                                         <option value="">---</option>
-                                        <option value="1">Yangiliklar</option>
-                                        <option value="2">Premyaerlar</option>
-                                        <option value="3">Kino Tahlil</option>
-                                        <option value="4">Suxbatlar</option>
-                                        <option value="5">Shaxsiyatlar</option>
-                                        <option value="6">Kino Lug'at</option>
-                                        <option value="7">Kino Fakt</option>
-                                        <option value="8">Filmografiya</option>
-                                        <option value="9">Kitoblar</option>
+                                        <option value="news">Yangiliklar</option>
+                                        <option value="premiere">Premyaerlar</option>
+                                        <option value="analysis">Kino Tahlil</option>
+                                        <option value="interview">Suxbatlar</option>
+                                        <option value="person">Shaxsiyatlar</option>
+                                        <option value="dictionary">Kino Lug'at</option>
+                                        <option value="fact">Kino Fakt</option>
+                                        <option value="filmography">Filmografiya</option>
+                                        <option value="books">Kitoblar</option>
                                     </select>
                                     <small class="text-danger">{{$errors->first('menu_id')}}</small>
                                 </div>

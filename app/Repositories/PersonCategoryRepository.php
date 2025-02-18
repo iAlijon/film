@@ -30,7 +30,7 @@ class PersonCategoryRepository extends BaseRepository
         $model = $this->model->create([
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
-            'menu_id' => $data['menu_id'],
+            'type' => $data['menu_id'],
             'status' => $data['status'],
         ]);
         if ($model) {
@@ -45,7 +45,7 @@ class PersonCategoryRepository extends BaseRepository
         $model->update([
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
-            'menu_id' => $data['menu_id'],
+            'type' => $data['menu_id'],
             'status' => $data['status'],
         ]);
     }

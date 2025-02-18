@@ -15,9 +15,21 @@ class News extends Model
         return $this->belongsTo(PersonCategory::class);
     }
 
-    public function getContentAttribute($data)
+
+    public function getContentAttribute($value)
     {
         $appUrl = config('app.url') . '/public/';
-        return preg_replace('/<img src="(uploads\/[^"]+)"/i', '<img src="' . $appUrl . 'uploads/images/news"', $data);
+         $img = preg_replace_callback('/(<img\s+[^>]*src=")\/?(uploads\/[^"]+)(")/i', function ($matches) use ($appUrl) {
+             // $matches[1] – rasmning nisbiy yoʻli: "uploads/images/example.jpg"
+             return '<img src="' . $appUrl . $matches[2] . '"';
+         }, $value);
+         return $img;
     }
+
+//    public function getContentAttribute($data)
+//    {
+//        $appUrl = config('app.url') . '/public/';
+//        dd(preg_replace('/<img src="(uploads\/[^"]+)"/i', '<img src="' . $appUrl . 'uploads/images/news"', $data));
+//        return preg_replace('/<img src="(uploads\/[^"]+)"/i', '<img src="' . $appUrl . 'uploads/images/news"', $data);
+//    }
 }

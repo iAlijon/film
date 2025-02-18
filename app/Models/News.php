@@ -14,4 +14,10 @@ class News extends Model
     {
         return $this->belongsTo(PersonCategory::class);
     }
+
+    public function getContentAttribute($data)
+    {
+        $appUrl = config('app.url') . '/public/';
+        return preg_replace('/<img src="(uploads\/[^"]+)"/i', '<img src="' . $appUrl . 'uploads/images/news"', $data);
+    }
 }

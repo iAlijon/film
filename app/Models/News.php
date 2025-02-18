@@ -26,10 +26,4 @@ class News extends Model
          return $img;
     }
 
-//    public function getContentAttribute($data)
-//    {
-//        $appUrl = config('app.url') . '/public/';
-//        dd(preg_replace('/<img src="(uploads\/[^"]+)"/i', '<img src="' . $appUrl . 'uploads/images/news"', $data));
-//        return preg_replace('/<img src="(uploads\/[^"]+)"/i', '<img src="' . $appUrl . 'uploads/images/news"', $data);
-//    }
 }

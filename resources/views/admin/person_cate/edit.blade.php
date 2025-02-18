@@ -65,7 +65,7 @@
                                         <option value="filmography">Filmografiya</option>
                                         <option value="books">Kitoblar</option>
                                     </select>
-                                    <small class="text-danger">{{$errors->first('menu_id')}}</small>
+                                    <small class="text-danger">{{$errors->first('menu')}}</small>
                                 </div>
 
                                 <div class="form-group">

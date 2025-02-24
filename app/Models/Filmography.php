@@ -11,8 +11,8 @@ class Filmography extends Model
     protected $guarded = [];
 
 
-    public function filmography()
+    public function category()
     {
-        return $this->belongsTo(FilmographyGroup::class, 'filmography_group_id');
+        return $this->belongsTo(PersonCategory::class);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Filmography;
+use App\Models\PersonCategory;
 use App\Repositories\FilmographyRepository;
 use App\Traits\ImageUploads;
 use Illuminate\Http\Request;
@@ -32,12 +33,12 @@ class FilmographyController extends Controller
         }else {
             $model = Filmography::query();
         }
-        $categories = FilmographyGroup::where('status', true)->select('id','name_oz')->get();
-        $models = $model->select('id','filmography_group_id','name_oz','name_uz','description_oz','description_uz','content_oz','content_uz','images','created_at','updated_at')
-            ->with('filmography')
+        $categories = PersonCategory::where('status', true)->where('type', 'filmography')->select('id','name_oz')->get();
+        $models = $model->select('id','category_id','name_oz','name_uz','description_oz','description_uz','content_oz','content_uz','images','created_at','updated_at')
+            ->with('category')
             ->orderBy('created_at', 'desc')
             ->paginate(20);
-        return view('admin.filmography.index', compact('models', 'categories'));
+        return view('admin.filmography.index', compact('models','categories'));
     }
 
     /**
@@ -47,7 +48,7 @@ class FilmographyController extends Controller
      */
     public function create()
     {
-        $categories = FilmographyGroup::where('status', true)->select('id','name_oz')->get();
+        $categories = PersonCategory::where('status', true)->where('type', 'filmography')->select('id','name_oz')->get();
         return view('admin.filmography.create', compact('categories'));
     }
 
@@ -113,7 +114,7 @@ class FilmographyController extends Controller
      */
     public function edit($id)
     {
-        $categories = FilmographyGroup::where('status', true)->select('id','name_oz')->get();
+        $categories = PersonCategory::where('status', true)->where('type', 'filmography')->select('id','name_oz')->get();
         $model = Filmography::where('id', $id)->first();
         return view('admin.filmography.edit', compact('categories', 'model'));
     }

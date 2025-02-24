@@ -21,7 +21,7 @@ class BooksController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        $categories = PersonCategory::where('status', true)->where('type', 'book')->get();
+        $categories = PersonCategory::where('status', true)->where('type', 'books')->select('id','name_oz','type')->get();
         return view('admin.book.index', compact('models','categories'));
     }
 
@@ -32,7 +32,7 @@ class BooksController extends Controller
      */
     public function create()
     {
-        $categories = PersonCategory::where('status', true)->where('type', 'book')->get();
+        $categories = PersonCategory::where('status', true)->where('type', 'books')->select('id','name_oz','type')->get();
         return view('admin.book.create', compact('categories'));
     }
 
@@ -74,7 +74,7 @@ class BooksController extends Controller
     public function edit($id)
     {
         $model = $this->repo->edit($id);
-        $categories = PersonCategory::where('status', true)->where('type', 'book')->get();
+        $categories = PersonCategory::where('status', true)->where('type', 'books')->select('id','name_oz','type')->get();
         return view('admin.book.edit', compact('model', 'categories'));
     }
 

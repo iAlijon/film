@@ -19,7 +19,7 @@ class PremiereController extends Controller
      */
     public function index()
     {
-        $categories = PersonCategory::where('status', true)->where('type', 'premiere')->get();
+        $categories = PersonCategory::where('status', true)->where('type', 'premiere')->select('id','name_oz','type')->get();
         $models = $this->repo->index($this->request);
         return view('admin.premiere.index', compact('models', 'categories'));
     }
@@ -31,7 +31,7 @@ class PremiereController extends Controller
      */
     public function create()
     {
-        $categories = PersonCategory::where('status', true)->where('type', 'premiere')->get();
+        $categories = PersonCategory::where('status', true)->where('type', 'premiere')->select('id','name_oz','type')->get();
         return view('admin.premiere.create', compact('categories'));
     }
 
@@ -72,7 +72,7 @@ class PremiereController extends Controller
      */
     public function edit($id)
     {
-        $categories = PersonCategory::where('status', true)->where('type', 'premiere')->get();
+        $categories = PersonCategory::where('status', true)->where('type', 'premiere')->select('id','name_oz','type')->get();
         $model = $this->repo->findById($id);
         return view('admin.premiere.edit', compact('model', 'categories'));
     }

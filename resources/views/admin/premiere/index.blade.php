@@ -49,7 +49,7 @@
                                 <button class="d-none" type="submit"></button>
                                 <th></th>
                                 <th>
-                                    <input type="text" name="name_oz" class="form-control" value="{{request()->is('name_oz')}}">
+                                    <input type="text" name="name_oz" class="form-control" value="{{request()->is('name_oz')}}" placeholder="Premyeralar Nomi">
                                 </th>
                                 <th>
                                     <select name="category_id" id="" onchange="this.form.submit()" class="form-control">
@@ -60,7 +60,13 @@
                                     </select>
                                 </th>
                                 <th></th>
-                                <th></th>
+                                <th>
+                                    <select name="status" id="" onchange="this.form.submit()" class="form-control">
+                                        <option value="">---</option>
+                                        <option value="1" {{request('status') == 1?'selected':''}}>Active</option>
+                                        <option value="2" {{request('status') == 2?'selected':''}}>No Active</option>
+                                    </select>
+                                </th>
                                 <th></th>
                                 <th></th>
                             </form>

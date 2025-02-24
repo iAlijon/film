@@ -24,7 +24,7 @@ class NewsRepository extends BaseRepository
     {
         $filter = new NewFilter($request);
         $filter = $filter->filter();
-        return $filter->with('category')->orderBy('id', 'desc')->paginate($this->limit);
+        return $filter->with('category')->orderBy('id', 'desc')->paginate($this->limit)->appends($request->query());
     }
 
     public function findById($id)

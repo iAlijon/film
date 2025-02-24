@@ -81,15 +81,16 @@
                                 <th></th>
                                 <th>
                                     <input type="text" class="form-control" name="name_oz"
-                                           value="{{request('name_oz')}}">
+                                           value="{{request('name_oz')}}" placeholder="Fakt Nomi">
                                 </th>
                                 <th></th>
                                 <th>
-                                    {{--                                    <select name="status" id="" class="form-control" onchange="this.form.submit()">--}}
-                                    {{--                                        <option value="{{ request('status') === null ? 'selected' : '' }}">----</option>--}}
-                                    {{--                                        <option value="1" {{request('status') == 1?'selected':''}}>Active</option>--}}
-                                    {{--                                        <option value="0" {{ request('status') === 0 ? 'selected' : '' }}>No Active</option>--}}
-                                    {{--                                    </select>--}}
+                                    <select name="status" id="" class="form-control" onchange="this.form.submit()">
+                                        <option value="">---</option>
+                                        <option value="1" {{request('status') == 1?'selected':''}}>Active</option>
+                                        <option value="2" {{ request('status') == 2 ? 'selected' : '' }}>No Active
+                                        </option>
+                                    </select>
                                 </th>
                                 <th></th>
                                 <th></th>

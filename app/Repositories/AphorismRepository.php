@@ -22,7 +22,10 @@ class AphorismRepository extends BaseRepository
         {
             $this->model = $this->model->where('title', 'like', '%'.$request->title.'%');
         }
-        return $this->model->with('calendar')->orderBy('id', 'desc')->paginate($this->limit);
+        if (isset($request->status) && !empty($request->status)) {
+            $this->model = $this->model->where('status', $request->status);
+        }
+        return $this->model->with('calendar')->orderBy('id', 'desc')->paginate($this->limit)->appends($request->query());
     }
 
     public function findById($id)

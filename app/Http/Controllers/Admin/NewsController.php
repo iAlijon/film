@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\NewRequests;
 use App\Models\News;
-use App\Models\NewsCategory;
 use App\Models\PersonCategory;
 use Illuminate\Http\Request;
 use App\Repositories\NewsRepository;

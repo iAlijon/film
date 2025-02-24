@@ -147,14 +147,16 @@
                                 <th></th>
                                 <th class="w-25">
                                     <input type="text" class="form-control" name="name_oz"
-                                           value="{{request('name_oz')}}">
+                                           value="{{request('name_oz')}}" placeholder="Yangiliklar Nomi">
                                 </th>
                                 <th></th>
                                 <th>
                                     <select name="category_id" class="form-control" id="new_category_id" onchange="this.form.submit()">
                                         <option value="">----</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}" {{request('category_id') == $category->id ?'selected':''}}>{{$category->name_oz}}</option>
+                                            <option value="{{$category->id}}" {{request('category_id') == $category->id ?'selected':''}}>
+                                                {{$category->name_oz}}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </th>

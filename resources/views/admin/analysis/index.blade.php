@@ -50,7 +50,7 @@
                                 <button type="submit" class="d-none"></button>
                                 <th></th>
                                 <th>
-                                    <input type="text" name="name_oz" class="form-control" value="{{request('name_oz')}}">
+                                    <input type="text" name="name_oz" class="form-control" value="{{request('name_oz')}}" placeholder="Tahlil Nomi">
                                 </th>
                                 <th>
                                     <select name="analysis_category_id" id="" class="form-control" onchange="this.form.submit()">

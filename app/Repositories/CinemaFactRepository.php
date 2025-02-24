@@ -27,7 +27,8 @@ class CinemaFactRepository extends BaseRepository
             $this->model = $this->model->where('status', $request->status);
         }
 
-        return $this->model->orderBy('id', 'desc')->paginate($this->limit);
+
+        return $this->model->orderBy('id', 'desc')->paginate($this->limit)->appends($request->query());
     }
 
     public function findById($id)

@@ -56,7 +56,7 @@
                                     </select>
                                 </th>
                                 <th>
-                                    <input type="text" class="form-control" name="name_oz" value="{{request('name_oz')}}" placeholder="Search">
+                                    <input type="text" class="form-control" name="name_oz" value="{{request('name_oz')}}" placeholder="Filmografiya Nomi">
                                 </th>
                                 <th></th>
                                 <th></th>

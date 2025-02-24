@@ -65,7 +65,7 @@
                                     </select>
                                 </th>
                                 <th>
-                                    <input type="text" name="interview_oz" class="form-control" value="{{request('interview_oz')}}">
+                                    <input type="text" name="interview_oz" class="form-control" value="{{request('interview_oz')}}" placeholder="Suxbatlar Nomi">
                                 </th>
                                 <th></th>
                                 <th></th>

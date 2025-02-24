@@ -100,7 +100,7 @@
                                     <label for="status">Status</label>
                                     <select name="status" id="" class="form-control">
                                         <option value="1" selected>Active</option>
-                                        <option value="0">No Active</option>
+                                        <option value="2">No Active</option>
                                     </select>
                                 </div>
 

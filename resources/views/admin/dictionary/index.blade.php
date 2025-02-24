@@ -50,7 +50,7 @@
                                     <button type="submit" class="d-none"></button>
                                     <th></th>
                                     <th>
-                                        <input type="text" class="form-control" name="name_oz" value="{{request('name_oz')}}">
+                                        <input type="text" class="form-control" name="name_oz" value="{{request('name_oz')}}" placeholder="Lug'at Nomi">
                                     </th>
                                     <th></th>
                                     <th>
@@ -62,7 +62,13 @@
                                         </select>
                                     </th>
                                     <th></th>
-                                    <th></th>
+                                    <th>
+                                        <select name="status" id="" class="form-control" onchange="this.form.submit()">
+                                            <option value="">---</option>
+                                            <option value="1" {{request('status') == 1?'selected':''}}></option>
+                                            <option value="2" {{request('status') == 2?'selected':''}}></option>
+                                        </select>
+                                    </th>
                                     <th></th>
                                 </form>
                             </tr>

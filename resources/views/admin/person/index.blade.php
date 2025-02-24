@@ -57,7 +57,7 @@
                                     </select>
                                 </th>
                                 <th>
-                                    <input type="text" class="form-control" name="full_name_oz" value="{{request('full_name_oz')}}">
+                                    <input type="text" class="form-control" name="full_name_oz" value="{{request('full_name_oz')}}" placeholder="F.I.O">
                                 </th>
                                 <th></th>
                                 <th></th>

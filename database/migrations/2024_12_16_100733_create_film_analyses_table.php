@@ -29,7 +29,7 @@ return new class extends Migration
             $table->text('content_ru')->nullable();
             $table->text('content_en')->nullable();
             $table->string('images');
-            $table->boolean('status')->default(true);
+            $table->integer('status')->default(1);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

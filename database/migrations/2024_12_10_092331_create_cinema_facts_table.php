@@ -28,7 +28,7 @@ return new class extends Migration
             $table->text('content_uz');
             $table->text('content_ru')->nullable();
             $table->text('content_en')->nullable();
-            $table->boolean('status')->default(true);
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->mediumText('description_uz');
             $table->mediumText('description_ru')->nullable();
             $table->mediumText('description_en')->nullable();
-            $table->boolean('status')->default(true);
+            $table->integer('status')->default(1);
             $table->text('content_oz');
             $table->text('content_uz');
             $table->text('content_ru')->nullable();

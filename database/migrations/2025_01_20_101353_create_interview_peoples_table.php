@@ -25,7 +25,7 @@ return new class extends Migration
             $table->longText('description_uz');
             $table->longText('description_ru')->nullable();
             $table->longText('description_en')->nullable();
-            $table->boolean('status')->default(true);
+            $table->integer('status')->default(1);
             $table->timestamps();
 
 

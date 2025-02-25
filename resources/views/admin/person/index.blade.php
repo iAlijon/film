@@ -79,7 +79,7 @@
                                 <td>{{$item->category->name_oz}}</td>
                                 <td>{{$item->full_name_oz}}</td>
                                 <td>{{$item->description_oz}}</td>
-                                <td>{{$item->status == true?'Active':'No Active'}}</td>
+                                <td>{{$item->status == 1?'Active':'No Active'}}</td>
                                 <td>{{$item->created_at->format('d-m-Y')}}</td>
                                 <td>
                                     <div class="d-flex align-items-center justify-content-center">

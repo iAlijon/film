@@ -50,8 +50,9 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('person.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('person.update', $model->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             {{----  oz  ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">

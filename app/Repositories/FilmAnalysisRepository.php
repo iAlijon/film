@@ -20,12 +20,14 @@ class FilmAnalysisRepository extends BaseRepository
         if (isset($request->name_oz) && !empty($request->name_oz)) {
             $this->model = $this->model->where('name_oz', 'ilike', '%' . $request->name_oz . '%');
         }
-
         if (isset($request->category_id) && !empty($request->category_id)) {
            $this->model =  $this->model->where('category_id', $request->category_id);
         }
+        if (isset($request->status) && !empty($request->status)) {
+            $this->model = $this->model->where('status', $request->status);
+        }
 
-        return $this->model->orderBy('id', 'desc')->paginate($this->limit);
+        return $this->model->orderBy('id', 'desc')->paginate($this->limit)->appends($request->query());
     }
 
     public function findById($id)

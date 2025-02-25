@@ -23,7 +23,10 @@ class InterviewPeoplesRepository extends BaseRepository
         if (isset($request->full_name_oz) && !empty($request->full_name_oz)) {
             $this->model = $this->model->where('full_name_oz', 'ilike', '%'.$request->full_name_oz.'%');
         }
-        return $this->model->with('category')->orderBy('created_at', 'desc')->paginate($this->limit);
+        if (isset($request->status) && !empty($request->status)) {
+            $this->model = $this->model->where('status', $request->status);
+        }
+        return $this->model->with('category')->orderBy('created_at', 'desc')->paginate($this->limit)->appends($request->query());
     }
 
     public function findById($id)

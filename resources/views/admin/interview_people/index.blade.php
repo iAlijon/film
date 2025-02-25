@@ -51,7 +51,7 @@
                                 <button class="d-none" type="submit"></button>
                                 <th></th>
                                 <th>
-                                    <input type="text" class="form-control" value="{{request()->is('full_name_oz')}}" name="full_name_oz">
+                                    <input type="text" class="form-control" value="{{request()->is('full_name_oz')}}" name="full_name_oz" placeholder="F.I.O">
                                 </th>
                                 <th>
                                     <select class="form-control" name="category_id" id="" onchange="this.form.submit()">

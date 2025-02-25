@@ -60,7 +60,7 @@
 
                                 <div class="form-group">
                                     <label for="">Kategoriya</label>
-                                    <select name="category_id" id="category_id"8
+                                    <select name="category_id" id="category_id"
                                             class="form-control">
                                         <option value="">---</option>
                                         @foreach($categories as $category)
@@ -145,6 +145,7 @@
         $(document).ready(function () {
             $('#category_id').on('change', function () {
                 let category_id = $(this).val();
+                console.log(category_id);
                 let interview_people_id = $('#interview_people_id')
                 $.ajax({
                     url: '{{ route("interview-status") }}',

@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
     ]);
     Route::post('/new-status', [\App\Http\Controllers\Admin\NewsController::class, 'newStatus'])->name('new-status');
     Route::get('/book/download/{id}', [\App\Http\Controllers\Admin\BooksController::class, 'download'])->name('download');
-    Route::get('/interview-status', [\App\Http\Controllers\Admin\InterViewController::class, 'interviewStatus'])->name('interview-status');
+    Route::get('/interview-status', [\App\Http\Controllers\Admin\InterviewController::class, 'interviewStatus'])->name('interview-status');
 });
 
 

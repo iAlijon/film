@@ -38,7 +38,7 @@ class NewRequests extends FormRequest
             'content_en' => 'nullable',
             'images' => 'nullable|image|mimes:png,jpeg,jpg|max:2048',
             'category_id' => 'required|integer',
-            'status' => 'required'
+            'status' => 'required|integer',
         ];
     }
 }

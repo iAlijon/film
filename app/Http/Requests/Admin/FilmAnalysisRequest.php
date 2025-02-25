@@ -31,7 +31,7 @@ class FilmAnalysisRequest extends FormRequest
             'description_uz' => 'required',
             'content_oz' => 'required',
             'content_uz' => 'required',
-            'status' => 'required|boolean',
+            'status' => 'required|integer',
             'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }

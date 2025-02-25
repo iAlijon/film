@@ -29,7 +29,7 @@ class InterviewPeopleRequest extends FormRequest
             'full_name_uz' => 'required',
             'description_oz' => 'required',
             'description_uz' => 'required',
-            'status' => 'required|boolean',
+            'status' => 'required|integer',
             'image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ];
     }

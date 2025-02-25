@@ -36,7 +36,7 @@ class CinemaFactRequest extends FormRequest
             'content_uz' => 'required',
             'content_ru' => 'nullable',
             'content_en' => 'nullable',
-            'status' => 'required|boolean',
+            'status' => 'required|integer',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
         ];
     }

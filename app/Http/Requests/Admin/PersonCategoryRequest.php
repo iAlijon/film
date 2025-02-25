@@ -26,7 +26,7 @@ class PersonCategoryRequest extends FormRequest
         return [
             'name_oz' => 'required',
             'name_uz' => 'required',
-            'status' => 'required|boolean',
+            'status' => 'required|integer',
             'menu' => 'required|string',
         ];
     }

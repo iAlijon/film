@@ -31,7 +31,7 @@ class PremiereRequest extends FormRequest
             'content_oz' => 'required',
             'content_uz' => 'required',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-            'status' => 'required|boolean',
+            'status' => 'required|integer',
             'category_id' => 'required'
         ];
     }

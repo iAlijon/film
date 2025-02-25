@@ -32,7 +32,7 @@ class InterviewRequest extends FormRequest
             'description_uz' => 'required',
             'content_oz' => 'required',
             'content_uz' => 'required',
-            'status' => 'required|boolean',
+            'status' => 'required|integer',
         ];
     }
 }

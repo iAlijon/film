@@ -30,7 +30,7 @@ class AphorismRequest extends FormRequest
             'description_uz' => 'required',
             'calendar.*.description_oz' => 'required',
             'calendar.*.description_uz' => 'required',
-            'status' => 'required|boolean',
+            'status' => 'required|integer',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
         ];
     }

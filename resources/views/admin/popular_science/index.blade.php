@@ -51,7 +51,13 @@
                                     <input type="text" name="name_oz" class="form-control">
                                 </th>
                                 <th></th>
-                                <th></th>
+                                <th>
+                                    <select name="status" id="" class="form-control" onchange="this.form.submit()">
+                                        <option value="">---</option>
+                                        <option value="1" {{request('status') == 1?'selected':''}}></option>
+                                        <option value="2" {{request('status') == 2?'selected':''}}></option>
+                                    </select>
+                                </th>
                                 <th></th>
                                 <th></th>
                             </form>

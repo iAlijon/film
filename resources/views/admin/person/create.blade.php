@@ -102,7 +102,7 @@
                                     <select name="status" id="status" class="form-control">
                                         <option value="">----</option>
                                         <option value="1" selected>Active</option>
-                                        <option value="0">No Active</option>
+                                        <option value="2">No Active</option>
                                     </select>
                                     <small class="text-danger">{{$errors->first('status')}}</small>
                                 </div>

@@ -78,7 +78,7 @@
                                     <label for="">Status</label>
                                     <select name="status" id="status" class="form-control">
                                         <option value="1" {{$model->status == 1?'selected':''}}>Active</option>
-                                        <option value="0" {{$model->status == 0?'selected':''}}>No Active</option>
+                                        <option value="2" {{$model->status == 2?'selected':''}}>No Active</option>
                                     </select>
                                     <small class="text-danger">{{$errors->first('status')}}</small>
                                 </div>

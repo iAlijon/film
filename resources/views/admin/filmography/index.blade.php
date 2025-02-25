@@ -59,7 +59,13 @@
                                     <input type="text" class="form-control" name="name_oz" value="{{request('name_oz')}}" placeholder="Filmografiya Nomi">
                                 </th>
                                 <th></th>
-                                <th></th>
+                                <th>
+                                    <select name="status" id="" class="form-control" onchange="this.form.submit()">
+                                        <option value="">---</option>
+                                        <option value="1" {{request('status') == 1?'selected':''}}>Active</option>
+                                        <option value="2" {{request('status') == 2?'selected':''}}>No Active</option>
+                                    </select>
+                                </th>
                                 <th></th>
                                 <th></th>
                             </form>

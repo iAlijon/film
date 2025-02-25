@@ -74,7 +74,7 @@ class InterviewPeoplesController extends Controller
      */
     public function edit($id)
     {
-        $categories = PersonCategory::query()->where('status', true)->where('type', 'interview')->get();
+        $categories = PersonCategory::query()->where('status', true)->where('type', 'interview')->select('id','name_oz','type')->get();
         $model = $this->repo->findById($id);
         return view('admin.interview_people.edit', compact('model','categories'));
     }

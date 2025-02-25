@@ -61,7 +61,7 @@
                                     <select name="category_id" id="category_id" class="form-control">
                                         <option value="">---</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}" {{$model->interview_category_id == $category->id?'selected':''}}>{{$category->name_oz}}</option>
+                                            <option value="{{$category->id}}" {{$model->category_id == $category->id?'selected':''}}>{{$category->name_oz}}</option>
                                         @endforeach
                                     </select>
                                     <small class="text-danger">{{$errors->first('category_id')}}</small>

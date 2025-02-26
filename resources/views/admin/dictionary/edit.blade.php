@@ -67,14 +67,14 @@
                                             @foreach($model->film_dictionary_category as $item)
                                                 @foreach($dictionaries as $dictionary)
                                                     <option value="{{$dictionary->id}}" {{$dictionary->id == $item->dictionary_category_id?'selected':''}}>
-                                                        {{json_decode($dictionary->oz)->upper}}
+                                                        {{$dictionary->name_oz['upper']}}
                                                     </option>
                                                 @endforeach
                                             @endforeach
                                         @else
                                             @foreach($dictionaries as $dictionary)
                                                 <option value="{{$dictionary->id}}">
-                                                    {{json_decode($dictionary->oz)->upper}}
+                                                    {{$dictionary->name_oz['upper']}}
                                                 </option>
                                             @endforeach
                                         @endif
@@ -131,14 +131,14 @@
                                         @foreach($model->film_dictionary_category as $item)
                                                 @foreach($dictionaries as $dictionary)
                                                     <option value="{{$dictionary->id}}" {{$dictionary->id == $item->dictionary_category_id?'selected':''}}>
-                                                        {{json_decode($dictionary->ru)->upper}}
+                                                        {{json_decode($dictionary->name_ru)->upper}}
                                                     </option>
                                                 @endforeach
                                         @endforeach
                                         @else
                                             @foreach($dictionaries as $dictionary)
                                                 <option value="{{$dictionary->id}}">
-                                                    {{json_decode($dictionary->ru)->upper}}
+                                                    {{json_decode($dictionary->name_ru)->upper}}
                                                 </option>
                                             @endforeach
                                         @endif

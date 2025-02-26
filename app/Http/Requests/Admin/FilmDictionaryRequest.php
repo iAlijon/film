@@ -56,7 +56,7 @@ class FilmDictionaryRequest extends FormRequest
                 'content_ru' => 'nullable',
                 'content_en' => 'nullable',
                 'image' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
-                'status' => 'required|boolean',
+                'status' => 'required|integer',
                 'dictionary_id' => 'required|array'
             ];
         }

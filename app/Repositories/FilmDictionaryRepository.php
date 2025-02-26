@@ -103,7 +103,7 @@ class FilmDictionaryRepository extends BaseRepository
         ]);
         $dictionaries = array_unique(array_filter($data['dictionary_id']));
         $results = FilmDictionaryCategory::where('film_dictionary_id', $model->id)->get();
-        if (!empty($result))
+        if (!empty($results))
         {
 
             foreach ($results as $result)

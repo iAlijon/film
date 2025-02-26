@@ -118,7 +118,7 @@
             @if(session()->has('success'))
                 <div class="alert alert-success position-relative">
                     {{session()->get('success')}}
-                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                    <p class="cancel mb-0">&times;</p>
                 </div>
             @endif
             <div class="card card-info">

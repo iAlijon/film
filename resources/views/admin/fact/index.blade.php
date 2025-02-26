@@ -1,27 +1,5 @@
 @extends('admin.layouts.admin')
 
-@push('css')
-    <style>
-        .alert {
-            position: relative;
-        }
-
-        .alert-success {
-            color: #155724 !important;
-            background-color: #d4edda !important;
-            border-color: #c3e6cb !important;
-        }
-
-        .cancel {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            cursor: pointer;
-            font-size: 20px;
-        }
-    </style>
-@endpush
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
@@ -41,7 +19,8 @@
     <section class="content">
         <div class="col-11 ml-auto mr-auto">
             @if(session()->has('success'))
-                <div class="alert alert-success" id="close">{{session()->get('success')}}
+                <div class="alert alert-success position-relative">
+                    {{session()->get('success')}}
                     <p class="cancel mb-0">&times;</p>
                 </div>
             @endif

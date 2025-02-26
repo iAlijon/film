@@ -19,7 +19,8 @@
     <section class="content">
         <div class="col-11 ml-auto mr-auto">
             @if(session()->has('success'))
-                <div class="alert alert-success" id="close">{{session()->get('success')}}
+                <div class="alert alert-success position-relative">
+                    {{session()->get('success')}}
                     <p class="cancel mb-0">&times;</p>
                 </div>
             @endif

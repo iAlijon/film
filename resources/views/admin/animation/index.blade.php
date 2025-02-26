@@ -20,7 +20,8 @@
     <section class="content">
         <div class="col-11 mr-auto ml-auto">
             @if(session()->has('success'))
-                <div class="alert alert-success" id="close">{{session()->get('success')}}
+                <div class="alert alert-success position-relative">
+                    {{session()->get('success')}}
                     <p class="cancel mb-0">&times;</p>
                 </div>
             @endif

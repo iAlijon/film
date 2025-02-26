@@ -49,13 +49,13 @@
                                 <button class="d-none" type="submit"></button>
                                 <th></th>
                                 <th>
-                                    <input type="text" name="name_oz" class="form-control" value="{{request()->is('name_oz')}}" placeholder="Premyeralar Nomi">
+                                    <input type="text" name="name_oz" class="form-control" value="{{request('name_oz')}}" placeholder="Premyeralar Nomi">
                                 </th>
                                 <th>
                                     <select name="category_id" id="" onchange="this.form.submit()" class="form-control">
                                         <option value="">---</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->name_oz}}</option>
+                                            <option value="{{$category->id}}" {{request('category_id') == $category->id?'selected':'' }}>{{$category->name_oz}}</option>
                                         @endforeach
                                     </select>
                                 </th>

@@ -1,7 +1,21 @@
 @extends('admin.layouts.admin')
 
 @push('css')
-
+    <style>
+        .alert-danger {
+            color: #721c24 !important;
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+        }
+        .cancel {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            font-size: 20px;
+        }
+    </style>
 @endpush
 
 @section('content')

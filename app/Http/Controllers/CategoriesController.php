@@ -10,7 +10,7 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         $lang = $request->header('lang', 'oz');
-        $categories = PersonCategory::where('status', true)
+        $categories = PersonCategory::where('status', 1)
             ->select('id','name_'.$lang.' as name','type')
             ->get();
         return response()->json(['success' => true, 'data' => $categories, 'message' => 'ok']);

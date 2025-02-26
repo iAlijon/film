@@ -14,12 +14,12 @@ class FilmographyController extends Controller
         $result = $request->all();
         $per_page = $result['per_page']??6;
         if (isset($result['category_id']) && !empty($result['category_id'])) {
-            $params = Filmography::where('category_id', $result['category_id'])->where('status', true)
+            $params = Filmography::where('category_id', $result['category_id'])->where('status', 1)
                 ->select('id','images','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','created_at','updated_at')
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);
         }else {
-            $params = Filmography::where('status', true)
+            $params = Filmography::where('status', 1)
                 ->select('id','images','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','created_at','updated_at')
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);

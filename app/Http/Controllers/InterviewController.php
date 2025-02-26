@@ -21,7 +21,7 @@ class InterviewController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);
         }else {
-            $data = Interview::where('status', true)
+            $data = Interview::where('status', 1)
                 ->select('id', 'interview_people_id' ,'interview_'.$lang.' as interview', 'description_'.$lang.' as description', 'content_'.$lang.' as content','created_at')
                 ->with('people:id,images,full_name_'.$lang.' as full_name')
                 ->orderBy('created_at', 'desc')

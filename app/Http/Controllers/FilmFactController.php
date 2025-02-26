@@ -10,7 +10,7 @@ class FilmFactController extends Controller
     public function index(Request $request)
     {
         $lang = $request->header('lang', 'oz');
-        $models = CinemaFact::where('status', true)
+        $models = CinemaFact::where('status', 1)
             ->select('id','images','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','created_at','updated_at')
             ->orderBy('created_at','desc')
             ->paginate(2);

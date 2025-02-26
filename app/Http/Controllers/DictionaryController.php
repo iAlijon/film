@@ -52,7 +52,7 @@ class DictionaryController extends Controller
                 $arr[] = $params;
             }
         }else {
-            $arr = FilmDictionary::query()->where('status', true)
+            $arr = FilmDictionary::query()->where('status', 1)
                 ->select('id', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'created_at', 'updated_at')
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);

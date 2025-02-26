@@ -19,7 +19,7 @@ class PersonDirectorController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);
         }else {
-            $data = Person::where('status', true)
+            $data = Person::where('status', 1)
                 ->select('id', 'category_id', 'images', 'birth_date', 'full_name_' . $lang . ' as full_name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content','created_at')
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);

@@ -13,12 +13,12 @@ class PremiereController extends Controller
         $result = $request->all();
         $per_page = $result['per_page']??6;
         if (isset($result['category_id']) && !empty($result['category_id'])) {
-            $data = Premiere::where('category_id', $result['category_id'])->where('status', true)
+            $data = Premiere::where('category_id', $result['category_id'])->where('status', 1)
                 ->orderBy('id', 'desc')
                 ->select('id','category_id','images','created_at','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content')
                 ->paginate($per_page);
         }else{
-            $data = Premiere::where('status', true)->orderBy('id', 'desc')
+            $data = Premiere::where('status', 1)->orderBy('id', 'desc')
                 ->select('id','category_id','images','created_at','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content')
                 ->paginate($per_page);
         }

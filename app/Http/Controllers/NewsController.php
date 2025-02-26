@@ -13,12 +13,12 @@ class NewsController extends Controller
         $result = $request->all();
         $per_page = $result['per_page']??6;
         if (isset($result['category_id']) && !empty($result['category_id'])) {
-            $news = News::where('category_id', $result['category_id'])->where('status', true)
+            $news = News::where('category_id', $result['category_id'])->where('status', 1)
                 ->select('id','category_id','image','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','created_at','status')
                 ->orderBy('created_at' ,'desc')
                 ->paginate($per_page);
         }else {
-            $news = News::where('status', true)
+            $news = News::where('status', 1)
                 ->select('id','category_id','image','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','created_at','status')
                 ->orderBy('created_at' ,'desc')
                 ->paginate($per_page);

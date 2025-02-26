@@ -18,7 +18,7 @@ class FilmAnalysisController extends Controller
                 ->select('id','category_id','name_'.$lang.' as name','description_'.$lang.' as description','images','created_at','updated_at')
                 ->paginate($per_page);
         }else {
-            $items = FilmAnalysis::where('status', true)
+            $items = FilmAnalysis::where('status', 1)
                 ->orderBy('created_at', 'desc')
                 ->select('id','category_id','name_'.$lang.' as name','description_'.$lang.' as description','images','created_at','updated_at')
                 ->paginate($per_page);

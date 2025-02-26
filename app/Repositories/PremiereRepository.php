@@ -53,8 +53,13 @@ class PremiereRepository extends BaseRepository
     public function update($data, $id)
     {
         $model = $this->findById($id);
-        if ($model->images) {
-            deleteImages($model->images, 'premiere');
+        if (isset($data['image']) && !empty($data['image'])) {
+            if ($model->images) {
+                deleteImages($model->images, 'premiere');
+            }
+            $images = $this->uploads($data['image'], 'premiere');
+        }else {
+            $images = $model->images;
         }
         $model->update([
             'category_id' => $data['category_id'],
@@ -64,7 +69,7 @@ class PremiereRepository extends BaseRepository
             'description_uz' => $data['description_uz'],
             'content_oz' => contentByDomDocment($data['content_oz'], 'premiere'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'premiere'),
-            'images' => $this->uploads($data['image'], 'premiere'),
+            'images' => $images,
             'status' => $data['status']
         ]);
         return $model;

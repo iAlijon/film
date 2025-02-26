@@ -58,9 +58,14 @@ class FilmAnalysisRepository extends BaseRepository
     public function update($data, $id)
     {
         $item = $this->model->find($id);
-        if ($item->images)
-        {
-            deleteImages($item->images, 'analysis');
+        if (isset($data['image']) && !empty($data['image'])) {
+            if ($item->images)
+            {
+                deleteImages($item->images, 'analysis');
+            }
+            $images = $this->uploads($data['image'], 'analysis');
+        }else {
+            $images = $item->images;
         }
         $model = $item->update([
             'category_id' => $data['category_id'],
@@ -71,7 +76,7 @@ class FilmAnalysisRepository extends BaseRepository
             'content_oz' => contentByDomDocment($data['content_oz'], 'analysis'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'analysis'),
             'status' => $data['status'],
-            'images' => $this->uploads($data['image'], 'analysis')
+            'images' => $images
         ]);
         if ($model)
         {

@@ -11,7 +11,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('film_analysis.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Film_analysis</li>
+                        <li class="breadcrumb-item active">Film Analysis</li>
                     </ol>
                 </div>
             </div>
@@ -53,8 +53,8 @@
                                     <input type="text" name="name_oz" class="form-control" value="{{request('name_oz')}}" placeholder="Tahlil Nomi">
                                 </th>
                                 <th>
-                                    <select name="analysis_category_id" id="" class="form-control" onchange="this.form.submit()">
-                                        <option value="">----</option>
+                                    <select name="category_id" id="" class="form-control" onchange="this.form.submit()">
+                                        <option value="">---</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}" {{request('category_id') == $category->id?'selected':''}}>{{$category->name_oz}}</option>
                                         @endforeach

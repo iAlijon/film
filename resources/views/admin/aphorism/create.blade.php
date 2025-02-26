@@ -58,13 +58,13 @@
 
                                 <div class="form-group">
                                     <label>F.I.O</label>
-                                    <input type="text" class="form-control" name="full_name_oz">
+                                    <input type="text" class="form-control  @error('full_name_oz') border-danger @enderror" name="full_name_oz">
                                     <small class="text-danger">{{$errors->first('full_name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Rasm</label>
-                                    <input type="file" class="form-control" name="image"
+                                    <input type="file" class="form-control @error('image') border-danger @enderror" name="image"
                                            accept="image/jpeg, image/jpg, image/png, image/gif">
                                     <small class="text-danger">{{$errors->first('image')}}</small>
                                 </div>
@@ -72,7 +72,7 @@
 
                                 <div class="form-group">
                                     <label>Qisqacha ma'lumot</label>
-                                    <textarea name="description_oz" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_oz" cols="30" rows="5" class="form-control  @error('description_oz') border-danger @enderror"></textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
@@ -112,13 +112,13 @@
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
                                     <label>Ф.И.О</label>
-                                    <input type="text" class="form-control" name="full_name_uz">
+                                    <input type="text" class="form-control @error('full_name_uz') border-danger @enderror" name="full_name_uz">
                                     <small class="text-danger">{{$errors->first('full_name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Қисқача маълумот</label>
-                                    <textarea name="description_uz" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_uz" cols="30" rows="5" class="form-control @error('description_uz') border-danger @enderror"></textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 

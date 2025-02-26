@@ -23,23 +23,41 @@ class AphorismRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'full_name_oz' => 'required|string',
-            'full_name_uz' => 'required|string',
-            'description_oz' => 'required',
-            'description_uz' => 'required',
-            'calendar.*.description_oz' => 'required',
-            'calendar.*.description_uz' => 'required',
-            'status' => 'required|integer',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
-        ];
+        if ($this->isMethod('post')) {
+            return [
+                'full_name_oz' => 'required|string',
+                'full_name_uz' => 'required|string',
+                'description_oz' => 'required',
+                'description_uz' => 'required',
+                'calendar.*.description_oz' => 'required',
+                'calendar.*.description_uz' => 'required',
+                'status' => 'required|integer',
+                'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
+            ];
+        }else {
+            return [
+                'full_name_oz' => 'required|string',
+                'full_name_uz' => 'required|string',
+                'description_oz' => 'required',
+                'description_uz' => 'required',
+                'calendar.*.description_oz' => 'required',
+                'calendar.*.description_uz' => 'required',
+                'status' => 'required|integer',
+                'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048'
+            ];
+        }
     }
 
     public function messages()
     {
         return [
             'calendar.*.description_oz.required' => 'The form oz field is required',
-            'calendar.*.description_uz.required' => 'The form uz field is required'
+            'calendar.*.description_uz.required' => 'The form uz field is required',
+            'image.required' => 'Rasm maydoni to\'ldirish talab qilinadi',
+            'full_name_oz' => 'F.I.O maydoni to\'ldirish talab qilinadi',
+            'full_name_uz' => 'Ф.И.О майдони тўлдириш талаб қилинади',
+            'description_oz' => 'Qisqacha ma\'lumot maydoni to\'ldirish talab qilinadi',
+            'description_uz' => 'Қисқача маълумот майдони тўлдириш талаб қилинади'
         ];
     }
 }

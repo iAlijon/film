@@ -57,17 +57,20 @@ class AphorismRepository extends BaseRepository
     public function update($data, $id)
     {
         $model = $this->findById($id);
-        if ($model->images)
-        {
-            deleteImages($model->images, 'aphorism');
-
+        if (isset($data['image']) && !empty($data['image'])) {
+            if ($model->images) {
+                deleteImages($model->images, 'aphorism');
+            }
+            $images = $this->uploads($data['image'], 'aphorism');
+        }else {
+            $images = $model->images;
         }
         $model->update([
             'full_name_oz' => $data['full_name_oz'],
             'full_name_uz' => $data['full_name_uz'],
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
-            'images' => $this->uploads($data['image'], 'aphorism'),
+            'images' => $images,
             'status' => $data['status']
         ]);
         $items = Calendar::where('aphorism_id', $model->id)->get();

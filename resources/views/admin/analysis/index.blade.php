@@ -55,8 +55,9 @@
                                 <th>
                                     <select name="analysis_category_id" id="" class="form-control" onchange="this.form.submit()">
                                         <option value="">----</option>
-                                        <option value="1" {{request('analysis_category_id') == 1?'selected':''}}>Milliy filmlar tahlili</option>
-                                        <option value="2" {{request('analysis_category_id') == 2?'selected':''}}>Xorijiy filmlar tahlili</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}" {{request('category_id') == $category->id?'selected':''}}>{{$category->name_oz}}</option>
+                                        @endforeach
                                     </select>
                                 </th>
                                 <th></th>

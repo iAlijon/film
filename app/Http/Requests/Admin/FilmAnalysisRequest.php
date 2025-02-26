@@ -24,7 +24,7 @@ class FilmAnalysisRequest extends FormRequest
     public function rules()
     {
         return [
-            'analysis_category_id' => 'required',
+            'category_id' => 'required',
             'name_oz' => 'required',
             'name_uz' => 'required',
             'description_oz' => 'required',

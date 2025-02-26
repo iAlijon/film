@@ -66,11 +66,12 @@
                             {{---- oz ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
-                                    <label for="analysis_category_id">Tahlil kategoriyasi</label>
-                                    <select name="analysis_category_id" id="" class="form-control">
+                                    <label for="category_id">Tahlil kategoriyasi</label>
+                                    <select name="category_id" id="" class="form-control">
                                         <option value="">----</option>
-                                        <option value="1" {{$model->analysis_category == 1?'selected':''}}>Milliy filmlar tahlili</option>
-                                        <option value="2" {{$model->analysis_category == 2?'selected':''}}>Xorijiy filmlar tahlili</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}" {{request('category_id') == $category->id?'selected':''}}>{{$category->name_oz}}</option>
+                                        @endforeach
                                     </select>
                                     <small class="text-danger">{{$errors->first('analysis_category_id')}}</small>
                                 </div>

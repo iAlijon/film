@@ -56,36 +56,37 @@
                             {{---- oz ----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
-                                    <label for="analysis_category_id">Tahlil kategoriyasi</label>
-                                    <select name="analysis_category_id" id="" class="form-control">
-                                        <option value="">----</option>
-                                        <option value="1">Milliy filmlar tahlili</option>
-                                        <option value="2">Xorijiy filmlar tahlili</option>
+                                    <label for="category_id">Tahlil kategoriyasi</label>
+                                    <select name="category_id" id="" class="form-control">
+                                        <option value="">---</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}" {{request('category_id') == $category->id?'selected':''}}>{{$category->name_oz}}</option>
+                                        @endforeach
                                     </select>
                                     <small class="text-danger">{{$errors->first('analysis_category_id')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name_oz">Nomi</label>
-                                    <input type="text" class="form-control" name="name_oz">
+                                    <input type="text" class="form-control @error('name_oz') border-danger @enderror" name="name_oz">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="image">Rasm</label>
-                                    <input type="file" class="form-control" name="image" accept="image/jpeg,png,jpg">
+                                    <input type="file" class="form-control @error('image') border-danger @enderror" name="image" accept="image/jpeg,png,jpg">
                                     <small class="text-danger">{{$errors->first('image')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description_oz">Qisqacha ma'lumot</label>
-                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control @error('description_oz') border-danger @enderror"></textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" id="" cols="30" rows="10" class="form-control textarea"></textarea>
+                                    <textarea name="content_oz" id="" cols="30" rows="10" class="form-control textarea @error('content_oz') border-danger @enderror"></textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
@@ -103,19 +104,19 @@
 
                                 <div class="form-group">
                                     <label for="name_uz">Номи</label>
-                                    <input type="text" class="form-control" name="name_uz">
+                                    <input type="text" class="form-control @error('name_uz') border-danger @enderror" name="name_uz">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description_uz">Қисқача маълумот</label>
-                                    <textarea name="description_uz" id="description_uz" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_uz" id="description_uz" cols="30" rows="5" class="form-control @error('description_uz') border-danger @enderror"></textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_uz">Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" id="content_uz" cols="30" rows="10" class="form-control textarea"></textarea>
+                                    <textarea name="content_uz" id="content_uz" cols="30" rows="10" class="form-control textarea @error('content_uz') border-danger @enderror"></textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
 

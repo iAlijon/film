@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FilmAnalysisRequest;
+use App\Models\PersonCategory;
 use App\Repositories\FilmAnalysisRepository;
 use Illuminate\Http\Request;
 
@@ -18,8 +19,9 @@ class MovieAnalysisController extends Controller
      */
     public function index()
     {
+        $categories = PersonCategory::where('status', 1)->where('type', 'analysis')->select('id','name_oz','type')->get();
         $models = $this->repo->index($this->request);
-        return view('admin.analysis.index', compact('models'));
+        return view('admin.analysis.index', compact('models', 'categories'));
     }
 
     /**
@@ -29,7 +31,8 @@ class MovieAnalysisController extends Controller
      */
     public function create()
     {
-        return view('admin.analysis.create');
+        $categories = PersonCategory::where('status', 1)->where('type', 'analysis')->select('id','name_oz','type')->get();
+        return view('admin.analysis.create', compact('categories'));
     }
 
     /**
@@ -70,8 +73,9 @@ class MovieAnalysisController extends Controller
      */
     public function edit($id)
     {
+        $categories = PersonCategory::where('status', 1)->where('type', 'analysis')->select('id','name_oz','type')->get();
         $model = $this->repo->findById($id);
-        return view('admin.analysis.edit', compact('model'));
+        return view('admin.analysis.edit', compact('model', 'categories'));
     }
 
     /**

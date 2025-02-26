@@ -30,12 +30,24 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill"
                                href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="true">O'Z</a>
+                               aria-selected="true">O'Z
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        <div class="line" style="width: 25px; height: 0.3px; background-color: red"></div>
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
                                href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false">UZ</a>
+                               aria-selected="false">UZ
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        <div class="line" style="width: 25px; height: 0.3px; background-color: red"></div>
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
@@ -57,7 +69,7 @@
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
                                     <label>Kategoriya Nomi</label>
-                                    <select name="category_id" id="category_id" class="form-control">
+                                    <select name="category_id" id="category_id" class="form-control @error('category_id') border-danger @enderror">
                                         <option value="">---</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name_oz}}</option>
@@ -68,19 +80,19 @@
 
                                 <div class="form-group">
                                     <label for="full_name_oz">F.I.O</label>
-                                    <input type="text" name="full_name_oz" class="form-control">
+                                    <input type="text" name="full_name_oz" class="form-control @error('full_name_oz') border-danger @enderror">
                                     <small class="text-danger">{{$errors->first('full_name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="image">Rasim</label>
-                                    <input type="file" name="image" class="form-control">
+                                    <input type="file" name="image" class="form-control @error('image') border-danger @enderror">
                                     <small class="text-danger">{{$errors->first('image')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description_oz">Qisqacha ma'lumot</label>
-                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control @error('description_oz') border-danger @enderror"></textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
@@ -96,13 +108,13 @@
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
                                     <label>Ф.И.О</label>
-                                    <input type="text" class="form-control" name="full_name_uz">
+                                    <input type="text" class="form-control @error('full_name_uz') border-danger @enderror" name="full_name_uz">
                                     <small class="text-danger">{{$errors->first('full_name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description_uz">Қисқача маълумот</label>
-                                    <textarea name="description_uz" id="" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_uz" id="" cols="30" rows="5" class="form-control @error('description_uz') border-danger @enderror"></textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
                             </div>

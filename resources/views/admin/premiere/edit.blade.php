@@ -58,7 +58,7 @@
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
                                     <label>Kategoriya</label>
-                                    <select name="category_id" id="category_id" class="form-control">
+                                    <select name="category_id" id="category_id" class="form-control @error('category_id') border-danger @enderror">
                                         <option>----</option>
                                         @foreach($categories as $category)
                                         <option value="{{$category->id}}" {{$model->category_id == $category->id?'selected':''}}>
@@ -71,7 +71,7 @@
 
                                 <div class="form-group">
                                     <label for="name_oz">Premyera nomi</label>
-                                    <input type="text" name="name_oz" class="form-control" value="{{$model->name_oz}}">
+                                    <input type="text" name="name_oz" class="form-control @error('name_oz') border-danger @enderror" value="{{$model->name_oz}}">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
@@ -83,13 +83,13 @@
 
                                 <div class="form-group">
                                     <label for="description_oz">Qisqacha ma'lumot</label>
-                                    <textarea name="description_oz" cols="30" rows="5" class="form-control">{{$model->description_oz}}</textarea>
+                                    <textarea name="description_oz" cols="30" rows="5" class="form-control @error('description_oz') border-danger @enderror">{{$model->description_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" class="textarea form-control summernote"
+                                    <textarea name="content_oz" class="textarea form-control summernote @error('content_oz') border-danger @enderror"
                                               id="summernote">{{$model->content_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
@@ -107,19 +107,19 @@
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
                                     <label for="name_uz">Премьера номи</label>
-                                    <input type="text" name="name_uz" class="form-control" value="{{$model->name_uz}}">
+                                    <input type="text" name="name_uz" class="form-control @error('name_uz') border-danger @enderror" value="{{$model->name_uz}}">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description_uz">Қисқача маълумот</label>
-                                    <textarea name="description_uz" cols="30" rows="5" class="form-control">{{$model->description_uz}}</textarea>
+                                    <textarea name="description_uz" cols="30" rows="5" class="form-control @error('description_uz') border-danger @enderror">{{$model->description_uz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_uz">Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" class="textarea form-control summernote"
+                                    <textarea name="content_uz" class="textarea form-control summernote @error('content_uz') border-danger @enderror"
                                               id="summernote">{{$model->content_uz}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>

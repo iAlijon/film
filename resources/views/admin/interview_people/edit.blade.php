@@ -30,12 +30,28 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill"
                                href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="true">O'Z</a>
+                               aria-selected="true">O'Z
+                                @if($errors->any() == '*_oz')
+                                    @if($errors->any())
+                                        @foreach($errors->all() as $error)
+                                            <div class="line"></div>
+                                        @endforeach
+                                    @endif
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
                                href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false">UZ</a>
+                               aria-selected="false">UZ
+                                @if($errors->any() == '*_uz')
+                                    @if($errors->any())
+                                        @foreach($errors->all() as $error)
+                                            <div class="line"></div>
+                                        @endforeach
+                                    @endif
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"

@@ -63,6 +63,11 @@
             background-color: #d4edda !important;
             border-color: #c3e6cb !important;
         }
+        .alert-danger {
+            color: #721c24 !important;
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+        }
 
         .cancel {
             position: absolute;
@@ -71,6 +76,11 @@
             transform: translate(-50%, -50%);
             cursor: pointer;
             font-size: 20px;
+        }
+        .line {
+            width: 100%;
+            height: 0.5px;
+            background-color: #7c151f;
         }
     </style>
     @stack('css')

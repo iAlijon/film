@@ -21,7 +21,7 @@
             @if(session()->has('error'))
                 <div class="alert alert-danger position-relative">
                     {{session()->get('error')}}
-                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                    <p class="cancel mb-0">&times;</p>
                 </div>
             @endif
             <div class="card card-info card-outline">
@@ -33,7 +33,9 @@
                                aria-selected="true">O'Z
                                 @if($errors->any())
                                     @foreach($errors->all() as $error)
-                                        <div class="line" style="width: 25px; height: 0.3px; background-color: red"></div>
+                                        @if(str_contains($error, 'oz'))
+                                        <div class="line"></div>
+                                        @endif
                                     @endforeach
                                 @endif
                             </a>
@@ -44,7 +46,9 @@
                                aria-selected="false">UZ
                                 @if($errors->any())
                                     @foreach($errors->all() as $error)
-                                        <div class="line" style="width: 25px; height: 0.3px; background-color: red"></div>
+                                        @if(str_contains($error, 'uz'))
+                                            <div class="line"></div>
+                                        @endif
                                     @endforeach
                                 @endif
                             </a>
@@ -80,7 +84,7 @@
 
                                 <div class="form-group">
                                     <label for="full_name_oz">F.I.O</label>
-                                    <input type="text" name="full_name_oz" class="form-control @error('full_name_oz') border-danger @enderror">
+                                    <input type="text" name="full_name_oz" class="form-control @error('full_name_oz') border-danger @enderror" value="{{old('full_name_oz')}}">
                                     <small class="text-danger">{{$errors->first('full_name_oz')}}</small>
                                 </div>
 
@@ -92,7 +96,10 @@
 
                                 <div class="form-group">
                                     <label for="description_oz">Qisqacha ma'lumot</label>
-                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control @error('description_oz') border-danger @enderror"></textarea>
+                                    <textarea name="description_oz" id="" cols="30" rows="5"
+                                              class="form-control @error('description_oz') border-danger @enderror"
+                                              >{{old('description_oz')}}
+                                    </textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
@@ -108,13 +115,15 @@
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
                                     <label>Ф.И.О</label>
-                                    <input type="text" class="form-control @error('full_name_uz') border-danger @enderror" name="full_name_uz">
+                                    <input type="text" class="form-control @error('full_name_uz') border-danger @enderror" name="full_name_uz" value="{{old('full_name_oz')}}">
                                     <small class="text-danger">{{$errors->first('full_name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description_uz">Қисқача маълумот</label>
-                                    <textarea name="description_uz" id="" cols="30" rows="5" class="form-control @error('description_uz') border-danger @enderror"></textarea>
+                                    <textarea name="description_uz" id="" cols="30" rows="5" class="form-control @error('description_uz') border-danger @enderror"
+                                     >{{old('description_uz')}}
+                                    </textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
                             </div>

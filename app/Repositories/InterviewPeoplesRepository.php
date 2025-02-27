@@ -55,14 +55,19 @@ class InterviewPeoplesRepository extends BaseRepository
     public function update($data, $id)
     {
         $model = $this->findById($id);
-        if ($model->images) {
-            deleteImages($model->images, 'interview_people');
+        if (isset($data['image']) && !empty($data['image'])) {
+            if ($model->images) {
+                deleteImages($model->images, 'interview_people');
+            }
+            $images = $this->uploads($data['image'], 'interview_people');
+        }else {
+            $images = $model->images;
         }
         $model->update([
             'category_id' => $data['category_id'],
             'full_name_oz' => $data['full_name_oz'],
             'full_name_uz' => $data['full_name_uz'],
-            'images' => $this->uploads($data['image'], 'interview_people'),
+            'images' => $images,
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
             'status' => $data['status']

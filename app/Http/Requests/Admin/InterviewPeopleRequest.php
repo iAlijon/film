@@ -23,14 +23,26 @@ class InterviewPeopleRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'category_id' => 'required|integer',
-            'full_name_oz' => 'required',
-            'full_name_uz' => 'required',
-            'description_oz' => 'required',
-            'description_uz' => 'required',
-            'status' => 'required|integer',
-            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
-        ];
+        if ($this->isMethod('store')) {
+            return [
+                'category_id' => 'required|integer',
+                'full_name_oz' => 'required',
+                'full_name_uz' => 'required',
+                'description_oz' => 'required',
+                'description_uz' => 'required',
+                'status' => 'required|integer',
+                'image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+            ];
+        }else {
+            return [
+                'category_id' => 'required|integer',
+                'full_name_oz' => 'required',
+                'full_name_uz' => 'required',
+                'description_oz' => 'required',
+                'description_uz' => 'required',
+                'status' => 'required|integer',
+                'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+            ];
+        }
     }
 }

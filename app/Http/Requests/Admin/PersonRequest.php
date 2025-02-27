@@ -23,17 +23,32 @@ class PersonRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'category_id' => 'required',
-            'full_name_oz' => 'required',
-            'full_name_uz' => 'required',
-            'description_oz' => 'required',
-            'description_uz' => 'required',
-            'content_oz' => 'required',
-            'content_uz' => 'required',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-            'status' => 'required|integer',
-            'birth_date' => 'required|date'
-        ];
+        if ($this->isMethod('store')) {
+            return [
+                'category_id' => 'required',
+                'full_name_oz' => 'required',
+                'full_name_uz' => 'required',
+                'description_oz' => 'required',
+                'description_uz' => 'required',
+                'content_oz' => 'required',
+                'content_uz' => 'required',
+                'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+                'status' => 'required|integer',
+                'birth_date' => 'required|date'
+            ];
+        }elseif ($this->isMethod('update')) {
+            return [
+                'category_id' => 'required',
+                'full_name_oz' => 'required',
+                'full_name_uz' => 'required',
+                'description_oz' => 'required',
+                'description_uz' => 'required',
+                'content_oz' => 'required',
+                'content_uz' => 'required',
+                'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'status' => 'required|integer',
+                'birth_date' => 'required|date'
+            ];
+        }
     }
 }

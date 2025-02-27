@@ -58,8 +58,13 @@ class PersonRepository extends BaseRepository
     public function update($data, $id)
     {
         $model = $this->findById($id);
-        if ($model->images) {
-            deleteImages($model->images, 'person');
+        if (isset($data['images']) && !empty($data['images'])) {
+            if ($model->images) {
+                deleteImages($model->images, 'person');
+            }
+            $images = $this->uploads($data['image'], 'person');
+        }else {
+            $images = $model->images;
         }
         $model->update([
             'category_id' => $data['category_id'],
@@ -70,7 +75,7 @@ class PersonRepository extends BaseRepository
             'content_oz' => contentByDomDocment($data['content_oz'], 'person'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'person'),
             'status' => $data['status'],
-            'images' => $this->uploads($data['image'], 'person'),
+            'images' => $images,
             'birth_date' => $data['birth_date']
         ]);
         if ($model) {

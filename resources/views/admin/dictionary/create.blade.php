@@ -39,7 +39,7 @@
             @if(session()->has('error'))
                 <div class="alert alert-danger position-relative">
                     {{session()->get('error')}}
-                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                    <p class="cancel mb-0">&times;</p>
                 </div>
             @endif
             <div class="card card-outline card-info">
@@ -48,12 +48,28 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill"
                                href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="true">O'Z</a>
+                               aria-selected="true">O'Z
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        @if(str_contains($error,'oz'))
+                                            <div class="line"></div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
                                href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false">UZ</a>
+                               aria-selected="false">UZ
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        @if(str_contains($error,'uz'))
+                                            <div class="line"></div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
@@ -81,7 +97,7 @@
                                            class="mb-0">Lug'at</p>
                                     </label>
                                     <select name="dictionary_id[]" id="dictionary" multiple="multiple"
-                                            class="select2 form-control" data-placeholder="Lug'atni tanlang">
+                                            class="select2 form-control @error('dictionary_id[]') border-danger @enderror" data-placeholder="Lug'atni tanlang">
                                         @foreach($dictionaries as $dictionary)
                                             <option
                                                 value="{{$dictionary->id}}">{{$dictionary->name_oz['upper']}}</option>
@@ -92,28 +108,28 @@
 
                                 <div class="form-group required">
                                     <label for="name_oz">Nomi</label>
-                                    <input type="text" class="form-control" name="name_oz" required placeholder="Nomi">
+                                    <input type="text" class="form-control @error('name_oz') border-danger @enderror" name="name_oz" required placeholder="Nomi" value="{{old('name_oz')}}">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="images">Rasm</label>
-                                    <input type="file" name="image" class="form-control">
+                                    <input type="file" name="image" class="form-control @error('image') border-danger @enderror" value="{{old('image')}}">
                                     <small class="text-danger">{{$errors->first('image')}}</small>
                                 </div>
 
                                 <div class="form-group required">
                                     <label for="description_oz">Qisqacha ma'lumoti</label>
-                                    <textarea name="description_oz" class="form-control" cols="30" rows="5" required
-                                              placeholder="Qisqacha ma'lumot"></textarea>
+                                    <textarea name="description_oz" class="form-control @error('description_oz') border-danger @enderror" cols="30" rows="5" required
+                                              placeholder="Qisqacha ma'lumot">{{old('description_oz')}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group required">
                                     <label for="content_oz">To'liq ma'lumot</label>
                                     <textarea name="content_oz" id="content_oz" cols="30" rows="10"
-                                              class="form-control textarea" required
-                                              placeholder="To'liq ma'lumot"></textarea>
+                                              class="form-control textarea @error('content_oz') border-danger @enderror" required
+                                              placeholder="To'liq ma'lumot">{{old('content_oz')}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
@@ -135,7 +151,7 @@
                                            data-content="Керакли белигни топа оламасангиз Лотинчадан қдириб кўринг фақат бир тильдагсни танланг"
                                            class="mb-0">Луғат</p>
                                     </label>
-                                    <select name="dictionary_id[]" multiple="multiple" class="select2 form-control"
+                                    <select name="dictionary_id[]" multiple="multiple" class="select2 form-control @error('dictionary_id[]') border-danger @enderror"
                                             data-placeholder="Луғатни танланг">
                                         @foreach($dictionaries as $dictionary)
                                             <option
@@ -147,21 +163,21 @@
 
                                 <div class="form-group required">
                                     <label for="name_uz">Номи</label>
-                                    <input type="text" class="form-control" name="name_uz" required placeholder="Номи">
+                                    <input type="text" class="form-control @error('name_uz') border-danger @enderror" name="name_uz" required placeholder="Номи" value="{{old('name_uz')}}">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group required">
                                     <label for="description_uz">Қисқача маълумоти</label>
-                                    <textarea name="description_uz" id="description_uz" class="form-control" cols="30"
-                                              rows="5" required placeholder="Қисқача маълумоти"></textarea>
+                                    <textarea name="description_uz" id="description_uz" class="form-control @error('description_uz') border-danger @enderror" cols="30"
+                                              rows="5" required placeholder="Қисқача маълумоти">{{old('description_uz')}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group required">
                                     <label for="content_uz">Тўлиқ маълумот</label>
                                     <textarea name="content_uz" id="content_uz" cols="30" rows="10"
-                                              class="form-control textarea" required></textarea>
+                                              class="form-control textarea @error('content_uz') border-danger @enderror" required>{{old('content_uz')}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
 

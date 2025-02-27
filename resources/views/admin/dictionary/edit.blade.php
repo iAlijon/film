@@ -22,7 +22,7 @@
             @if(session()->has('error'))
                 <div class="alert alert-danger position-relative">
                     {{session()->get('error')}}
-                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                    <p class="cancel mb-0">&times;</p>
                 </div>
             @endif
             <div class="card card-outline card-info">
@@ -84,19 +84,19 @@
 
                                 <div class="form-group required">
                                     <label for="name_oz">Nomi</label>
-                                    <input type="text" class="form-control" name="name_oz" required placeholder="Nomi" value="{{$model->name_oz}}">
+                                    <input type="text" class="form-control @error('name_oz') border-danger @enderror" name="name_oz" required placeholder="Nomi" value="{{$model->name_oz}}">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="images">Rasm</label>
-                                    <input type="file" name="image" class="form-control">
+                                    <input type="file" name="image" class="form-control @error('image') border-danger @enderror">
                                     <small class="text-danger">{{$errors->first('image')}}</small>
                                 </div>
 
                                 <div class="form-group required">
                                     <label for="description_oz">Qisqacha ma'lumoti</label>
-                                    <textarea name="description_oz" class="form-control" cols="30" rows="5" required placeholder="Qisqacha ma'lumot">
+                                    <textarea name="description_oz" class="form-control @error('description_oz') border-danger @enderror" cols="30" rows="5" required placeholder="Qisqacha ma'lumot">
                                         {{$model->description_oz}}
                                     </textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
@@ -104,7 +104,7 @@
 
                                 <div class="form-group required">
                                     <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" id="content_oz" cols="30" rows="10" class="form-control textarea" required placeholder="To'liq ma'lumot">
+                                    <textarea name="content_oz" id="content_oz" cols="30" rows="10" class="form-control textarea @error('content_oz') border-danger @enderror" required placeholder="To'liq ma'lumot">
                                         {{$model->content_oz}}
                                     </textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
@@ -126,7 +126,7 @@
                                     <label for="dictionary_id">
                                         <p data-toggle="popover" data-content="Керакли белигни топа оламасангиз Лотинчадан қдириб кўринг фақат бир тильдагсни танланг" class="mb-0">Луғат</p>
                                     </label>
-                                    <select name="dictionary_id[]"  multiple="multiple" class="select2 form-control" data-placeholder="Луғатни танланг">
+                                    <select name="dictionary_id[]"  multiple="multiple" class="select2 form-control @error('dictionary_id[]') border-danger @enderror" data-placeholder="Луғатни танланг">
                                         @if(isset($model->film_dictionary_category) && !empty($model->film_dictionary_category))
                                         @foreach($model->film_dictionary_category as $item)
                                                 @foreach($dictionaries as $dictionary)
@@ -148,13 +148,13 @@
 
                                 <div class="form-group required">
                                     <label for="name_uz">Номи</label>
-                                    <input type="text" class="form-control" name="name_uz" required placeholder="Номи" value="{{$model->name_oz}}">
+                                    <input type="text" class="form-control @error('name_uz') border-danger @enderror" name="name_uz" required placeholder="Номи" value="{{$model->name_oz}}">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group required">
                                     <label for="description_uz">Қисқача маълумоти</label>
-                                    <textarea name="description_uz" id="description_uz" class="form-control" cols="30" rows="5" required placeholder="Қисқача маълумоти">
+                                    <textarea name="description_uz" id="description_uz" class="form-control @error('description_uz') border-danger @enderror" cols="30" rows="5" required placeholder="Қисқача маълумоти">
                                         {{$model->description_oz}}
                                     </textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
@@ -162,7 +162,7 @@
 
                                 <div class="form-group required">
                                     <label for="content_uz">Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" id="content_uz" cols="30" rows="10" class="form-control textarea" required>
+                                    <textarea name="content_uz" id="content_uz" cols="30" rows="10" class="form-control textarea @error('content_uz') border-danger @enderror" required>
                                         {{$model->content_oz}}
                                     </textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>

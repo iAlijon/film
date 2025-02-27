@@ -62,8 +62,13 @@ class CinemaFactRepository extends BaseRepository
     public function update($id, $data)
     {
         $model = $this->findById($id);
-        if ($model->images) {
-            deleteImages($model->images, 'fact');
+        if (isset($data['image']) && !empty($data['image'])) {
+            if ($model->images) {
+                deleteImages($model->images, 'fact');
+            }
+            $images = $this->uploads($data['image'], 'fact');
+        }else {
+            $images = $model->images;
         }
         $model->update([
             'name_oz' => $data['name_oz'],
@@ -78,7 +83,7 @@ class CinemaFactRepository extends BaseRepository
             'content_uz' => contentByDomDocment($data['content_uz']),
             'content_ru' => $data['content_ru']??null,
             'content_en' => $data['content_en']??null,
-            'images' => $this->uploads($data['image'], 'fact'),
+            'images' => $images,
             'status' => $data['status']
         ]);
 

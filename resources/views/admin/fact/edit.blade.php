@@ -30,12 +30,28 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill"
                                href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="true">O'Z</a>
+                               aria-selected="true">O'Z
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        @if(str_contains($error,'oz'))
+                                            <div class="line"></div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
                                href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false">UZ</a>
+                               aria-selected="false">UZ
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        @if(str_contains($error,'uz'))
+                                            <div class="line"></div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
@@ -58,25 +74,25 @@
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
                                     <label for="name_oz">Nomi</label>
-                                    <input type="text" name="name_oz" class="form-control" placeholder="Nomi" value="{{$model->name_oz}}">
+                                    <input type="text" name="name_oz" class="form-control @error('name_oz') border-danger @enderror" placeholder="Nomi" value="{{$model->name_oz}}">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="image">Rasm</label>
-                                    <input type="file" class="form-control" name="image">
+                                    <input type="file" class="form-control @error('image') border-danger @enderror " name="image">
                                     <small class="text-danger">{{$errors->first('image')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description_oz">Qisqacha ma'lumot</label>
-                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control">{{$model->description_oz}}</textarea>
+                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control @error('description_oz') border-danger @enderror">{{$model->description_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" id="" cols="30" rows="10" class="textarea form-control summernote">{{$model->content_oz}}</textarea>
+                                    <textarea name="content_oz" id="" cols="30" rows="10" class="textarea form-control summernote @error('content_oz') border-danger @enderror">{{$model->content_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
@@ -92,19 +108,19 @@
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
                                     <label for="name_uz">Номи</label>
-                                    <input type="text" name="name_uz" class="form-control" placeholder="Номи" value="{{$model->name_uz}}">
+                                    <input type="text" name="name_uz" class="form-control @error('name_uz') border-danger @enderror" placeholder="Номи" value="{{$model->name_uz}}">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description_uz">Қисқача маълумоти</label>
-                                    <textarea name="description_uz" id="" cols="30" rows="5" class="form-control">{{$model->description_uz}}</textarea>
+                                    <textarea name="description_uz" id="" cols="30" rows="5" class="form-control @error('description_uz') border-danger @enderror">{{$model->description_uz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_uz">Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" id="" cols="30" rows="10" class="textarea form-control summernote">{{$model->content_uz}}</textarea>
+                                    <textarea name="content_uz" id="" cols="30" rows="10" class="textarea form-control summernote @error('content_uz') border-danger @enderror">{{$model->content_uz}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
                             </div>

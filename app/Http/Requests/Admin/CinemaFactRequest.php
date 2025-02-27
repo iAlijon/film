@@ -23,21 +23,40 @@ class CinemaFactRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name_oz' => 'required',
-            'name_uz' => 'required',
-            'name_ru' => 'nullable',
-            'name_en' => 'nullable',
-            'description_oz' => 'required',
-            'description_uz' => 'required',
-            'description_ru' => 'nullable',
-            'description_en' => 'nullable',
-            'content_oz' => 'required',
-            'content_uz' => 'required',
-            'content_ru' => 'nullable',
-            'content_en' => 'nullable',
-            'status' => 'required|integer',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
-        ];
+        if ($this->isMethod('post')) {
+            return [
+                'name_oz' => 'required',
+                'name_uz' => 'required',
+                'name_ru' => 'nullable',
+                'name_en' => 'nullable',
+                'description_oz' => 'required',
+                'description_uz' => 'required',
+                'description_ru' => 'nullable',
+                'description_en' => 'nullable',
+                'content_oz' => 'required',
+                'content_uz' => 'required',
+                'content_ru' => 'nullable',
+                'content_en' => 'nullable',
+                'status' => 'required|integer',
+                'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
+            ];
+        }else {
+            return [
+                'name_oz' => 'required',
+                'name_uz' => 'required',
+                'name_ru' => 'nullable',
+                'name_en' => 'nullable',
+                'description_oz' => 'required',
+                'description_uz' => 'required',
+                'description_ru' => 'nullable',
+                'description_en' => 'nullable',
+                'content_oz' => 'required',
+                'content_uz' => 'required',
+                'content_ru' => 'nullable',
+                'content_en' => 'nullable',
+                'status' => 'required|integer',
+                'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048'
+            ];
+        }
     }
 }

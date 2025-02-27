@@ -20,9 +20,9 @@
     <section class="content">
         <div class="col-11 mr-auto ml-auto">
             @if(session()->has('error'))
-                <div class="alert alert-danger position-relative">
+                <div class="alert alert-danger" id="close">
                     {{session()->get('error')}}
-                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                    <p class="cancel mb-0">&times;</p>
                 </div>
             @endif
             <div class="card card-info card-outline">
@@ -31,12 +31,28 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill"
                                href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="true">O'Z</a>
+                               aria-selected="true">O'Z
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        @if(str_contains($error,'oz'))
+                                            <div class="line"></div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
                                href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false">UZ</a>
+                               aria-selected="false">UZ
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        @if(str_contains($error,'uz'))
+                                            <div class="line"></div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
@@ -59,7 +75,7 @@
 
                                 <div class="form-group required">
                                     <label for="">Mazular</label>
-                                    <select name="category_id" id="" class="form-control">
+                                    <select name="category_id" id="" class="form-control @error('category_id') border-danger @enderror">
                                         <option value="">---</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name_oz}}</option>
@@ -69,25 +85,29 @@
 
                                 <div class="form-group required">
                                     <label for="name_oz">Nomi</label>
-                                    <input type="text" class="form-control" name="name_oz">
+                                    <input type="text" class="form-control @error('name_oz') border-danger @enderror" name="name_oz" value="{{old('name_oz')}}">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group required">
                                     <label for="image">Rasm</label>
-                                    <input type="file" class="form-control" name="image">
+                                    <input type="file" class="form-control @error('image') border-danger @enderror" name="image">
                                     <small class="text-danger">{{$errors->first('image')}}</small>
                                 </div>
 
                                 <div class="form-group required">
                                     <label for="description_oz">Qisqacha ma'lumot</label>
-                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control @error('description_oz') border-danger @enderror">
+                                        {{old('description_oz')}}
+                                    </textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group required">
                                     <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" id="" cols="30" rows="10" class="form-control textarea"></textarea>
+                                    <textarea name="content_oz" id="" cols="30" rows="10" class="form-control textarea @error('content_oz') border-danger @enderror">
+                                        {{old('content_oz')}}
+                                    </textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
@@ -105,19 +125,23 @@
 
                                 <div class="form-group required">
                                     <label for="name_uz">Номи</label>
-                                    <input type="text" class="form-control" name="name_uz">
+                                    <input type="text" class="form-control @error('name_uz') border-danger @enderror" name="name_uz" value="{{old('name_uz')}}">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group required">
                                     <label for="description_uz">Қисқача маълумот</label>
-                                    <textarea name="description_uz" id="" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="description_uz" id="" cols="30" rows="5" class="form-control @error('description_uz') border-danger @enderror">
+                                        {{old('description_uz')}}
+                                    </textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group required">
                                     <label for="content_uz">Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" id="" cols="30" rows="10" class="form-control textarea"></textarea>
+                                    <textarea name="content_uz" id="" cols="30" rows="10" class="form-control textarea @error('content_uz') border-danger @enderror">
+                                        {{old('content_uz')}}
+                                    </textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
                             </div>

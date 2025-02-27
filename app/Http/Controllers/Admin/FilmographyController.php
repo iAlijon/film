@@ -135,7 +135,7 @@ class FilmographyController extends Controller
             'description_uz' => 'required',
             'content_oz' => 'required',
             'content_uz' => 'required',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             'status' => 'required|boolean',
             'category_id' => 'required'
         ]);
@@ -143,10 +143,15 @@ class FilmographyController extends Controller
             return back()->withErrors($validator)->withInput();
         }
         $model = Filmography::where('id', $id)->first();
-        if ($model->images) {
-            deleteImages($model->images, 'filmography');
-        }
         $data = $request->all();
+        if (isset($data['image']) && !empty($data['image'])) {
+            if ($model->images) {
+                deleteImages($model->images, 'filmography');
+            }
+            $images = $this->uploads($data['image'], 'filmography');
+        }else {
+            $images = $model->images;
+        }
         $model->update([
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
@@ -154,7 +159,7 @@ class FilmographyController extends Controller
             'description_uz' => $data['description_uz'],
             'content_oz' => contentByDomDocment($data['content_oz'], 'filmography'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'filmography'),
-            'images' => $this->uploads($data['image'], 'filmography'),
+            'images' => $images,
             'status' => $data['status'],
             'filmography_group_id' => $data['category_id']
         ]);

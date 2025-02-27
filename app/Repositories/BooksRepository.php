@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Models\Books;
 use App\Traits\ImageUploads;
+use Illuminate\Support\Facades\Log;
 
 class BooksRepository extends BaseRepository
 {
@@ -38,62 +39,72 @@ class BooksRepository extends BaseRepository
 
     public function create($data)
     {
-         $model = $this->model->create([
-             'name_oz' => $data['name_oz'],
-             'name_uz' => $data['name_uz'],
-             'description_oz' => $data['description_oz'],
-             'description_uz' => $data['description_uz'],
-             'content_oz' => contentByDomDocment($data['content_oz'], 'book'),
-             'content_uz' => contentByDomDocment($data['content_uz'], 'book'),
-             'images' => $this->uploads($data['image'], 'book'),
-             'status' => $data['status'],
-             'files' => $this->fileUploads($data['file'], 'book'),
-             'category_id' => $data['category_id']
-         ]);
-         if ($model)
-         {
-             return $model;
-         }
-         return false;
+        try {
+            $model = $this->model->create([
+                'name_oz' => $data['name_oz'],
+                'name_uz' => $data['name_uz'],
+                'description_oz' => $data['description_oz'],
+                'description_uz' => $data['description_uz'],
+                'content_oz' => contentByDomDocment($data['content_oz'], 'book'),
+                'content_uz' => contentByDomDocment($data['content_uz'], 'book'),
+                'images' => $this->uploads($data['image'], 'book'),
+                'status' => $data['status'],
+                'files' => $this->fileUploads($data['file'], 'book'),
+                'category_id' => $data['category_id']
+            ]);
+            if ($model)
+            {
+                return $model;
+            }
+        }catch (\Exception $exception) {
+            Log::info('Books Errors: ', $exception->getMessage());
+            return false;
+        }
     }
 
     public function update($data, $id)
     {
-        $model = $this->model->find($id);
-        if (isset($data['image']) && !empty($data['image'])) {
-            if ($model->images) {
-                deleteImages($model->images, 'book');
+        try {
+            $model = $this->model->find($id);
+            if (isset($data['image']) && !empty($data['image'])) {
+                if ($model->images) {
+                    deleteImages($model->images, 'book');
+                }
+                $images = $this->uploads($data['image'], 'book');
+            }else {
+                $images = $model->images;
             }
-            $images = $this->uploads($data['image'], 'book');
-        }else {
-            $images = $model->images;
-        }
-        if (isset($data['file']) && !empty($data['file'])) {
-            if ($model->files) {
-                @unlink(public_path('files/book/').$model->files);
+            if (isset($data['file']) && !empty($data['file'])) {
+                if ($model->files) {
+                    @unlink(public_path('files/book/').$model->files);
+                }
+                $files = $this->fileUploads($data['file'], 'book');
+            }else {
+                $files = $model->files;
             }
-            $files = $this->fileUploads($data['file'], 'book');
-        }else {
-            $files = $model->files;
-        }
-        $model->update([
-            'name_oz' => $data['name_oz'],
-            'name_uz' => $data['name_uz'],
-            'description_oz' => $data['description_oz'],
-            'description_uz' => $data['description_uz'],
-            'content_oz' => contentByDomDocment($data['content_oz'], 'book'),
-            'content_uz' => contentByDomDocment($data['content_uz'], 'book'),
-            'images' => $images,
-            'status' => $data['status'],
-            'files' => $files,
-            'category_id' => $data['category_id']
-        ]);
+            $model->update([
+                'name_oz' => $data['name_oz'],
+                'name_uz' => $data['name_uz'],
+                'description_oz' => $data['description_oz'],
+                'description_uz' => $data['description_uz'],
+                'content_oz' => contentByDomDocment($data['content_oz'], 'book'),
+                'content_uz' => contentByDomDocment($data['content_uz'], 'book'),
+                'images' => $images,
+                'status' => $data['status'],
+                'files' => $files,
+                'category_id' => $data['category_id']
+            ]);
 
-        if ($model)
-        {
-            return $model;
+            if ($model)
+            {
+                return $model;
+            }
+
+        }catch (\Exception $e) {
+            Log::info('Books Errors Update:', $e->getMessage());
+            return false;
         }
-        return false;
+
     }
 
     public function delete($id)

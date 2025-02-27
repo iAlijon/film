@@ -36,7 +36,7 @@ class PersonRequest extends FormRequest
                 'status' => 'required|integer',
                 'birth_date' => 'required|date'
             ];
-        }elseif ($this->isMethod('update')) {
+        }else {
             return [
                 'category_id' => 'required',
                 'full_name_oz' => 'required',

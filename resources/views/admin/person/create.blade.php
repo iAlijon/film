@@ -33,7 +33,7 @@
                                aria-selected="true">O'Z
                                 @if($errors->any())
                                     @foreach($errors->all() as $error)
-                                        @if(str_contains($error, 'oz'))
+                                        @if(str_contains($error,'oz'))
                                             <div class="line"></div>
                                         @endif
                                     @endforeach
@@ -46,7 +46,7 @@
                                aria-selected="false">UZ
                                 @if($errors->any())
                                     @foreach($errors->all() as $error)
-                                        @if(str_contains($error, 'uz'))
+                                        @if(str_contains($error,'uz'))
                                             <div class="line"></div>
                                         @endif
                                     @endforeach
@@ -109,7 +109,7 @@
 
                                 <div class="form-group">
                                     <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" class="textarea form-control w3-right-align @error('content_oz')border-danger@enderror" cols="30" rows="6" placeholder="To'liq ma'lumot">{{old('content_oz')}}</textarea>
+                                    <textarea name="content_oz" class="textarea form-control w3-right-align @error('content_oz') border-danger @enderror" cols="30" rows="6" placeholder="To'liq ma'lumot">{{old('content_oz')}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
@@ -132,13 +132,17 @@
 
                                 <div class="form-group">
                                     <label for="description_uz">Қисқача маълумот</label>
-                                    <textarea name="description_uz" cols="30" rows="5" class="form-control @error('description_uz') border-danger @enderror" placeholder="Қисқача маълумот">{{old('description_uz')}}</textarea>
+                                    <textarea name="description_uz" cols="30" rows="5" class="form-control @error('description_uz') border-danger @enderror" placeholder="Қисқача маълумот">
+                                        {{old('description_uz')}}
+                                    </textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="content_uz">Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" class="textarea form-control @error('content_uz') border-danger @enderror" cols="30" rows="6" placeholder="Тўлиқ маълумот">{{old('content_uz')}}</textarea>
+                                    <textarea name="content_uz" class="textarea form-control @error('content_uz') border-danger @enderror" cols="30" rows="6" placeholder="Тўлиқ маълумот">
+                                        {{old('content_uz')}}
+                                    </textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
                             </div>

@@ -25,6 +25,9 @@ class BooksRepository extends BaseRepository
             $this->model = $this->model->where('category_id', $request->category_id);
         }
 
+        if (isset($request->status) && !empty($request->status)) {
+            $this->model = $this->model->where('status', $request->status);
+        }
         return $this->model->with('category')->orderBy('id', 'desc')->paginate($this->limit);
     }
 
@@ -57,11 +60,21 @@ class BooksRepository extends BaseRepository
     public function update($data, $id)
     {
         $model = $this->model->find($id);
-        if ($model->images) {
-            deleteImages($model->images, 'book');
+        if (isset($data['image']) && !empty($data['image'])) {
+            if ($model->images) {
+                deleteImages($model->images, 'book');
+            }
+            $images = $this->uploads($data['image'], 'book');
+        }else {
+            $images = $model->images;
         }
-        if ($model->files) {
-            @unlink(public_path('files/book/').$model->files);
+        if (isset($data['file']) && !empty($data['file'])) {
+            if ($model->files) {
+                @unlink(public_path('files/book/').$model->files);
+            }
+            $files = $this->fileUploads($data['file'], 'book');
+        }else {
+            $files = $model->files;
         }
         $model->update([
             'name_oz' => $data['name_oz'],
@@ -70,9 +83,9 @@ class BooksRepository extends BaseRepository
             'description_uz' => $data['description_uz'],
             'content_oz' => contentByDomDocment($data['content_oz'], 'book'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'book'),
-            'images' => $this->uploads($data['image'], 'book'),
+            'images' => $images,
             'status' => $data['status'],
-            'files' => $this->fileUploads($data['file'], 'book'),
+            'files' => $files,
             'category_id' => $data['category_id']
         ]);
 

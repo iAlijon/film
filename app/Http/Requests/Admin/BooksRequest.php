@@ -23,17 +23,32 @@ class BooksRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'category_id' => 'required|integer',
-            'name_oz' => 'required',
-            'name_uz' => 'required',
-            'description_oz' => 'required',
-            'description_uz' => 'required',
-            'content_oz' => 'required',
-            'content_uz' => 'required',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-            'file' => 'required|mimes:doc,docx,pdf,exl,xlsx|max:10480',
-            'status' => 'required|integer',
-        ];
+        if ($this->isMethod('post')) {
+            return [
+                'category_id' => 'required|integer',
+                'name_oz' => 'required',
+                'name_uz' => 'required',
+                'description_oz' => 'required',
+                'description_uz' => 'required',
+                'content_oz' => 'required',
+                'content_uz' => 'required',
+                'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+                'file' => 'required|mimes:doc,docx,pdf,exl,xlsx|max:10480',
+                'status' => 'required|integer',
+            ];
+        }else {
+            return [
+                'category_id' => 'required|integer',
+                'name_oz' => 'required',
+                'name_uz' => 'required',
+                'description_oz' => 'required',
+                'description_uz' => 'required',
+                'content_oz' => 'required',
+                'content_uz' => 'required',
+                'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'file' => 'nullable|mimes:doc,docx,pdf,exl,xlsx|max:10480',
+                'status' => 'required|integer',
+            ];
+        }
     }
 }

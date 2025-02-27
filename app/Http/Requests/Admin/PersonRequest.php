@@ -23,7 +23,7 @@ class PersonRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->isMethod('store')) {
+        if ($this->isMethod('post')) {
             return [
                 'category_id' => 'required',
                 'full_name_oz' => 'required',
@@ -36,7 +36,7 @@ class PersonRequest extends FormRequest
                 'status' => 'required|integer',
                 'birth_date' => 'required|date'
             ];
-        }else {
+        }elseif ($this->isMethod('put')) {
             return [
                 'category_id' => 'required',
                 'full_name_oz' => 'required',

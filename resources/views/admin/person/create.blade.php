@@ -91,7 +91,7 @@
 
                                 <div class="form-group">
                                     <label for="image">Rasm</label>
-                                    <input type="file" class="form-control" name="image" accept="image/jpeg,.png,.jpg">
+                                    <input type="file" class="form-control @error('image') border-danger @enderror" name="image" accept="image/jpeg,.png,.jpg">
                                     <small class="text-danger">{{$errors->first('image')}}</small>
                                 </div>
 
@@ -109,7 +109,7 @@
 
                                 <div class="form-group">
                                     <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" class="textarea form-control w3-right-align  @error('content_oz') border-danger @enderror" cols="30" rows="6" placeholder="To'liq ma'lumot">{{old('content_oz')}}</textarea>
+                                    <textarea name="content_oz" class="textarea form-control w3-right-align @error('content_oz')border-danger@enderror" cols="30" rows="6" placeholder="To'liq ma'lumot">{{old('content_oz')}}</textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 

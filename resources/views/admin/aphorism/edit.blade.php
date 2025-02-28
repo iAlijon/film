@@ -19,9 +19,9 @@
     <section class="content">
         <div class="col-11 mr-auto ml-auto">
             @if(session()->has('error'))
-                <div class="alert alert-danger position-relative">
+                <div class="alert alert-danger" id="close">
                     {{session()->get('error')}}
-                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                    <p class="cancel mb-0">&times;</p>
                 </div>
             @endif
             <div class="card card-info card-outline">
@@ -59,13 +59,13 @@
 
                                 <div class="form-group">
                                     <label>F.I.O</label>
-                                    <input type="text" class="form-control" name="full_name_oz" value="{{$model->full_name_oz}}">
+                                    <input type="text" class="form-control @error('full_name_oz') border-danger @enderror" name="full_name_oz" value="{{$model->full_name_oz}}">
                                     <small class="text-danger">{{$errors->first('full_name_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Rasm</label>
-                                    <input type="file" class="form-control" name="image"
+                                    <input type="file" class="form-control @error('full_name_oz') border-danger @enderror" name="image"
                                            accept="image/jpeg, image/jpg, image/png, image/gif">
                                     <small class="text-danger">{{$errors->first('image')}}</small>
                                 </div>
@@ -73,7 +73,7 @@
 
                                 <div class="form-group">
                                     <label>Qisqacha ma'lumot</label>
-                                    <textarea name="description_oz" cols="30" rows="5" class="form-control">{{$model->description_oz}}</textarea>
+                                    <textarea name="description_oz" cols="30" rows="5" class="form-control @error('description_oz') border-danger @enderror">{{$model->description_oz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
@@ -90,7 +90,7 @@
                                                     <div class="card-body">
                                                         <div class="form-group dynamic-form">
                                                             <textarea name="calendar[{{$k}}][description_oz]"
-                                                                      id="description_oz" class="form-control"
+                                                                      id="description_oz" class="form-control @error("calendar[{{$k}}][description_oz]") border-danger @enderror"
                                                                       placeholder="Enter description">{{$calendar->description_oz}}</textarea>
                                                             <small class="text-danger">{{$errors->first("calendar.$k.description_oz")}}</small>
                                                         <!-- Button to Add More Forms -->
@@ -117,13 +117,13 @@
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
                                     <label>Ф.И.О</label>
-                                    <input type="text" class="form-control" name="full_name_uz" value="{{$model->full_name_uz}}">
+                                    <input type="text" class="form-control @error('full_name_uz') border-danger @enderror" name="full_name_uz" value="{{$model->full_name_uz}}">
                                     <small class="text-danger">{{$errors->first('full_name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Қисқача маълумот</label>
-                                    <textarea name="description_uz" cols="30" rows="5" class="form-control">{{$model->description_uz}}</textarea>
+                                    <textarea name="description_uz" cols="30" rows="5" class="form-control @error('description_uz') border-danger @enderror">{{$model->description_uz}}</textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
@@ -139,7 +139,7 @@
                                                     <div class="card-body">
                                                         <div class="form-group dynamic-form">
                                                             <textarea name="calendar[{{$k}}][description_uz]"
-                                                                      id="description_uz" class="form-control"
+                                                                      id="description_uz" class="form-control @error("calendar[{{$k}}][description_uz]") border-danger @enderror"
                                                                       placeholder="Enter description">{{$calendar->description_uz}}</textarea>
                                                             <small class="text-danger">{{$errors->first("calendar.$k.description_uz")}}</small>
                                                             <!-- Button to Add More Forms -->

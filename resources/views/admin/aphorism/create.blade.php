@@ -19,9 +19,9 @@
     <section class="content">
         <div class="col-11 mr-auto ml-auto">
             @if(session()->has('error'))
-                <div class="alert alert-danger position-relative">
+                <div class="alert alert-danger" id="close">
                     {{session()->get('error')}}
-                    <button class="btn btn-danger position-absolute cancel">&times;</button>
+                    <p class="cancel mb-0">&times;</p>
                 </div>
             @endif
             <div class="card card-info card-outline">
@@ -30,12 +30,28 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill"
                                href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="true">O'Z</a>
+                               aria-selected="true">O'Z
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        @if(str_contains($error,'oz'))
+                                            <div class="line"></div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
                                href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false">UZ</a>
+                               aria-selected="false">UZ
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        @if(str_contains($error,'uz'))
+                                            <div class="line"></div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
@@ -87,7 +103,8 @@
                                                 <div class="card-body">
                                                     <div class="form-group dynamic-form">
                                                         <label for="description_oz">Forma</label>
-                                                        <textarea name="calendar[0][description_oz]" id="description_oz" class="form-control" placeholder="Enter description"></textarea>
+                                                        <textarea name="calendar[0][description_oz]" id="description_oz" class="form-control @error("calendar[0][description_oz]") border-danger @enderror"
+                                                                  placeholder="Enter description"></textarea>
                                                         <small class="text-danger">{{$errors->first('calendar[0][description_oz]')}}</small>
                                                         <!-- Button to Add More Forms -->
                                                     </div>
@@ -135,7 +152,7 @@
                                                 <div class="card-body">
                                                     <div class="form-group dynamic-form">
                                                         <label for="description_uz">Форма</label>
-                                                        <textarea name="calendar[0][description_uz]" id="description_uz" class="form-control" placeholder="Enter description"></textarea>
+                                                        <textarea name="calendar[0][description_uz]" id="description_uz" class="form-control @error("calendar[0][description_uz]") border-danger @enderror" placeholder="Enter description"></textarea>
                                                         <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                                         <!-- Button to Add More Forms -->
                                                     </div>

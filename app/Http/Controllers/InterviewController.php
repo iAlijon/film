@@ -27,7 +27,8 @@ class InterviewController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);
         }
-        if ($data['items']) {
+
+        if ($data) {
             return response()->json(['success' => true, 'data' => $data, 'message'=>'ok']);
         }
         return response()->json(['success' => false, 'data' => '', 'message'=>'ok']);

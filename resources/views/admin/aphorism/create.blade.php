@@ -103,7 +103,7 @@
                                                 <div class="card-body">
                                                     <div class="form-group dynamic-form">
                                                         <label for="description_oz">Forma</label>
-                                                        <textarea name="calendar[0][description_oz]" id="description_oz" class="form-control @error("calendar[0][description_oz]") border-danger @enderror"
+                                                        <textarea name="calendar[0][description_oz]" id="description_oz" class="form-control @error('calendar[0][description_oz]') border-danger @enderror"
                                                                   placeholder="Enter description"></textarea>
                                                         <small class="text-danger">{{$errors->first('calendar[0][description_oz]')}}</small>
                                                         <!-- Button to Add More Forms -->
@@ -152,7 +152,7 @@
                                                 <div class="card-body">
                                                     <div class="form-group dynamic-form">
                                                         <label for="description_uz">Форма</label>
-                                                        <textarea name="calendar[0][description_uz]" id="description_uz" class="form-control @error("calendar[0][description_uz]") border-danger @enderror" placeholder="Enter description"></textarea>
+                                                        <textarea name="calendar[0][description_uz]" id="description_uz" class="form-control @error('calendar[0][description_uz]') border-danger @enderror" placeholder="Enter description"></textarea>
                                                         <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                                         <!-- Button to Add More Forms -->
                                                     </div>
@@ -182,7 +182,6 @@
         function addForm(section) {
             const dynamicForms = document.getElementById(`dynamic-forms_${section}`);
             let formIndex = formIndexes[section];
-            console.log(formIndex)
             // Create a new form group
             const newForm = document.createElement('div');
             newForm.classList.add('form-group', 'dynamic-form', 'mt-3');
@@ -227,9 +226,22 @@
             formIndexes[section] = forms.length + 1;
         }
 
+        function check(section) {
+            let isValid = true;
+            $(`#dynamic-forms_${section} .dynamic-form`).each(function (){
+               let textarea = $(this).find('textarea');
+               // let add = document.getElementsByName(`calendar[${index + 1}][description_${section}]`);
+               if (textarea.val().trim() === '') {
+                    textarea.addClass('border-danger');
+                    isValid = false;
+               }
+            });
+        }
+
         // Add event listeners for adding forms
         ['oz', 'uz'].forEach((section) => {
             document.getElementById(`add-form-btn_${section}`).addEventListener('click', () => addForm(section));
+            document.getElementById(`add-form-btn_${section}`).addEventListener('click', () => check(section));
 
             // Delegate click event for remove buttons
             document.getElementById(`dynamic-forms_${section}`).addEventListener('click', (e) => {

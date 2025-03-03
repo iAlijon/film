@@ -214,9 +214,22 @@
             formIndexes[section] = forms.length + 1;
         }
 
+        function check(section) {
+            let isValid = true;
+            $(`#dynamic-forms_${section} .dynamic-form`).each(function (){
+                let textarea = $(this).find('textarea');
+                // let add = document.getElementsByName(`calendar[${index + 1}][description_${section}]`);
+                if (textarea.val().trim() === '') {
+                    textarea.addClass('border-danger');
+                    isValid = false;
+                }
+            });
+        }
+
         // Add event listeners for adding forms
         ['oz', 'uz'].forEach((section) => {
             document.getElementById(`add-form-btn_${section}`).addEventListener('click', () => addForm(section));
+            document.getElementById(`add-form-btn_${section}`).addEventListener('click', () => check(section));
 
             // Delegate click event for remove buttons
             document.getElementById(`dynamic-forms_${section}`).addEventListener('click', (e) => {

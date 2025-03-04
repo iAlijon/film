@@ -34,7 +34,7 @@ class FilmographyController extends Controller
             $model = Filmography::query();
         }
         $categories = PersonCategory::where('status', true)->where('type', 'filmography')->select('id','name_oz')->get();
-        $models = $model->select('id','category_id','name_oz','name_uz','description_oz','description_uz','content_oz','content_uz','images','created_at','updated_at')
+        $models = $model->select('id','category_id','name_oz','name_uz','description_oz','description_uz','content_oz','content_uz','images','created_at','updated_at','status')
             ->with('category')
             ->orderBy('created_at', 'desc')
             ->paginate(20);

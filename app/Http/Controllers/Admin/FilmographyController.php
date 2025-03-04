@@ -84,7 +84,7 @@ class FilmographyController extends Controller
             'content_uz' => contentByDomDocment($data['content_uz'], 'filmography'),
             'images' => $this->uploads($data['image'], 'filmography'),
             'status' => $data['status'],
-            'filmography_group_id' => $data['category_id']
+            'category_id' => $data['category_id']
         ]);
         if ($model) {
             $request->session()->flash('success', 'Success');

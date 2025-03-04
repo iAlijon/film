@@ -161,7 +161,7 @@ class FilmographyController extends Controller
             'content_uz' => contentByDomDocment($data['content_uz'], 'filmography'),
             'images' => $images,
             'status' => $data['status'],
-            'filmography_group_id' => $data['category_id']
+            'category_id' => $data['category_id']
         ]);
 
         if ($model) {

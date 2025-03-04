@@ -33,7 +33,7 @@ class BooksRequest extends FormRequest
                 'content_oz' => 'required',
                 'content_uz' => 'required',
                 'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-                'file' => 'required|mimes:doc,docx,pdf,exl,xlsx|max:10480',
+                'file' => 'required|mimes:doc,docx,pdf|max:10480',
                 'status' => 'required|integer',
             ];
         }else {
@@ -46,7 +46,7 @@ class BooksRequest extends FormRequest
                 'content_oz' => 'required',
                 'content_uz' => 'required',
                 'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-                'file' => 'nullable|mimes:doc,docx,pdf,exl,xlsx|max:10480',
+                'file' => 'nullable|mimes:doc,docx,pdf|max:10480',
                 'status' => 'required|integer',
             ];
         }

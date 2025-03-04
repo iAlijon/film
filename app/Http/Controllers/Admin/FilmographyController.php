@@ -23,18 +23,21 @@ class FilmographyController extends Controller
     public function index(Request $request)
     {
         $result = $request->all();
-        if (isset($result['name_oz']) && !empty($result['name_oz'] || isset($result['category_id']) && !empty($result['category_id']))) {
+        if (isset($result['name_oz']) && !empty($result['name_oz']) || isset($result['category_id']) && !empty($result['category_id']) || isset($result['status']) && !empty($result['status'])) {
             if (isset($result['name_oz']) && !empty($result['name_oz'])) {
                 $model = Filmography::where('name_oz', 'ilike','%'.$result['name_oz'].'%');
             }
             if (isset($result['category_id']) && !empty($result['category_id'])) {
-                $model = Filmography::where('filmography_group_id', $result['category_id']);
+                $model = Filmography::where('category_id', $result['category_id']);
+            }
+            if (isset($result['status']) && !empty($result['status'])) {
+                $model = Filmography::where('status', $result['status']);
             }
         }else {
             $model = Filmography::query();
         }
-        $categories = PersonCategory::where('status', true)->where('type', 'filmography')->select('id','name_oz')->get();
-        $models = $model->select('id','category_id','name_oz','name_uz','description_oz','description_uz','content_oz','content_uz','images','created_at','updated_at','status')
+        $categories = PersonCategory::where('status', 1)->where('type', 'filmography')->select('id','name_oz')->get();
+        $models = $model->select('id','category_id','name_oz','description_oz','content_oz','images','created_at','updated_at','status')
             ->with('category')
             ->orderBy('created_at', 'desc')
             ->paginate(20);

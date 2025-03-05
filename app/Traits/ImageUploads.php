@@ -26,6 +26,7 @@ trait ImageUploads
     {
         $app_url = config('app.url');
         $file_name = time().'_'.$file->getClientOriginalName();
+        $file_name = str_replace(' ', '_', $file_name);
         $path = public_path('files/').$folder;
         if ($file->move($path, $file_name)){
             return $app_url.'/public/files/'.$folder.'/'.$file_name;

@@ -39,7 +39,7 @@ Route::get('interview/{id}', [\App\Http\Controllers\InterviewController::class, 
 
 //person
 Route::get('persons', [\App\Http\Controllers\PersonDirectorController::class, 'index'])->name('person.api.index');
-Route::get('person/{id}', [\App\Http\Controllers\PersonDirectorController::class, 'show'])->name('person.api.show');
+Route::get('persons/{id}', [\App\Http\Controllers\PersonDirectorController::class, 'show'])->name('person.api.show');
 
 //film_dictionary
 Route::get('film_dictionary', [\App\Http\Controllers\DictionaryController::class, 'dictionary'])->name('dictionary');

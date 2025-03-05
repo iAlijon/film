@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 class BooksRepository extends BaseRepository
 {
     use ImageUploads;
+
     public function __construct()
     {
         $this->model = new Books();
@@ -18,11 +19,11 @@ class BooksRepository extends BaseRepository
 
     public function index($request)
     {
-        if (isset($request->name_oz) && !empty($request->name_oz)){
-            $this->model = $this->model->where('name_oz', 'ilike', '%'.$request->name_oz.'%');
+        if (isset($request->name_oz) && !empty($request->name_oz)) {
+            $this->model = $this->model->where('name_oz', 'ilike', '%' . $request->name_oz . '%');
         }
 
-        if (isset($request->category_id) && !empty($request->category_id)){
+        if (isset($request->category_id) && !empty($request->category_id)) {
             $this->model = $this->model->where('category_id', $request->category_id);
         }
 
@@ -52,11 +53,10 @@ class BooksRepository extends BaseRepository
                 'files' => $this->fileUploads($data['file'], 'book'),
                 'category_id' => $data['category_id']
             ]);
-            if ($model)
-            {
+            if ($model) {
                 return $model;
             }
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             Log::info('Books Errors: ', $exception->getMessage());
             return false;
         }
@@ -71,15 +71,15 @@ class BooksRepository extends BaseRepository
                     deleteImages($model->images, 'book');
                 }
                 $images = $this->uploads($data['image'], 'book');
-            }else {
+            } else {
                 $images = $model->images;
             }
             if (isset($data['file']) && !empty($data['file'])) {
                 if ($model->files) {
-                    @unlink(public_path('files/book/').$model->files);
+                    @unlink(public_path('files/book/') . $model->files);
                 }
                 $files = $this->fileUploads($data['file'], 'book');
-            }else {
+            } else {
                 $files = $model->files;
             }
             $model->update([
@@ -95,12 +95,11 @@ class BooksRepository extends BaseRepository
                 'category_id' => $data['category_id']
             ]);
 
-            if ($model)
-            {
+            if ($model) {
                 return $model;
             }
 
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             Log::info('Books Errors Update:', $e->getMessage());
             return false;
         }
@@ -110,15 +109,13 @@ class BooksRepository extends BaseRepository
     public function delete($id)
     {
         $model = $this->model->find($id);
-        if ($model->images){
+        if ($model->images) {
             deleteImages($model->images, 'book');
         }
-        if ($model->files)
-        {
-            @unlink(public_path('files/book/').$model->files);
+        if ($model->files) {
+            @unlink(public_path('files/book/') . $model->files);
         }
-        if ($model->delete())
-        {
+        if ($model->delete()) {
             return true;
         }
         return false;
@@ -127,9 +124,6 @@ class BooksRepository extends BaseRepository
     public function download($id)
     {
         $model = $this->model->find($id);
-        if ($model->files){
-            $file_path = public_path('/files/book/'.$model->files);
-            return response()->download($file_path);
-        }
+        return response()->download($model->files);
     }
 }

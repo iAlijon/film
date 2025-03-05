@@ -35,7 +35,7 @@ class InterviewController extends Controller
 
     }
 
-    public function interviewItemFilter(Request $request,$id)
+    public function show(Request $request,$id)
     {
         $lang = $request->header('lang', 'oz');
         $data = Interview::where('id', $id)

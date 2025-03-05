@@ -85,7 +85,7 @@
                             <td>{{$model->created_at}}</td>
                             <td>
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <a href="{{getFile($model->files)}}" class="btn btn-info mr-2" target="_blank"><i class="fas fa-eye"></i></a>
+                                    <a href="{{$model->files}}" class="btn btn-info mr-2" target="_blank"><i class="fas fa-eye"></i></a>
                                     <a href="{{route('download', $model->id)}}" class="btn btn-primary"><i class="fas fa-download"></i></a>
                                 </div>
                             </td>

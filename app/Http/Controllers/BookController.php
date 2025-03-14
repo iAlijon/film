@@ -37,9 +37,6 @@ class BookController extends Controller
             ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'category_id', 'created_at', 'updated_at')
             ->first();
         if ($params) {
-            if ($params->files) {
-                $params->files = asset('/files/book/' . $params->files);
-            }
             return response()->json(['success' => true, 'data' => $params, 'message' => 'ok']);
         }
         return response()->json(['success' => false, 'data' => '', 'message' => 'ok']);

@@ -29,7 +29,7 @@ trait ImageUploads
         $file_name = str_replace(' ', '_', $file_name);
         $path = public_path('files/').$folder;
         if ($file->move($path, $file_name)){
-            return $app_url.'/public/files/'.$folder.'/'.$file_name;
+            return $app_url.'/files/'.$folder.'/'.$file_name;
         }else{
             return null;
         }

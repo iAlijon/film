@@ -46,7 +46,7 @@ class BooksRequest extends FormRequest
                 'content_oz' => 'required',
                 'content_uz' => 'required',
                 'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-                'file' => 'nullable|mimes:doc,docx,pdf|max:10480',
+                'file' => 'nullable|mimes:doc,docx,pdf|max:51200',
                 'status' => 'required|integer',
             ];
         }

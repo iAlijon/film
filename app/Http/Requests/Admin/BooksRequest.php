@@ -39,7 +39,7 @@ class BooksRequest extends FormRequest
                 'type_uz' => 'required',
                 'about_oz' => 'required',
                 'about_uz' => 'required',
-                'date' => 'required|date'
+                'date' => 'required'
             ];
         }else {
             return [
@@ -57,7 +57,7 @@ class BooksRequest extends FormRequest
                 'type_uz' => 'required',
                 'about_oz' => 'required',
                 'about_uz' => 'required',
-                'date' => 'required|date'
+                'date' => 'required'
             ];
         }
     }

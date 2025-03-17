@@ -56,7 +56,9 @@ class BooksRepository extends BaseRepository
                 'type_uz' => $data['type_uz'],
                 'about_oz' => $data['about_oz'],
                 'about_uz' => $data['about_uz'],
-                'date' =>  $data['date']
+                'date' =>  $data['date'],
+                'content_oz' => null,
+                'content_uz' => null,
             ]);
             if ($model) {
                 return $model;
@@ -102,7 +104,9 @@ class BooksRepository extends BaseRepository
                 'type_uz' => $data['type_uz'],
                 'about_oz' => $data['about_oz'],
                 'about_uz' => $data['about_uz'],
-                'date' =>  $data['date']
+                'date' =>  $data['date'],
+                'content_oz' => null,
+                'content_uz' => null,
             ]);
 
             if ($model) {

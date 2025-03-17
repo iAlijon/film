@@ -32,8 +32,6 @@ return new class extends Migration
             $table->text('content_en')->nullable();
             $table->string('author_oz')->nullable();
             $table->string('author_uz')->nullable();
-            $table->string('type_oz')->nullable();
-            $table->string('type_uz')->nullable();
             $table->string('about_oz')->nullable();
             $table->string('about_uz')->nullable();
             $table->date('date')->nullable();

@@ -35,8 +35,6 @@ class BooksRequest extends FormRequest
                 'status' => 'required|integer',
                 'author_oz' => 'required',
                 'author_uz' => 'required',
-                'type_oz' => 'required',
-                'type_uz' => 'required',
                 'about_oz' => 'required',
                 'about_uz' => 'required',
                 'date' => 'required'
@@ -53,8 +51,6 @@ class BooksRequest extends FormRequest
                 'status' => 'required|integer',
                 'author_oz' => 'required',
                 'author_uz' => 'required',
-                'type_oz' => 'required',
-                'type_uz' => 'required',
                 'about_oz' => 'required',
                 'about_uz' => 'required',
                 'date' => 'required'

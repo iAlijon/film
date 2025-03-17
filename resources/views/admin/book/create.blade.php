@@ -91,14 +91,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="type_oz">Janr</label>
-                                    <input type="text" name="type_oz" class="form-control @error('type_oz') border-danger @enderror" value="{{old('type_oz')}}"
-                                    placeholder="Janr..."
-                                    >
-                                    <small class="text-danger">{{$errors->first('type_oz')}}</small>
-                                </div>
-
-                                <div class="form-group">
                                     <label for="name_oz">Nomi</label>
                                     <input type="text" name="name_oz" class="form-control @error('name_oz') border-danger @enderror" value="{{old('name_oz')}}"
                                     placeholder="Nomi..."
@@ -161,14 +153,6 @@
                                     placeholder="Муаллиф..."
                                     >
                                     <small class="text-danger">{{$errors->first('author_uz')}}</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="type_uz">Жанр</label>
-                                    <input type="text" name="type_uz" class="form-control @error('type_uz') border-danger @enderror" value="{{old('type_uz')}}"
-                                           placeholder="Жанр..."
-                                    >
-                                    <small class="text-danger">{{$errors->first('type_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">

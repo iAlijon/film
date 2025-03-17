@@ -137,7 +137,6 @@ class BooksRepository extends BaseRepository
     public function download($id)
     {
         $model = $this->model->find($id);
-        $file = basename($model->files);
-        return response()->download(asset('/public/file/book/'.$file));
+        return response()->download($model->files);
     }
 }

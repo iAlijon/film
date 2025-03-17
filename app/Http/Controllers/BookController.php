@@ -60,6 +60,9 @@ class BookController extends Controller
 
     public function fileDownload($id){
         $model = Books::where('id', $id)->first();
-        return response()->download($model->files);
+        $file_name = basename($model->files);
+        return \response()->make($file_name, 200, [
+            'Content-Disposition' => 'attachment; filename="' . $file_name . '"',
+        ]);
     }
 }

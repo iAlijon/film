@@ -21,6 +21,7 @@ class BookController extends Controller
                     'about_'.$lang.' as about',
                     'date'
                 )
+                ->with('category:id,name_'.$lang.' as name')
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);
         }else {
@@ -29,6 +30,7 @@ class BookController extends Controller
                     'about_'.$lang.' as about',
                     'date'
                 )
+                ->with('category:id,name_'.$lang.' as name')
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);
         }
@@ -48,6 +50,7 @@ class BookController extends Controller
                  'about_'.$lang.' as about',
                  'date'
             )
+            ->with('category:id,name_'.$lang.' as name')
             ->first();
         if ($params) {
             return response()->json(['success' => true, 'data' => $params, 'message' => 'ok']);

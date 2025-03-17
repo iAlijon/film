@@ -61,8 +61,7 @@ class BookController extends Controller
     public function fileDownload($id){
         $model = Books::where('id', $id)->first();
         $file_name = basename($model->files);
-        return \response()->make($file_name, 200, [
-            'Content-Disposition' => 'attachment; filename="' . $file_name . '"',
-        ]);
+        $path = public_path('files/book/'.$file_name);
+        return response()->download($path);
     }
 }

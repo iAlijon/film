@@ -26,10 +26,8 @@ class BookController extends Controller
                 ->paginate($per_page);
         }else {
             $params = Books::where('status', 1)
-                ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description',
-                    'category_id', 'created_at', 'updated_at',
-                    'author_'.$lang.' as author',
-                    'type_'.$lang,' as type',
+                ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'category_id', 'created_at', 'updated_at', 'author_'.$lang.' as author',
+                    'type_'.$lang.' as type',
                     'about_'.$lang.' as about',
                     'date'
                 )

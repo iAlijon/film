@@ -51,7 +51,14 @@ class BooksRepository extends BaseRepository
                 'images' => $this->uploads($data['image'], 'book'),
                 'status' => $data['status'],
                 'files' => $this->fileUploads($data['file'], 'book'),
-                'category_id' => $data['category_id']
+                'category_id' => $data['category_id'],
+                'author_oz' => $data['author_oz'],
+                'author_uz' => $data['author_uz'],
+                'type_oz' => $data['type_oz'],
+                'type_uz' => $data['type_uz'],
+                'about_oz' => $data['about_oz'],
+                'about_uz' => $data['about_uz'],
+                'date' =>  $data['date']
             ]);
             if ($model) {
                 return $model;
@@ -92,7 +99,14 @@ class BooksRepository extends BaseRepository
                 'images' => $images,
                 'status' => $data['status'],
                 'files' => $files,
-                'category_id' => $data['category_id']
+                'category_id' => $data['category_id'],
+                'author_oz' => $data['author_oz'],
+                'author_uz' => $data['author_uz'],
+                'type_oz' => $data['type_oz'],
+                'type_uz' => $data['type_uz'],
+                'about_oz' => $data['about_oz'],
+                'about_uz' => $data['about_uz'],
+                'date' =>  $data['date']
             ]);
 
             if ($model) {

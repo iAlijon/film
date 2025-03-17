@@ -84,9 +84,33 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="author">Muallif</label>
+                                    <input type="text" name="author_oz" class="form-control @error('author_oz') border-danger @enderror" value="{{$model->author_oz}}"
+                                           placeholder="Muallif..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('author_oz')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="type_oz">Janr</label>
+                                    <input type="text" name="type_oz" class="form-control @error('type_oz') border-danger @enderror" value="{{$model->type_oz}}"
+                                           placeholder="Janr..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('type_oz')}}</small>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="name_oz">Nomi</label>
                                     <input type="text" name="name_oz" class="form-control @error('name_oz') border-danger @enderror" value="{{$model->name_oz}}">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="about_oz">Kitob haqida</label>
+                                    <input type="text" name="about_oz" class="form-control @error('about_oz') border-danger @enderror" value="{{$model->about_oz}}"
+                                           placeholder="Kiton haqida..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('about_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
@@ -108,12 +132,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" id="" cols="30" rows="10" class="form-control textarea @error('content_oz') border-danger @enderror">{{$model->content_oz}}</textarea>
-                                    <small class="text-danger">{{$errors->first('content_oz')}}</small>
-                                </div>
-
-                                <div class="form-group">
                                     <label for="status">Status</label>
                                     <select name="status" id="" class="form-control">
                                         <option value="1" {{$model->status == 1?'selected':''}}>Active</option>
@@ -125,9 +143,32 @@
                             {{---- uz ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
+                                    <label for="author_uz">Муаллиф</label>
+                                    <input type="text" name="author_uz" class="form-control @error('author_uz') border-danger @enderror" value="{{$model->author_uz}}"
+                                           placeholder="Муаллиф..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('author_uz')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="type_uz">Жанр</label>
+                                    <input type="text" name="type_uz" class="form-control @error('type_uz') border-danger @enderror" value="{{$model->type_uz}}"
+                                           placeholder="Жанр..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('type_uz')}}</small>
+                                </div>
+                                <div class="form-group">
                                     <label for="name_uz">Номи</label>
                                     <input type="text" name="name_uz" class="form-control @error('name_uz') border-danger @enderror" value="{{$model->name_uz}}">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="about_uz">Kitob haqida</label>
+                                    <input type="text" name="about_uz" class="form-control @error('about_uz') border-danger @enderror" value="{{$model->about_uz}}"
+                                           placeholder="Китоб ҳақида..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('about_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
@@ -136,11 +177,6 @@
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="content_uz">Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" id="content_uz" cols="30" rows="10" class="form-control textarea @error('content_uz') border-danger @enderror">{{$model->content_uz}}</textarea>
-                                    <small class="text-danger">{{$errors->first('content_uz')}}</small>
-                                </div>
                             </div>
                             <div class="text-right">
                                 <button class="btn btn-success">&check;Saqlash</button>

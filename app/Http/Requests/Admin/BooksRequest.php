@@ -35,6 +35,13 @@ class BooksRequest extends FormRequest
                 'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
                 'file' => 'required|mimes:doc,docx,pdf|max:51200',
                 'status' => 'required|integer',
+                'author_oz' => 'required',
+                'author_uz' => 'required',
+                'type_oz' => 'required',
+                'type_uz' => 'required',
+                'about_oz' => 'required',
+                'about_uz' => 'required',
+                'date' => 'required|date'
             ];
         }else {
             return [
@@ -48,6 +55,13 @@ class BooksRequest extends FormRequest
                 'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'file' => 'nullable|mimes:doc,docx,pdf|max:51200',
                 'status' => 'required|integer',
+                'author_oz' => 'required',
+                'author_uz' => 'required',
+                'type_oz' => 'required',
+                'type_uz' => 'required',
+                'about_oz' => 'required',
+                'about_uz' => 'required',
+                'date' => 'required|date'
             ];
         }
     }

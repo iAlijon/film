@@ -83,9 +83,35 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="author">Muallif</label>
+                                    <input type="text" name="author_oz" class="form-control @error('author_oz') border-danger @enderror" value="{{old('author_oz')}}"
+                                    placeholder="Muallif..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('author_oz')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="type_oz">Janr</label>
+                                    <input type="text" name="type_oz" class="form-control @error('type_oz') border-danger @enderror" value="{{old('type_oz')}}"
+                                    placeholder="Janr..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('type_oz')}}</small>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="name_oz">Nomi</label>
-                                    <input type="text" name="name_oz" class="form-control @error('name_oz') border-danger @enderror" value="{{old('name_oz')}}">
+                                    <input type="text" name="name_oz" class="form-control @error('name_oz') border-danger @enderror" value="{{old('name_oz')}}"
+                                    placeholder="Nomi..."
+                                    >
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="about_oz">Kitob haqida</label>
+                                    <input type="text" name="about_oz" class="form-control @error('about_oz') border-danger @enderror" value="{{old('about_oz')}}"
+                                    placeholder="Kiton haqida..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('about_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
@@ -96,24 +122,26 @@
 
                                 <div class="form-group">
                                     <label for="file">Fayillar</label>
-                                    <input type="file" name="file" class="form-control @error('file') border-danger @enderror">
+                                    <input type="file" name="file" class="form-control @error('file') border-danger @enderror" accept="application/pdf,doc">
                                     <small class="text-danger">{{$errors->first('file')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="description_oz">Qisqqcha ma'lumot</label>
-                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control @error('description_oz') border-danger @enderror">
+                                    <label for="description_oz">Qisqacha ma'lumot</label>
+                                    <textarea name="description_oz" id="" cols="30" rows="5" class="form-control @error('description_oz') border-danger @enderror"
+                                    placeholder="Qisqacha ma'lumot..."
+                                    >
                                         {{old('description_oz')}}
                                     </textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="content_oz">To'liq ma'lumot</label>
-                                    <textarea name="content_oz" id="" cols="30" rows="10" class="form-control textarea @error('content_oz') border-danger @enderror">
-                                        {{old('content_oz')}}
-                                    </textarea>
-                                    <small class="text-danger">{{$errors->first('content_oz')}}</small>
+                                    <label for="date">Sana</label>
+                                    <input type="date" name="date" class="form-control @error('date') border-danger @enderror" value="{{old('date')}}"
+                                    placeholder="Sana"
+                                    >
+                                    <small class="text-danger">{{$errors->first('date')}}</small>
                                 </div>
 
                                 <div class="form-group">
@@ -128,9 +156,35 @@
                             {{---- uz ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
+                                    <label for="author_uz">Муаллиф</label>
+                                    <input type="text" name="author_uz" class="form-control @error('author_uz') border-danger @enderror" value="{{old('author_uz')}}"
+                                    placeholder="Муаллиф..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('author_uz')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="type_uz">Жанр</label>
+                                    <input type="text" name="type_uz" class="form-control @error('type_uz') border-danger @enderror" value="{{old('type_uz')}}"
+                                           placeholder="Жанр..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('type_uz')}}</small>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="name_uz">Номи</label>
-                                    <input type="text" name="name_uz" class="form-control @error('name_uz') border-danger @enderror" value="{{old('name_uz')}}">
+                                    <input type="text" name="name_uz" class="form-control @error('name_uz') border-danger @enderror" value="{{old('name_uz')}}"
+                                    placeholder="Номи..."
+                                    >
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="about_uz">Kitob haqida</label>
+                                    <input type="text" name="about_uz" class="form-control @error('about_uz') border-danger @enderror" value="{{old('about_uz')}}"
+                                           placeholder="Китоб ҳақида..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('about_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
@@ -141,13 +195,6 @@
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="content_uz">Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" id="content_uz" cols="30" rows="10" class="form-control textarea @error('content_uz') border-danger @enderror">
-                                        {{old('content_uz')}}
-                                    </textarea>
-                                    <small class="text-danger">{{$errors->first('content_uz')}}</small>
-                                </div>
                             </div>
                             <div class="text-right">
                                 <button class="btn btn-success">&check;Saqlash</button>

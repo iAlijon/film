@@ -7,6 +7,7 @@ namespace App\Repositories;
 use App\Models\Books;
 use App\Traits\ImageUploads;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Response;
 
 class BooksRepository extends BaseRepository
 {
@@ -138,6 +139,9 @@ class BooksRepository extends BaseRepository
     public function download($id)
     {
         $model = $this->model->find($id);
-        return response()->download($model->files);
+        $file_name = basename($model->files);
+        return \response()->make($file_name, 200, [
+            'Content-Disposition' => 'attachment; filename="' . $file_name . '"',
+        ]);
     }
 }

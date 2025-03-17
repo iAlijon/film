@@ -56,7 +56,7 @@ Route::get('filmography/{id}', [\App\Http\Controllers\FilmographyController::cla
 //book
 Route::get('book', [\App\Http\Controllers\BookController::class, 'index'])->name('book.api.index');
 Route::get('book/{id}', [\App\Http\Controllers\BookController::class, 'show'])->name('book.api.show');
-
+Route::get('book-file-download/{id}', [\App\Http\Controllers\BookController::class, 'fileDownload']);
 //category
 Route::get('categories', [\App\Http\Controllers\CategoriesController::class, 'index'])->name('category');
 

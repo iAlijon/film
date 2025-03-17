@@ -14,12 +14,25 @@ class BookController extends Controller
         $per_page = $result['per_page']??6;
         if (isset($result['category_id']) && !empty($result['category_id'])) {
             $params = Books::where('category_id', $result['category_id'])
-                ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'category_id', 'created_at', 'updated_at')
+                ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description',
+                     'category_id', 'created_at',
+                    'updated_at',
+                    'author_'.$lang.' as author',
+                    'type_'.$lang,' as type',
+                    'about_'.$lang.' as about',
+                    'date'
+                )
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);
         }else {
             $params = Books::where('status', 1)
-                ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'category_id', 'created_at', 'updated_at')
+                ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description',
+                    'category_id', 'created_at', 'updated_at',
+                    'author_'.$lang.' as author',
+                    'type_'.$lang,' as type',
+                    'about_'.$lang.' as about',
+                    'date'
+                )
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);
         }
@@ -33,11 +46,22 @@ class BookController extends Controller
     {
         $lang = $request->header('lang', 'oz');
         $params = Books::where('id', $id)
-            ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'category_id', 'created_at', 'updated_at')
+            ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description',
+                'category_id', 'created_at', 'updated_at',
+                 'author_'.$lang.' as author',
+                 'type_'.$lang,' as type',
+                 'about_'.$lang.' as about',
+                 'date'
+            )
             ->first();
         if ($params) {
             return response()->json(['success' => true, 'data' => $params, 'message' => 'ok']);
         }
         return response()->json(['success' => false, 'data' => '', 'message' => 'ok']);
+    }
+
+    public function fileDownload($id){
+        $model = Books::where('id', $id)->first();
+        return response()->download($model->files);
     }
 }

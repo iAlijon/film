@@ -7,7 +7,6 @@ namespace App\Repositories;
 use App\Models\Books;
 use App\Traits\ImageUploads;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Response;
 
 class BooksRepository extends BaseRepository
 {
@@ -53,6 +52,8 @@ class BooksRepository extends BaseRepository
                 'category_id' => $data['category_id'],
                 'author_oz' => $data['author_oz'],
                 'author_uz' => $data['author_uz'],
+                'type_oz' => $data['type_oz'],
+                'type_uz' => $data['type_uz'],
                 'about_oz' => $data['about_oz'],
                 'about_uz' => $data['about_uz'],
                 'date' =>  $data['date'],
@@ -99,11 +100,12 @@ class BooksRepository extends BaseRepository
                 'category_id' => $data['category_id'],
                 'author_oz' => $data['author_oz'],
                 'author_uz' => $data['author_uz'],
+                'type_oz' => $data['type_oz'],
+                'type_uz' => $data['type_uz'],
                 'about_oz' => $data['about_oz'],
                 'about_uz' => $data['about_uz'],
                 'date' =>  $data['date'],
-                'content_oz' => null,
-                'content_uz' => null,
+
             ]);
 
             if ($model) {
@@ -135,9 +137,7 @@ class BooksRepository extends BaseRepository
     public function download($id)
     {
         $model = $this->model->find($id);
-        $file_name = basename($model->files);
-        return \response()->make($file_name, 200, [
-            'Content-Disposition' => 'attachment; filename="' . $file_name . '"',
-        ]);
+        $file = basename($model->files);
+        return response()->download(asset('/public/file/book/'.$file));
     }
 }

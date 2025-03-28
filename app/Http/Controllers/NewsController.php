@@ -36,6 +36,10 @@ class NewsController extends Controller
             ->select('id','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','category_id','created_at')
             ->first();
         if ($new) {
+            $count = $new->count + 1;
+            $new->update([
+               'count' =>  $count
+            ]);
             return response()->json(['success' => true,'data' => $new, 'message' => 'ok']);
         }
         return response()->json(['success' => false,'data' => '', 'message' => 'ok']);

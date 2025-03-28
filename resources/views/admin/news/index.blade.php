@@ -190,7 +190,7 @@
                                     <div class="project-actions">
                                         <a href="{{route('news.edit', $model->id)}}" class="btn btn-info mr-1"><i
                                                 class="fas fa-pencil-alt"></i></a>
-                                        <a href="{{route('news.show', $model->id)}}" class="btn btn-info mr-1">
+                                        <a href="{{route('news.show', $model->id)}}" class="btn btn-success mr-1">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         <form action="{{ route('news.destroy', $model->id) }}" method="post" id="deleteItem-{{$model->id}}">

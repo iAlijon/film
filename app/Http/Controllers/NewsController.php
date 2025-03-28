@@ -14,12 +14,12 @@ class NewsController extends Controller
         $per_page = $result['per_page']??6;
         if (isset($result['category_id']) && !empty($result['category_id'])) {
             $news = News::where('category_id', $result['category_id'])->where('status', 1)
-                ->select('id','category_id','image','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','created_at','status')
+                ->select('id','category_id','image','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','created_at','status','count')
                 ->orderBy('created_at' ,'desc')
                 ->paginate($per_page);
         }else {
             $news = News::where('status', 1)
-                ->select('id','category_id','image','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','created_at','status')
+                ->select('id','category_id','image','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','created_at','status','count')
                 ->orderBy('created_at' ,'desc')
                 ->paginate($per_page);
         }
@@ -33,7 +33,7 @@ class NewsController extends Controller
     {
         $lang = \request()->header('lang', 'oz');
         $new = News::where('id', $id)
-            ->select('id','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','category_id','created_at')
+            ->select('id','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','category_id', 'count','created_at')
             ->first();
         if ($new) {
             $count = $new->count + 1;

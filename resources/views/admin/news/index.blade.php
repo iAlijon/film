@@ -136,6 +136,7 @@
                             <th>Nomi</th>
                             <th>Qisqacha ma'lumot</th>
                             <th>Kategoriya</th>
+                            <th>Ko'rishlar soni</th>
                             <th>Status</th>
                             <th>Qo'shilgan vaqti</th>
                             <th></th>
@@ -173,6 +174,7 @@
                                 <td>{{$model->name_oz}}</td>
                                 <td>{{$model->description_oz}}</td>
                                 <td>{{$model->category->name_oz}}</td>
+                                <td>{{$model->view_count}}</td>
                                 <td class="text-center">
                                     <label class="switch">
                                         <input type="checkbox"

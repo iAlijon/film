@@ -27,7 +27,7 @@ class FilmAnalysisRepository extends BaseRepository
             $this->model = $this->model->where('status', $request->status);
         }
 
-        return $this->model->orderBy('id', 'desc')->paginate($this->limit)->appends($request->query());
+        return $this->model->with('category')->orderBy('id', 'desc')->paginate($this->limit)->appends($request->query());
     }
 
     public function findById($id)

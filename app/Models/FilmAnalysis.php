@@ -9,4 +9,9 @@ class FilmAnalysis extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function category()
+    {
+        return $this->belongsTo(PersonCategory::class);
+    }
 }

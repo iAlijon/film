@@ -78,7 +78,7 @@
                             <tr>
                                 <td>{{$k + 1}}</td>
                                 <td>{{$model->name_oz}}</td>
-                                <td>{{$model->analysis_category == 1?'Milliy filmlar tahlili':'Xorijiy filmlar tahlili'}}</td>
+                                <td>{{$model->category->name_oz}}</td>
                                 <td>{{$model->description_oz}}</td>
                                 <td>{{$model->status == 1?'Active':'No Active'}}</td>
                                 <td>{{$model->created_at}}</td>

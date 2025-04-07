@@ -45,4 +45,9 @@ class PersonCategory extends Model
     {
         return $this->hasOne(Books::class, 'category_id', 'id');
     }
+
+    public function analysis()
+    {
+        return $this->hasMany(FilmAnalysis::class);
+    }
 }

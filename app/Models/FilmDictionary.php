@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\GlobalSearch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class FilmDictionary extends Model
 {
     use HasFactory;
-
+    use GlobalSearch;
     protected $fillable = [
         'name_oz',
         'name_uz',

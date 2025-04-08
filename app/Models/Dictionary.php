@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\GlobalSearch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Dictionary extends Model
 {
     use HasFactory;
+    use GlobalSearch;
     protected $table = 'dictionary';
     protected $casts = [
         'name_oz' => 'array',

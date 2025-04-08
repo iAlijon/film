@@ -60,3 +60,6 @@ Route::get('book-file-download/{id}', [\App\Http\Controllers\BookController::cla
 //category
 Route::get('categories', [\App\Http\Controllers\CategoriesController::class, 'index'])->name('category');
 
+//GlobalSearch
+Route::get('search', [\App\Http\Controllers\SearchController::class, 'search']);
+

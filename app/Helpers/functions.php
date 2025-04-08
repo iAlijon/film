@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Str;
 
-if(!function_exists('contentByDomDocment')) {
-    function contentByDomDocment($content, $folder=null)
+if (!function_exists('contentByDomDocment')) {
+    function contentByDomDocment($content, $folder = null)
     {
         $dom = new \DomDocument();
         libxml_use_internal_errors(true);
@@ -21,15 +21,15 @@ if(!function_exists('contentByDomDocment')) {
                     list(, $data) = explode(',', $data);
                     $data = base64_decode($data);
 
-                    $directory =  "/uploads/images/".$folder."/";
+                    $directory = "/uploads/images/" . $folder . "/";
                     $path = public_path() . $directory;
-                    if(!is_dir($path)) {
+                    if (!is_dir($path)) {
                         mkdir($path, 0755, true);
                     }
 
                     $file_name = Str::random(10) . $k . '.jpg';
                     $file_path = $directory . $file_name;
-                    file_put_contents($path.$file_name, $data);
+                    file_put_contents($path . $file_name, $data);
                 } else {
                     $file_path = $data;
                 }
@@ -43,7 +43,7 @@ if(!function_exists('contentByDomDocment')) {
         if (count($links) > 0) {
             foreach ($links as $k => $link) {
                 $dataFile = $link->getAttribute('href');
-                if(preg_match('/\bblob:\b/', $dataFile)) {
+                if (preg_match('/\bblob:\b/', $dataFile)) {
                     list($url, $dataFile) = explode('/9fformat', $dataFile);
                     list($file_format, $dataFile) = explode('/bs64file', $dataFile);
                     switch ($file_format) {
@@ -67,16 +67,16 @@ if(!function_exists('contentByDomDocment')) {
                     }
 
                     $dataFile = base64_decode($dataFile);
-                    $directory =  "/uploads/files/" . $folder ."/";
+                    $directory = "/uploads/files/" . $folder . "/";
                     $path = public_path() . $directory;
-                    if(!is_dir($path)) {
+                    if (!is_dir($path)) {
                         mkdir($path, 0755, true);
                     }
 
                     $file_name = Str::random(10) . $k . $file_type;
                     $file_path = $directory . $file_name;
 
-                    file_put_contents($path.$file_name, $dataFile);
+                    file_put_contents($path . $file_name, $dataFile);
 
                 } else {
                     $file_path = $dataFile;
@@ -104,37 +104,67 @@ if(!function_exists('contentByDomDocment')) {
 
 }
 
-if (!function_exists('getInFolder'))
-{
+if (!function_exists('getInFolder')) {
     function getInFolder($image, $folder)
     {
-        $path = explode('storage/'.$folder.'/', $image);
-        if ($path){
-            return '/storage/'.$folder.'/'.$path[1];
+        $path = explode('storage/' . $folder . '/', $image);
+        if ($path) {
+            return '/storage/' . $folder . '/' . $path[1];
         }
         return false;
     }
 }
 
-if (!function_exists('deleteImages'))
-{
-    function deleteImages($images, $folder){
-        $path = explode('storage/'.$folder.'/', $images);
-        if ($path){
-            @unlink('storage/'.$folder.'/'.$path[1]);
+if (!function_exists('deleteImages')) {
+    function deleteImages($images, $folder)
+    {
+        $path = explode('storage/' . $folder . '/', $images);
+        if ($path) {
+            @unlink('storage/' . $folder . '/' . $path[1]);
             return true;
         }
         return false;
     }
 }
 
-if (!function_exists('getFile'))
-{
-    function getFile($file){
-        $files = public_path('files/book/').$file;
-        if (file_exists($files))
-        {
-            return '/files/book/'.$file;
+if (!function_exists('getFile')) {
+    function getFile($file)
+    {
+        $files = public_path('files/book/') . $file;
+        if (file_exists($files)) {
+            return '/files/book/' . $file;
         }
+    }
+}
+
+if (!function_exists('successJson')) {
+    function successJson($data, $message = null)
+    {
+        return response()->json([
+            'success' => true,
+            'data' => $data,
+            'message' => $message ?? 'ok',
+            'status' => 200
+        ]);
+    }
+}
+
+if (!function_exists('errorJson')) {
+    function errorJson($message = null, $status = null)
+    {
+        return response()->json([
+            'success' => false,
+            'data' => '',
+            'message' => $message,
+            'status' => $status
+        ]);
+    }
+}
+
+if (!function_exists('getTranslates'))
+{
+    function getTranslates($baseField, $lang){
+        $field = "{$baseField}_{$lang}";
+        return $field;
     }
 }

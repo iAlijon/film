@@ -36,13 +36,17 @@ class NewsController extends Controller
             ->select('id','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','category_id', 'view_count','created_at')
             ->first();
         if ($new) {
-            $count = $new->view_count + 1;
-            $new->update([
-               'view_count' =>  $count
-            ]);
-            return response()->json(['success' => true,'data' => $new, 'message' => 'ok']);
+            return successJson($new, 'ok');
         }
-        return response()->json(['success' => false,'data' => '', 'message' => 'ok']);
+        return errorJson('Undefined news !', 404);
+//        if ($new) {
+//            $count = $new->view_count + 1;
+//            $new->update([
+//               'view_count' =>  $count
+//            ]);
+//            return response()->json(['success' => true,'data' => $new, 'message' => 'ok']);
+//        }
+//        return response()->json(['success' => false,'data' => '', 'message' => 'ok']);
     }
 
 }

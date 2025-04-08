@@ -23,7 +23,7 @@ Route::get('aphorism', [\App\Http\Controllers\AphorismController::class, 'index'
 
 // news
 Route::get('news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.api.index');
-Route::get('news/{id}', [\App\Http\Controllers\NewsController::class, 'show'])->name('news.api.show');
+Route::get('news/{id}', [\App\Http\Controllers\NewsController::class, 'show'])->name('news.api.show')->middleware('view_count');
 
 //premiere
 Route::get('premiere', [\App\Http\Controllers\PremiereController::class, 'index'])->name('premiere.api.index');
@@ -59,8 +59,4 @@ Route::get('book/{id}', [\App\Http\Controllers\BookController::class, 'show'])->
 Route::get('book-file-download/{id}', [\App\Http\Controllers\BookController::class, 'fileDownload']);
 //category
 Route::get('categories', [\App\Http\Controllers\CategoriesController::class, 'index'])->name('category');
-
-
-
-
 

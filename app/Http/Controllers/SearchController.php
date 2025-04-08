@@ -21,7 +21,7 @@ class SearchController extends Controller
     {
         $q = $request->input();
         $lang = $request->header('lang', 'oz');
-        $news = News::search($q, ['name_oz','name_uz','description_oz','description_uz'])->get('id','category_id','image','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','image','created_at','status','view_count');
+        $news = News::search($q, ['name_oz','name_uz','description_oz','description_uz'])->get();
         $premiere = Premiere::search($q, ['name_oz','name_ru','description_oz','description_uz'])->get();
         $analysis = FilmAnalysis::search($q, ['name_oz','name_uz','description_oz','description_uz','content_oz','content_uz'])->get();
         $interview = Interview::search($q, ['interview_oz','interview_uz','description_oz','description_uz','content_oz','content_uz'])->get();

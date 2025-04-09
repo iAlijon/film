@@ -6,6 +6,7 @@ use App\Models\Dictionary;
 use App\Models\FilmDictionary;
 use App\Models\FilmDictionaryCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class DictionaryController extends Controller
 {
@@ -46,30 +47,41 @@ class DictionaryController extends Controller
             $arr = [];
             foreach ($result as $item) {
                 $params = FilmDictionary::where('id', $item['film_dictionary_id'])
-                    ->select('id', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'created_at', 'updated_at')
+                    ->select('id', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'view_count','created_at', 'updated_at')
                     ->orderBy('created_at', 'desc')
                     ->paginate($per_page);
                 $arr[] = $params;
             }
         }else {
             $arr = FilmDictionary::query()->where('status', 1)
-                ->select('id', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'created_at', 'updated_at')
+                ->select('id', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'view_count','created_at', 'updated_at')
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);
         }
         if ($arr != []) {
-            return response()->json(['success' => true, 'data' => $arr, 'message' => 'ok']);
+            return successJson($arr, 'ok');
         }
-        return response()->json(['success' => false, 'data' => $params, 'message' => 'ok']);
+        return errorJson('Undefined Element !', 404);
     }
 
     public function show(Request $request,$id)
     {
         $lang = $request->header('lang', 'oz');
-        $model = FilmDictionary::where('id',$id)
-            ->select('id','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','created_at','updated_at')
+        $data = FilmDictionary::where('id',$id)
+            ->select('id','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','created_at','view_count','updated_at')
             ->first();
-        if ($model) return response()->json(['success'=>true,'data'=>$model,'message'=>'ok']);
-         return response()->json(['success'=>false,'data'=>'','message'=>'ok']);
+        if ($data) {
+            $ip = $request->ip();
+            $cache = "view_count_{$id}_ip_{$ip}";
+            $count = $data->view_count + 1;
+            if (!Cache::has($cache)) {
+                $data->update([
+                    'view_count' => $count
+                ]);
+                Cache::put($cache, true, now()->addMinutes(3));
+            }
+            return successJson($data, 'ok');
+        }
+        return errorJson('Undefined Element !', 404);
     }
 }

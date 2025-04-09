@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Interview;
 use App\Models\PeopleAssociatedWithTheFilmCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class InterviewController extends Controller
 {
@@ -16,22 +17,22 @@ class InterviewController extends Controller
         if (isset($result['category_id']) && !empty($result['category_id']))
         {
             $data = Interview::where('category_id', $result['category_id'])
-                ->select('id', 'interview_people_id' ,'interview_'.$lang.' as interview', 'description_'.$lang.' as description', 'content_'.$lang.' as content','created_at')
+                ->select('id', 'interview_people_id' ,'interview_'.$lang.' as interview', 'description_'.$lang.' as description', 'content_'.$lang.' as content','view_count','created_at')
                 ->with('people:id,images,full_name_'.$lang.' as full_name')
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);
         }else {
             $data = Interview::where('status', 1)
-                ->select('id', 'interview_people_id' ,'interview_'.$lang.' as interview', 'description_'.$lang.' as description', 'content_'.$lang.' as content','created_at')
+                ->select('id', 'interview_people_id' ,'interview_'.$lang.' as interview', 'description_'.$lang.' as description', 'content_'.$lang.' as content','view_count','created_at')
                 ->with('people:id,images,full_name_'.$lang.' as full_name')
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);
         }
 
         if ($data) {
-            return response()->json(['success' => true, 'data' => $data, 'message'=>'ok']);
+            return successJson($data, 'ok');
         }
-        return response()->json(['success' => false, 'data' => '', 'message'=>'ok']);
+        return errorJson('Undefined Element !', 404);
 
     }
 
@@ -39,12 +40,21 @@ class InterviewController extends Controller
     {
         $lang = $request->header('lang', 'oz');
         $data = Interview::where('id', $id)
-            ->select('id', 'interview_people_id' ,'interview_'.$lang.' as interview', 'description_'.$lang.' as description', 'content_'.$lang.' as content','created_at')
+            ->select('id', 'interview_people_id' ,'interview_'.$lang.' as interview', 'description_'.$lang.' as description', 'content_'.$lang.' as content','view_count','created_at')
             ->with('people:id,images,full_name_'.$lang.' as full_name')
             ->first();
         if ($data) {
-            return response()->json(['success' => true, 'data' => $data, 'message' => 'ok']);
+            $ip = $request->ip();
+            $cache = "view_count_{$id}_ip_{$ip}";
+            $count = $data->view_count + 1;
+            if (!Cache::has($cache)) {
+                $data->update([
+                    'view_count' => $count
+                ]);
+                Cache::put($cache, true, now()->addMinutes(3));
+            }
+            return successJson($data, 'ok');
         }
-        return response()->json(['success' => false, 'data' => '', 'message' => 'ok']);
+        return errorJson('Undefined Element !', 404);
     }
 }

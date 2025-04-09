@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Books;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class BookController extends Controller
 {
@@ -19,7 +20,8 @@ class BookController extends Controller
                     'updated_at',
                     'author_'.$lang.' as author',
                     'about_'.$lang.' as about',
-                    'date'
+                    'date',
+                    'view_count'
                 )
                 ->with('category:id,name_'.$lang.' as name')
                 ->orderBy('created_at', 'desc')
@@ -28,34 +30,45 @@ class BookController extends Controller
             $params = Books::where('status', 1)
                 ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'category_id', 'created_at', 'updated_at', 'author_'.$lang.' as author',
                     'about_'.$lang.' as about',
-                    'date'
+                    'date',
+                    'view_count'
                 )
                 ->with('category:id,name_'.$lang.' as name')
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);
         }
         if ($params) {
-            return response()->json(['success' => true, 'data' => $params, 'message' => 'ok']);
+            return successJson($params, 'ok');
         }
-        return response()->json(['success' => false, 'data' => '', 'message' => 'ok']);
+        return errorJson('Undefined Element !', 404);
     }
 
     public function show(Request $request, $id)
     {
         $lang = $request->header('lang', 'oz');
-        $params = Books::where('id', $id)
+        $data = Books::where('id', $id)
             ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description',
                 'category_id', 'created_at', 'updated_at',
                  'author_'.$lang.' as author',
                  'about_'.$lang.' as about',
-                 'date'
+                 'date',
+                 'view_count'
             )
             ->with('category:id,name_'.$lang.' as name')
             ->first();
-        if ($params) {
-            return response()->json(['success' => true, 'data' => $params, 'message' => 'ok']);
+        if ($data) {
+            $ip = $request->ip();
+            $cache = "view_count_{$id}_ip_{$ip}";
+            $count = $data->view_count + 1;
+            if (!Cache::has($cache)) {
+                $data->update([
+                    'view_count' => $count
+                ]);
+                Cache::put($cache, true, now()->addMinutes(3));
+            }
+            return successJson($data, 'ok');
         }
-        return response()->json(['success' => false, 'data' => '', 'message' => 'ok']);
+        return errorJson('Undefined Element !', 404);
     }
 
     public function fileDownload($id){

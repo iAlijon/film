@@ -46,14 +46,14 @@ class DictionaryController extends Controller
             $result = FilmDictionaryCategory::where('dictionary_category_id', $input['dictionary_id'])->get();
             $arr = [];
             foreach ($result as $item) {
-                $params = FilmDictionary::where('id', $item['film_dictionary_id'])
+                $params = FilmDictionary::where('id', $item['film_dictionary_id'])->with('film_dictionary_category:id,film_dictionary_id,dictionary_category_id')
                     ->select('id', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'view_count','created_at', 'updated_at')
                     ->orderBy('created_at', 'desc')
                     ->paginate($per_page);
                 $arr[] = $params;
             }
         }else {
-            $arr = FilmDictionary::query()->where('status', 1)
+            $arr = FilmDictionary::query()->where('status', 1)->with('film_dictionary_category:id,film_dictionary_id,dictionary_category_id')
                 ->select('id', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'view_count','created_at', 'updated_at')
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);
@@ -67,7 +67,7 @@ class DictionaryController extends Controller
     public function show(Request $request,$id)
     {
         $lang = $request->header('lang', 'oz');
-        $data = FilmDictionary::where('id',$id)
+        $data = FilmDictionary::where('id',$id)->with('film_dictionary_category:id,film_dictionary_id,dictionary_category_id')
             ->select('id','name_'.$lang.' as name','description_'.$lang.' as description','content_'.$lang.' as content','created_at','view_count','updated_at')
             ->first();
         if ($data) {

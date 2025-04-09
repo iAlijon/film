@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FilmAnalysis;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class FilmAnalysisController extends Controller
 {
@@ -15,19 +16,18 @@ class FilmAnalysisController extends Controller
         if (isset($params['category_id']) && !empty($params['category_id'])) {
             $items = FilmAnalysis::where('category_id', $params['category_id'])
                 ->orderBy('created_at', 'desc')
-                ->select('id','category_id','name_'.$lang.' as name','description_'.$lang.' as description','images','created_at','updated_at')
+                ->select('id','category_id','name_'.$lang.' as name','description_'.$lang.' as description','images','view_count','created_at','updated_at')
                 ->paginate($per_page);
         }else {
             $items = FilmAnalysis::where('status', 1)
                 ->orderBy('created_at', 'desc')
-                ->select('id','category_id','name_'.$lang.' as name','description_'.$lang.' as description','images','created_at','updated_at')
+                ->select('id','category_id','name_'.$lang.' as name','description_'.$lang.' as description','images','view_count','created_at','updated_at')
                 ->paginate($per_page);
         }
         if ($items) {
-            return response()->json(['success' => true,'data' => $items, 'message' => 'ok']);
+            return successJson($items, 'ok');
         }
-        return response()->json(['success' => false,'data' => '', 'message' => 'ok']);
-
+        return errorJson('Undefined Element', 404);
     }
 
 
@@ -36,13 +36,22 @@ class FilmAnalysisController extends Controller
         $lang = $request->header('lang', 'oz');
         $items = FilmAnalysis::where('id', $id)->orderBy('id', 'desc')
             ->select('id','category_id','name_'.$lang.' as name','description_'.$lang.' as description',
-                'content_'.$lang.' as content','images','created_at','updated_at')
+                'content_'.$lang.' as content','images','view_count','created_at','updated_at')
             ->first();
         if ($items)
         {
-            return response()->json(['success' => true,'data' => $items, 'message' => 'ok']);
+            $ip = $request->ip();
+            $cache = "view_count_{$id}_ip_{$ip}";
+            $count = $items->view_count + 1;
+            if (!Cache::has($cache)) {
+                $items->update([
+                    'view_count' => $count
+                ]);
+                Cache::put($cache, true, now()->addMinutes(3));
+            }
+            return successJson($items, 'ok');
         }
-        return response()->json(['success' => false,'data' => '', 'message' => 'ok']);
+        return errorJson('Undefined Element!', 404);
     }
 
 }

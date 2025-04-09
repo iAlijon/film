@@ -11,7 +11,7 @@ trait GlobalSearch
         $term = is_array($term) ? implode(' ', $term) : $term;
         return static::select($select)->where(function ($query) use ($term, $columns){
            foreach ($columns as $column) {
-               $query->orWhere($column, 'ILIKE', '%'.$term.'%');
+               $query->orWhere($column, 'ILIKE', '%'.$term.'%')->where('status', 1);
            }
         })->get();
     }

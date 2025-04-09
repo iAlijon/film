@@ -55,7 +55,7 @@ class SearchController extends Controller
             'interviews' => $interview,
             'persons' => $persons,
             'dictionary' => $film_dictionary,
-            'fact' => $fact,
+            'facts' => $fact,
             'filmography' => $filmography,
             'books' => $book,
         ];

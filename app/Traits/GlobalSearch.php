@@ -6,13 +6,13 @@ namespace App\Traits;
 
 trait GlobalSearch
 {
-    public static function search($term, $columns = ['name_oz'])
+    public static function search($term, $columns = ['name_oz'],$select = ['*'])
     {
         $term = is_array($term) ? implode(' ', $term) : $term;
-        return static::where(function ($query) use ($term, $columns){
+        return static::select($select)->where(function ($query) use ($term, $columns){
            foreach ($columns as $column) {
-               $query->orWhere($column, 'ILIKE', "%$term%");
+               $query->orWhere($column, 'ILIKE', '%'.$term.'%');
            }
-        });
+        })->get();
     }
 }

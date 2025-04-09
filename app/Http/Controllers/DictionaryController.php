@@ -42,8 +42,8 @@ class DictionaryController extends Controller
         $lang = $request->header('lang', 'oz');
         $input = $request->all();
         $per_page = $result['per_page']??6;
-        if (isset($input['dictionary_id'])) {
-            $result = FilmDictionaryCategory::where('dictionary_category_id', $input['dictionary_id'])->get();
+        if (isset($input['letter_id'])) {
+            $result = FilmDictionaryCategory::where('dictionary_category_id', $input['letter_id'])->get();
             $arr = [];
             foreach ($result as $item) {
                 $params = FilmDictionary::where('id', $item['film_dictionary_id'])->with('film_dictionary_category:id,film_dictionary_id,dictionary_category_id')

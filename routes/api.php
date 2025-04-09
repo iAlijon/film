@@ -42,7 +42,7 @@ Route::get('persons', [\App\Http\Controllers\PersonDirectorController::class, 'i
 Route::get('persons/{id}', [\App\Http\Controllers\PersonDirectorController::class, 'show'])->name('person.api.show');
 
 //film_dictionary
-Route::get('film_dictionary', [\App\Http\Controllers\DictionaryController::class, 'dictionary'])->name('dictionary');
+Route::get('letters_category', [\App\Http\Controllers\DictionaryController::class, 'letters'])->name('letters');
 Route::get('dictionary', [\App\Http\Controllers\DictionaryController::class, 'index'])->name('dictionary.api.index');
 Route::get('dictionary/{id}', [\App\Http\Controllers\DictionaryController::class, 'show'])->name('dictionary.api.show');
 

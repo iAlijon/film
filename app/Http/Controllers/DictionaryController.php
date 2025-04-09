@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
 
 class DictionaryController extends Controller
 {
-    public function dictionary(Request $request)
+    public function letters(Request $request)
     {
         $lang = $request->header('lang', 'oz');
         if ($lang == 'uz'){

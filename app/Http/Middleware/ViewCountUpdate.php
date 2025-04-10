@@ -27,8 +27,13 @@ class ViewCountUpdate
                 $cache = "view_count_{$new_id}_ip_{$ip}";
 
                 if (!Cache::has($cache)) {
+                    if ($model->view_count == null) {
+                        $model->update([
+                           'view_count' => 0
+                        ]);
+                    }
                     $model->increment('view_count');
-                    Cache::put($cache, true, now()->addMinutes(3));
+                    Cache::put($cache, true, now()->addMinutes(2));
                 }
             }
         }

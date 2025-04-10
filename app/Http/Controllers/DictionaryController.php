@@ -44,22 +44,27 @@ class DictionaryController extends Controller
         $per_page = $result['per_page']??6;
         if (isset($input['letter_id'])) {
             $result = FilmDictionaryCategory::where('dictionary_category_id', $input['letter_id'])->get();
-            $arr = [];
-            foreach ($result as $item) {
-                $params = FilmDictionary::where('id', $item['film_dictionary_id'])->with('film_dictionary_category:id,film_dictionary_id,dictionary_category_id')
-                    ->select('id', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'view_count','created_at', 'updated_at')
-                    ->orderBy('created_at', 'desc')
-                    ->paginate($per_page);
-                $arr[] = $params;
-            }
+            $ids = collect($result)->pluck('film_dictionary_id')->filter()->unique()->toArray();
+            $data = FilmDictionary::whereIn('id', $ids)->with('film_dictionary_category:id,film_dictionary_id,dictionary_category_id')
+                ->select('id', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'view_count','created_at', 'updated_at')
+                ->orderBy('created_at', 'desc')
+                ->paginate($per_page);
+
+//            foreach ($result as $item) {
+//                $params = FilmDictionary::where('id', $item['film_dictionary_id'])->with('film_dictionary_category:id,film_dictionary_id,dictionary_category_id')
+//                    ->select('id', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'view_count','created_at', 'updated_at')
+//                    ->orderBy('created_at', 'desc')
+//                    ->paginate($per_page);
+//                $arr[] = $params;
+//            }
         }else {
-            $arr = FilmDictionary::query()->where('status', 1)->with('film_dictionary_category:id,film_dictionary_id,dictionary_category_id')
+            $data = FilmDictionary::query()->where('status', 1)->with('film_dictionary_category:id,film_dictionary_id,dictionary_category_id')
                 ->select('id', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'content_' . $lang . ' as content', 'view_count','created_at', 'updated_at')
                 ->orderBy('created_at', 'desc')
                 ->paginate($per_page);
         }
-        if ($arr != []) {
-            return successJson($arr, 'ok');
+        if ($data) {
+            return successJson($data, 'ok');
         }
         return errorJson('Undefined Element !', 404);
     }

@@ -60,14 +60,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('interview.index')}}" class="nav-link">
+                            <a href="{{route('interview.index')}}" class="nav-link {{(request()->is('admin/interview*'))?'active':''}}">
                                 <i class="nav-icon far fa-circle"></i>
                                 Intervyu
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{route('interview_peoples.index')}}" class="nav-link">
+                            <a href="{{route('interview_peoples.index')}}" class="nav-link {{(request()->is('admin/interview_people'))?'active':''}}">
                                 <i class="nav-icon far fa-circle"></i>
                                 Suxbat o'tkaziladigan odamlar
                             </a>
@@ -75,34 +75,34 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('person.index')}}" class="nav-link">
+                    <a href="{{route('person.index')}}" class="nav-link {{(request()->is('admin/person*'))?'active':''}}">
                         <i class="far fa-circle"></i>
                         <p>Shaxsiyatlar</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('film_dictionary.index')}}" class="nav-link">
+                    <a href="{{route('film_dictionary.index')}}" class="nav-link {{(request()->is('admin/film_dictionary*'))?'active':''}}">
                         <i class="far fa-circle"></i>
                         <p class="text">Kinolug‘at</p>
                         <span class="badge badge-primary right"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('cinema_fact.index')}}" class="nav-link">
+                    <a href="{{route('cinema_fact.index')}}" class="nav-link {{(request()->is('admin/cinema_fact*'))?'active':''}}">
                         <i class="far fa-circle"></i>
                         <p class="text">Kino fakt</p>
                         <span class="badge badge-primary right"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('filmography.index')}}" class="nav-link">
+                    <a href="{{route('filmography.index')}}" class="nav-link {{(request()->is('admin/filmography*'))?'active':''}}">
                         <i class="far fa-circle"></i>
                         <p>Filmografiya</p>
                         <span class="badge badge-primary right"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('film_analysis.index')}}" class="nav-link">
+                    <a href="{{route('film_analysis.index')}}" class="nav-link {{(request()->is('admin/film_analysis*'))?'active':''}}">
                         <i class="far fa-circle"></i>
                         <p>Kino tahlil</p>
                         <span class="badge badge-primary right"></span>
@@ -110,14 +110,14 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{route('book.index')}}" class="nav-link">
+                    <a href="{{route('book.index')}}" class="nav-link {{(request()->is('admin/book*'))?'active':''}}">
                         <i class="far fa-circle"></i>
                         <p>Kitob</p>
                         <span class="badge badge-primary right"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('categories.index')}}" class="nav-link">
+                    <a href="{{route('categories.index')}}" class="nav-link {{(request()->is('admin/categories*'))?'active':''}}">
                         <i class="far fa-circle"></i>
                         <p>Kategoriyalar</p>
                     </a>

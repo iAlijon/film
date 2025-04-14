@@ -52,19 +52,17 @@ class BooksRepository extends BaseRepository
                 'category_id' => $data['category_id'],
                 'author_oz' => $data['author_oz'],
                 'author_uz' => $data['author_uz'],
-                'type_oz' => $data['type_oz'],
-                'type_uz' => $data['type_uz'],
+                'type_oz' => $data['type_oz']??null,
+                'type_uz' => $data['type_uz']??null,
                 'about_oz' => $data['about_oz'],
                 'about_uz' => $data['about_uz'],
                 'date' =>  $data['date'],
-                'content_oz' => null,
-                'content_uz' => null,
             ]);
             if ($model) {
                 return $model;
             }
         } catch (\Exception $exception) {
-            Log::info('Books Errors: ', $exception->getMessage());
+            Log::info($exception->getMessage());
             return false;
         }
     }
@@ -100,8 +98,8 @@ class BooksRepository extends BaseRepository
                 'category_id' => $data['category_id'],
                 'author_oz' => $data['author_oz'],
                 'author_uz' => $data['author_uz'],
-                'type_oz' => $data['type_oz'],
-                'type_uz' => $data['type_uz'],
+                'type_oz' => $data['type_oz']??null,
+                'type_uz' => $data['type_uz']??null,
                 'about_oz' => $data['about_oz'],
                 'about_uz' => $data['about_uz'],
                 'date' =>  $data['date'],

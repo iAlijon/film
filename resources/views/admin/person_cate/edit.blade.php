@@ -53,7 +53,7 @@
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
                                     <label for="">Menu</label>
-                                    <select name="menu" id="" class="form-control">
+                                    <select name="menu" id="menu" class="form-control">
                                         <option value="">---</option>
                                         <option value="news">Yangiliklar</option>
                                         <option value="premiere">Premyaerlar</option>
@@ -82,6 +82,13 @@
                                     </select>
                                     <small class="text-danger">{{$errors->first('status')}}</small>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="">Order</label>
+                                    <input type="text" class="form-control" name="order" placeholder="Order" id="order">
+                                    <small class="text-danger"{{$errors->first('order')}}></small>
+                                </div>
+
                             </div>
                             {{----  uz  ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
@@ -101,3 +108,22 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function () {
+            $('#menu').on('change', function () {
+                let menu = $(this).val();
+                $.ajax({
+                    url: '{{route('order_category')}}',
+                    method: 'GET',
+                    data: {menu: menu},
+                    success: function (res){
+                        let order = res.data.order + 1;
+                        $('#order').val(order);
+                    },
+                })
+            })
+        })
+    </script>
+@endpush

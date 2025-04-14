@@ -105,4 +105,12 @@ class PersonCategoryController extends Controller
         $this->repo->delete($id);
         return redirect()->route('categories.index');
     }
+
+    public function order(Request $request)
+    {
+        $input = $request->all();
+        $model = PersonCategory::where('type', $input)->latest()->first();
+        return successJson($model, 'ok');
+
+    }
 }

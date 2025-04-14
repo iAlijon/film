@@ -32,6 +32,7 @@ class PersonCategoryRepository extends BaseRepository
             'name_uz' => $data['name_uz'],
             'type' => $data['menu'],
             'status' => $data['status'],
+            'order' => $data['order']
         ]);
         if ($model) {
             return $model;
@@ -47,6 +48,7 @@ class PersonCategoryRepository extends BaseRepository
             'name_uz' => $data['name_uz'],
             'type' => $data['menu'],
             'status' => $data['status'],
+            'order' => $data['order']
         ]);
     }
 

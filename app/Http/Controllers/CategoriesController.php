@@ -11,7 +11,7 @@ class CategoriesController extends Controller
     {
         $lang = $request->header('lang', 'oz');
         $categories = PersonCategory::where('status', 1)
-            ->select('id','name_'.$lang.' as name','type')
+            ->select('id','name_'.$lang.' as name','type','order')
             ->orderBy('created_at', 'asc')
             ->get();
         return response()->json(['success' => true, 'data' => $categories, 'message' => 'ok']);

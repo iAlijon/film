@@ -13,27 +13,31 @@ class DictionaryController extends Controller
     public function letters(Request $request)
     {
         $lang = $request->header('lang', 'oz');
-        if ($lang == 'uz'){
-            $data = Dictionary::select('id','name_ru as name')->orderBy('id', 'asc')->get();
+//        if ($lang == 'uz'){
+            $data = Dictionary::select('id','name_'.$lang.' as name')->orderBy('id', 'asc')->get();
             $items = json_decode($data, true);
             $arr = [];
+            $outLetter = ['Zh','Ya','Yu','Yo','Shch',"'",'ʼ','Ts','Ь','Ы','Ъ'];
             foreach ($items as $item) {
                 $arr[] = [
                     'id' => $item['id'],
                     'name' => json_decode($item['name'], true)['upper'],
                 ];
             }
-            return response()->json(['success' => true,'data' => $arr,'message' => 'ok']);
-        }
-        $data = Dictionary::select('id','name_'.$lang.' as name')->orderBy('id', 'asc')->get();
-        $items = json_decode($data, true);
-        $arr = [];
-        foreach ($items as $item) {
-            $arr[] = [
-             'id' => $item['id'],
-             'name' => json_decode($item['name'], true)['upper'],
-            ];
-        }
+           $filter = collect($arr)->reject(function ($item) use ($outLetter){
+              return in_array($item['name'], $outLetter);
+           });
+            return successJson($filter, 'ok');
+//        }
+//        $data = Dictionary::select('id','name_'.$lang.' as name')->orderBy('id', 'asc')->get();
+//        $items = json_decode($data, true);
+//        $arr = [];
+//        foreach ($items as $item) {
+//            $arr[] = [
+//             'id' => $item['id'],
+//             'name' => json_decode($item['name'], true)['upper'],
+//            ];
+//        }
         return response()->json(['success' => true,'data' => $arr,'message' => 'ok']);
     }
 

@@ -65,16 +65,16 @@
                                     <select name="dictionary_id[]"  multiple="multiple" class="select2 form-control" data-placeholder="Lug'atni tanlang">
                                         @if(isset($model->film_dictionary_category) && !empty($model->film_dictionary_category))
                                             @foreach($model->film_dictionary_category as $item)
-                                                @foreach($dictionaries as $dictionary)
-                                                    <option value="{{$dictionary->id}}" {{$dictionary->id == $item->dictionary_category_id?'selected':''}}>
-                                                        {{$dictionary->name_oz['upper']}}
+                                                @foreach($letters['data'] as $letter)
+                                                    <option value="{{$letter['id']}}" {{$letter['id'] == $item->dictionary_category_id?'selected':''}}>
+                                                        {{$letter['name']}}
                                                     </option>
                                                 @endforeach
                                             @endforeach
                                         @else
-                                            @foreach($dictionaries as $dictionary)
-                                                <option value="{{$dictionary->id}}">
-                                                    {{$dictionary->name_oz['upper']}}
+                                            @foreach($letters['data'] as $letter)
+                                                <option value="{{$letter['id']}}">
+                                                    {{$letter['name']}}
                                                 </option>
                                             @endforeach
                                         @endif
@@ -121,30 +121,6 @@
                             </div>
                             {{----  uz  ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
-
-                                <div class="form-group required">
-                                    <label for="dictionary_id">
-                                        <p data-toggle="popover" data-content="Керакли белигни топа оламасангиз Лотинчадан қдириб кўринг фақат бир тильдагсни танланг" class="mb-0">Луғат</p>
-                                    </label>
-                                    <select name="dictionary_id[]"  multiple="multiple" class="select2 form-control @error('dictionary_id[]') border-danger @enderror" data-placeholder="Луғатни танланг">
-                                        @if(isset($model->film_dictionary_category) && !empty($model->film_dictionary_category))
-                                        @foreach($model->film_dictionary_category as $item)
-                                                @foreach($dictionaries as $dictionary)
-                                                    <option value="{{$dictionary->id}}" {{$dictionary->id == $item->dictionary_category_id?'selected':''}}>
-                                                        {{json_decode($dictionary->name_ru)->upper}}
-                                                    </option>
-                                                @endforeach
-                                        @endforeach
-                                        @else
-                                            @foreach($dictionaries as $dictionary)
-                                                <option value="{{$dictionary->id}}">
-                                                    {{json_decode($dictionary->name_ru)->upper}}
-                                                </option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                    <small class="text-danger">{{$errors->first('dictionary_id')}}</small>
-                                </div>
 
                                 <div class="form-group required">
                                     <label for="name_uz">Номи</label>

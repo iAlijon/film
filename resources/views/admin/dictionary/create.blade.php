@@ -98,9 +98,9 @@
                                     </label>
                                     <select name="dictionary_id[]" id="dictionary" multiple="multiple"
                                             class="select2 form-control @error('dictionary_id[]') border-danger @enderror" data-placeholder="Lug'atni tanlang">
-                                        @foreach($dictionaries as $dictionary)
+                                        @foreach($letters['data'] as $letter)
                                             <option
-                                                value="{{$dictionary->id}}">{{$dictionary->name_oz['upper']}}</option>
+                                                value="{{$letter['id']}}">{{$letter['name']}}</option>
                                         @endforeach
                                     </select>
                                     <small class="text-danger">{{$errors->first('dictionary_id')}}</small>
@@ -144,22 +144,6 @@
                             </div>
                             {{----  uz  ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
-
-                                <div class="form-group required">
-                                    <label for="dictionary_id">
-                                        <p data-toggle="popover"
-                                           data-content="Керакли белигни топа оламасангиз Лотинчадан қдириб кўринг фақат бир тильдагсни танланг"
-                                           class="mb-0">Луғат</p>
-                                    </label>
-                                    <select name="dictionary_id[]" multiple="multiple" class="select2 form-control @error('dictionary_id[]') border-danger @enderror"
-                                            data-placeholder="Луғатни танланг">
-                                        @foreach($dictionaries as $dictionary)
-                                            <option
-                                                value="{{$dictionary->id}}">{{json_decode($dictionary->name_ru)->upper}}</option>
-                                        @endforeach
-                                    </select>
-                                    <small class="text-danger">{{$errors->first('dictionary_id')}}</small>
-                                </div>
 
                                 <div class="form-group required">
                                     <label for="name_uz">Номи</label>

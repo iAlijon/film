@@ -83,8 +83,8 @@
                                     <th>
                                         <select name="dictionary_id" id="" class="form-control" onchange="this.form.submit()">
                                             <option value="">----</option>
-                                            @foreach($dictionaries as $dictionary)
-                                                <option value="{{$dictionary->id}}" {{$dictionary->id == request('dictionary_id')?'selected':''}}>{{json_decode($dictionary->name_ru)->upper}}</option>
+                                            @foreach($letters['data'] as $letter)
+                                                <option value="{{$letter['id']}}" {{$letter['id'] == request('dictionary_id')?'selected':''}}>{{$letter['name']}}</option>
                                             @endforeach
                                         </select>
                                     </th>
@@ -108,8 +108,8 @@
                                     <td>{{$item->description_oz}}</td>
                                     <td>
                                         @foreach($item->film_dictionary_category as $result)
-                                            @foreach($dictionaries as $param)
-                                                {{$result->dictionary_category_id == $param->id?$param->name_oz['upper']:''}}
+                                            @foreach($letters['data'] as $letter)
+                                                {{$result->dictionary_category_id == $letter['id']?$letter['name']:''}}
                                             @endforeach,
                                         @endforeach
                                     </td>

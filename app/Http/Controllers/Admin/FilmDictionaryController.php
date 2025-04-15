@@ -6,14 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FilmDictionaryRequest;
 use App\Models\Dictionary;
 use App\Repositories\FilmDictionaryRepository;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class FilmDictionaryController extends Controller
 {
+    const url = 'https://kino-tahlil.uz/api/letters_category';
     public function __construct(protected FilmDictionaryRepository $repo, protected Request $request)
-    {
-    }
+    {}
 
     /**
      * Display a listing of the resource.
@@ -23,8 +24,10 @@ class FilmDictionaryController extends Controller
     public function index()
     {
         $models = $this->repo->index($this->request);
-        $dictionaries = Dictionary::orderBy('id', 'asc')->select('id', 'name_oz', 'name_ru')->get();
-        return view('admin.dictionary.index', compact('models', 'dictionaries'));
+        $client = new Client();
+        $response = $client->get(self::url);
+        $letters = json_decode($response->getBody()->getContents(), true);
+        return view('admin.dictionary.index', compact('models', 'letters'));
     }
 
     /**
@@ -34,8 +37,11 @@ class FilmDictionaryController extends Controller
      */
     public function create()
     {
-        $dictionaries = Dictionary::select('id', 'name_ru', 'name_oz')->orderBy('id', 'asc')->get();
-        return view('admin.dictionary.create', compact('dictionaries'));
+
+        $client = new Client();
+        $response = $client->get(self::url);
+        $letters = json_decode($response->getBody()->getContents(), true);
+        return view('admin.dictionary.create', compact('letters'));
     }
 
     /**
@@ -76,8 +82,10 @@ class FilmDictionaryController extends Controller
     public function edit($id)
     {
         $model = $this->repo->findById($id);
-        $dictionaries = Dictionary::select('id', 'name_ru', 'name_oz')->orderBy('id', 'asc')->get();
-        return view('admin.dictionary.edit', compact('model', 'dictionaries'));
+        $client = new Client();
+        $response = $client->get(self::url);
+        $letters = json_decode($response->getBody()->getContents(), true);
+        return view('admin.dictionary.edit', compact('model', 'letters'));
     }
 
     /**

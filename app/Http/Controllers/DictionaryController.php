@@ -12,7 +12,7 @@ class DictionaryController extends Controller
 {
     public function letters(Request $request)
     {
-        $lang = $request->header('lang', 'oz');
+            $lang = $request->header('lang', 'oz');
 //        if ($lang == 'uz'){
             $data = Dictionary::select('id','name_'.$lang.' as name')->orderBy('id', 'asc')->get();
             $items = json_decode($data, true);
@@ -38,7 +38,7 @@ class DictionaryController extends Controller
 //             'name' => json_decode($item['name'], true)['upper'],
 //            ];
 //        }
-        return response()->json(['success' => true,'data' => $arr,'message' => 'ok']);
+//        return response()->json(['success' => true,'data' => $arr,'message' => 'ok']);
     }
 
     public function index(Request $request)

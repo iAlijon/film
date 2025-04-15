@@ -17,7 +17,7 @@ class DictionaryController extends Controller
             $data = Dictionary::select('id','name_'.$lang.' as name')->orderBy('id', 'asc')->get();
             $items = json_decode($data, true);
             $arr = [];
-            $outLetter = ['Zh','Ya','Yu','Yo','Shch',"'",'ʼ','Ts','Ь','Ы','Ъ'];
+            $outLetter = ['Zh','Ya','Yu','Yo','Shch',"'",'ʼ','Ts','Ь','Ы','Ъ','Щ'];
             foreach ($items as $item) {
                 $arr[] = [
                     'id' => $item['id'],

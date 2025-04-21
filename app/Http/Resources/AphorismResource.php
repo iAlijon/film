@@ -24,8 +24,6 @@ class AphorismResource extends JsonResource
             'description' => $this->getTranslates("description", $lang),
             'created_at' => $this->created_at,
             'calendar' => CalendarResource::collection($this->calendar),
-
-
         ];
     }
 }

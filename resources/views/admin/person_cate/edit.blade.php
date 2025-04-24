@@ -55,15 +55,15 @@
                                     <label for="">Menu</label>
                                     <select name="menu" id="menu" class="form-control">
                                         <option value="">---</option>
-                                        <option value="news">Yangiliklar</option>
-                                        <option value="premiere">Premyaerlar</option>
-                                        <option value="analysis">Kino Tahlil</option>
-                                        <option value="interview">Suxbatlar</option>
-                                        <option value="person">Shaxsiyatlar</option>
-                                        <option value="dictionary">Kino Lug'at</option>
-                                        <option value="fact">Kino Fakt</option>
-                                        <option value="filmography">Filmografiya</option>
-                                        <option value="books">Kitoblar</option>
+                                        <option value="news" {{$model->type == 'news'?'selected':''}}>Yangiliklar</option>
+                                        <option value="premiere" {{$model->type == 'premiere'?'selected':''}}>Premyaerlar</option>
+                                        <option value="analysis" {{$model->type == 'analysis'?'selected':''}}>Kino Tahlil</option>
+                                        <option value="interview" {{$model->type == 'interview'?'selected':''}}>Suxbatlar</option>
+                                        <option value="person" {{$model->type == 'person'?'selected':''}}>Shaxsiyatlar</option>
+                                        <option value="dictionary" {{$model->type == 'dictionary'?'selected':''}}>Kino Lug'at</option>
+                                        <option value="fact" {{$model->type == 'fact'?'selected':''}}>Kino Fakt</option>
+                                        <option value="filmography" {{$model->type == 'filmography'?'selected':''}}>Filmografiya</option>
+                                        <option value="books" {{$model->type == 'books'?'selected':''}}>Kitoblar</option>
                                     </select>
                                     <small class="text-danger">{{$errors->first('menu')}}</small>
                                 </div>
@@ -85,7 +85,7 @@
 
                                 <div class="form-group">
                                     <label for="">Order</label>
-                                    <input type="text" class="form-control" name="order" placeholder="Order" id="order">
+                                    <input type="text" class="form-control" name="order" placeholder="Order" id="order" value="{{$model->order <= 0??1}}">
                                     <small class="text-danger"{{$errors->first('order')}}></small>
                                 </div>
 
@@ -114,6 +114,7 @@
         $(document).ready(function () {
             $('#menu').on('change', function () {
                 let menu = $(this).val();
+                console.log(menu);
                 $.ajax({
                     url: '{{route('order_category')}}',
                     method: 'GET',

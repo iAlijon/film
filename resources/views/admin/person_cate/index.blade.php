@@ -41,6 +41,7 @@
                             <th>#</th>
                             <th>Nomi</th>
                             <th>Status</th>
+                            <th>Joylashish o'rni</th>
                             <th>Qo'shilgan sanasi</th>
                             <th></th>
                         </tr>
@@ -70,6 +71,7 @@
                                 <td>{{$k + 1}}</td>
                                 <td>{{$model->name_oz}}</td>
                                 <td>{{$model->status == 1?'Active':'No Active'}}</td>
+                                <td>{{$model->order}}</td>
                                 <td>{{$model->created_at}}</td>
                                 <td>
                                     <div class="d-flex align-items-center justify-content-center">

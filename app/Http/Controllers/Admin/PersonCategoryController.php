@@ -31,7 +31,8 @@ class PersonCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.person_cate.create');
+        $order = PersonCategory::where('status', 1)->max('order');
+        return view('admin.person_cate.create', compact('order'));
     }
 
     /**

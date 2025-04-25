@@ -84,7 +84,7 @@
 
                                 <div class="form-group">
                                     <label for="">Order</label>
-                                    <input type="text" class="form-control" name="order" placeholder="Order" id="order">
+                                    <input type="text" class="form-control" name="order" placeholder="Order" value="{{$order}}">
                                     <small class="text-danger"{{$errors->first('order')}}></small>
                                 </div>
 
@@ -93,7 +93,7 @@
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
                                     <label>Категория Номи</label>
-                                    <input type="text" class="form-control" name="name_uz" placeholder="Name" id="order">
+                                    <input type="text" class="form-control" name="name_uz" placeholder="Name">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
                             </div>
@@ -109,19 +109,19 @@
 @endsection
 @push('js')
     <script>
-        $(document).ready(function () {
-            $('#menu').on('change', function () {
-                let menu = $(this).val();
-                $.ajax({
-                    url: '{{route('order_category')}}',
-                    method: 'GET',
-                    data: {menu: menu},
-                    success: function (res){
-                        let order = res.data.order + 1;
-                        $('#order').val(order);
-                    },
-                })
-            })
-        })
+        {{--$(document).ready(function () {--}}
+        {{--    $('#menu').on('change', function () {--}}
+        {{--        let menu = $(this).val();--}}
+        {{--        $.ajax({--}}
+        {{--            url: '{{route('order_category')}}',--}}
+        {{--            method: 'GET',--}}
+        {{--            data: {menu: menu},--}}
+        {{--            success: function (res){--}}
+        {{--                let order = res.data.order + 1;--}}
+        {{--                $('#order').val(order);--}}
+        {{--            },--}}
+        {{--        })--}}
+        {{--    })--}}
+        {{--})--}}
     </script>
 @endpush

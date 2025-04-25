@@ -85,7 +85,7 @@
 
                                 <div class="form-group">
                                     <label for="">Order</label>
-                                    <input type="text" class="form-control" name="order" placeholder="Order" id="order" value="{{$model->order <= 0??1}}">
+                                    <input type="text" class="form-control" name="order" placeholder="Order" value="{{$model->order}}">
                                     <small class="text-danger"{{$errors->first('order')}}></small>
                                 </div>
 
@@ -111,20 +111,20 @@
 
 @push('js')
     <script>
-        $(document).ready(function () {
-            $('#menu').on('change', function () {
-                let menu = $(this).val();
-                console.log(menu);
-                $.ajax({
-                    url: '{{route('order_category')}}',
-                    method: 'GET',
-                    data: {menu: menu},
-                    success: function (res){
-                        let order = res.data.order + 1;
-                        $('#order').val(order);
-                    },
-                })
-            })
-        })
+        {{--$(document).ready(function () {--}}
+        {{--    $('#menu').on('change', function () {--}}
+        {{--        let menu = $(this).val();--}}
+        {{--        console.log(menu);--}}
+        {{--        $.ajax({--}}
+        {{--            url: '{{route('order_category')}}',--}}
+        {{--            method: 'GET',--}}
+        {{--            data: {menu: menu},--}}
+        {{--            success: function (res){--}}
+        {{--                let order = res.data.order + 1;--}}
+        {{--                $('#order').val(order);--}}
+        {{--            },--}}
+        {{--        })--}}
+        {{--    })--}}
+        {{--})--}}
     </script>
 @endpush

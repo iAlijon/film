@@ -3,7 +3,7 @@
 use Illuminate\Support\Str;
 
 if (!function_exists('contentByDomDocment')) {
-    function contentByDomDocment($content, $folder = null)
+    function contentByDomDocment($content, $folder)
     {
         $dom = new \DomDocument();
         libxml_use_internal_errors(true);

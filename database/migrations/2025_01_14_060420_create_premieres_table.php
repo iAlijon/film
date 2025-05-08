@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('premieres', function (Blueprint $table) {
             $table->id();
-            $table->integer('premiere_category');
+            $table->integer('category_id');
             $table->string('images');
             $table->string('name_oz');
             $table->string('name_uz');
@@ -30,7 +30,10 @@ return new class extends Migration
             $table->text('content_ru')->nullable();
             $table->text('content_en')->nullable();
             $table->integer('status')->default(1);
+            $table->bigInteger('view_count')->default(0);
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
         });
     }
 

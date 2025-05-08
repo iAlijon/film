@@ -20,16 +20,18 @@ if (!function_exists('contentByDomDocment')) {
                     list($type, $data) = explode(';', $data);
                     list(, $data) = explode(',', $data);
                     $data = base64_decode($data);
-
                     $directory = "/uploads/images/" . $folder . "/";
-                    $path = public_path() . $directory;
+                    $path = public_path($directory);
                     if (!is_dir($path)) {
                         mkdir($path, 0755, true);
                     }
 
                     $file_name = Str::random(10) . $k . '.jpg';
-                    $file_path = $directory . $file_name;
-                    file_put_contents($path . $file_name, $data);
+                    $file_full_path = $path . $file_name;
+                    file_put_contents($file_full_path, $data);
+
+                    // Full URL with APP_URL
+                    $file_path = asset($directory . $file_name);
                 } else {
                     $file_path = $data;
                 }

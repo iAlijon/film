@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('filmographies', function (Blueprint $table) {
             $table->id();
+            $table->integer('category_id');
             $table->string('name_oz');
             $table->string('name_uz');
             $table->string('name_ru')->nullable();
@@ -29,9 +30,10 @@ return new class extends Migration
             $table->text('content_ru')->nullable();
             $table->text('content_en')->nullable();
             $table->integer('status')->default(1);
+            $table->bigInteger('view_count')->default(0);
             $table->timestamps();
 
-            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
         });
     }
 

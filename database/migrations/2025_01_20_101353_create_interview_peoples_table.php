@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('interview_peoples', function (Blueprint $table) {
             $table->id();
-            $table->integer('interview_category_id');
+            $table->integer('category_id');
             $table->string('full_name_oz');
             $table->string('full_name_uz');
             $table->string('full_name_ru')->nullable();
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreign('interview_category_id')->references('id')->on('people_associated_with_the_film_categories')->cascadeOnDelete();
+            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
         });
     }
 

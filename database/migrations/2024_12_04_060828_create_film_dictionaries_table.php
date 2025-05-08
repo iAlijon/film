@@ -29,6 +29,7 @@ return new class extends Migration
             $table->text('content_uz');
             $table->text('content_ru')->nullable();
             $table->text('content_en')->nullable();
+            $table->bigInteger('view_count')->default(0);
             $table->timestamps();
         });
     }

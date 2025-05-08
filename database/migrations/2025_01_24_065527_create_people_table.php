@@ -31,9 +31,10 @@ return new class extends Migration
             $table->string('images');
             $table->integer('status')->default(1);
             $table->date('birth_date');
+            $table->bigInteger('view_count')->default(0);
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('person_categories')->cascadeOnDelete();
+            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
         });
     }
 

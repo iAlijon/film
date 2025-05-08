@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
+            $table->integer('category_id');
             $table->string('name_oz');
             $table->string('name_uz');
             $table->string('name_ru')->nullable();
             $table->string('name_en')->nullable();
-            $table->integer('book_category');
             $table->string('images');
             $table->string('files');
             $table->longText('description_oz');
@@ -36,7 +36,10 @@ return new class extends Migration
             $table->string('about_uz')->nullable();
             $table->date('date')->nullable();
             $table->integer('status')->default(1);
+            $table->bigInteger('view_count')->default(0);
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
         });
     }
 

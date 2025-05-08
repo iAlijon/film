@@ -70,10 +70,10 @@
                                     <select name="category_id" id="" class="form-control">
                                         <option value="">----</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}" {{request('category_id') == $category->id?'selected':''}}>{{$category->name_oz}}</option>
+                                            <option value="{{$category->id}}" {{$model->category_id == $category->id?'selected':''}}>{{$category->name_oz}}</option>
                                         @endforeach
                                     </select>
-                                    <small class="text-danger">{{$errors->first('analysis_category_id')}}</small>
+                                    <small class="text-danger">{{$errors->first('category_id')}}</small>
                                 </div>
 
                                 <div class="form-group">

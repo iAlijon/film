@@ -23,16 +23,30 @@ class FilmAnalysisRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'category_id' => 'required',
-            'name_oz' => 'required',
-            'name_uz' => 'required',
-            'description_oz' => 'required',
-            'description_uz' => 'required',
-            'content_oz' => 'required',
-            'content_uz' => 'required',
-            'status' => 'required|integer',
-            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-        ];
+        if ($this->isMethod('post')) {
+            return [
+                'category_id' => 'required',
+                'name_oz' => 'required',
+                'name_uz' => 'required',
+                'description_oz' => 'required',
+                'description_uz' => 'required',
+                'content_oz' => 'required',
+                'content_uz' => 'required',
+                'status' => 'required|integer',
+                'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            ];
+        }else {
+            return [
+                'category_id' => 'required',
+                'name_oz' => 'required',
+                'name_uz' => 'required',
+                'description_oz' => 'required',
+                'description_uz' => 'required',
+                'content_oz' => 'required',
+                'content_uz' => 'required',
+                'status' => 'required|integer',
+                'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            ];
+        }
     }
 }

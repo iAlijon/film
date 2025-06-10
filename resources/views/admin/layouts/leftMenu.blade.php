@@ -60,14 +60,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('interview.index')}}" class="nav-link {{(request()->is('admin/interview*'))?'active':''}}">
+                            <a href="{{route('interview.index')}}" class="nav-link {{(request()->is('admin/interview'))?'active':''}}">
                                 <i class="nav-icon far fa-circle"></i>
                                 Intervyu
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{route('interview_peoples.index')}}" class="nav-link {{(request()->is('admin/interview_people'))?'active':''}}">
+                            <a href="{{route('interview_peoples.index')}}" class="nav-link {{(request()->is('admin/interview_peoples'))?'active':''}}">
                                 <i class="nav-icon far fa-circle"></i>
                                 Suxbat o'tkaziladigan odamlar
                             </a>

@@ -15,8 +15,14 @@ class BookController extends Controller
         $per_page = $result['per_page']??6;
         if (isset($result['category_id']) && !empty($result['category_id'])) {
             $params = Books::where('category_id', $result['category_id'])
-                ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description',
-                     'category_id', 'created_at',
+                ->select(
+                    'id',
+                    'images',
+                    'files',
+                    'name_' . $lang . ' as name',
+                    'description_' . $lang . ' as description',
+                    'category_id',
+                    'created_at',
                     'updated_at',
                     'author_'.$lang.' as author',
                     'about_'.$lang.' as about',
@@ -28,7 +34,16 @@ class BookController extends Controller
                 ->paginate($per_page);
         }else {
             $params = Books::where('status', 1)
-                ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description', 'category_id', 'created_at', 'updated_at', 'author_'.$lang.' as author',
+                ->select(
+                    'id',
+                    'images',
+                    'files',
+                    'name_' . $lang . ' as name',
+                    'description_' . $lang . ' as description',
+                    'category_id',
+                    'created_at',
+                    'updated_at',
+                    'author_'.$lang.' as author',
                     'about_'.$lang.' as about',
                     'date',
                     'view_count'
@@ -47,7 +62,12 @@ class BookController extends Controller
     {
         $lang = $request->header('lang', 'oz');
         $data = Books::where('id', $id)
-            ->select('id', 'images', 'files', 'name_' . $lang . ' as name', 'description_' . $lang . ' as description',
+            ->select(
+                'id',
+                'images',
+                'files',
+                'name_' . $lang . ' as name',
+                'description_' . $lang . ' as description',
                 'category_id', 'created_at', 'updated_at',
                  'author_'.$lang.' as author',
                  'about_'.$lang.' as about',

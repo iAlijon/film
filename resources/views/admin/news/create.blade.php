@@ -40,9 +40,9 @@
                                aria-selected="false">UZ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
-                               href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="false" disabled="disabled">RU</a>
+                            <a class="nav-link" id="custom-tabs-three-ru-tab" data-toggle="pill"
+                               href="#custom-tabs-three-ru" role="tab" aria-controls="custom-tabs-three-ru"
+                               aria-selected="false">RU</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" id="custom-tabs-three-body-tab" data-toggle="pill"
@@ -70,7 +70,7 @@
 
                                 <div class="form-group">
                                     <label>Nomi</label>
-                                    <input type="text" class="form-control @error('name_oz') border-danger @enderror" name="name_oz">
+                                    <input type="text" class="form-control @error('name_oz') border-danger @enderror" name="name_oz" placeholder="Nomi">
                                     <small class="text-danger">{{$errors->first('name_oz')}}</small>
                                 </div>
 
@@ -82,13 +82,13 @@
 
                                 <div class="form-group">
                                     <label>Qisqacha ma'lumot</label>
-                                    <textarea name="description_oz" cols="30" rows="5" class="form-control @error('description_oz') border-danger @enderror"></textarea>
+                                    <textarea name="description_oz" cols="30" rows="5" class="form-control @error('description_oz') border-danger @enderror" placeholder="Qisqacha ma'lumot"></textarea>
                                     <small class="text-danger">{{$errors->first('description_oz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label>To'liq ma'lumot</label>
-                                    <textarea name="content_oz" class="textarea form-control summernote @error('content_oz') border-danger @enderror" id="summernote"></textarea>
+                                    <textarea name="content_oz" class="textarea form-control summernote @error('content_oz') border-danger @enderror" id="summernote" placeholder="To'liq ma'lumot"></textarea>
                                     <small class="text-danger">{{$errors->first('content_oz')}}</small>
                                 </div>
 
@@ -104,22 +104,43 @@
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
                                 <div class="form-group">
                                     <label>Номи</label>
-                                    <input type="text" class="form-control @error('name_uz') border-danger @enderror" name="name_uz">
+                                    <input type="text" class="form-control @error('name_uz') border-danger @enderror" name="name_uz" placeholder="Номи">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Қисқача маълумот</label>
-                                    <textarea name="description_uz" cols="30" rows="5" class="form-control @error('description_uz') border-danger @enderror"></textarea>
+                                    <textarea name="description_uz" cols="30" rows="5" class="form-control @error('description_uz') border-danger @enderror" placeholder="Қисқача маълумот"></textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Тўлиқ маълумот</label>
-                                    <textarea name="content_uz" class="textarea form-control summernote @error('content_uz') border-danger @enderror" id="summernote"></textarea>
+                                    <textarea name="content_uz" class="textarea form-control summernote @error('content_uz') border-danger @enderror" id="summernote" placeholder="Тўлиқ маълумот"></textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
                             </div>
+                            {{----  ru  ----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-ru" role="tabpanel">
+                                <div class="form-group">
+                                    <label>Имя</label>
+                                    <input type="text" class="form-control @error('name_ru') border-danger @enderror" name="name_ru" placeholder="Имя">
+                                    <small class="text-danger">{{$errors->first('name_ru')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Краткая информация</label>
+                                    <textarea name="description_ru" cols="30" rows="5" class="form-control @error('description_ru') border-danger @enderror" placeholder="Краткая информация"></textarea>
+                                    <small class="text-danger">{{$errors->first('description_ru')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Полная информация</label>
+                                    <textarea name="content_ru" class="textarea form-control summernote @error('content_ru') border-danger @enderror" id="summernote" placeholder="Полная информация"></textarea>
+                                    <small class="text-danger">{{$errors->first('content_ru')}}</small>
+                                </div>
+                            </div>
+
                             <div class="text-right">
                                 <button class="btn btn-success">&check;Saqlash</button>
                             </div>

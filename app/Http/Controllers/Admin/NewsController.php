@@ -24,7 +24,7 @@ class NewsController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = PersonCategory::select('id', 'name_oz', 'name_uz')->where('type', 'news')->where('status', true)->get();
+        $categories = PersonCategory::select('id', 'name_oz', 'name_uz', 'name_ru')->where('type', 'news')->where('status', true)->get();
         $models = $this->repo->index($request);
         return view('admin.news.index', compact('models', 'categories'));
     }
@@ -36,7 +36,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        $categories = PersonCategory::select('id', 'name_oz', 'name_uz')->where('type', 'news')->where('status', true)->get();
+        $categories = PersonCategory::select('id', 'name_oz', 'name_uz', 'name_ru')->where('type', 'news')->where('status', true)->get();
        return view('admin.news.create', compact('categories'));
     }
 

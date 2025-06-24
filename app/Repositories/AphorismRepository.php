@@ -38,8 +38,10 @@ class AphorismRepository extends BaseRepository
         $model = $this->model->create([
             'full_name_oz' => $data['full_name_oz'],
             'full_name_uz' => $data['full_name_uz'],
+            'full_name_ru' => $data['full_name_ru'],
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
+            'description_ru' => $data['description_ru'],
             'images' => $this->uploads($data['image'], 'aphorism'),
             'status' => $data['status']
         ]);
@@ -49,6 +51,7 @@ class AphorismRepository extends BaseRepository
                 'aphorism_id' => $model->id,
                 'description_oz' => $datum['description_oz']??null,
                 'description_uz' => $datum['description_uz']??null,
+                'description_ru' => $datum['description_ru']??null,
             ]);
         }
         return $model;
@@ -68,8 +71,10 @@ class AphorismRepository extends BaseRepository
         $model->update([
             'full_name_oz' => $data['full_name_oz'],
             'full_name_uz' => $data['full_name_uz'],
+            'full_name_ru' => $data['full_name_ru'],
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
+            'description_ru' => $data['description_ru'],
             'images' => $images,
             'status' => $data['status']
         ]);
@@ -84,6 +89,7 @@ class AphorismRepository extends BaseRepository
                 'aphorism_id' => $model->id,
                 'description_oz' => $datum['description_oz'],
                 'description_uz' => $datum['description_uz'],
+                'description_ru' => $datum['description_ru'],
             ]);
         }
         return $model;

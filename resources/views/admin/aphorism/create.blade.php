@@ -54,9 +54,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
-                               href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="false" disabled="disabled">RU</a>
+                            <a class="nav-link" id="custom-tabs-three-ru-tab" data-toggle="pill"
+                               href="#custom-tabs-three-ru" role="tab" aria-controls="custom-tabs-three-ru"
+                               aria-selected="false">RU
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        @if(str_contains($error,'ru'))
+                                            <div class="line"></div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" id="custom-tabs-three-body-tab" data-toggle="pill"
@@ -164,6 +172,45 @@
                                     </div>
                                 </div>
                             </div>
+                            {{----- ru -----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-ru" role="tabpanel">
+                                <div class="form-group">
+                                    <label>Ф.И.О</label>
+                                    <input type="text" class="form-control @error('full_name_ru') border-danger @enderror" name="full_name_ru">
+                                    <small class="text-danger">{{$errors->first('full_name_ru')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Краткая информация</label>
+                                    <textarea name="description_ru" cols="30" rows="5" class="form-control @error('description_ru') border-danger @enderror"></textarea>
+                                    <small class="text-danger">{{$errors->first('description_ru')}}</small>
+                                </div>
+
+                                <div class="card card-outline card-success">
+                                    <div class="card-header">
+                                        <label>Календарь</label>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="dynamic-forms_ru">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Форма
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group dynamic-form">
+                                                        <label for="description_ru">Форма</label>
+                                                        <textarea name="calendar[0][description_ru]" id="description_ru" class="form-control @error('calendar[0][description_ru]') border-danger @enderror" placeholder="Enter description"></textarea>
+                                                        <small class="text-danger">{{$errors->first('description_ru')}}</small>
+                                                        <!-- Button to Add More Forms -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-primary mt-3 btn-block ml-auto" id="add-form-btn_ru" style="width: 9%">добавить</button>
+                                            <!-- First Form -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="text-right">
                             <button class="btn btn-success">&check;Saqlash</button>
@@ -178,7 +225,7 @@
 @push('js')
 
 <script>
-        let formIndexes = { oz: 1, uz: 1 }; // Track form indexes for both sections
+        let formIndexes = { oz: 1, uz: 1, ru: 1 }; // Track form indexes for both sections
         function addForm(section) {
             const dynamicForms = document.getElementById(`dynamic-forms_${section}`);
             let formIndex = formIndexes[section];

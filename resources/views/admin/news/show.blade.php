@@ -49,9 +49,9 @@
                                aria-selected="false">UZ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
-                               href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="false" disabled="disabled">RU</a>
+                            <a class="nav-link" id="custom-tabs-three-ru-tab" data-toggle="pill"
+                               href="#custom-tabs-three-ru" role="tab" aria-controls="custom-tabs-three-ru"
+                               aria-selected="false">RU</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" id="custom-tabs-three-body-tab" data-toggle="pill"
@@ -124,6 +124,37 @@
                                 </tbody>
                             </table>
                         </div>
+                        {{----- ru -----}}
+                        <div class="tab-pane fade" id="custom-tabs-three-ru" role="tabpanel">
+                            <table class="table table-bordered table-striped table-hover">
+                                <tbody>
+                                <tr>
+                                    <th>Имя</th>
+                                    <td>{{$model->name_ru}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Картина</th>
+                                    <td><img src="{{getInFolder($model->image, 'news')}}" alt="error"></td>
+                                </tr>
+                                <tr>
+                                    <th>Краткая информация</th>
+                                    <td>{{$model->description_ru}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Добавленное время</th>
+                                    <td>{{$model->created_at}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Статус</th>
+                                    <td>{{$model->status==1?'Active':'No Active'}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Полная информация</th>
+                                    <td> <?= $model->content_ru ?></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -134,7 +165,6 @@
                         <form action="{{ route('news.destroy', $model->id) }}" method="post"
                               id="deleteItem-{{$model->id}}">
                             @csrf
-                            @method('delete')
 
                         </form>
                         <a type="submit" class="btn btn-danger"

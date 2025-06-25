@@ -38,14 +38,14 @@
                                aria-selected="false">UZ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
-                               href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="false" disabled="disabled">RU</a>
+                            <a class="nav-link" id="custom-tabs-three-ru-tab" data-toggle="pill"
+                               href="#custom-tabs-three-ru" role="tab" aria-controls="custom-tabs-three-ru"
+                               aria-selected="false">RU</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-body-tab" data-toggle="pill"
-                               href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false" disabled="disabled">EN</a>
+                            <a class="nav-link" id="custom-tabs-three-en-tab" data-toggle="pill"
+                               href="#custom-tabs-three-en" role="tab" aria-controls="custom-tabs-three-en"
+                               aria-selected="false">EN</a>
                         </li>
                     </ul>
                 </div>
@@ -54,6 +54,7 @@
                         @csrf
                         @method("PUT")
                         <div class="tab-content" id="custom-tabs-three-tabContent">
+
                             {{----- oz -----}}
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel">
                                 <div class="form-group">
@@ -124,6 +125,49 @@
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
                             </div>
+                            {{----- ru -----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-ru" role="tabpanel">
+                                <div class="form-group">
+                                    <label for="name_ru">Премьерное имя</label>
+                                    <input type="text" name="name_ru" class="form-control @error('name_ru') border-danger @enderror" value="{{$model->name_ru}}">
+                                    <small class="text-danger">{{$errors->first('name_ru')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description_ru">Краткая информация</label>
+                                    <textarea name="description_ru" cols="30" rows="5" class="form-control @error('description_ru') border-danger @enderror">{{$model->description_ru}}</textarea>
+                                    <small class="text-danger">{{$errors->first('description_ru')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="content_ru">Полная информация</label>
+                                    <textarea name="content_ru" class="textarea form-control summernote @error('content_ru') border-danger @enderror"
+                                              id="summernote">{{$model->content_ru}}</textarea>
+                                    <small class="text-danger">{{$errors->first('content_ru')}}</small>
+                                </div>
+                            </div>
+                            {{----- en -----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-en" role="tabpanel">
+                                <div class="form-group">
+                                    <label for="name_en">Premiere name</label>
+                                    <input type="text" name="name_en" class="form-control @error('name_en') border-danger @enderror" value="{{$model->name_en}}">
+                                    <small class="text-danger">{{$errors->first('name_en')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description_en">Brief information</label>
+                                    <textarea name="description_en" cols="30" rows="5" class="form-control @error('description_en') border-danger @enderror">{{$model->description_en}}</textarea>
+                                    <small class="text-danger">{{$errors->first('description_en')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="content_en">Full information</label>
+                                    <textarea name="content_en" class="textarea form-control summernote @error('content_en') border-danger @enderror"
+                                              id="summernote">{{$model->content_en}}</textarea>
+                                    <small class="text-danger">{{$errors->first('content_en')}}</small>
+                                </div>
+                            </div>
+
                             <div class="text-right">
                                 <button class="btn btn-success">&check;Saqlash</button>
                             </div>

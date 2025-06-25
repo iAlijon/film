@@ -40,9 +40,13 @@ class InterviewPeoplesRepository extends BaseRepository
             'category_id' => $data['category_id'],
             'full_name_oz' => $data['full_name_oz'],
             'full_name_uz' => $data['full_name_uz'],
+            'full_name_ru' => $data['full_name_ru'],
+            'full_name_en' => $data['full_name_en']??null,
             'images' => $this->uploads($data['image'], 'interview_people'),
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
+            'description_ru' => $data['description_ru'],
+            'description_en' => $data['description_en']??null,
             'status' => $data['status']
         ]);
 
@@ -67,9 +71,13 @@ class InterviewPeoplesRepository extends BaseRepository
             'category_id' => $data['category_id'],
             'full_name_oz' => $data['full_name_oz'],
             'full_name_uz' => $data['full_name_uz'],
+            'full_name_ru' => $data['full_name_ru'],
+            'full_name_en' => $data['full_name_en']??null,
             'images' => $images,
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
+            'description_ru' => $data['description_ru'],
+            'description_en' => $data['description_en']??null,
             'status' => $data['status']
         ]);
 

@@ -28,8 +28,12 @@ class InterviewPeopleRequest extends FormRequest
                 'category_id' => 'required|integer',
                 'full_name_oz' => 'required',
                 'full_name_uz' => 'required',
+                'full_name_ru' => 'required',
+                'full_name_en' => 'nullable',
                 'description_oz' => 'required',
                 'description_uz' => 'required',
+                'description_ru' => 'required',
+                'description_en' => 'nullable',
                 'status' => 'required|integer',
                 'image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
             ];
@@ -38,8 +42,12 @@ class InterviewPeopleRequest extends FormRequest
                 'category_id' => 'required|integer',
                 'full_name_oz' => 'required',
                 'full_name_uz' => 'required',
+                'full_name_ru' => 'required',
+                'full_name_en' => 'nullable',
                 'description_oz' => 'required',
                 'description_uz' => 'required',
+                'description_ru' => 'required',
+                'description_en' => 'nullable',
                 'status' => 'required|integer',
                 'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
             ];

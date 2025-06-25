@@ -54,14 +54,22 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
-                               href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="false" disabled="disabled">RU</a>
+                            <a class="nav-link" id="custom-tabs-three-ru-tab" data-toggle="pill"
+                               href="#custom-tabs-three-ru" role="tab" aria-controls="custom-tabs-three-ru"
+                               aria-selected="false">RU
+                                @if($errors->any() == '*_ru')
+                                    @if($errors->any())
+                                        @foreach($errors->all() as $error)
+                                            <div class="line"></div>
+                                        @endforeach
+                                    @endif
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-body-tab" data-toggle="pill"
-                               href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false" disabled="disabled">EN</a>
+                            <a class="nav-link" id="custom-tabs-three-en-tab" data-toggle="pill"
+                               href="#custom-tabs-three-en" role="tab" aria-controls="custom-tabs-three-en"
+                               aria-selected="false">EN</a>
                         </li>
                     </ul>
                 </div>
@@ -123,6 +131,35 @@
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
                                 </div>
                             </div>
+                            {{----  ru  ----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-ru" role="tabpanel">
+                                <div class="form-group">
+                                    <label>Ф.И.О</label>
+                                    <input type="text" class="form-control" name="full_name_ru" value="{{$model->full_name_ru}}">
+                                    <small class="text-danger">{{$errors->first('full_name_ru')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description_ru">Краткая информация</label>
+                                    <textarea name="description_ru" id="" cols="30" rows="5" class="form-control">{{$model->description_ru}}</textarea>
+                                    <small class="text-danger">{{$errors->first('description_ru')}}</small>
+                                </div>
+                            </div>
+                            {{----  en  ----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-en" role="tabpanel">
+                                <div class="form-group">
+                                    <label>F.I.О</label>
+                                    <input type="text" class="form-control" name="full_name_en" value="{{$model->full_name_en}}">
+                                    <small class="text-danger">{{$errors->first('full_name_en')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description_en">Brief information</label>
+                                    <textarea name="description_en" id="" cols="30" rows="5" class="form-control">{{$model->description_en}}</textarea>
+                                    <small class="text-danger">{{$errors->first('description_en')}}</small>
+                                </div>
+                            </div>
+
                             <div class="text-right">
                                 <button class="btn btn-success">&check;Saqlash</button>
                             </div>

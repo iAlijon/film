@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InterviewPeopleRequest;
-use App\Http\Requests\Admin\InterviewRequest;
-use App\Models\PeopleAssociatedWithTheFilmCategory;
 use App\Models\PersonCategory;
 use App\Repositories\InterviewPeoplesRepository;
 use Illuminate\Http\Request;

@@ -40,14 +40,14 @@
                                aria-selected="false">UZ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
+                            <a class="nav-link" id="custom-tabs-three-ru-tab" data-toggle="pill"
                                href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="false" disabled="disabled">RU</a>
+                               aria-selected="false">RU</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-body-tab" data-toggle="pill"
-                               href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false" disabled="disabled">EN</a>
+                            <a class="nav-link" id="custom-tabs-three-en-tab" data-toggle="pill"
+                               href="#custom-tabs-three-en" role="tab" aria-controls="custom-tabs-three-en"
+                               aria-selected="false">EN</a>
                         </li>
                     </ul>
                 </div>
@@ -128,6 +128,49 @@
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
                                 </div>
                             </div>
+                            {{----  ru  ----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-ru" role="tabpanel">
+                                <div class="form-group">
+                                    <label>Номи</label>
+                                    <input type="text" class="form-control @error('interview_ru') border-danger @enderror" name="interview_ru"  value="{{$model->interview_ru}}">
+                                    <small class="text-danger">{{$errors->first('interview_ru')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Қисқача маълумот</label>
+                                    <textarea name="description_ru" cols="30" rows="5" class="form-control @error('description_ru') border-danger @enderror">{{$model->description_ru}}</textarea>
+                                    <small class="text-danger">{{$errors->first('description_ru')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Тўлиқ маълумот</label>
+                                    <textarea name="content_ru" class="textarea form-control summernote @error('content_ru') border-danger @enderror"
+                                              id="summernote">{{$model->content_ru}}</textarea>
+                                    <small class="text-danger">{{$errors->first('content_ru')}}</small>
+                                </div>
+                            </div>
+                            {{----  en  ----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-en" role="tabpanel">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control @error('interview_en') border-danger @enderror" name="interview_en"  value="{{$model->interview_ru}}">
+                                    <small class="text-danger">{{$errors->first('interview_en')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Brief information</label>
+                                    <textarea name="description_en" cols="30" rows="5" class="form-control @error('description_en') border-danger @enderror">{{$model->description_en}}</textarea>
+                                    <small class="text-danger">{{$errors->first('description_en')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Full information</label>
+                                    <textarea name="content_en" class="textarea form-control summernote @error('content_en') border-danger @enderror"
+                                              id="summernote">{{$model->content_en}}</textarea>
+                                    <small class="text-danger">{{$errors->first('content_en')}}</small>
+                                </div>
+                            </div>
+
                             <div class="text-right">
                                 <button class="btn btn-success">&check;Saqlash</button>
                             </div>

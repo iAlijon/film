@@ -28,10 +28,16 @@ class InterviewRequest extends FormRequest
             'interview_people_id' => 'required',
             'interview_oz' => 'required|string',
             'interview_uz' => 'required|string',
+            'interview_ru' => 'required|string',
+            'interview_en' => 'nullable|string',
             'description_oz' => 'required',
             'description_uz' => 'required',
+            'description_ru' => 'required',
+            'description_en' => 'nullable',
             'content_oz' => 'required',
             'content_uz' => 'required',
+            'content_ru' => 'required',
+            'content_en' => 'nullable',
             'status' => 'required|integer',
         ];
     }

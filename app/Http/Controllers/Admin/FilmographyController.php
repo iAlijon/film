@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Filmography;
 use App\Models\PersonCategory;
-use App\Repositories\FilmographyRepository;
 use App\Traits\ImageUploads;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class FilmographyController extends Controller
@@ -66,10 +64,16 @@ class FilmographyController extends Controller
         $validator = Validator::make($request->all(), [
             'name_oz' => 'required|string',
             'name_uz' => 'required|string',
+            'name_ru' => 'required|string',
+            'name_en' => 'nullable|string',
             'description_oz' => 'required',
             'description_uz' => 'required',
+            'description_ru' => 'required',
+            'description_en' => 'nullable',
             'content_oz' => 'required',
             'content_uz' => 'required',
+            'content_ru' => 'required',
+            'content_en' => 'nullable',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
             'status' => 'required|boolean',
             'category_id' => 'required'
@@ -81,10 +85,16 @@ class FilmographyController extends Controller
         $model = Filmography::create([
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
+            'name_ru' => $data['name_ru'],
+            'name_en' => $data['name_en']??null,
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
+            'description_ru' => $data['description_ru'],
+            'description_en' => $data['description_en']??null,
             'content_oz' => contentByDomDocment($data['content_oz'], 'filmography'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'filmography'),
+            'content_ru' => contentByDomDocment($data['content_ru'], 'filmography'),
+            'content_en' => contentByDomDocment($data['content_en'], 'filmography')??null,
             'images' => $this->uploads($data['image'], 'filmography'),
             'status' => $data['status'],
             'category_id' => $data['category_id']
@@ -134,10 +144,16 @@ class FilmographyController extends Controller
         $validator = Validator::make($request->all(), [
             'name_oz' => 'required|string',
             'name_uz' => 'required|string',
+            'name_ru' => 'required|string',
+            'name_en' => 'nullable|string',
             'description_oz' => 'required',
             'description_uz' => 'required',
+            'description_ru' => 'required',
+            'description_en' => 'nullable',
             'content_oz' => 'required',
             'content_uz' => 'required',
+            'content_ru' => 'required',
+            'content_en' => 'nullable',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             'status' => 'required|boolean',
             'category_id' => 'required'
@@ -158,10 +174,16 @@ class FilmographyController extends Controller
         $model->update([
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
+            'name_ru' => $data['name_ru'],
+            'name_en' => $data['name_en']??null,
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
+            'description_ru' => $data['description_ru'],
+            'description_en' => $data['description_en']??null,
             'content_oz' => contentByDomDocment($data['content_oz'], 'filmography'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'filmography'),
+            'content_ru' => contentByDomDocment($data['content_ru'], 'filmography'),
+            'content_en' => contentByDomDocment($data['content_en'], 'filmography')??null,
             'images' => $images,
             'status' => $data['status'],
             'category_id' => $data['category_id']

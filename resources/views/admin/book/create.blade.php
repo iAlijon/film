@@ -54,14 +54,30 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
-                               href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="false" disabled="disabled">RU</a>
+                            <a class="nav-link" id="custom-tabs-three-ru-tab" data-toggle="pill"
+                               href="#custom-tabs-three-ru" role="tab" aria-controls="custom-tabs-three-ru"
+                               aria-selected="false">RU
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        @if(str_contains($error,'ru'))
+                                            <div class="line"></div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-body-tab" data-toggle="pill"
-                               href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false" disabled="disabled">EN</a>
+                            <a class="nav-link" id="custom-tabs-three-en-tab" data-toggle="pill"
+                               href="#custom-tabs-three-en" role="tab" aria-controls="custom-tabs-three-en"
+                               aria-selected="false">EN
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        @if(str_contains($error,'en'))
+                                            <div class="line"></div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -177,6 +193,76 @@
                                         {{old('description_uz')}}
                                     </textarea>
                                     <small class="text-danger">{{$errors->first('description_uz')}}</small>
+                                </div>
+
+                            </div>
+                            {{---- ru ----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-ru" role="tabpanel">
+                                <div class="form-group">
+                                    <label for="author_ru">Автор</label>
+                                    <input type="text" name="author_ru" class="form-control @error('author_ru') border-danger @enderror" value="{{old('author_ru')}}"
+                                           placeholder="Автор..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('author_uz')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name_ru">Имя</label>
+                                    <input type="text" name="name_ru" class="form-control @error('name_ru') border-danger @enderror" value="{{old('name_ru')}}"
+                                           placeholder="Имя..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('name_ru')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="about_ru">О книге</label>
+                                    <input type="text" name="about_ru" class="form-control @error('about_ru') border-danger @enderror" value="{{old('about_ru')}}"
+                                           placeholder="О книге..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('about_ru')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description_ru">Краткая информация</label>
+                                    <textarea name="description_ru" id="description_ru" cols="30" rows="5" class="form-control @error('description_ru') border-danger @enderror">
+                                        {{old('description_ru')}}
+                                    </textarea>
+                                    <small class="text-danger">{{$errors->first('description_ru')}}</small>
+                                </div>
+
+                            </div>
+                            {{---- en ----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-en" role="tabpanel">
+                                <div class="form-group">
+                                    <label for="author_en">Author</label>
+                                    <input type="text" name="author_en" class="form-control @error('author_en') border-danger @enderror" value="{{old('author_en')}}"
+                                           placeholder="Author..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('author_en')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name_en">Name</label>
+                                    <input type="text" name="name_en" class="form-control @error('name_en') border-danger @enderror" value="{{old('name_en')}}"
+                                           placeholder="Name..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('name_en')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="about_en">About the book</label>
+                                    <input type="text" name="about_en" class="form-control @error('about_en') border-danger @enderror" value="{{old('about_en')}}"
+                                           placeholder="About the book..."
+                                    >
+                                    <small class="text-danger">{{$errors->first('about_en')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description_en">Brief information</label>
+                                    <textarea name="description_en" id="description_en" cols="30" rows="5" class="form-control @error('description_en') border-danger @enderror">
+                                        {{old('description_en')}}
+                                    </textarea>
+                                    <small class="text-danger">{{$errors->first('description_en')}}</small>
                                 </div>
 
                             </div>

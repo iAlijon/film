@@ -26,6 +26,8 @@ class PersonCategoryRequest extends FormRequest
         return [
             'name_oz' => 'required',
             'name_uz' => 'required',
+            'name_ru' => 'required',
+            'name_en' => 'nullable',
             'status' => 'required|integer',
             'menu' => 'required|string',
             'order' => 'required'

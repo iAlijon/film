@@ -33,14 +33,14 @@
                                aria-selected="false">UZ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
-                               href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="false" disabled="disabled">RU</a>
+                            <a class="nav-link" id="custom-tabs-three-ru-tab" data-toggle="pill"
+                               href="#custom-tabs-three-ru" role="tab" aria-controls="custom-tabs-three-ru"
+                               aria-selected="false">RU</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-body-tab" data-toggle="pill"
-                               href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false" disabled="disabled">EN</a>
+                            <a class="nav-link" id="custom-tabs-three-en-tab" data-toggle="pill"
+                               href="#custom-tabs-three-en" role="tab" aria-controls="custom-tabs-three-en"
+                               aria-selected="false">EN</a>
                         </li>
                     </ul>
                 </div>
@@ -95,6 +95,22 @@
                                     <label>Категория Номи</label>
                                     <input type="text" class="form-control" name="name_uz" placeholder="Name">
                                     <small class="text-danger">{{$errors->first('name_uz')}}</small>
+                                </div>
+                            </div>
+                            {{----  ru  ----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-ru" role="tabpanel">
+                                <div class="form-group">
+                                    <label for="name_ru">Название категории</label>
+                                    <input type="text" class="form-control" name="name_ru" placeholder="Name">
+                                    <small class="text-danger">{{$errors->first('name_ru')}}</small>
+                                </div>
+                            </div>
+                            {{----  en  ----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-en" role="tabpanel">
+                                <div class="form-group">
+                                    <label for="name_en">Category name</label>
+                                    <input type="text" class="form-control" name="name_en" placeholder="Name">
+                                    <small class="text-danger">{{$errors->first('name_en')}}</small>
                                 </div>
                             </div>
                             <div class="text-right">

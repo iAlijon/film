@@ -30,6 +30,8 @@ class PersonCategoryRepository extends BaseRepository
         $model = $this->model->create([
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
+            'name_ru' => $data['name_ru'],
+            'name_en' => $data['name_en']??null,
             'type' => $data['menu'],
             'status' => $data['status'],
             'order' => $data['order']
@@ -46,6 +48,8 @@ class PersonCategoryRepository extends BaseRepository
         $model->update([
             'name_oz' => $data['name_oz'],
             'name_uz' => $data['name_uz'],
+            'name_ru' => $data['name_ru'],
+            'name_en' => $data['name_en']??null,
             'type' => $data['menu'],
             'status' => $data['status'],
             'order' => $data['order']

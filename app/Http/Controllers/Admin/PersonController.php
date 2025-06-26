@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PersonCategoryRequest;
 use App\Http\Requests\Admin\PersonRequest;
 use App\Models\PersonCategory;
 use App\Repositories\PersonRepository;

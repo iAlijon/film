@@ -38,14 +38,14 @@
                                aria-selected="false">UZ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
-                               href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="false" disabled="disabled">RU</a>
+                            <a class="nav-link" id="custom-tabs-three-ru-tab" data-toggle="pill"
+                               href="#custom-tabs-three-ru" role="tab" aria-controls="custom-tabs-three-ru"
+                               aria-selected="false">RU</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-body-tab" data-toggle="pill"
+                            <a class="nav-link" id="custom-tabs-three-body-tab" data-toggle="pill"
                                href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false" disabled="disabled">EN</a>
+                               aria-selected="false">EN</a>
                         </li>
                     </ul>
                 </div>
@@ -118,6 +118,50 @@
                                     <label for="content_uz">Тўлиқ маълумот</label>
                                     <textarea name="content_uz" id="content_uz" cols="30" rows="10" class="form-control textarea @error('content_uz') border-danger @enderror"></textarea>
                                     <small class="text-danger">{{$errors->first('content_uz')}}</small>
+                                </div>
+
+                            </div>
+                            {{---- ru ----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-ru" role="tabpanel">
+
+                                <div class="form-group">
+                                    <label for="name_ru">Имя</label>
+                                    <input type="text" class="form-control @error('name_ru') border-danger @enderror" name="name_ru">
+                                    <small class="text-danger">{{$errors->first('name_ru')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description_ru">Краткая информация</label>
+                                    <textarea name="description_ru" id="description_ru" cols="30" rows="5" class="form-control @error('description_ru') border-danger @enderror"></textarea>
+                                    <small class="text-danger">{{$errors->first('description_ru')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="content_en">Полная информация</label>
+                                    <textarea name="content_en" id="content_en" cols="30" rows="10" class="form-control textarea @error('content_en') border-danger @enderror"></textarea>
+                                    <small class="text-danger">{{$errors->first('content_en')}}</small>
+                                </div>
+
+                            </div>
+                            {{---- en ----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-en" role="tabpanel">
+
+                                <div class="form-group">
+                                    <label for="name_en">Name</label>
+                                    <input type="text" class="form-control @error('name_en') border-danger @enderror" name="name_en" placeholder="Name">
+                                    <small class="text-danger">{{$errors->first('name_en')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description_en">Brief information</label>
+                                    <textarea name="description_en" id="description_en" cols="30" rows="5" class="form-control @error('description_en') border-danger @enderror"></textarea>
+                                    <small class="text-danger">{{$errors->first('description_en')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="content_en">Full information</label>
+                                    <textarea name="content_en" id="content_en" cols="30" rows="10" class="form-control textarea @error('content_en') border-danger @enderror"></textarea>
+                                    <small class="text-danger">{{$errors->first('content_en')}}</small>
                                 </div>
 
                             </div>

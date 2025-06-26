@@ -67,7 +67,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-en-tab" data-toggle="pill"
+                            <a class="nav-link" id="custom-tabs-three-en-tab" data-toggle="pill"
                                href="#custom-tabs-three-en" role="tab" aria-controls="custom-tabs-three-en"
                                aria-selected="false">EN
                                 @if($errors->any())

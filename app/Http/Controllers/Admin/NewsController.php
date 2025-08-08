@@ -120,7 +120,11 @@ class NewsController extends Controller
     {
         $data = $request->all();
         $model = News::where('id', $data['id'])->first();
-        $model->update(['status' => $data['status']]);
+        if ($data['status'])
+            $status = 1;
+        else
+            $status = 0;
+        $model->update(['status' => $status]);
         if ($model){
             return $model;
         }

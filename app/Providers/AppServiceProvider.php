@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Telegram\Commands\StartCommand;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class AppServiceProvider extends ServiceProvider
 {

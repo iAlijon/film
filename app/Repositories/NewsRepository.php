@@ -6,18 +6,23 @@ namespace App\Repositories;
 
 use App\Http\Filter\NewFilter;
 use App\Models\News;
+use App\Models\TelegramUser;
 use App\Traits\ImageUploads;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
+use Telegram\Bot\Api;
+use Telegram\Bot\Exceptions\TelegramResponseException;
+use Telegram\Bot\FileUpload\InputFile;
+use Telegram\Bot\Laravel\Facades\Telegram;
+use App\Services\TelegramServices;
 
 class NewsRepository extends BaseRepository
 {
     use ImageUploads;
-    public function __construct()
+    protected $telegram;
+    public function __construct(TelegramServices $telegramServices)
     {
-
         $this->model = new News();
+        $this->telegram = $telegramServices;
     }
 
     public function index($request)
@@ -51,6 +56,7 @@ class NewsRepository extends BaseRepository
             'image' => $this->uploads($data['images'], 'news'),
             'category_id' => $data['category_id']
         ]);
+        $this->telegram->sendToTelegram($model);
         if ($model) {
             return $model;
         }
@@ -84,6 +90,7 @@ class NewsRepository extends BaseRepository
             'image' => $image,
             'category_id' => $data['category_id']
         ]);
+
         if ($model) {
             return $model;
         }
@@ -98,4 +105,6 @@ class NewsRepository extends BaseRepository
         $model->delete();
         return true;
     }
+
+
 }

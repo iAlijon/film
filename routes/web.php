@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
     Route::get('/book/download/{id}', [\App\Http\Controllers\Admin\BooksController::class, 'download'])->name('download');
     Route::get('/interview-status', [\App\Http\Controllers\Admin\InterviewController::class, 'interviewStatus'])->name('interview-status');
     Route::get('order_category', [\App\Http\Controllers\Admin\PersonCategoryController::class, 'order'])->name('order_category');
+    Route::get('telegram_user', [\App\Http\Controllers\Admin\TelegramUsers::class, 'index'])->name('telegram_user');
 });
 
 

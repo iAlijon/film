@@ -1,6 +1,8 @@
 <?php
 namespace App\Services;
 use App\Models\TelegramUser;
+use App\Models\User;
+use CURLFile;
 use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Api;
 use Telegram\Bot\Exceptions\TelegramResponseException;
@@ -8,6 +10,7 @@ use Telegram\Bot\FileUpload\InputFile;
 
 class TelegramServices
 {
+
     public function sendToTelegram($data)
     {
         try {
@@ -23,36 +26,37 @@ class TelegramServices
             $content = strip_tags($content, $allowed);
             $caption = <<<TEXT
             🎬: $name
+
             🆕: $description
+
                 $content
+
+            👉 @kinoArtUzBot
             TEXT;
-            $telegram = new Api($token);
-            $users = TelegramUser::all();
-            try {
-                $telegram->sendPhoto([
-                    'chat_id' => 549249454,
-                    'photo' => InputFile::create($image_path),
-                    'caption' => $caption,
-                    'parse_mode' => 'html'
-                ]);
-            }catch (\Exception $e)
-            {
-                Log::info($e->getMessage());
+
+            $url = "https://api.telegram.org/bot$token/sendPhoto";
+            $users = TelegramUser::pluck('telegram_id')->filter();
+            foreach ($users as $chat_id) {
+                try {
+                    $postFields = [
+                        'chat_id' => (int)$chat_id,
+                        'photo' => curl_file_create($image_path, 'news/jpeg', 'test.jpeg'),
+                        'caption' => $caption,
+                        'parse_mode' => 'HTML'
+                    ];
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type:multipart/form-data"]);
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+                    $result = curl_exec($ch);
+                    curl_close($ch);
+                }catch (\Exception $e){
+                    Log::info('chat_id', [$e->getMessage()]);
+                }
             }
-//            foreach ($users as $user){
-//                try {
-//                    $telegram->sendPhoto([
-//                        'chat_id' => 549249454,
-//                        'photo' => InputFile::create($image_path),
-//                        'caption' => $caption,
-//                        'parse_mode' => 'html'
-//                    ]);
-//                }catch (TelegramResponseException $exception){
-//                    Log::error('telegram xatosi:'.$exception->getMessage());
-//                }
-//
-//            }
-        }catch (TelegramResponseException $exception)
+        }catch (\Exception $exception)
+
         {
             Log::error('Yuborishdagi xatolik:'.$exception->getMessage());
         }

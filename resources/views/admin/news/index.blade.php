@@ -180,7 +180,7 @@
                                         <input type="checkbox"
                                                class="status-toggle"
                                                data-id="{{$model->id}}"
-                                            {{$model->status == true ? 'checked':false}}
+                                            {{$model->status == 1 ? 'checked':0}}
                                         >
                                         <div class="slider round"></div>
                                     </label>
@@ -239,7 +239,7 @@
             $('.status-toggle').change(function () {
                 const checkbox = $(this);
                 const itemId = checkbox.data('id');
-                const newStatus = checkbox.is(':checked') ? true : false;
+                const newStatus = checkbox.is(':checked') ? 1 : 0;
                 console.log(itemId, newStatus)
                 $.ajax({
                     url: "{{route('new-status')}}",

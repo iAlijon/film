@@ -122,6 +122,12 @@
                         <p>Kategoriyalar</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('telegram_user')}}" class="nav-link" {{(request()->is('admin/telegram_users*'))?'active':''}}>
+                        <i class="far fa-circle"></i>
+                        <p>Telegram Foydalanuvchilar</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

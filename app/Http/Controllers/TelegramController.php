@@ -42,12 +42,12 @@ class TelegramController extends Controller
             if ($message === '/start') {
                 TelegramUser::create([
                     'name' => $update->getMessage()->getFrom()->getFirstName(),
-                    'username' => $update->getMessage()->getFrom()->getUsername(),
+                    'username' => $update->getMessage()->getFrom()->getUsername()??null,
                     'telegram_id' => $update->getMessage()->getChat()->getId()
                 ]);
                 $keyboard = Keyboard::make()
                     ->setResizeKeyboard(true)
-                    ->row(['Yangiliklar', 'Premyera'])
+                    ->row(['Yangiliklar', 'Primyera'])
                     ->row(['Kino tahlil', 'Suhbatlar'])
                     ->row(['Shaxsiyat', 'Kinolug\'at'])
                     ->row(['Kinofakt', 'Filmografoya'])
@@ -84,8 +84,32 @@ class TelegramController extends Controller
                         'parse_mode' => 'html'
                     ]);
                 }
-            }elseif ($message === 'Premyera'){
+            }elseif ($message === 'Primyera'){
+                $models = Premiere::where('status', 1)->get();
+                foreach ($models as $model)
+                {
+                    $name = $model['name_oz'];
+                    $description = $model['description_oz'];
+                    $content = $model['content_oz'];
+                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span>';
+                    $description = strip_tags($description, $allowed);
+                    $content = strip_tags($content, $allowed);
+                    $caption = <<<TEXT
+                    🎬: $name
+                    🆕: $description
+                    $content
+                    TEXT;
 
+                    $url = explode('/', $model['images']);
+                    $last = array_pop($url);
+                    $image_path = storage_path('app/public/premiere/'.$last);
+                    Telegram::sendPhoto([
+                        'chat_id' => $chat_id,
+                        'photo' => InputFile::create($image_path),
+                        'caption' => $caption,
+                        'parse_mode' => 'html'
+                    ]);
+                }
             }
         }catch (\Exception $exception) {
             report($exception);

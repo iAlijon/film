@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Aphorism;
 use App\Models\FilmAnalysis;
+use App\Models\Interview;
 use App\Models\News;
 use App\Models\Premiere;
 use App\Models\TelegramUser;
@@ -47,7 +48,7 @@ class TelegramController extends Controller
                 ]);
                 $keyboard = Keyboard::make()
                     ->setResizeKeyboard(true)
-                    ->row(['Yangiliklar', 'Primyera'])
+                    ->row(['Yangiliklar', 'Premyera'])
                     ->row(['Kino tahlil', 'Suhbatlar'])
                     ->row(['Shaxsiyat', 'Kinolug\'at'])
                     ->row(['Kinofakt', 'Filmografoya'])
@@ -84,7 +85,7 @@ class TelegramController extends Controller
                         'parse_mode' => 'html'
                     ]);
                 }
-            }elseif ($message === 'Primyera'){
+            }elseif ($message === 'Premyera'){
                 $models = Premiere::where('status', 1)->get();
                 foreach ($models as $model)
                 {
@@ -107,7 +108,63 @@ class TelegramController extends Controller
                         'chat_id' => $chat_id,
                         'photo' => InputFile::create($image_path),
                         'caption' => $caption,
-                        'parse_mode' => 'html'
+                        'parse_mode' => 'HTML'
+                    ]);
+                }
+            }elseif ($message == 'Kino tahlil')
+            {
+                $models = FilmAnalysis::where('status', 1)->get();
+                foreach ($models as $model)
+                {
+                    $name = $model['name_oz'];
+                    $description = $model['description_oz'];
+                    $content = $model['content_oz'];
+                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span>';
+                    $description = strip_tags($description, $allowed);
+                    $content = strip_tags($content, $allowed);
+                    $caption = <<<TEXT
+                    🎬: $name
+                    🆕: $description
+                    $content
+                    TEXT;
+
+                    $url = explode('/', $model['images']);
+                    $last = array_pop($url);
+                    $image_path = storage_path('app/public/analysis/'.$last);
+                    Telegram::sendPhoto([
+                        'chat_id' => $chat_id,
+                        'photo' => InputFile::create($image_path),
+                        'caption' => $caption,
+                        'parse_mode' => 'HTML'
+                    ]);
+                }
+            }elseif ($message == 'Suhbatlar'){
+                $models = Interview::where('status', 1)->with('people','category')->get();
+                foreach ($models as $model)
+                {
+                    $name = $model['interview_oz'];
+                    $description = $model['description_oz'];
+                    $category_name = $model['category']['name_oz'];
+                    $content = $model['content_oz'];
+                    $full_name = $model['people']['full_name'];
+                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span>';
+                    $description = strip_tags($description, $allowed);
+                    $content = strip_tags($content, $allowed);
+                    $caption = <<<TEXT
+                    $category_name: $full_name
+                    🎬: $name
+                    🆕: $description
+                    $content
+                    TEXT;
+
+                    $url = explode('/', $model['people']['images']);
+                    $last = array_pop($url);
+                    $image_path = storage_path('app/public/interview/'.$last);
+                    Telegram::sendMessage([
+                        'chat_id' => $chat_id,
+                        'photo' => InputFile::create($image_path),
+                        'caption' => $caption,
+                        'parse_mode' => 'HTML'
                     ]);
                 }
             }

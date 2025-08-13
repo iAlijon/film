@@ -6,6 +6,7 @@ use App\Models\Aphorism;
 use App\Models\FilmAnalysis;
 use App\Models\Interview;
 use App\Models\News;
+use App\Models\Person;
 use App\Models\Premiere;
 use App\Models\TelegramUser;
 use App\Telegram\Commands\StartCommand;
@@ -41,10 +42,11 @@ class TelegramController extends Controller
             $chat_id = $update->getMessage()->getChat()->getId();
             $message = $update->getMessage()->getText();
             if ($message === '/start') {
-                TelegramUser::create([
+                TelegramUser::updateOrCreate([
+                    'telegram_id' => $update->getMessage()->getChat()->getId()
+                ],[
                     'name' => $update->getMessage()->getFrom()->getFirstName(),
                     'username' => $update->getMessage()->getFrom()->getUsername()??null,
-                    'telegram_id' => $update->getMessage()->getChat()->getId()
                 ]);
                 $keyboard = Keyboard::make()
                     ->setResizeKeyboard(true)
@@ -146,27 +148,80 @@ class TelegramController extends Controller
                     $description = $model['description_oz'];
                     $category_name = $model['category']['name_oz'];
                     $content = $model['content_oz'];
-                    $full_name = $model['people']['full_name'];
+                    $full_name = $model['people']['full_name_oz'];
                     $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span>';
                     $description = strip_tags($description, $allowed);
                     $content = strip_tags($content, $allowed);
                     $caption = <<<TEXT
-                    $category_name: $full_name
+                    👤  $category_name: $full_name
+
                     🎬: $name
                     🆕: $description
-                    $content
+
+                        $content
                     TEXT;
 
                     $url = explode('/', $model['people']['images']);
                     $last = array_pop($url);
-                    $image_path = storage_path('app/public/interview/'.$last);
-                    Telegram::sendMessage([
+                    $image_path = storage_path('app/public/interview_people/'.$last);
+                    Telegram::sendPhoto([
                         'chat_id' => $chat_id,
                         'photo' => InputFile::create($image_path),
                         'caption' => $caption,
                         'parse_mode' => 'HTML'
                     ]);
                 }
+            }elseif ($message == 'Shaxsiyat')
+            {
+                $models = Person::where('status', 1)->get();
+                if ($models->count() > 0)
+                {
+                    foreach ($models as $model)
+                    {
+                        $full_name = $model['full_name_oz'];
+                        $birth_date = $model['birth_date'];
+                        $description = $model['description_oz'];
+                        $content = $model['content_oz'];
+                        $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span>';
+                        $description = strip_tags($description, $allowed);
+                        $content = strip_tags($content, $allowed);
+                        $caption = <<<TEXT
+                        👤  $full_name
+                        📅  $birth_date
+                        🆕: $description
+
+                            $content
+                        TEXT;
+
+                        $url = explode('/', $model['images']);
+                        $last = array_pop($url);
+                        $image_path = storage_path('app/public/person/'.$last);
+                        Telegram::sendPhoto([
+                            'chat_id' => $chat_id,
+                            'photo' => InputFile::create($image_path),
+                            'caption' => $caption,
+                            'parse_mode' => 'HTML'
+                        ]);
+                    }
+                }else{
+                    function centerLine(string $text, int $width = 30): string {
+                        $len = mb_strlen($text);
+                        $pad = max(0, intdiv($width - $len, 2));
+                        return str_repeat(' ', $pad) . $text;
+                    }
+                    $line = centerLine('Bu menuda ma\'lumot topilmadi', 30);
+                    Telegram::sendMessage([
+                       'chat_id' => $chat_id,
+                       'text' => "<pre>$line</pre>",
+                       'parse_mode' => 'HTML'
+                    ]);
+                }
+            }elseif ($message == 'Kinolug\'at')
+            {
+
+                $keyboard = Keyboard::make()
+                    ->setResizeKeyboard(true)
+                    ->row([]);
             }
         }catch (\Exception $exception) {
             report($exception);

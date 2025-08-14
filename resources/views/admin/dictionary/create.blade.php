@@ -72,9 +72,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-content-tab" data-toggle="pill"
-                               href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="false" disabled="disabled">RU</a>
+                            <a class="nav-link" id="custom-tabs-three-content-tab" data-toggle="pill"
+                               href="#custom-tabs-three-ru" role="tab" aria-controls="custom-tabs-three-ru"
+                               aria-selected="false">RU
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        @if(str_contains($error,'ru'))
+                                            <div class="line"></div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" id="custom-tabs-three-body-tab" data-toggle="pill"
@@ -166,7 +174,30 @@
                                 </div>
 
                             </div>
+                            {{----- ru ------}}
+                            <div class="tab-pane fade" id="custom-tabs-three-ru" role="tabpanel">
 
+                                <div class="form-group required">
+                                    <label for="name_ru">Имя</label>
+                                    <input type="text" class="form-control @error('name_ru') border-danger @enderror" name="name_ru" required placeholder="Номи" value="{{old('name_ru')}}">
+                                    <small class="text-danger">{{$errors->first('name_ru')}}</small>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label for="description_ru">Краткая информация</label>
+                                    <textarea name="description_ru" id="description_ru" class="form-control @error('description_ru') border-danger @enderror" cols="30"
+                                              rows="5" required placeholder="Қисқача маълумоти">{{old('description_ru')}}</textarea>
+                                    <small class="text-danger">{{$errors->first('description_ru')}}</small>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label for="content_ru">Полная информация</label>
+                                    <textarea name="content_ru" id="content_ru" cols="30" rows="10"
+                                              class="form-control textarea @error('content_ru') border-danger @enderror" required>{{old('content_ru')}}</textarea>
+                                    <small class="text-danger">{{$errors->first('content_ru')}}</small>
+                                </div>
+
+                            </div>
                             <div class="text-right">
                                 <button class="btn btn-success">&check;Saqlash</button>
                             </div>
@@ -180,19 +211,19 @@
 @endsection
 
 @push('js')
-    <script>
-        $(document).ready(function () {
-            $('#dictionary').on('select2:select', function (e){
-                let selected = e.params.data.id;
-                // let dictionary = document.getElementById('dictionary').value;
-                console.log(e.params);
-                if (selected){
-                    $(`#dictionary option[value="${selected}"]`).prop('disabled', true);
-                }else {
-                    $(`#dictionary option[value="${selected}"]`).prop('disabled', false);
-                }
-                $('#dictionary').select2();
-            })
-        })
-    </script>
+{{--    <script>--}}
+{{--        $(document).ready(function () {--}}
+{{--            $('#dictionary').on('select2:select', function (e){--}}
+{{--                let selected = e.params.data.id;--}}
+{{--                // let dictionary = document.getElementById('dictionary').value;--}}
+{{--                console.log(e.params);--}}
+{{--                if (selected){--}}
+{{--                    $(`#dictionary option[value="${selected}"]`).prop('disabled', true);--}}
+{{--                }else {--}}
+{{--                    $(`#dictionary option[value="${selected}"]`).prop('disabled', false);--}}
+{{--                }--}}
+{{--                $('#dictionary').select2();--}}
+{{--            })--}}
+{{--        })--}}
+{{--    </script>--}}
 @endpush

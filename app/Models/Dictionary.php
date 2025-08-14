@@ -15,6 +15,7 @@ class Dictionary extends Model
         'name_oz' => 'array',
         'name_uz' => 'array',
     ];
+    protected $guarded = [];
 
     public function film_dictionary_category()
     {

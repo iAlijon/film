@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aphorism;
+use App\Models\Dictionary;
 use App\Models\FilmAnalysis;
 use App\Models\Interview;
 use App\Models\News;
@@ -218,10 +219,13 @@ class TelegramController extends Controller
                 }
             }elseif ($message == 'Kinolug\'at')
             {
-
-                $keyboard = Keyboard::make()
-                    ->setResizeKeyboard(true)
-                    ->row([]);
+                $dictionary = Dictionary::all();
+                foreach ($dictionary as $item)
+                {
+                    $keyboard = Keyboard::make()
+                        ->setResizeKeyboard(true)
+                        ->row([$item['name_oz']]);
+                }
             }
         }catch (\Exception $exception) {
             report($exception);

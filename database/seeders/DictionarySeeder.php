@@ -31,8 +31,8 @@ class DictionarySeeder extends Seeder
 
 
             DB::table('dictionary')->insert([
-                'oz' => json_encode($oz),
-                'ru' => json_encode($ru)
+                'name_oz' => json_encode($oz),
+                'name_ru' => json_encode($ru)
             ]);
         }
 

@@ -11,6 +11,7 @@ use App\Models\Person;
 use App\Models\Premiere;
 use App\Models\TelegramUser;
 use App\Telegram\Commands\StartCommand;
+use http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
@@ -219,13 +220,47 @@ class TelegramController extends Controller
                 }
             }elseif ($message == 'Kinolug\'at')
             {
-                $dictionary = Dictionary::all();
-                foreach ($dictionary as $item)
+                $client = new \GuzzleHttp\Client(['varefy' => false]);
+                $res = $client->get('https://kino-tahlil.uz/api/letters_category');
+                $items = json_decode($res->getBody()->getContents(), true);
+                Log::info($items);
+                $rows = [];
+                $row = [];
+                foreach ($items['data'] as $item)
                 {
-                    $keyboard = Keyboard::make()
-                        ->setResizeKeyboard(true)
-                        ->row([$item['name_oz']]);
+                    $row[] = $item['name'];
+                    if (count($row) === 4) {
+                        $rows[] = $row;
+                        $row = [];
+                    }
                 }
+                if (!empty($row)) {
+                    $rows[] = $row;
+                }
+                $rows[] = ['◀️ Ortga'];
+                $keyboard = Keyboard::make([
+                    'keyboard' => $rows,
+                    'resize_keyboard' => true,
+                ]);
+                Telegram::sendMessage([
+                   'chat_id' => $chat_id,
+                   'text' => 'Lug\'at boycha ma\'lumotni chiqarsh',
+                   'reply_markup' => $keyboard
+                ]);
+            }elseif ($message == '◀️ Ortga')
+            {
+                $keyboard = Keyboard::make()
+                    ->setResizeKeyboard(true)
+                    ->row(['Yangiliklar', 'Premyera'])
+                    ->row(['Kino tahlil', 'Suhbatlar'])
+                    ->row(['Shaxsiyat', 'Kinolug\'at'])
+                    ->row(['Kinofakt', 'Filmografoya'])
+                    ->row(['Kitoblar']);
+                Telegram::sendMessage([
+                    'chat_id' => $chat_id,
+                    'text' => '✅ Asosiy Menu',
+                    'reply_markup' => $keyboard
+                ]);
             }
         }catch (\Exception $exception) {
             report($exception);

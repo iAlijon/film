@@ -65,6 +65,13 @@ class TelegramController extends Controller
                 ]);
             }elseif ($message === 'Yangiliklar') {
                 $news = $this->news();
+                if (count($models) === 0){
+                    Telegram::sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => centerLine('Bu menuda ma\'lumot topilmadi', 30),
+                        'parse_mode' => 'HTML'
+                    ]);
+                }
                 foreach ($news as $new)
                 {
                     $name = $new['name_oz'];
@@ -92,6 +99,13 @@ class TelegramController extends Controller
                 }
             }elseif ($message === 'Premyera'){
                 $models = Premiere::where('status', 1)->get();
+                if (count($models) === 0){
+                    Telegram::sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => centerLine('Bu menuda ma\'lumot topilmadi', 30),
+                        'parse_mode' => 'HTML'
+                    ]);
+                }
                 foreach ($models as $model)
                 {
                     $name = $model['name_oz'];
@@ -119,6 +133,13 @@ class TelegramController extends Controller
             }elseif ($message == 'Kino tahlil')
             {
                 $models = FilmAnalysis::where('status', 1)->get();
+                if (count($models) === 0){
+                    Telegram::sendMessage([
+                       'chat_id' => $chat_id,
+                       'text' => centerLine('Bu menuda ma\'lumot topilmadi', 30),
+                        'parse_mode' => 'HTML'
+                    ]);
+                }
                 foreach ($models as $model)
                 {
                     $name = $model['name_oz'];
@@ -177,6 +198,13 @@ class TelegramController extends Controller
             }elseif ($message == 'Shaxsiyat')
             {
                 $models = Person::where('status', 1)->get();
+                if (count($models) === 0){
+                    Telegram::sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => centerLine('Bu menuda ma\'lumot topilmadi', 30),
+                        'parse_mode' => 'HTML'
+                    ]);
+                }
                 if ($models->count() > 0)
                 {
                     foreach ($models as $model)

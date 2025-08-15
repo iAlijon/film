@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Aphorism;
 use App\Models\Dictionary;
 use App\Models\FilmAnalysis;
+use App\Models\FilmDictionaryCategory;
 use App\Models\Interview;
 use App\Models\News;
 use App\Models\Person;
@@ -206,11 +207,6 @@ class TelegramController extends Controller
                         ]);
                     }
                 }else{
-                    function centerLine(string $text, int $width = 30): string {
-                        $len = mb_strlen($text);
-                        $pad = max(0, intdiv($width - $len, 2));
-                        return str_repeat(' ', $pad) . $text;
-                    }
                     $line = centerLine('Bu menuda ma\'lumot topilmadi', 30);
                     Telegram::sendMessage([
                        'chat_id' => $chat_id,
@@ -244,7 +240,7 @@ class TelegramController extends Controller
                 ]);
                 Telegram::sendMessage([
                    'chat_id' => $chat_id,
-                   'text' => 'Lug\'at boycha ma\'lumotni chiqarsh',
+                   'text' => 'Lug\'at bo\'yicha ma\'lumotni chqarish',
                    'reply_markup' => $keyboard
                 ]);
             }elseif ($message == '◀️ Ortga')
@@ -261,6 +257,46 @@ class TelegramController extends Controller
                     'text' => '✅ Asosiy Menu',
                     'reply_markup' => $keyboard
                 ]);
+            }elseif (checkLetters($message))
+            {
+                $param = $this->checkLetter($message);
+                Log::info($param);
+                $result = FilmDictionaryCategory::where('dictionary_category_id', $param->id)->with('film_dictionary')->get();
+                Log::info($result);
+                $line = centerLine('Bu Lug\'at bo\'yicha qidirilgan ma\'lumot topilmadi', 30);
+                if (count($result) === 0) {
+                    Telegram::sendMessage([
+                       'chat_id' => $chat_id,
+                       'text' => "<pre>$line</pre>",
+                       'parse_mode' => 'HTML'
+                    ]);
+                }
+                foreach ($result as $item)
+                {
+                    $name = $item['film_dictionary']['name_oz'];
+                    $description = $item['film_dictionary']['description_oz'];
+                    $content = $item['film_dictionary']['content_oz'];
+                    $url = explode('/', $item['film_dictionary']['images']);
+                    $last = array_pop($url);
+                    $image_path = storage_path('app/public/dictionary/'.$last);
+                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span>';
+                    $description = strip_tags($description, $allowed);
+                    $content = strip_tags($content, $allowed);
+                    $caption = <<<TEXT
+                     $message: $name
+
+                     🆕: $description
+
+                         $content
+                    TEXT;
+
+                    Telegram::sendPhoto([
+                        'chat_id' => $chat_id,
+                        'photo' => InputFile::create($image_path),
+                        'caption' => $caption,
+                    ]);
+                }
+
             }
         }catch (\Exception $exception) {
             report($exception);
@@ -273,5 +309,11 @@ class TelegramController extends Controller
     {
         $models = News::where('status', 1)->select('name_oz', 'description_oz', 'content_oz', 'view_count', 'image')->get();
         return $models;
+    }
+
+    public function checkLetter($letter)
+    {
+        $result = Dictionary::whereJsonContains('name_oz->upper', $letter)->get();
+        return $result[0];
     }
 }

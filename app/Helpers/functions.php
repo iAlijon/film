@@ -170,3 +170,30 @@ if (!function_exists('getTranslates'))
         return $field;
     }
 }
+
+if (!function_exists('checkLetters'))
+{
+    function checkLetters($letters)
+    {
+        $params = [
+          'A','B','V','G','D','E','Z','I','Y','K','L','M','N','P','R','S','T','U','F','H','Ch','Sh','Y'
+        ];
+        $lettersArray = array_map('strtoupper', str_split($letters));
+        foreach ($lettersArray as $letter)
+        {
+            if (!in_array($letter, $params)){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+if (!function_exists('centerLine'))
+{
+    function centerLine($text, $width){
+        $len = mb_strlen($text);
+        $pad = max(0, intdiv($width - $len, 2));
+        return str_repeat(' ', $pad) . $text;
+    }
+}

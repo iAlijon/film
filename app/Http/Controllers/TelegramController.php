@@ -65,7 +65,7 @@ class TelegramController extends Controller
                 ]);
             }elseif ($message === 'Yangiliklar') {
                 $news = $this->news();
-                if (count($models) === 0){
+                if (count($news) === 0){
                     Telegram::sendMessage([
                         'chat_id' => $chat_id,
                         'text' => centerLine('Bu menuda ma\'lumot topilmadi', 30),

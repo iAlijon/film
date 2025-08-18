@@ -193,18 +193,16 @@ class TelegramController extends Controller
                 if (count($models) === 0){
                     $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }
-                if ($models->count() > 0)
-                {
-                    foreach ($models as $model)
-                    {
-                        $full_name = $model['full_name_oz'];
-                        $birth_date = $model['birth_date'];
-                        $description = $model['description_oz'];
-                        $content = $model['content_oz'];
-                        $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span>';
-                        $description = strip_tags($description, $allowed);
-                        $content = strip_tags($content, $allowed);
-                        $caption = <<<TEXT
+
+                foreach ($models as $model) {
+                    $full_name = $model['full_name_oz'];
+                    $birth_date = $model['birth_date'];
+                    $description = $model['description_oz'];
+                    $content = $model['content_oz'];
+                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span>';
+                    $description = strip_tags($description, $allowed);
+                    $content = strip_tags($content, $allowed);
+                    $caption = <<<TEXT
                         👤  $full_name
                         📅  $birth_date
                         🆕: $description
@@ -212,18 +210,15 @@ class TelegramController extends Controller
                             $content
                         TEXT;
 
-                        $url = explode('/', $model['images']);
-                        $last = array_pop($url);
-                        $image_path = storage_path('app/public/person/'.$last);
-                        Telegram::sendPhoto([
-                            'chat_id' => $chat_id,
-                            'photo' => InputFile::create($image_path),
-                            'caption' => $caption,
-                            'parse_mode' => 'HTML'
-                        ]);
-                    }
-                }else{
-                    $this->NotFound($chat_id, $line = centerLine('Bu menuda ma\'lumot topilmadi', 30));
+                    $url = explode('/', $model['images']);
+                    $last = array_pop($url);
+                    $image_path = storage_path('app/public/person/' . $last);
+                    Telegram::sendPhoto([
+                        'chat_id' => $chat_id,
+                        'photo' => InputFile::create($image_path),
+                        'caption' => $caption,
+                        'parse_mode' => 'HTML'
+                    ]);
                 }
             }elseif ($message == 'Kinolug\'at')
             {

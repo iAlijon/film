@@ -66,11 +66,7 @@ class TelegramController extends Controller
             }elseif ($message === 'Yangiliklar') {
                 $news = $this->news();
                 if (count($news) === 0){
-                    Telegram::sendMessage([
-                        'chat_id' => $chat_id,
-                        'text' => centerLine('Bu menuda ma\'lumot topilmadi', 30),
-                        'parse_mode' => 'HTML'
-                    ]);
+                    $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }
                 foreach ($news as $new)
                 {
@@ -100,11 +96,7 @@ class TelegramController extends Controller
             }elseif ($message === 'Premyera'){
                 $models = Premiere::where('status', 1)->get();
                 if (count($models) === 0){
-                    Telegram::sendMessage([
-                        'chat_id' => $chat_id,
-                        'text' => centerLine('Bu menuda ma\'lumot topilmadi', 30),
-                        'parse_mode' => 'HTML'
-                    ]);
+                    $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }
                 foreach ($models as $model)
                 {
@@ -134,11 +126,7 @@ class TelegramController extends Controller
             {
                 $models = FilmAnalysis::where('status', 1)->get();
                 if (count($models) === 0){
-                    Telegram::sendMessage([
-                       'chat_id' => $chat_id,
-                       'text' => centerLine('Bu menuda ma\'lumot topilmadi', 30),
-                        'parse_mode' => 'HTML'
-                    ]);
+                    $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }
                 foreach ($models as $model)
                 {
@@ -166,6 +154,10 @@ class TelegramController extends Controller
                 }
             }elseif ($message == 'Suhbatlar'){
                 $models = Interview::where('status', 1)->with('people','category')->get();
+                if (count($models) === 0)
+                {
+                   $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
+                }
                 foreach ($models as $model)
                 {
                     $name = $model['interview_oz'];
@@ -199,11 +191,7 @@ class TelegramController extends Controller
             {
                 $models = Person::where('status', 1)->get();
                 if (count($models) === 0){
-                    Telegram::sendMessage([
-                        'chat_id' => $chat_id,
-                        'text' => centerLine('Bu menuda ma\'lumot topilmadi', 30),
-                        'parse_mode' => 'HTML'
-                    ]);
+                    $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }
                 if ($models->count() > 0)
                 {
@@ -235,12 +223,7 @@ class TelegramController extends Controller
                         ]);
                     }
                 }else{
-                    $line = centerLine('Bu menuda ma\'lumot topilmadi', 30);
-                    Telegram::sendMessage([
-                       'chat_id' => $chat_id,
-                       'text' => "<pre>$line</pre>",
-                       'parse_mode' => 'HTML'
-                    ]);
+                    $this->NotFound($chat_id, $line = centerLine('Bu menuda ma\'lumot topilmadi', 30));
                 }
             }elseif ($message == 'Kinolug\'at')
             {
@@ -288,16 +271,9 @@ class TelegramController extends Controller
             }elseif (checkLetters($message))
             {
                 $param = $this->checkLetter($message);
-                Log::info($param);
                 $result = FilmDictionaryCategory::where('dictionary_category_id', $param->id)->with('film_dictionary')->get();
-                Log::info($result);
-                $line = centerLine('Bu Lug\'at bo\'yicha qidirilgan ma\'lumot topilmadi', 30);
                 if (count($result) === 0) {
-                    Telegram::sendMessage([
-                       'chat_id' => $chat_id,
-                       'text' => "<pre>$line</pre>",
-                       'parse_mode' => 'HTML'
-                    ]);
+                    $this->NotFound($chat_id, centerLine('Bu Lug\'at bo\'yicha qidirilgan ma\'lumot topilmadi', 30));
                 }
                 foreach ($result as $item)
                 {
@@ -343,5 +319,14 @@ class TelegramController extends Controller
     {
         $result = Dictionary::whereJsonContains('name_oz->upper', $letter)->get();
         return $result[0];
+    }
+
+    public function NotFound($chat_id,$text)
+    {
+        Telegram::sendMessage([
+            'chat_id' => $chat_id,
+            'text' => "<pre>.$text</pre>",
+            'parse_mode' => 'HTML'
+        ]);
     }
 }

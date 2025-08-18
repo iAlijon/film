@@ -126,7 +126,6 @@ class TelegramController extends Controller
             }elseif ($message == 'Kino tahlil')
             {
                 $models = FilmAnalysis::where('status', 1)->get();
-                Log::info($models);
                 if (count($models) === 0){
                     $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }

@@ -137,10 +137,12 @@ class TelegramController extends Controller
                     $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                     $description = strip_tags($description, $allowed);
                     $content = strip_tags($content, $allowed);
+                    $longText = mb_substr($content, 0, 1024);
+                    $remaining = mb_substr($content, 1024);
                     $caption = <<<TEXT
                     🎬: $name
                     🆕: $description
-                    $content
+                    $longText
                     TEXT;
 
                     $url = explode('/', $model['images']);
@@ -152,6 +154,15 @@ class TelegramController extends Controller
                         'caption' => $caption,
                         'parse_mode' => 'HTML'
                     ]);
+
+                    if (!empty($remaining))
+                    {
+                        Telegram::sendMessage([
+                           'chat_id' =>$chat_id,
+                           'text' => $remaining,
+                           'parse_mode' => 'HTML'
+                        ]);
+                    }
                 }
             }elseif ($message == 'Suhbatlar'){
                 $models = Interview::where('status', 1)->with('people','category')->get();

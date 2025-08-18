@@ -136,12 +136,14 @@ class TelegramController extends Controller
                     $content = $model['content_oz'];
                     $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                     $description = strip_tags($description, $allowed);
+                    $longDesc = mb_substr($description, 0, 1024);
+                    $remDesc = mb_substr($description, 1024);
                     $content = strip_tags($content, $allowed);
                     $longText = mb_substr($content, 0, 1024);
                     $remaining = mb_substr($content, 1024);
                     $caption = <<<TEXT
                     🎬: $name
-                    🆕: $description
+                    🆕: $longDesc
                     $longText
                     TEXT;
 
@@ -154,6 +156,15 @@ class TelegramController extends Controller
                         'caption' => $caption,
                         'parse_mode' => 'HTML'
                     ]);
+
+                    if (!empty($remDesc))
+                    {
+                        Telegram::sendMessage([
+                            'chat_id' =>$chat_id,
+                            'text' => $remDesc,
+                            'parse_mode' => 'HTML'
+                        ]);
+                    }
 
                     if (!empty($remaining))
                     {

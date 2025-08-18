@@ -73,7 +73,7 @@ class TelegramController extends Controller
                     $name = $new['name_oz'];
                     $description = $new['description_oz'];
                     $content = $new['content_oz'];
-                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span>';
+                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                     $description = strip_tags($description, $allowed);
                     $content = strip_tags($content, $allowed);
 
@@ -95,6 +95,7 @@ class TelegramController extends Controller
                 }
             }elseif ($message === 'Premyera'){
                 $models = Premiere::where('status', 1)->get();
+                Log::info($models);
                 if (count($models) === 0){
                     $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }
@@ -103,7 +104,7 @@ class TelegramController extends Controller
                     $name = $model['name_oz'];
                     $description = $model['description_oz'];
                     $content = $model['content_oz'];
-                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span>';
+                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                     $description = strip_tags($description, $allowed);
                     $content = strip_tags($content, $allowed);
                     $caption = <<<TEXT
@@ -133,7 +134,7 @@ class TelegramController extends Controller
                     $name = $model['name_oz'];
                     $description = $model['description_oz'];
                     $content = $model['content_oz'];
-                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span>';
+                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                     $description = strip_tags($description, $allowed);
                     $content = strip_tags($content, $allowed);
                     $caption = <<<TEXT
@@ -165,7 +166,7 @@ class TelegramController extends Controller
                     $category_name = $model['category']['name_oz'];
                     $content = $model['content_oz'];
                     $full_name = $model['people']['full_name_oz'];
-                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span>';
+                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                     $description = strip_tags($description, $allowed);
                     $content = strip_tags($content, $allowed);
                     $caption = <<<TEXT
@@ -199,7 +200,7 @@ class TelegramController extends Controller
                     $birth_date = $model['birth_date'];
                     $description = $model['description_oz'];
                     $content = $model['content_oz'];
-                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span>';
+                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                     $description = strip_tags($description, $allowed);
                     $content = strip_tags($content, $allowed);
                     $caption = <<<TEXT
@@ -278,7 +279,7 @@ class TelegramController extends Controller
                     $url = explode('/', $item['film_dictionary']['images']);
                     $last = array_pop($url);
                     $image_path = storage_path('app/public/dictionary/'.$last);
-                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span>';
+                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                     $description = strip_tags($description, $allowed);
                     $content = strip_tags($content, $allowed);
                     $caption = <<<TEXT

@@ -139,12 +139,12 @@ class TelegramController extends Controller
                     $longDesc = mb_substr($description, 0, 1024);
                     $remDesc = mb_substr($description, 1024);
                     $content = strip_tags($content, $allowed);
-                    $longText = mb_substr($content, 0, 1024);
+                    $longCont = mb_substr($content, 0, 1024);
                     $remaining = mb_substr($content, 1024);
                     $caption = <<<TEXT
                     🎬: $name
                     🆕: $longDesc
-                    $longText
+                    $longCont
                     TEXT;
 
                     $url = explode('/', $model['images']);

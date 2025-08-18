@@ -130,53 +130,58 @@ class TelegramController extends Controller
                 if (count($models) === 0){
                     $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }
-                foreach ($models as $model)
-                {
-                    $name = $model['name_oz'];
-                    $description = $model['description_oz'];
-                    $content = $model['content_oz'];
-                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
-                    $description = strip_tags($description, $allowed);
-                    $longDesc = mb_substr($description, 0, 1024);
-                    Log::info($longDesc);
-                    $remDesc = mb_substr($description, 1024);
-                    $content = strip_tags($content, $allowed);
-                    $longCont = mb_substr($content, 0, 1024);
-                    $remaining = mb_substr($content, 1024);
-                    $caption = <<<TEXT
+                try {
+                    foreach ($models as $model)
+                    {
+                        $name = $model['name_oz'];
+                        $description = $model['description_oz'];
+                        $content = $model['content_oz'];
+                        $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
+                        $description = strip_tags($description, $allowed);
+                        $longDesc = mb_substr($description, 0, 1024);
+                        Log::info($longDesc);
+                        $remDesc = mb_substr($description, 1024);
+                        $content = strip_tags($content, $allowed);
+                        $longCont = mb_substr($content, 0, 1024);
+                        $remaining = mb_substr($content, 1024);
+                        $caption = <<<TEXT
                     🎬: $name
                     🆕: $longDesc
                     $longCont
                     TEXT;
 
-                    $url = explode('/', $model['images']);
-                    $last = array_pop($url);
-                    $image_path = storage_path('app/public/analysis/'.$last);
-                    Telegram::sendPhoto([
-                        'chat_id' => $chat_id,
-                        'photo' => InputFile::create($image_path),
-                        'caption' => $caption,
-                        'parse_mode' => 'HTML'
-                    ]);
-
-                    if (!empty($remDesc))
-                    {
-                        Telegram::sendMessage([
-                            'chat_id' =>$chat_id,
-                            'text' => $remDesc,
+                        $url = explode('/', $model['images']);
+                        $last = array_pop($url);
+                        $image_path = storage_path('app/public/analysis/'.$last);
+                        Telegram::sendPhoto([
+                            'chat_id' => $chat_id,
+                            'photo' => InputFile::create($image_path),
+                            'caption' => $caption,
                             'parse_mode' => 'HTML'
                         ]);
-                    }
 
-                    if (!empty($remaining))
-                    {
-                        Telegram::sendMessage([
-                           'chat_id' =>$chat_id,
-                           'text' => $remaining,
-                           'parse_mode' => 'HTML'
-                        ]);
+                        if (!empty($remDesc))
+                        {
+                            Telegram::sendMessage([
+                                'chat_id' =>$chat_id,
+                                'text' => $remDesc,
+                                'parse_mode' => 'HTML'
+                            ]);
+                        }
+
+                        if (!empty($remaining))
+                        {
+                            Telegram::sendMessage([
+                                'chat_id' =>$chat_id,
+                                'text' => $remaining,
+                                'parse_mode' => 'HTML'
+                            ]);
+                        }
                     }
+                }catch (\Exception $exception){
+                    return response()->json(['message' => $exception->getMessage()]);
                 }
+
             }elseif ($message == 'Suhbatlar'){
                 $models = Interview::where('status', 1)->with('people','category')->get();
                 if (count($models) === 0)

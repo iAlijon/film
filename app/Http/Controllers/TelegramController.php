@@ -147,6 +147,7 @@ class TelegramController extends Controller
                         $caption = <<<TEXT
                         🎬: $name
                         🆕: $longDesc
+
                             $longCont
                         TEXT;
 

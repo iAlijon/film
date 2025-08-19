@@ -141,7 +141,7 @@
                                 </div>
                             </div>
                             {{----  ru  ----}}
-                            <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
+                            <div class="tab-pane fade" id="custom-tabs-three-ru" role="tabpanel">
                                 <div class="form-group">
                                     <label for="name_ru">Имя</label>
                                     <input type="text" name="name_ru" class="form-control @error('name_ru') border-danger @enderror" placeholder="Имя" value="{{$model->name_ru}}">

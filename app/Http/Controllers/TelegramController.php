@@ -142,6 +142,7 @@ class TelegramController extends Controller
                         $content = strip_tags($content, $allowed);
                         $longCont = mb_substr($content, 0, 600);
                         $remaining = mb_substr($content, 1024);
+
                         $caption = <<<TEXT
                         🎬: $name
                         🆕: $longDesc

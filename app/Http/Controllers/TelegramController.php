@@ -376,7 +376,6 @@ class TelegramController extends Controller
                         $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                         $description = strip_tags($description, $allowed);
                         $content = strip_tags($content, $allowed);
-                        Log::info('content',[strlen($content)]);
                         $caption = <<<TEXT
                         🎬:  $name
                         🆕: $description

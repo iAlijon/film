@@ -47,13 +47,13 @@
                                aria-selected="false">UZ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="custom-tabs-three-content-tab" data-toggle="pill"
-                               href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
+                            <a class="nav-link" id="custom-tabs-three-ru-tab" data-toggle="pill"
+                               href="#custom-tabs-three-ru" role="tab" aria-controls="custom-tabs-three-ru"
                                aria-selected="false">RU</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="custom-tabs-three-body-tab" data-toggle="pill"
-                               href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
+                            <a class="nav-link" id="custom-tabs-three-en-tab" data-toggle="pill"
+                               href="#custom-tabs-three-en" role="tab" aria-controls="custom-tabs-three-en"
                                aria-selected="false">EN</a>
                         </li>
                     </ul>
@@ -169,7 +169,7 @@
 
                             </div>
                             {{---- en ----}}
-                            <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">
+                            <div class="tab-pane fade" id="custom-tabs-three-en" role="tabpanel">
 
                                 <div class="form-group">
                                     <label for="name_en">Name</label>

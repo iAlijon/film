@@ -328,6 +328,8 @@ class TelegramController extends Controller
                     ]);
                 }
 
+            }elseif ($message === 'Kinofakt') {
+
             }
         }catch (\Exception $exception) {
             report($exception);

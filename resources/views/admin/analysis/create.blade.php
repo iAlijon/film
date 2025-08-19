@@ -43,8 +43,8 @@
                                aria-selected="false">RU</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="custom-tabs-three-body-tab" data-toggle="pill"
-                               href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
+                            <a class="nav-link" id="custom-tabs-three-en-tab" data-toggle="pill"
+                               href="#custom-tabs-three-en" role="tab" aria-controls="custom-tabs-three-en"
                                aria-selected="false">EN</a>
                         </li>
                     </ul>

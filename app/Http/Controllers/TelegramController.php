@@ -58,7 +58,7 @@ class TelegramController extends Controller
                     ->row(['Yangiliklar', 'Premyera'])
                     ->row(['Kino tahlil', 'Suhbatlar'])
                     ->row(['Shaxsiyat', 'Kinolug\'at'])
-                    ->row(['Kinofakt', 'Filmografoya'])
+                    ->row(['Kinofakt', 'Filmografiya'])
                     ->row(['Kitoblar']);
                 Telegram::sendMessage([
                     'chat_id' => $chat_id,
@@ -290,7 +290,7 @@ class TelegramController extends Controller
                     ->row(['Yangiliklar', 'Premyera'])
                     ->row(['Kino tahlil', 'Suhbatlar'])
                     ->row(['Shaxsiyat', 'Kinolug\'at'])
-                    ->row(['Kinofakt', 'Filmografoya'])
+                    ->row(['Kinofakt', 'Filmografiya'])
                     ->row(['Kitoblar']);
                 Telegram::sendMessage([
                     'chat_id' => $chat_id,
@@ -363,7 +363,7 @@ class TelegramController extends Controller
                 }catch (\Exception $e) {
                     Log::info($e->getMessage());
                 }
-            }elseif ($message === 'Filmografoya') {
+            }elseif ($message === 'Filmografiya') {
                 $models = Filmography::where('status', 1)->get();
                 if (count($models) === 0){
                     $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));

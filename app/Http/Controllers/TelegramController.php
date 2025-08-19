@@ -380,7 +380,7 @@ class TelegramController extends Controller
                         🎬:  $name
                         🆕: $description
 
-                            "$content\n\n"
+                            $content
                         TEXT;
 
                         $url = explode('/', $model['images']);

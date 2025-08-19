@@ -385,7 +385,7 @@ class TelegramController extends Controller
 
                         $url = explode('/', $model['images']);
                         $last = array_pop($url);
-                        $image_path = storage_path('app/public/fact/' . $last);
+                        $image_path = storage_path('app/public/filmography/' . $last);
                         Telegram::sendPhoto([
                             'chat_id' => $chat_id,
                             'photo' => InputFile::create($image_path),

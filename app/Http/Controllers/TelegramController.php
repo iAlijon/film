@@ -7,6 +7,7 @@ use App\Models\CinemaFact;
 use App\Models\Dictionary;
 use App\Models\FilmAnalysis;
 use App\Models\FilmDictionaryCategory;
+use App\Models\Filmography;
 use App\Models\Interview;
 use App\Models\News;
 use App\Models\Person;
@@ -361,6 +362,40 @@ class TelegramController extends Controller
                     }
                 }catch (\Exception $e) {
                     Log::info($e->getMessage());
+                }
+            }elseif ($message === 'Filmografoya') {
+                $models = Filmography::where('status', 1)->get();
+                if (count($models) === 0){
+                    $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
+                }
+                try {
+                    foreach ($models as $model) {
+                        $name = $model['name_oz'];
+                        $description = $model['description_oz'];
+                        $content = $model['content_oz'];
+                        $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
+                        $description = strip_tags($description, $allowed);
+                        $content = strip_tags($content, $allowed);
+                        $caption = <<<TEXT
+                        🎬:  $name
+                        🆕: $description
+
+                            $content
+                        TEXT;
+
+                        $url = explode('/', $model['images']);
+                        $last = array_pop($url);
+                        $image_path = storage_path('app/public/fact/' . $last);
+                        Telegram::sendPhoto([
+                            'chat_id' => $chat_id,
+                            'photo' => InputFile::create($image_path),
+                            'caption' => $caption,
+                            'parse_mode' => 'HTML'
+                        ]);
+                    }
+                }catch (\Exception $exception)
+                {
+                    Log::info($exception->getMessage());
                 }
             }
         }catch (\Exception $exception) {

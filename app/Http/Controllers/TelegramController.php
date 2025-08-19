@@ -153,6 +153,7 @@ class TelegramController extends Controller
                         $url = explode('/', $model['images']);
                         $last = array_pop($url);
                         $image_path = storage_path('app/public/analysis/'.$last);
+
                         Telegram::sendPhoto([
                             'chat_id' => $chat_id,
                             'photo' => InputFile::create($image_path),
@@ -163,7 +164,7 @@ class TelegramController extends Controller
                         if (!empty($remDesc))
                         {
                             Telegram::sendMessage([
-                                'chat_id' =>$chat_id,
+                                'chat_id' => $chat_id,
                                 'text' => $remDesc,
                                 'parse_mode' => 'HTML'
                             ]);
@@ -172,7 +173,7 @@ class TelegramController extends Controller
                         if (!empty($remaining))
                         {
                             Telegram::sendMessage([
-                                'chat_id' =>$chat_id,
+                                'chat_id' => $chat_id,
                                 'text' => $remaining,
                                 'parse_mode' => 'HTML'
                             ]);

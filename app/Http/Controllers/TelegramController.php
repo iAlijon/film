@@ -421,7 +421,7 @@ class TelegramController extends Controller
     {
         Telegram::sendMessage([
             'chat_id' => $chat_id,
-            'text' => "<pre>.$text</pre>",
+            'text' => "<pre>$text</pre>",
             'parse_mode' => 'HTML'
         ]);
     }

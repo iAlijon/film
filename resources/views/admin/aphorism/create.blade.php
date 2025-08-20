@@ -30,7 +30,7 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill"
                                href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="true">OZ
+                               aria-selected="true">O'Z
                                 @if($errors->any())
                                     @foreach($errors->all() as $error)
                                         @if(str_contains($error,'oz'))

@@ -41,7 +41,7 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill"
                                href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="true">OZ</a>
+                               aria-selected="true">O'Z</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
@@ -54,9 +54,9 @@
                                aria-selected="false">RU</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-body-tab" data-toggle="pill"
+                            <a class="nav-link" id="custom-tabs-three-body-tab" data-toggle="pill"
                                href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false" disabled="disabled">EN</a>
+                               aria-selected="false">EN</a>
                         </li>
                     </ul>
                 </div>
@@ -151,6 +151,37 @@
                                 <tr>
                                     <th>Полная информация</th>
                                     <td> <?= $model->content_ru ?></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        {{----- en -----}}
+                        <div class="tab-pane fade" id="custom-tabs-three-en" role="tabpanel">
+                            <table class="table table-bordered table-striped table-hover">
+                                <tbody>
+                                <tr>
+                                    <th>Имя</th>
+                                    <td>{{$model->name_en}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Картина</th>
+                                    <td><img src="{{getInFolder($model->image, 'news')}}" alt="error"></td>
+                                </tr>
+                                <tr>
+                                    <th>Краткая информация</th>
+                                    <td>{{$model->description_en}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Добавленное время</th>
+                                    <td>{{$model->created_at}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Статус</th>
+                                    <td>{{$model->status==1?'Active':'No Active'}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Полная информация</th>
+                                    <td> <?= $model->content_en ?></td>
                                 </tr>
                                 </tbody>
                             </table>

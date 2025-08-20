@@ -447,7 +447,7 @@ class TelegramController extends Controller
                 }catch (\Exception $exception) {
                     Log::error($exception->getMessage());
                 }
-            }elseif (checkMessage($message))
+            }elseif (!checkMessage($message))
             {
                 Telegram::deleteMessage([
                    'chat_id' => $chat_id,

@@ -326,9 +326,9 @@ class TelegramController extends Controller
                     ->row(['Shaxsiyat', 'Kinolug\'at'])
                     ->row(['Kinofakt', 'Filmografiya'])
                     ->row(['Kitoblar']);
-//                'text' => '✅ Asosiy Menu',
                 Telegram::sendMessage([
                     'chat_id' => $chat_id,
+                    'text' => ' \n',
                     'reply_markup' => $keyboard
                 ]);
             }elseif (checkLetters($message))

@@ -48,6 +48,7 @@ class TelegramController extends Controller
             $chat_id = $update->getMessage()->getChat()->getId();
             $message = $update->getMessage()->getText();
             $message_id = $update->getMessage()->getMessageId();
+            $name = $update->getMessage()->getFrom()->getFirstName();
             if ($message === '/start') {
                 TelegramUser::updateOrCreate([
                     'telegram_id' => $update->getMessage()->getChat()->getId()
@@ -64,7 +65,7 @@ class TelegramController extends Controller
                     ->row(['Kitoblar']);
                 Telegram::sendMessage([
                     'chat_id' => $chat_id,
-                    'text' => 'Bo\'timizga xush kelibsiz',
+                    'text' => 'Bo\'timizga xush kelibsiz'.$name,
                     'reply_markup' => $keyboard
                 ]);
             }elseif ($message === 'Yangiliklar') {

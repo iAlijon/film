@@ -105,7 +105,7 @@ class TelegramController extends Controller
                         Telegram::sendMessage([
                             'chat_id' => $chat_id,
                             'text' => $remDesc,
-                            'parse_mode' => 'HTML'
+                            'parse_mode' => null
                         ]);
                     }
 
@@ -113,7 +113,7 @@ class TelegramController extends Controller
                         Telegram::sendMessage([
                            'chat_id' => $chat_id,
                            'text' => $remCont,
-                            'parse_mode' => 'HTML'
+                            'parse_mode' => null
                         ]);
                     }
                 }

@@ -401,10 +401,38 @@ class TelegramController extends Controller
             }elseif ($message === 'Kitoblar') {
                 $models = Books::where('status', 1)->get();
                 Log::info('book',[$models]);
+                if (count($models) === 0) {
+                    $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
+                }
                 try {
+                    foreach ($models as $model) {
+                        $name = $model['name_oz'];
+                        $description = $model['description_oz'];
+                        $content = $model['content_oz'];
+                        $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
+                        $description = strip_tags($description, $allowed);
+                        $longDesc = mb_substr($description, 0, 400);
+                        $remDesc = mb_substr($description, 1024);
+                        $content = strip_tags($content, $allowed);
+                        $longCont = mb_substr($content, 0, 500);
+                        $remCont = mb_substr($content, 1024);
+                        $file = $model->files;
+                        $caption = <<<TEXT
+                          📚: $name
+                          🎬: $longDesc
 
+                              $longCont
+                        TEXT;
+                        Telegram::sendDocument([
+                           'chat_id' => $chat_id,
+                           'document' => InputFile::create($file),
+                           'caption' => $caption,
+                            'parse_mode' => 'HTML'
+                        ]);
+
+                    }
                 }catch (\Exception $exception) {
-
+                    Log::error($exception->getMessage());
                 }
             }
         }catch (\Exception $exception) {

@@ -87,8 +87,8 @@ class TelegramController extends Controller
                     $remCont = mb_substr($content, 1024);
                     $caption = <<<TEXT
                     🎬: $name
-                    🆕: $description
-                    $content
+                    🆕: $longDesc
+                    $longCont
                     TEXT;
 
                     $url = explode('/', $new['image']);
@@ -101,17 +101,17 @@ class TelegramController extends Controller
                         'parse_mode' => 'html'
                     ]);
 
-                    if (!empty($longDesc)) {
+                    if (!empty($remDesc)) {
                         Telegram::sendMessage([
                             'chat_id' => $chat_id,
-                            'text' => $longDesc
+                            'text' => $remDesc
                         ]);
                     }
 
-                    if (!empty($longCont)) {
+                    if (!empty($remCont)) {
                         Telegram::sendMessage([
                            'chat_id' => $chat_id,
-                           'text' => $longCont
+                           'text' => $remCont
                         ]);
                     }
                 }

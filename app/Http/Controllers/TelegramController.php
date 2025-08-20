@@ -47,7 +47,7 @@ class TelegramController extends Controller
             $update = Telegram::getWebhookUpdate();
             $chat_id = $update->getMessage()->getChat()->getId();
             $message = $update->getMessage()->getText();
-            $message_id = $update->getMessage();
+            $message_id = $update->getMessage()->getMessageId();
             Log::info($message_id);
             if ($message === '/start') {
                 TelegramUser::updateOrCreate([

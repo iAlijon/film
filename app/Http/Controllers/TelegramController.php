@@ -328,7 +328,7 @@ class TelegramController extends Controller
                     ->row(['Kitoblar']);
                 Telegram::sendMessage([
                     'chat_id' => $chat_id,
-                    'text' => ' \n',
+                    'text' => " \n",
                     'reply_markup' => $keyboard
                 ]);
             }elseif (checkLetters($message))

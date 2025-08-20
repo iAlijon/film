@@ -94,6 +94,10 @@ class TelegramController extends Controller
                     $url = explode('/', $new['image']);
                     $last = array_pop($url);
                     $image_path = storage_path('app/public/news/'.$last);
+                    $caption = tidy_repair_string($caption, [
+                        'output-xhtml' => true,
+                        'show-body-only' => true,
+                    ], 'utf8');
                     Telegram::sendPhoto([
                         'chat_id' => $chat_id,
                         'photo' => InputFile::create($image_path),
@@ -105,7 +109,7 @@ class TelegramController extends Controller
                         Telegram::sendMessage([
                             'chat_id' => $chat_id,
                             'text' => $remDesc,
-                            'parse_mode' => null
+                            'parse_mode' => 'HTML'
                         ]);
                     }
 
@@ -113,7 +117,7 @@ class TelegramController extends Controller
                         Telegram::sendMessage([
                            'chat_id' => $chat_id,
                            'text' => $remCont,
-                            'parse_mode' => null
+                            'parse_mode' => 'HTML'
                         ]);
                     }
                 }

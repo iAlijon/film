@@ -18,9 +18,9 @@ class AphorismRepository extends BaseRepository
 
     public function index($request)
     {
-        if (isset($request->title) && !empty($request->title))
+        if (isset($request->full_name_oz) && !empty($request->full_name_oz))
         {
-            $this->model = $this->model->where('title', 'like', '%'.$request->title.'%');
+            $this->model = $this->model->where('full_name_oz', 'like', '%'.$request->full_name_oz.'%');
         }
         if (isset($request->status) && !empty($request->status)) {
             $this->model = $this->model->where('status', $request->status);
@@ -39,9 +39,11 @@ class AphorismRepository extends BaseRepository
             'full_name_oz' => $data['full_name_oz'],
             'full_name_uz' => $data['full_name_uz'],
             'full_name_ru' => $data['full_name_ru'],
+            'full_name_en' => $data['full_name_en']??null,
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
             'description_ru' => $data['description_ru'],
+            'description_en' => $data['description_en']??null,
             'images' => $this->uploads($data['image'], 'aphorism'),
             'status' => $data['status']
         ]);
@@ -52,6 +54,7 @@ class AphorismRepository extends BaseRepository
                 'description_oz' => $datum['description_oz']??null,
                 'description_uz' => $datum['description_uz']??null,
                 'description_ru' => $datum['description_ru']??null,
+                'description_en' => $datum['description_en']??null,
             ]);
         }
         return $model;
@@ -72,9 +75,11 @@ class AphorismRepository extends BaseRepository
             'full_name_oz' => $data['full_name_oz'],
             'full_name_uz' => $data['full_name_uz'],
             'full_name_ru' => $data['full_name_ru'],
+            'full_name_en' => $data['full_name_en'],
             'description_oz' => $data['description_oz'],
             'description_uz' => $data['description_uz'],
             'description_ru' => $data['description_ru'],
+            'description_en' => $data['description_en'],
             'images' => $images,
             'status' => $data['status']
         ]);
@@ -90,6 +95,7 @@ class AphorismRepository extends BaseRepository
                 'description_oz' => $datum['description_oz'],
                 'description_uz' => $datum['description_uz'],
                 'description_ru' => $datum['description_ru'],
+                'description_en' => $datum['description_en'],
             ]);
         }
         return $model;

@@ -28,12 +28,15 @@ class AphorismRequest extends FormRequest
                 'full_name_oz' => 'required|string',
                 'full_name_uz' => 'required|string',
                 'full_name_ru' => 'required|string',
+                'full_name_en' => 'nullable|string',
                 'description_oz' => 'required',
                 'description_uz' => 'required',
                 'description_ru' => 'required',
+                'description_en' => 'nullable',
                 'calendar.*.description_oz' => 'required',
                 'calendar.*.description_uz' => 'required',
                 'calendar.*.description_ru' => 'required',
+                'calendar.*.description_en' => 'nullable',
                 'status' => 'required|integer',
                 'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
             ];
@@ -42,12 +45,15 @@ class AphorismRequest extends FormRequest
                 'full_name_oz' => 'required|string',
                 'full_name_uz' => 'required|string',
                 'full_name_ru' => 'required|string',
+                'full_name_en' => 'nullable|string',
                 'description_oz' => 'required',
                 'description_uz' => 'required',
                 'description_ru' => 'required',
+                'description_en' => 'nullable',
                 'calendar.*.description_oz' => 'required',
                 'calendar.*.description_uz' => 'required',
                 'calendar.*.description_ru' => 'required',
+                'calendar.*.description_en' => 'nullable',
                 'status' => 'required|integer',
                 'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048'
             ];

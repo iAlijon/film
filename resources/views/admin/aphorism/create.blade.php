@@ -30,7 +30,7 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill"
                                href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="true">O'Z
+                               aria-selected="true">OZ
                                 @if($errors->any())
                                     @foreach($errors->all() as $error)
                                         @if(str_contains($error,'oz'))
@@ -67,9 +67,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-body-tab" data-toggle="pill"
-                               href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false" disabled="disabled">EN</a>
+                            <a class="nav-link" id="custom-tabs-three-en-tab" data-toggle="pill"
+                               href="#custom-tabs-three-en" role="tab" aria-controls="custom-tabs-three-en"
+                               aria-selected="false">EN
+                                @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        @if(str_contains($error,'en'))
+                                            <div class="line"></div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -206,6 +214,45 @@
                                                 </div>
                                             </div>
                                             <button type="button" class="btn btn-primary mt-3 btn-block ml-auto" id="add-form-btn_ru" style="width: 9%">добавить</button>
+                                            <!-- First Form -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{----- en -----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-en" role="tabpanel">
+                                <div class="form-group">
+                                    <label>Ф.И.О</label>
+                                    <input type="text" class="form-control @error('full_name_en') border-danger @enderror" name="full_name_en">
+                                    <small class="text-danger">{{$errors->first('full_name_en')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Краткая информация</label>
+                                    <textarea name="description_en" cols="30" rows="5" class="form-control @error('description_en') border-danger @enderror"></textarea>
+                                    <small class="text-danger">{{$errors->first('description_en')}}</small>
+                                </div>
+
+                                <div class="card card-outline card-success">
+                                    <div class="card-header">
+                                        <label>Календарь</label>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="dynamic-forms_ru">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Форма
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group dynamic-form">
+                                                        <label for="description_en">Форма</label>
+                                                        <textarea name="calendar[0][description_en]" id="description_en" class="form-control @error('calendar[0][description_en]') border-danger @enderror" placeholder="Enter description"></textarea>
+                                                        <small class="text-danger">{{$errors->first('description_en')}}</small>
+                                                        <!-- Button to Add More Forms -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-primary mt-3 btn-block ml-auto" id="add-form-btn_en" style="width: 9%">Add</button>
                                             <!-- First Form -->
                                         </div>
                                     </div>

@@ -135,7 +135,6 @@ class TelegramController extends Controller
                 }
             }elseif ($message === 'Premyera'){
                 $models = Premiere::where('status', 1)->get();
-                Log::info($models);
                 if (count($models) === 0){
                     $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }
@@ -182,8 +181,6 @@ class TelegramController extends Controller
                         $content = strip_tags($content, $allowed);
                         $longCont = mb_substr($content, 0, 600);
                         $remaining = mb_substr($content, 1024);
-                        Log::info($remDesc);
-                        Log::info($remaining);
                         $caption = <<<TEXT
                         🎬: $name
                         🆕: $longDesc
@@ -297,7 +294,6 @@ class TelegramController extends Controller
                 $client = new \GuzzleHttp\Client(['varefy' => false]);
                 $res = $client->get('https://kino-tahlil.uz/api/letters_category');
                 $items = json_decode($res->getBody()->getContents(), true);
-                Log::info($items);
                 $rows = [];
                 $row = [];
                 foreach ($items['data'] as $item)
@@ -437,7 +433,6 @@ class TelegramController extends Controller
                 }
             }elseif ($message === 'Kitoblar') {
                 $models = Books::where('status', 1)->get();
-                Log::info('book',[$models]);
                 if (count($models) === 0) {
                     $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }

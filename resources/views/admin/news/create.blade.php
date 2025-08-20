@@ -32,7 +32,7 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill"
                                href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
-                               aria-selected="true">O'Z</a>
+                               aria-selected="true">OZ</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
@@ -45,9 +45,9 @@
                                aria-selected="false">RU</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" id="custom-tabs-three-body-tab" data-toggle="pill"
-                               href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
-                               aria-selected="false" disabled="disabled">EN</a>
+                            <a class="nav-link" id="custom-tabs-three-en-tab" data-toggle="pill"
+                               href="#custom-tabs-three-en" role="tab" aria-controls="custom-tabs-three-en"
+                               aria-selected="false">EN</a>
                         </li>
                     </ul>
                 </div>
@@ -140,7 +140,26 @@
                                     <small class="text-danger">{{$errors->first('content_ru')}}</small>
                                 </div>
                             </div>
+                            {{----  en  ----}}
+                            <div class="tab-pane fade" id="custom-tabs-three-en" role="tabpanel">
+                                <div class="form-group">
+                                    <label>Имя</label>
+                                    <input type="text" class="form-control @error('name_en') border-danger @enderror" name="name_en" placeholder="Имя">
+                                    <small class="text-danger">{{$errors->first('name_en')}}</small>
+                                </div>
 
+                                <div class="form-group">
+                                    <label>Краткая информация</label>
+                                    <textarea name="description_en" cols="30" rows="5" class="form-control @error('description_en') border-danger @enderror" placeholder="Краткая информация"></textarea>
+                                    <small class="text-danger">{{$errors->first('description_en')}}</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Полная информация</label>
+                                    <textarea name="content_en" class="textarea form-control summernote @error('content_en') border-danger @enderror" id="summernote" placeholder="Полная информация"></textarea>
+                                    <small class="text-danger">{{$errors->first('content_en')}}</small>
+                                </div>
+                            </div>
                             <div class="text-right">
                                 <button class="btn btn-success">&check;Saqlash</button>
                             </div>

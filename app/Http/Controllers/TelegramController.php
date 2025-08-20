@@ -449,6 +449,11 @@ class TelegramController extends Controller
                 }
             }elseif (!checkMessage($message))
             {
+                $message = Telegram::sendMessage([
+                    'chat_id' => $chat_id,
+                    'text' => "O‘chirilmoqda..."
+                ]);
+                $messageId = $message->getMessageId();
                 $frames = [
                     "Xabar o‘chirilmoqda ▓▓▓▓▓",
                     "Xabar o‘chirilmoqda ▓▓▓▓░",
@@ -461,15 +466,14 @@ class TelegramController extends Controller
                 foreach ($frames as $frame) {
                     Telegram::editMessageText([
                         'chat_id' => $chat_id,
-                        'message_id' => $message_id,
+                        'message_id' => $messageId,
                         'text' => $frame
                     ]);
                     usleep(500000); // 0.5 sekund kutish
                 }
                 Telegram::deleteMessage([
                    'chat_id' => $chat_id,
-                   'message_id' => $message_id,
-                   'text' => 'Bot menu lariga mos bo\'lmagan so\'zlar'
+                   'message_id' => $messageId,
                 ]);
             }
         }catch (\Exception $exception) {

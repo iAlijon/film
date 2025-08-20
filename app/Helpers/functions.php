@@ -230,7 +230,7 @@ if (!function_exists('checkMessage'))
             case 'Kitoblar':
                 return true;
                 break;
-            case '◀️ Ortga':
+            case '◀️ Asosiy Menu':
                 return true;
                 break;
             case checkLetters($message):

@@ -317,7 +317,7 @@ class TelegramController extends Controller
                    'text' => 'Lug\'at bo\'yicha ma\'lumotni chqarish',
                    'reply_markup' => $keyboard
                 ]);
-            }elseif ($message == '◀️ Ortga')
+            }elseif ($message == '◀️ Asosiy Menu')
             {
                 $keyboard = Keyboard::make()
                     ->setResizeKeyboard(true)

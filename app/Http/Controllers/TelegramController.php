@@ -80,8 +80,11 @@ class TelegramController extends Controller
                     $content = $new['content_oz'];
                     $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                     $description = strip_tags($description, $allowed);
+                    $longDesc = mb_substr($description, 0, 400);
+                    $remDesc = mb_substr($description, 1024);
                     $content = strip_tags($content, $allowed);
-
+                    $longCont = mb_substr($content, 0, 400);
+                    $remCont = mb_substr($content, 1024);
                     $caption = <<<TEXT
                     🎬: $name
                     🆕: $description
@@ -97,6 +100,20 @@ class TelegramController extends Controller
                         'caption' => $caption,
                         'parse_mode' => 'html'
                     ]);
+
+                    if (!empty($longDesc)) {
+                        Telegram::sendMessage([
+                            'chat_id' => $chat_id,
+                            'text' => $longDesc
+                        ]);
+                    }
+
+                    if (!empty($longCont)) {
+                        Telegram::sendMessage([
+                           'chat_id' => $chat_id,
+                           'text' => $longCont
+                        ]);
+                    }
                 }
             }elseif ($message === 'Premyera'){
                 $models = Premiere::where('status', 1)->get();

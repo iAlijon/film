@@ -75,65 +75,13 @@ class TelegramController extends Controller
                 }
                 foreach ($news as $new)
                 {
-//                    $name = $new['name_oz'];
-//                    $description = $new['description_oz'];
-//                    $content = $new['content_oz'];
-//                    $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
-//                    $description = strip_tags($description, $allowed);
-//                    $longDesc = mb_substr($description, 0, 400);
-//                    $remDesc = mb_substr($description, 1024);
-//                    $content = strip_tags($content, $allowed);
-//                    $longCont = mb_substr($content, 0, 500);
-//                    $remCont = mb_substr($content, 1024);
-//                    $caption = <<<TEXT
-//                    🎬: $name
-//                    🆕: $longDesc
-//                    $longCont
-//                    TEXT;
-//
-//                    $url = explode('/', $new['image']);
-//                    $last = array_pop($url);
-//                    $image_path = storage_path('app/public/news/'.$last);
-//                    $caption = tidy_repair_string($caption, [
-//                        'output-xhtml' => true,
-//                        'show-body-only' => true,
-//                    ], 'utf8');
-//                    Telegram::sendPhoto([
-//                        'chat_id' => $chat_id,
-//                        'photo' => InputFile::create($image_path),
-//                        'caption' => $caption,
-//                        'parse_mode' => 'HTML'
-//                    ]);
-//
-//                    if (!empty($remDesc)) {
-//                        Telegram::sendMessage([
-//                            'chat_id' => $chat_id,
-//                            'text' => $remDesc,
-//                            'parse_mode' => 'HTML'
-//                        ]);
-//                    }
-//
-//                    if (!empty($remCont)) {
-//                        Telegram::sendMessage([
-//                           'chat_id' => $chat_id,
-//                           'text' => $remCont,
-//                            'parse_mode' => 'HTML'
-//                        ]);
-//                    }
                     $name = $new['name_oz'];
                     $description = $new['description_oz'];
                     $content = $new['content_oz'];
-
-                    // Faqat ruxsat etilgan HTML teglar
                     $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
-
-                    // Noto‘g‘ri teglarni olib tashlash
                     $description = strip_tags($description, $allowed);
                     $content = strip_tags($content, $allowed);
-
-                    // --- HTML helper (notekis teglarni yopib beradi) ---
                     $fixHtml = function($text) {
-                        // Agar serverda tidy mavjud bo‘lsa
                         if (function_exists('tidy_repair_string')) {
                             return tidy_repair_string($text, [
                                 'output-xhtml' => true,
@@ -141,7 +89,6 @@ class TelegramController extends Controller
                                 'wrap' => 0
                             ], 'utf8');
                         }
-                        // Aks holda oddiy matnga qaytarib yuboramiz
                         return $text;
                     };
 
@@ -159,14 +106,10 @@ class TelegramController extends Controller
                     🆕: $longDesc
                     $longCont
                     TEXT;
-
-                    // Debug uchun loglash
-
                     $url = explode('/', $new['image']);
                     $last = array_pop($url);
                     $image_path = storage_path('app/public/news/'.$last);
 
-                    // Rasm va caption yuborish
                     Telegram::sendPhoto([
                         'chat_id' => $chat_id,
                         'photo' => InputFile::create($image_path),

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aphorism;
+use App\Models\Books;
 use App\Models\CinemaFact;
 use App\Models\Dictionary;
 use App\Models\FilmAnalysis;
@@ -396,6 +397,14 @@ class TelegramController extends Controller
                 }catch (\Exception $exception)
                 {
                     Log::info($exception->getMessage());
+                }
+            }elseif ($message === 'Kitoblar') {
+                $models = Books::where('status', 1)->get();
+                Log::info('book',[$models]);
+                try {
+
+                }catch (\Exception $exception) {
+
                 }
             }
         }catch (\Exception $exception) {

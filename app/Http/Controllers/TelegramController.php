@@ -412,10 +412,10 @@ class TelegramController extends Controller
                         $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                         $description = strip_tags($description, $allowed);
                         $longDesc = mb_substr($description, 0, 400);
-                        $remDesc = mb_substr($description, 1024);
+                        $remDesc = mb_substr($description, 3000);
                         $content = strip_tags($content, $allowed);
                         $longCont = mb_substr($content, 0, 500);
-                        $remCont = mb_substr($content, 1024);
+                        $remCont = mb_substr($content, 3000);
                         $file = $model->files;
                         $caption = <<<TEXT
                           📚: $name

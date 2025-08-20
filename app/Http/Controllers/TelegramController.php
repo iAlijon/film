@@ -314,7 +314,7 @@ class TelegramController extends Controller
                 ]);
                 Telegram::sendMessage([
                    'chat_id' => $chat_id,
-                   'text' => 'Lug\'at bo\'yicha ma\'lumotni chqarish',
+                   'text' => centerLine('Lug\'at bo\'yicha ma\'lumotni chqarish', 30),
                    'reply_markup' => $keyboard
                 ]);
             }elseif ($message == '◀️ Asosiy Menu')
@@ -328,7 +328,7 @@ class TelegramController extends Controller
                     ->row(['Kitoblar']);
                 Telegram::sendMessage([
                     'chat_id' => $chat_id,
-                    'text' => " \n",
+                    'text' => '✅ Asosiy Menu',
                     'reply_markup' => $keyboard
                 ]);
             }elseif (checkLetters($message))

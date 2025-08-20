@@ -449,26 +449,40 @@ class TelegramController extends Controller
                 }
             }elseif (!checkMessage($message))
             {
-                $frames = [
-                    "Xabar o‘chirilmoqda ▓▓▓▓▓",
-                    "Xabar o‘chirilmoqda ▓▓▓▓░",
-                    "Xabar o‘chirilmoqda ▓▓▓░░",
-                    "Xabar o‘chirilmoqda ▓▓░░░",
-                    "Xabar o‘chirilmoqda ▓░░░░",
-                    "Xabar o‘chirilmoqda ░░░░░",
-                ];
-
-                foreach ($frames as $frame) {
-                    Telegram::editMessageText([
-                        'chat_id' => $chat_id,
-                        'message_id' => $message_id,
-                        'text' => $frame
-                    ]);
-                    usleep(500000); // 0.5 sek
-                }
                 Telegram::deleteMessage([
                    'chat_id' => $chat_id,
                    'message_id' => $message_id,
+                ]);
+                $sent = Telegram::sendMessage([
+                    'chat_id' => $chat_id,
+                    'text' => $message, // foydalanuvchi xabari nusxasi
+                ]);
+
+                $newMsgId = $sent->getMessageId();
+
+// 3. Animatsiya kadrlarini yasash (parchalanib yo‘qolishi)
+                $frames = [];
+                for ($i = strlen($message); $i >= 1; $i--) {
+                    $frames[] = substr($message, 0, $i); // oxiridan boshlab qisqaradi
+                }
+                $frames[] = "💨";
+                $frames[] = "✅ O‘chirildi";
+
+// 4. Har safar matnni yangilab turish
+                foreach ($frames as $frame) {
+                    usleep(300000); // 0.3s kutish
+                    Telegram::editMessageText([
+                        'chat_id' => $chat_id,
+                        'message_id' => $newMsgId,
+                        'text' => $frame,
+                    ]);
+                }
+
+// 5. Oxirida ham butunlay yo‘qotish (xohlasa)
+                sleep(1);
+                Telegram::deleteMessage([
+                    'chat_id' => $chat_id,
+                    'message_id' => $newMsgId,
                 ]);
             }
         }catch (\Exception $exception) {

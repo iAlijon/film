@@ -65,7 +65,7 @@ class TelegramController extends Controller
                     ->row(['Kitoblar']);
                 Telegram::sendMessage([
                     'chat_id' => $chat_id,
-                    'text' => 'Bo\'timizga xush kelibsiz'.$name,
+                    'text' => 'Bo\'timizga xush kelibsiz'.''.$name,
                     'reply_markup' => $keyboard
                 ]);
             }elseif ($message === 'Yangiliklar') {

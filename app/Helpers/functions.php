@@ -201,6 +201,7 @@ if (!function_exists('centerLine'))
 if (!function_exists('checkMessage'))
 {
     function checkMessage($message) {
+        \Illuminate\Support\Facades\Log::info($message);
         switch($message){
             case 'Yangiliklar':
                 return true;

@@ -307,7 +307,7 @@ class TelegramController extends Controller
                 if (!empty($row)) {
                     $rows[] = $row;
                 }
-                $rows[] = ['◀️ Ortga'];
+                $rows[] = ['◀️ Asosiy Menu'];
                 $keyboard = Keyboard::make([
                     'keyboard' => $rows,
                     'resize_keyboard' => true,

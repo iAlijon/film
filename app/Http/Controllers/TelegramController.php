@@ -48,7 +48,6 @@ class TelegramController extends Controller
             $chat_id = $update->getMessage()->getChat()->getId();
             $message = $update->getMessage()->getText();
             $message_id = $update->getMessage()->getMessageId();
-            Log::info($message_id);
             if ($message === '/start') {
                 TelegramUser::updateOrCreate([
                     'telegram_id' => $update->getMessage()->getChat()->getId()
@@ -448,15 +447,14 @@ class TelegramController extends Controller
                 }catch (\Exception $exception) {
                     Log::error($exception->getMessage());
                 }
+            }elseif (!checkMessage($message))
+            {
+                Telegram::deleteMessage([
+                   'chat_id' => $chat_id,
+                   'message_id' => $message_id,
+                   'text' => 'Bot menu lariga mos bo\'lmagan so\'zlar'
+                ]);
             }
-//            elseif (!checkMessage($message))
-//            {
-//                Telegram::deleteMessage([
-//                   'chat_id' => $chat_id,
-//                   'message_id' => $message_id,
-//                   'text' => 'Bot menu lariga mos bo\'lmagan so\'zlar'
-//                ]);
-//            }
         }catch (\Exception $exception) {
             report($exception);
             Log::error('error:', [$exception->getMessage()]);

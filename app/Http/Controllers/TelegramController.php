@@ -448,14 +448,15 @@ class TelegramController extends Controller
                 }catch (\Exception $exception) {
                     Log::error($exception->getMessage());
                 }
-            }elseif (!checkMessage($message))
-            {
-                Telegram::deleteMessage([
-                   'chat_id' => $chat_id,
-                   'message_id' => $message_id,
-                   'text' => 'Bot menu lariga mos bo\'lmagan so\'zlar'
-                ]);
             }
+//            elseif (!checkMessage($message))
+//            {
+//                Telegram::deleteMessage([
+//                   'chat_id' => $chat_id,
+//                   'message_id' => $message_id,
+//                   'text' => 'Bot menu lariga mos bo\'lmagan so\'zlar'
+//                ]);
+//            }
         }catch (\Exception $exception) {
             report($exception);
             Log::error('error:', [$exception->getMessage()]);

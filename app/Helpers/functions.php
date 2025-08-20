@@ -197,3 +197,47 @@ if (!function_exists('centerLine'))
         return str_repeat(' ', $pad) . $text;
     }
 }
+
+if (!function_exists('checkMessage'))
+{
+    function checkMessage($message) {
+        switch($message){
+            case 'Yangiliklar':
+                return true;
+                break;
+            case 'Premyera':
+                return true;
+                break;
+            case 'Kino tahlil':
+                return true;
+                break;
+            case 'Suhbatlar':
+                return true;
+                break;
+            case 'Shaxsiyat':
+                return true;
+                break;
+            case 'Kinolug\'at':
+                return true;
+                break;
+            case 'Kinofakt':
+                return true;
+                break;
+            case 'Filmografiya':
+                return true;
+                break;
+            case 'Kitoblar':
+                return true;
+                break;
+            case '◀️ Ortga':
+                return true;
+                break;
+            case checkLetters($message):
+                return true;
+                break;
+            default:
+                return false;
+                break;
+        }
+    }
+}

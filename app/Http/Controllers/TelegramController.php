@@ -104,14 +104,16 @@ class TelegramController extends Controller
                     if (!empty($remDesc)) {
                         Telegram::sendMessage([
                             'chat_id' => $chat_id,
-                            'text' => $remDesc
+                            'text' => $remDesc,
+                            'parse_mode' => 'html'
                         ]);
                     }
 
                     if (!empty($remCont)) {
                         Telegram::sendMessage([
                            'chat_id' => $chat_id,
-                           'text' => $remCont
+                           'text' => $remCont,
+                            'parse_mode' => 'html'
                         ]);
                     }
                 }

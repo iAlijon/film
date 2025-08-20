@@ -450,9 +450,11 @@ class TelegramController extends Controller
             }elseif (!checkMessage($message))
             {
                 Telegram::deleteMessage([
-                   'chat_id' => $chat_id,
-                   'message_id' => $message_id,
+                    'chat_id' => $chat_id,
+                    'message_id' => $message_id,
                 ]);
+
+                // 2. Bot xabarini chiqaramiz
                 $sent = Telegram::sendMessage([
                     'chat_id' => $chat_id,
                     'text' => $message, // foydalanuvchi xabari nusxasi
@@ -460,15 +462,18 @@ class TelegramController extends Controller
 
                 $newMsgId = $sent->getMessageId();
 
-// 3. Animatsiya kadrlarini yasash (parchalanib yo‘qolishi)
+                // 3. Animatsiya kadrlarini yasash (parchalanib yo‘qolishi)
                 $frames = [];
-                for ($i = strlen($message); $i >= 1; $i--) {
-                    $frames[] = substr($message, 0, $i); // oxiridan boshlab qisqaradi
+                $len = mb_strlen($message);
+
+                for ($i = $len; $i >= 1; $i--) {
+                    // oxiridan boshlab qisqartiramiz
+                    $frames[] = mb_substr($message, 0, $i) . " ‎"; // invisible space qo‘shildi
                 }
                 $frames[] = "💨";
                 $frames[] = "✅ O‘chirildi";
 
-// 4. Har safar matnni yangilab turish
+                // 4. Har safar matnni yangilab turamiz
                 foreach ($frames as $frame) {
                     usleep(300000); // 0.3s kutish
                     Telegram::editMessageText([
@@ -478,7 +483,7 @@ class TelegramController extends Controller
                     ]);
                 }
 
-// 5. Oxirida ham butunlay yo‘qotish (xohlasa)
+                // 5. Oxirida ham butunlay o‘chirish (ixtiyoriy)
                 sleep(1);
                 Telegram::deleteMessage([
                     'chat_id' => $chat_id,

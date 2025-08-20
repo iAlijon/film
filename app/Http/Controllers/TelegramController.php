@@ -469,7 +469,7 @@ class TelegramController extends Controller
                         'message_id' => $messageId,
                         'text' => $frame
                     ]);
-                    usleep(500000); // 0.5 sekund kutish
+                    usleep(500000); // 0.5 sek
                 }
                 Telegram::deleteMessage([
                    'chat_id' => $chat_id,

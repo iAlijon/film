@@ -98,14 +98,14 @@ class TelegramController extends Controller
                         'chat_id' => $chat_id,
                         'photo' => InputFile::create($image_path),
                         'caption' => $caption,
-                        'parse_mode' => 'html'
+                        'parse_mode' => 'HTML'
                     ]);
 
                     if (!empty($remDesc)) {
                         Telegram::sendMessage([
                             'chat_id' => $chat_id,
                             'text' => $remDesc,
-                            'parse_mode' => 'html'
+                            'parse_mode' => 'HTML'
                         ]);
                     }
 
@@ -113,7 +113,7 @@ class TelegramController extends Controller
                         Telegram::sendMessage([
                            'chat_id' => $chat_id,
                            'text' => $remCont,
-                            'parse_mode' => 'html'
+                            'parse_mode' => 'HTML'
                         ]);
                     }
                 }

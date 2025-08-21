@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\TelegramController;
+use App\Http\Controllers\GoogleController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,10 +15,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-//
-//Route::middleware('auth:sanctum')->get('/user', function (Request $reques t) {
-//    return $request->user();
-//});
+
+
 
 //aphorism
 Route::get('aphorism', [\App\Http\Controllers\AphorismController::class, 'index'])->name('aphorism');

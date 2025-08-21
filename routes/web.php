@@ -38,4 +38,5 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
     Route::get('telegram_user', [\App\Http\Controllers\Admin\TelegramUsers::class, 'index'])->name('telegram_user');
 });
 
-
+Route::get('auth/google', [\App\Http\Controllers\GoogleController::class, 'redirect']);
+Route::get('auth/google/callback', [\App\Http\Controllers\GoogleController::class, 'callback']);

@@ -56,11 +56,16 @@ Route::get('filmography/{id}', [\App\Http\Controllers\FilmographyController::cla
 //book
 Route::get('book', [\App\Http\Controllers\BookController::class, 'index'])->name('book.api.index');
 Route::get('book/{id}', [\App\Http\Controllers\BookController::class, 'show'])->name('book.api.show');
-Route::get('book-file-download/{id}', [\App\Http\Controllers\BookController::class, 'fileDownload']);
+
 //category
 Route::get('categories', [\App\Http\Controllers\CategoriesController::class, 'index'])->name('category');
 
 //GlobalSearch
 Route::get('search', [\App\Http\Controllers\SearchController::class, 'search']);
+//Telegram
+Route::post('/telegram/webhook', [\App\Http\Controllers\TelegramController::class, 'handle']);
 
-Route::post('/telegram/webhook', [TelegramController::class, 'handle']);
+Route::post('login', [\App\Http\Controllers\LoginController::class, 'login'])->name('api_login');
+Route::group(['middleware' => 'ApiAuth'], function (){
+    Route::get('book-file-download/{id}', [\App\Http\Controllers\BookController::class, 'fileDownload']);
+});

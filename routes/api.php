@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('login', [\App\Http\Controllers\LoginController::class, 'login'])->name('api_login');
+Route::get('auth/google', [\App\Http\Controllers\GoogleController::class, 'redirect']);
+Route::get('auth/google/callback', [\App\Http\Controllers\GoogleController::class, 'callback']);
 Route::get('aphorism', [\App\Http\Controllers\AphorismController::class, 'index'])->name('aphorism');
 Route::get('news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.api.index');
 Route::get('premiere', [\App\Http\Controllers\PremiereController::class, 'index'])->name('premiere.api.index');

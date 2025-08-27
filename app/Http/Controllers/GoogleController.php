@@ -17,13 +17,13 @@ class GoogleController extends Controller
 
     public function callback()
     {
-        $googleUser = Socialite::driver('google')->stateless()->user();
-        if (!$googleUser) {
-            return errorJson('Google gmail tasdiqlanmadi');
-        }
-        Log::info('google_user', [$googleUser]);
-        $string = \Illuminate\Support\Str::uuid();
         try {
+            $googleUser = Socialite::driver('google')->stateless()->user();
+            if (!$googleUser) {
+                return errorJson('Google gmail tasdiqlanmadi');
+            }
+            Log::info('google_user', [$googleUser]);
+            $string = \Illuminate\Support\Str::uuid();
             if ($googleUser) {
                 $user = User::updateOrCreate([
                     'email' => $googleUser->getEmail()

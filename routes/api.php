@@ -53,5 +53,4 @@ Route::group(['middleware' => 'ApiAuth'], function (){
     Route::get('filmography/{id}', [\App\Http\Controllers\FilmographyController::class, 'show'])->name('filmography.api.show');
     Route::get('book', [\App\Http\Controllers\BookController::class, 'index'])->name('book.api.index');
     Route::get('book/{id}', [\App\Http\Controllers\BookController::class, 'show'])->name('book.api.show');
-    Route::get('categories', [\App\Http\Controllers\CategoriesController::class, 'index'])->name('category');
 });

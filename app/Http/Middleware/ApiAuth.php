@@ -21,7 +21,7 @@ class ApiAuth
         $token = $request->bearerToken();
 
         if (!$token) {
-            return response()->json(['message' => 'Token yuborilmagan'], 401);
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
 
         // Sanctum orqali foydalanuvchini tekshirish

@@ -33,9 +33,10 @@ class GoogleController extends Controller
                 ]);
                 $token = $user->createToken('user_token')->plainTextToken;
             }
+            return response()->json(['success' => true, 'access_token' => $token, 'message' => 'ok']);
         }catch (\Exception $exception) {
             Log::info($exception->getMessage());
         }
-        return response()->json(['success' => true, 'access_token' => $token, 'message' => 'ok']);
+
     }
 }

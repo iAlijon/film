@@ -17,19 +17,14 @@ class ApiAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        // header dan token olish
         $token = $request->bearerToken();
-
         if (!$token) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
-
-        // Sanctum orqali foydalanuvchini tekshirish
         $user = Auth::guard('sanctum')->user();
         if (!$user) {
-            return response()->json(['message' => 'Yaroqsiz token'], 401);
+            return response()->json(['message' => 'Token expired'], 401);
         }
-
         return $next($request);
     }
 }

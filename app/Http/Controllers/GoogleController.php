@@ -12,7 +12,9 @@ class GoogleController extends Controller
 {
     public function redirect()
     {
-        return Socialite::driver('google')->stateless()->redirect()->getTargetUrl();
+        $url =  Socialite::driver('google')->stateless()->redirect()->getTargetUrl();
+        return response()->json(['url' => $url]);
+
     }
 
     public function callback()

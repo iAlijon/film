@@ -130,7 +130,7 @@ class TelegramController extends Controller
                             'inline_keyboard' => [
                                 [
                                     'text' => 'Davomini o\'qish',
-                                    'url' => url("https://film-front-javohirs-projects-cf013492.vercel.app/news/{$new->id}")
+                                    'url' => url("https://film-front-javohirs-projects-cf013492.vercel.app/news/{$new['id']}")
                                 ]
                             ]
                         ]

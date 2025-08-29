@@ -119,16 +119,16 @@ class TelegramController extends Controller
                             'url' => url("https://film-front-javohirs-projects-cf013492.vercel.app/news/{$new->id}")
                         ])
                     ];
-                    $keyboard = Keyboard::button([
-                       'inline_keyboard' => $button
-                    ]);
+
 
                     Telegram::sendPhoto([
                         'chat_id' => $chat_id,
                         'photo' => InputFile::create($image_path),
                         'caption' => $caption,
                         'parse_mode' => 'HTML',
-                        'reply_markup' => $keyboard
+                        'reply_markup' => [
+                            'inline_keyboard' => $button
+                        ]
                     ]);
 
 //                    if (!empty($remDesc)) {

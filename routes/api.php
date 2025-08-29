@@ -37,7 +37,7 @@ Route::post('/telegram/webhook', [\App\Http\Controllers\TelegramController::clas
 
 Route::group(['middleware' => 'ApiAuth'], function (){
     Route::get('aphorism', [\App\Http\Controllers\AphorismController::class, 'index'])->name('aphorism');
-    Route::get('news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.api.index');
+//    Route::get('news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.api.index');
     Route::get('news/{id}', [\App\Http\Controllers\NewsController::class, 'show'])->name('news.api.show')->middleware('view_count');
     Route::get('premiere', [\App\Http\Controllers\PremiereController::class, 'index'])->name('premiere.api.index');
     Route::get('premiere/{id}', [\App\Http\Controllers\PremiereController::class, 'show'])->name('premiere.api.show');

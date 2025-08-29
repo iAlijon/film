@@ -113,27 +113,18 @@ class TelegramController extends Controller
                     $url = explode('/', $new['image']);
                     $last = array_pop($url);
                     $image_path = storage_path('app/public/news/'.$last);
-//                    $button = [
-//                        Keyboard::inlineButton([
-//                           'text' => 'Davomini O\'qish',
-//                            'url' => url("https://film-front-javohirs-projects-cf013492.vercel.app/news/{$new->id}")
-//                        ])
-//                    ];
-
-
+                    $keyboard = Keyboard::make()->inline()->row(
+                        Keyboard::inlineButton([
+                            'text' => "Davomini o‘qish",
+                            'url'  => "https://film-front-javohirs-projects-cf013492.vercel.app/news/{$new['id']}"
+                        ])
+                    );
                     Telegram::sendPhoto([
                         'chat_id' => $chat_id,
                         'photo' => InputFile::create($image_path),
                         'caption' => $caption,
                         'parse_mode' => 'HTML',
-                        'reply_markup' => [
-                            'inline_keyboard' => [
-                                [
-                                    'text' => 'Davomini o\'qish',
-                                    'url' => url("https://film-front-javohirs-projects-cf013492.vercel.app/news/{$new['id']}")
-                                ]
-                            ]
-                        ]
+                        'reply_markup' => $keyboard
                     ]);
 
 //                    if (!empty($remDesc)) {

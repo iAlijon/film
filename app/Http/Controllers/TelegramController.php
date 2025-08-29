@@ -77,7 +77,6 @@ class TelegramController extends Controller
                 if (count($models) === 0){
                     $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }
-                $button = [];
                 foreach ($models as $new)
                 {
                     $name = $new['name_oz'];
@@ -114,7 +113,7 @@ class TelegramController extends Controller
                     $url = explode('/', $new['image']);
                     $last = array_pop($url);
                     $image_path = storage_path('app/public/news/'.$last);
-                    $button[] = [
+                    $button = [
                         Keyboard::inlineButton([
                            'text' => 'Davomini O\'qish',
                             'url' => url("https://film-front-javohirs-projects-cf013492.vercel.app/news/{$new->id}")

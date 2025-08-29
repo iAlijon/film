@@ -69,11 +69,15 @@ class TelegramController extends Controller
                     'reply_markup' => $keyboard
                 ]);
             }elseif ($message === 'Yangiliklar') {
-                $news = $this->news();
-                if (count($news) === 0){
+                $models = News::where('status', 1)
+                    ->select('name_oz', 'description_oz', 'content_oz', 'view_count', 'image')
+                    ->latest()
+                    ->take(5)
+                    ->get();
+                if (count($models) === 0){
                     $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }
-                foreach ($news as $new)
+                foreach ($models as $new)
                 {
                     $name = $new['name_oz'];
                     $description = $new['description_oz'];
@@ -522,11 +526,6 @@ class TelegramController extends Controller
         }
     }
 
-    public function news()
-    {
-        $models = News::where('status', 1)->select('name_oz', 'description_oz', 'content_oz', 'view_count', 'image')->get();
-        return $models;
-    }
 
     public function checkLetter($letter)
     {

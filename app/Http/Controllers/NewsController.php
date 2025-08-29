@@ -39,14 +39,6 @@ class NewsController extends Controller
             return successJson($new, 'ok');
         }
         return errorJson('Undefined news !', 404);
-//        if ($new) {
-//            $count = $new->view_count + 1;
-//            $new->update([
-//               'view_count' =>  $count
-//            ]);
-//            return response()->json(['success' => true,'data' => $new, 'message' => 'ok']);
-//        }
-//        return response()->json(['success' => false,'data' => '', 'message' => 'ok']);
     }
 
 }

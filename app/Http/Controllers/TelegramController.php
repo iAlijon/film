@@ -79,6 +79,7 @@ class TelegramController extends Controller
                 }
                 foreach ($models as $new)
                 {
+                    Log::info($new);
                     $name = $new['name_oz'];
                     $description = $new['description_oz'];
                     $content = $new['content_oz'];

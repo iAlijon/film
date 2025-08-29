@@ -127,7 +127,7 @@ class TelegramController extends Controller
                         'caption' => $caption,
                         'parse_mode' => 'HTML',
                         'reply_markup' => [
-                            'inline_keyboard' => $button
+                            'inline_keyboard' => [$button]
                         ]
                     ]);
 

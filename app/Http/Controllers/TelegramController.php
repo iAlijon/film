@@ -77,6 +77,7 @@ class TelegramController extends Controller
                 if (count($models) === 0){
                     $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }
+                $button = [];
                 foreach ($models as $new)
                 {
                     $name = $new['name_oz'];
@@ -100,10 +101,10 @@ class TelegramController extends Controller
                     $content = $fixHtml($content);
 
                     $longDesc = mb_substr($description, 0, 400);
-                    $remDesc  = mb_substr($description, 1024);
+//                    $remDesc  = mb_substr($description, 1024);
 
                     $longCont = mb_substr($content, 0, 500);
-                    $remCont  = mb_substr($content, 1024);
+//                    $remCont  = mb_substr($content, 1024);
 
                     $caption = <<<TEXT
                     🎬: $name
@@ -113,29 +114,39 @@ class TelegramController extends Controller
                     $url = explode('/', $new['image']);
                     $last = array_pop($url);
                     $image_path = storage_path('app/public/news/'.$last);
+                    $button[] = [
+                        Keyboard::inlineButton([
+                           'text' => 'Davomini O\'qish',
+                            'url' => url("https://film-front-javohirs-projects-cf013492.vercel.app/news/{$new->id}")
+                        ])
+                    ];
+                    $keyboard = Keyboard::button([
+                       'inline_keyboard' => $button
+                    ]);
 
                     Telegram::sendPhoto([
                         'chat_id' => $chat_id,
                         'photo' => InputFile::create($image_path),
                         'caption' => $caption,
-                        'parse_mode' => 'HTML'
+                        'parse_mode' => 'HTML',
+                        'reply_markup' => $keyboard
                     ]);
 
-                    if (!empty($remDesc)) {
-                        Telegram::sendMessage([
-                            'chat_id' => $chat_id,
-                            'text' => $fixHtml($remDesc),
-                            'parse_mode' => 'HTML'
-                        ]);
-                    }
-
-                    if (!empty($remCont)) {
-                        Telegram::sendMessage([
-                            'chat_id' => $chat_id,
-                            'text' => $fixHtml($remCont),
-                            'parse_mode' => 'HTML'
-                        ]);
-                    }
+//                    if (!empty($remDesc)) {
+//                        Telegram::sendMessage([
+//                            'chat_id' => $chat_id,
+//                            'text' => $fixHtml($remDesc),
+//                            'parse_mode' => 'HTML'
+//                        ]);
+//                    }
+//
+//                    if (!empty($remCont)) {
+//                        Telegram::sendMessage([
+//                            'chat_id' => $chat_id,
+//                            'text' => $fixHtml($remCont),
+//                            'parse_mode' => 'HTML'
+//                        ]);
+//                    }
                 }
             }elseif ($message === 'Premyera'){
                 $models = Premiere::where('status', 1)->get();

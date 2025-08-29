@@ -70,7 +70,7 @@ class TelegramController extends Controller
                 ]);
             }elseif ($message === 'Yangiliklar') {
                 $models = News::where('status', 1)
-                    ->select('name_oz', 'description_oz', 'content_oz', 'view_count', 'image')
+                    ->select('id','name_oz', 'description_oz', 'content_oz', 'view_count', 'image')
                     ->latest()
                     ->take(5)
                     ->get();

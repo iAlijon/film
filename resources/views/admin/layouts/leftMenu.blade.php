@@ -128,6 +128,12 @@
                         <p>Telegram Foydalanuvchilar</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('users')}}" class="nav-link" {{(request()->is('admin/users*'))?'active':''}}>
+                        <i class="far fa-circle"></i>
+                        <p>Foydalanuvchilar</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

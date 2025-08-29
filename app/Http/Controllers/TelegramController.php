@@ -79,7 +79,6 @@ class TelegramController extends Controller
                 }
                 foreach ($models as $new)
                 {
-                    Log::info($new);
                     $name = $new['name_oz'];
                     $description = $new['description_oz'];
                     $content = $new['content_oz'];
@@ -115,7 +114,6 @@ class TelegramController extends Controller
                     $last = array_pop($url);
                     $image_path = storage_path('app/public/news/'.$last);
                     $id = $new['id'];
-                    Log::info($id);
                     $keyboard = Keyboard::make()->inline()->row([
                         Keyboard::inlineButton([
                             'text' => "Davomini o‘qish",

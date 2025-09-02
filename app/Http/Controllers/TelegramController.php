@@ -154,7 +154,6 @@ class TelegramController extends Controller
                             'url'  => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
                         ])
                     ]);
-                    Log::info($keyboard);
                     $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
 //                    Telegram::sendPhoto([
 //                        'chat_id' => $chat_id,
@@ -550,6 +549,7 @@ class TelegramController extends Controller
 
     public function sendPhoto($chat_id, $photo = null,$message = null, $keyboard = null)
     {
+        Log::info($keyboard);
         Telegram::sendPhoto([
             'chat_id' => $chat_id,
             'photo' => InputFile::create($photo),

@@ -155,12 +155,6 @@ class TelegramController extends Controller
                         ])
                     ]);
                     $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
-//                    Telegram::sendPhoto([
-//                        'chat_id' => $chat_id,
-//                        'photo' => InputFile::create($image_path),
-//                        'caption' => $caption,
-//                        'parse_mode' => 'HTML'
-//                    ]);
                 }
             }elseif ($message == 'Kino tahlil')
             {
@@ -547,7 +541,7 @@ class TelegramController extends Controller
         ]);
     }
 
-    public function sendPhoto($chat_id, $photo = null,$message = null, $keyboard = null)
+    public function sendPhoto($chat_id, $photo,$message, $keyboard = null)
     {
         Log::info($keyboard);
         Telegram::sendPhoto([

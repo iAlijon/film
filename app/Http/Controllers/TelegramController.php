@@ -148,10 +148,11 @@ class TelegramController extends Controller
                     $url = explode('/', $model['images']);
                     $last = array_pop($url);
                     $image_path = storage_path('app/public/premiere/'.$last);
+                    $id = $model['id'];
                     $keyboard = Keyboard::make()->inline()->row([
                         Keyboard::inlineButton([
                             'text' => "Davomini o‘qish",
-                            'url'  => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
+                            'url'  => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$id}"
                         ])
                     ]);
                     Log::info($keyboard);

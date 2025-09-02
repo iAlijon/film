@@ -98,12 +98,8 @@ class TelegramController extends Controller
 
                     $description = $fixHtml($description);
                     $content = $fixHtml($content);
-
                     $longDesc = mb_substr($description, 0, 400);
-//                    $remDesc  = mb_substr($description, 1024);
-
                     $longCont = mb_substr($content, 0, 500);
-//                    $remCont  = mb_substr($content, 1024);
 
                     $caption = <<<TEXT
                     🎬: $name
@@ -120,29 +116,15 @@ class TelegramController extends Controller
                             'url'  => "https://film-front-javohirs-projects-cf013492.vercel.app/news/{$id}"
                         ])
                     ]);
-                    Telegram::sendPhoto([
-                        'chat_id' => $chat_id,
-                        'photo' => InputFile::create($image_path),
-                        'caption' => $caption,
-                        'parse_mode' => 'HTML',
-                        'reply_markup' => $keyboard
-                    ]);
+                    $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
+//                    Telegram::sendPhoto([
+//                        'chat_id' => $chat_id,
+//                        'photo' => InputFile::create($image_path),
+//                        'caption' => $caption,
+//                        'parse_mode' => 'HTML',
+//                        'reply_markup' => $keyboard
+//                    ]);
 
-//                    if (!empty($remDesc)) {
-//                        Telegram::sendMessage([
-//                            'chat_id' => $chat_id,
-//                            'text' => $fixHtml($remDesc),
-//                            'parse_mode' => 'HTML'
-//                        ]);
-//                    }
-//
-//                    if (!empty($remCont)) {
-//                        Telegram::sendMessage([
-//                            'chat_id' => $chat_id,
-//                            'text' => $fixHtml($remCont),
-//                            'parse_mode' => 'HTML'
-//                        ]);
-//                    }
                 }
             }elseif ($message === 'Premyera'){
                 $models = Premiere::where('status', 1)->get();
@@ -545,6 +527,26 @@ class TelegramController extends Controller
         Telegram::sendMessage([
             'chat_id' => $chat_id,
             'text' => "<pre>$text</pre>",
+            'parse_mode' => 'HTML'
+        ]);
+    }
+
+    public function sendMessage($chat_id, $message = null)
+    {
+        Telegram::sendMessage([
+           'chat_id' => $chat_id,
+           'text' => $message,
+           'parse_mode' => 'HTML'
+        ]);
+    }
+
+    public function sendPhoto($chat_id, $photo = null,$message = null, $keyboard = null)
+    {
+        Telegram::sendPhoto([
+            'chat_id' => $chat_id,
+            'photo' => InputFile::create($photo),
+            'caption' => $message,
+            'reply_keyboard' => $keyboard,
             'parse_mode' => 'HTML'
         ]);
     }

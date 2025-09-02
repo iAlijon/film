@@ -148,12 +148,19 @@ class TelegramController extends Controller
                     $url = explode('/', $model['images']);
                     $last = array_pop($url);
                     $image_path = storage_path('app/public/premiere/'.$last);
-                    Telegram::sendPhoto([
-                        'chat_id' => $chat_id,
-                        'photo' => InputFile::create($image_path),
-                        'caption' => $caption,
-                        'parse_mode' => 'HTML'
+                    $keyboard = Keyboard::make()->inline()->row([
+                        Keyboard::inlineButton([
+                            'text' => "Davomini o‘qish",
+                            'url'  => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
+                        ])
                     ]);
+                    $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
+//                    Telegram::sendPhoto([
+//                        'chat_id' => $chat_id,
+//                        'photo' => InputFile::create($image_path),
+//                        'caption' => $caption,
+//                        'parse_mode' => 'HTML'
+//                    ]);
                 }
             }elseif ($message == 'Kino tahlil')
             {

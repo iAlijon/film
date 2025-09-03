@@ -134,7 +134,8 @@ class TelegramController extends Controller
                     $image_path = storage_path('app/public/premiere/'.$last);
                     $keyboard = [
                         [
-                            'text' => '🔗 Batafsil', 'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
+                            'text' => '🔗 Batafsil',
+                            'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
                         ]
                     ];
 //                    $keyboard = Keyboard::make()->inline()->row([
@@ -147,13 +148,6 @@ class TelegramController extends Controller
                         'inline_keyboard' => $keyboard
                     ]);
                     $this->sendPhoto($chat_id, $image_path, $caption, $replay_keyboard);
-//                    Telegram::sendPhoto([
-//                        'chat_id' => $chat_id,
-//                        'photo' => InputFile::create($image_path),
-//                        'caption' => $caption,
-//                        'reply_markup' => $keyboard,
-//                        'parse_mode' => 'HTML',
-//                    ]);
                 }
             }elseif ($message == 'Kino tahlil')
             {

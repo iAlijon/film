@@ -138,14 +138,14 @@ class TelegramController extends Controller
                             'url'  => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
                         ])
                     ]);
-//                    $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
-                    Telegram::sendPhoto([
-                        'chat_id' => $chat_id,
-                        'photo' => InputFile::create($image_path),
-                        'caption' => $caption,
-                        'reply_markup' => $keyboard,
-                        'parse_mode' => 'HTML',
-                    ]);
+                    $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
+//                    Telegram::sendPhoto([
+//                        'chat_id' => $chat_id,
+//                        'photo' => InputFile::create($image_path),
+//                        'caption' => $caption,
+//                        'reply_markup' => $keyboard,
+//                        'parse_mode' => 'HTML',
+//                    ]);
                 }
             }elseif ($message == 'Kino tahlil')
             {

@@ -114,7 +114,7 @@ class TelegramController extends Controller
                     $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
                 }
             }elseif ($message === 'Premyera'){
-                $models = Premiere::where('status', 1)->get();
+                $models = Premiere::where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
                 if (count($models) === 0){
                     $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }

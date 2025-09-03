@@ -460,7 +460,6 @@ class TelegramController extends Controller
 
     public function sendPhoto($chat_id, $photo,$message, $keyboard)
     {
-        Log::info($keyboard);
         Telegram::sendPhoto([
             'chat_id' => $chat_id,
             'photo' => InputFile::create($photo),

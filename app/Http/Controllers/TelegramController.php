@@ -311,7 +311,7 @@ class TelegramController extends Controller
                     $keyboard = Keyboard::make()->inline()->row([
                        Keyboard::inlineButton([
                            'text' => '🔗 Batafsil',
-                           'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$item['id']}"
+                           'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/dictionary/{$item['id']}"
                        ])
                     ]);
                     $this->sendPhoto($chat_id,$image_path,$caption,$keyboard);

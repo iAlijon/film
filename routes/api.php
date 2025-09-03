@@ -42,7 +42,8 @@ Route::group(['middleware' => 'ApiAuth'], function (){
     Route::get('movie_analysis/{id}', [\App\Http\Controllers\FilmAnalysisController::class,'show'])->name('movie_analysis.api.show');
     Route::get('interview/{id}', [\App\Http\Controllers\InterviewController::class, 'show'])->name('interview.api.show');
     Route::get('persons/{id}', [\App\Http\Controllers\PersonDirectorController::class, 'show'])->name('person.api.show');
-    Route::get('dictionary/{id}', [\App\Http\Controllers\DictionaryController::class, 'show'])->name('dictionary.api.show');
+
     Route::get('filmography/{id}', [\App\Http\Controllers\FilmographyController::class, 'show'])->name('filmography.api.show');
     Route::get('book/{id}', [\App\Http\Controllers\BookController::class, 'show'])->name('book.api.show');
 });
+Route::get('dictionary/{id}', [\App\Http\Controllers\DictionaryController::class, 'show'])->name('dictionary.api.show');

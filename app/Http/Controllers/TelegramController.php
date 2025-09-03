@@ -112,19 +112,11 @@ class TelegramController extends Controller
                     $id = $new['id'];
                     $keyboard = Keyboard::make()->inline()->row([
                         Keyboard::inlineButton([
-                            'text' => "Davomini o‘qish",
+                            'text' => "Batafsil",
                             'url'  => "https://film-front-javohirs-projects-cf013492.vercel.app/news/{$id}"
                         ])
                     ]);
                     $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
-//                    Telegram::sendPhoto([
-//                        'chat_id' => $chat_id,
-//                        'photo' => InputFile::create($image_path),
-//                        'caption' => $caption,
-//                        'parse_mode' => 'HTML',
-//                        'reply_markup' => $keyboard
-//                    ]);
-
                 }
             }elseif ($message === 'Premyera'){
                 $models = Premiere::where('status', 1)->get();
@@ -150,7 +142,7 @@ class TelegramController extends Controller
                     $image_path = storage_path('app/public/premiere/'.$last);
                     $keyboard = Keyboard::make()->inline()->row([
                         Keyboard::inlineButton([
-                            'text' => "Davomini o‘qish",
+                            'text' => "Batafsil",
                             'url'  => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
                         ])
                     ]);
@@ -548,7 +540,7 @@ class TelegramController extends Controller
         ]);
     }
 
-    public function sendPhoto($chat_id, $photo,$message, $keyboard = null)
+    public function sendPhoto($chat_id, $photo,$message, $keyboard)
     {
         Log::info($keyboard);
         Telegram::sendPhoto([

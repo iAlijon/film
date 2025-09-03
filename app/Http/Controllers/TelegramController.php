@@ -496,7 +496,7 @@ class TelegramController extends Controller
         ]);
     }
 
-    public function sendPhoto($chat_id, $photo,$message, $keyboard=null)
+    public function sendPhoto($chat_id, $photo,$message, $keyboard = [])
     {
         Log::info($keyboard);
         Telegram::sendPhoto([

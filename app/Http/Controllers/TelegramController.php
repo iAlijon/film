@@ -146,6 +146,7 @@ class TelegramController extends Controller
                     ]);
                     $keyboard = Keyboard::make()->inline();
                     $keyboard->row([$btn]);
+                    Log::info($keyboard);
                     $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
                 }
             }elseif ($message == 'Kino tahlil')

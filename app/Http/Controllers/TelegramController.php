@@ -32,7 +32,7 @@ class TelegramController extends Controller
     protected $premiery;
     protected $film_analysis;
     protected $aphorism;
-    const url = 'https://film-front-javohirs-projects-cf013492.vercel.app/news/';
+    const url = 'https://film-front-javohirs-projects-cf013492.vercel.app/';
     public function __construct()
     {
         $this->news = new News();
@@ -105,7 +105,7 @@ class TelegramController extends Controller
                     $keyboard = Keyboard::make()->inline()->row([
                         Keyboard::inlineButton([
                             'text' => "🔗 Batafsil",
-                            'url'  => self::url.$id
+                            'url'  => self::url.'news/'.$id
                         ])
                     ]);
                     $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
@@ -131,7 +131,7 @@ class TelegramController extends Controller
                     $image_path = storage_path('app/public/premiere/'.$last);
                     $btn = Keyboard::inlineButton([
                         'text' => '🔗 Batafsil',
-                        'url' => self::url.$model['id']
+                        'url' => self::url.'premiere/'.$model['id']
                     ]);
                     $keyboard = Keyboard::make()->inline();
                     $keyboard->row([$btn]);
@@ -162,7 +162,7 @@ class TelegramController extends Controller
                         $keyboard = Keyboard::make()->inline()->row([
                             Keyboard::inlineButton([
                                'text' => '🔗 Batafsil',
-                               'url' => self::url.$model['id']
+                               'url' => self::url.'analysis/'.$model['id']
                             ])
                         ]);
                        $this->sendPhoto($chat_id,$image_path,$caption,$keyboard);
@@ -198,7 +198,7 @@ class TelegramController extends Controller
                     $keyboard = Keyboard::make()->inline()->row([
                        Keyboard::inlineButton([
                            'text' => '🔗 Batafsil',
-                           'url' => self::url.$model['id']
+                           'url' => self::url.'interviews/'.$model['id']
                        ])
                     ]);
                     $this->sendPhoto($chat_id,$image_path,$caption,$keyboard);
@@ -228,7 +228,7 @@ class TelegramController extends Controller
                     $keyboard = Keyboard::make()->inline()->row([
                         Keyboard::inlineButton([
                             'text' => '🔗 Batafsil',
-                            'url' => self::url.$model['id']
+                            'url' => self::url.'persons/'.$model['id']
                         ])
                     ]);
                     $this->sendPhoto($chat_id,$image_path,$caption,$keyboard);
@@ -292,7 +292,7 @@ class TelegramController extends Controller
                     $keyboard = Keyboard::make()->inline()->row([
                        Keyboard::inlineButton([
                            'text' => '🔗 Batafsil',
-                           'url' => self::url.$item['id']
+                           'url' => self::url.'dictionary/'.$item['id']
                        ])
                     ]);
                     $this->sendPhoto($chat_id,$image_path,$caption,$keyboard);
@@ -320,7 +320,7 @@ class TelegramController extends Controller
                         $keyboard = Keyboard::make()->inline()->row([
                            Keyboard::inlineButton([
                                'text' => '🔗 Batafsil',
-                               'url' => self::url.$model['id']
+                               'url' => self::url.'facts/'.$model['id']
                            ])
                         ]);
                         $this->sendPhoto($chat_id,$image_path,$caption,$keyboard);
@@ -350,7 +350,7 @@ class TelegramController extends Controller
                         $keyboard = Keyboard::make()->inline()->row([
                            Keyboard::inlineButton([
                                'text' => '🔗 Batafsil',
-                               'url' => self::url.$model['id']
+                               'url' => self::url.'filmography/'.$model['id']
                            ])
                         ]);
                         $this->sendPhoto($chat_id,$image_path,$caption,$keyboard);
@@ -379,7 +379,7 @@ class TelegramController extends Controller
                         $keyboard = Keyboard::make()->inline()->row([
                            Keyboard::inlineButton([
                                'text' => '🔗 Batafsil',
-                               'url' => self::url.$model['id']
+                               'url' => self::url.'books/'.$model['id']
                            ])
                         ]);
                         $this->sendDocument($chat_id,$file,$caption,$keyboard);

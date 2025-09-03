@@ -132,13 +132,21 @@ class TelegramController extends Controller
                     $url = explode('/', $model['images']);
                     $last = array_pop($url);
                     $image_path = storage_path('app/public/premiere/'.$last);
-                    $keyboard = Keyboard::make()->inline()->row([
-                        Keyboard::inlineButton([
-                            'text' => "Batafsil",
-                            'url'  => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
-                        ])
+                    $keyboard = [
+                        [
+                            'text' => '🔗 Batafsil', 'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
+                        ]
+                    ];
+//                    $keyboard = Keyboard::make()->inline()->row([
+//                        Keyboard::inlineButton([
+//                            'text' => "🔗 Batafsil",
+//                            'url'  => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
+//                        ])
+//                    ]);
+                    $replay_keyboard = Keyboard::make([
+                        'inline_keyboard' => $keyboard
                     ]);
-                    $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
+                    $this->sendPhoto($chat_id, $image_path, $caption, $replay_keyboard);
 //                    Telegram::sendPhoto([
 //                        'chat_id' => $chat_id,
 //                        'photo' => InputFile::create($image_path),

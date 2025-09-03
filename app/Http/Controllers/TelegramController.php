@@ -122,14 +122,11 @@ class TelegramController extends Controller
                 {
                     $name = $model['name_oz'];
                     $description = $model['description_oz'];
-                    $content = $model['content_oz'];
                     $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                     $description = strip_tags($description, $allowed);
-                    $content = strip_tags($content, $allowed);
                     $caption = <<<TEXT
                     🎬: $name
                     🆕: $description
-                    $content
                     TEXT;
 
                     $url = explode('/', $model['images']);
@@ -161,19 +158,11 @@ class TelegramController extends Controller
                     {
                         $name = $model['name_oz'];
                         $description = $model['description_oz'];
-                        $content = $model['content_oz'];
                         $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                         $description = strip_tags($description, $allowed);
-                        $longDesc = mb_substr($description, 0, 300);
-                        $remDesc = mb_substr($description, 1024);
-                        $content = strip_tags($content, $allowed);
-                        $longCont = mb_substr($content, 0, 600);
-                        $remaining = mb_substr($content, 1024);
                         $caption = <<<TEXT
                         🎬: $name
-                        🆕: $longDesc
-
-                            $longCont
+                        🆕: $description
                         TEXT;
 
                         $url = explode('/', $model['images']);
@@ -220,18 +209,14 @@ class TelegramController extends Controller
                     $name = $model['interview_oz'];
                     $description = $model['description_oz'];
                     $category_name = $model['category']['name_oz'];
-                    $content = $model['content_oz'];
                     $full_name = $model['people']['full_name_oz'];
                     $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                     $description = strip_tags($description, $allowed);
-                    $content = strip_tags($content, $allowed);
                     $caption = <<<TEXT
                     👤  $category_name: $full_name
 
                     🎬: $name
                     🆕: $description
-
-                        $content
                     TEXT;
 
                     $url = explode('/', $model['people']['images']);
@@ -255,16 +240,12 @@ class TelegramController extends Controller
                     $full_name = $model['full_name_oz'];
                     $birth_date = $model['birth_date'];
                     $description = $model['description_oz'];
-                    $content = $model['content_oz'];
                     $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                     $description = strip_tags($description, $allowed);
-                    $content = strip_tags($content, $allowed);
                     $caption = <<<TEXT
                         👤  $full_name
                         📅  $birth_date
                         🆕: $description
-
-                            $content
                         TEXT;
 
                     $url = explode('/', $model['images']);
@@ -330,19 +311,14 @@ class TelegramController extends Controller
                 {
                     $name = $item['film_dictionary']['name_oz'];
                     $description = $item['film_dictionary']['description_oz'];
-                    $content = $item['film_dictionary']['content_oz'];
                     $url = explode('/', $item['film_dictionary']['images']);
                     $last = array_pop($url);
                     $image_path = storage_path('app/public/dictionary/'.$last);
                     $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                     $description = strip_tags($description, $allowed);
-                    $content = strip_tags($content, $allowed);
                     $caption = <<<TEXT
                      $message: $name
-
                      🆕: $description
-
-                         $content
                     TEXT;
 
                     Telegram::sendPhoto([
@@ -361,15 +337,11 @@ class TelegramController extends Controller
                     foreach ($models as $model) {
                         $name = $model['name_oz'];
                         $description = $model['description_oz'];
-                        $content = $model['content_oz'];
                         $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                         $description = strip_tags($description, $allowed);
-                        $content = strip_tags($content, $allowed);
                         $caption = <<<TEXT
                         🎬:  $name
                         🆕: $description
-
-                            $content
                         TEXT;
 
                         $url = explode('/', $model['images']);
@@ -394,15 +366,11 @@ class TelegramController extends Controller
                     foreach ($models as $model) {
                         $name = $model['name_oz'];
                         $description = $model['description_oz'];
-                        $content = $model['content_oz'];
                         $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                         $description = strip_tags($description, $allowed);
-                        $content = strip_tags($content, $allowed);
                         $caption = <<<TEXT
                         🎬:  $name
                         🆕: $description
-
-                            $content
                         TEXT;
 
                         $url = explode('/', $model['images']);
@@ -428,20 +396,13 @@ class TelegramController extends Controller
                     foreach ($models as $model) {
                         $name = $model['name_oz'];
                         $description = $model['description_oz'];
-                        $content = $model['content_oz'];
                         $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                         $description = strip_tags($description, $allowed);
-                        $longDesc = mb_substr($description, 0, 400);
-                        $remDesc = mb_substr($description, 1024);
-                        $content = strip_tags($content, $allowed);
-                        $longCont = mb_substr($content, 0, 500);
-                        $remCont = mb_substr($content, 1024);
+                        $longDesc = mb_substr($description, 0, 800);
                         $file = $model->files;
                         $caption = <<<TEXT
                           📚: $name
                           🎬: $longDesc
-
-                              $longCont
                         TEXT;
                         Telegram::sendDocument([
                            'chat_id' => $chat_id,

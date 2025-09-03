@@ -162,31 +162,13 @@ class TelegramController extends Controller
                         $url = explode('/', $model['images']);
                         $last = array_pop($url);
                         $image_path = storage_path('app/public/analysis/'.$last);
-
-                        Telegram::sendPhoto([
-                            'chat_id' => $chat_id,
-                            'photo' => InputFile::create($image_path),
-                            'caption' => $caption,
-                            'parse_mode' => 'HTML'
+                        $keyboard = Keyboard::make()->inline()->row([
+                            Keyboard::inlineButton([
+                               'text' => '🔗 Batafsil',
+                               'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/analysis/{$model['id']}"
+                            ])
                         ]);
-
-                        if (!empty($remDesc))
-                        {
-                            Telegram::sendMessage([
-                                'chat_id' => $chat_id,
-                                'text' => $remDesc,
-                                'parse_mode' => 'HTML'
-                            ]);
-                        }
-
-                        if (!empty($remaining))
-                        {
-                            Telegram::sendMessage([
-                                'chat_id' => $chat_id,
-                                'text' => $remaining,
-                                'parse_mode' => 'HTML'
-                            ]);
-                        }
+                       $this->sendPhoto($chat_id,$image_path,$caption,$keyboard);
                     }
                 }catch (\Exception $exception){
                     Log::info($exception->getMessage());

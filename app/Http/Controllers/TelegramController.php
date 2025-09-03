@@ -81,10 +81,8 @@ class TelegramController extends Controller
                 {
                     $name = $new['name_oz'];
                     $description = $new['description_oz'];
-                    $content = $new['content_oz'];
                     $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                     $description = strip_tags($description, $allowed);
-                    $content = strip_tags($content, $allowed);
                     $fixHtml = function($text) {
                         if (function_exists('tidy_repair_string')) {
                             return tidy_repair_string($text, [
@@ -97,14 +95,11 @@ class TelegramController extends Controller
                     };
 
                     $description = $fixHtml($description);
-                    $content = $fixHtml($content);
-                    $longDesc = mb_substr($description, 0, 400);
-                    $longCont = mb_substr($content, 0, 500);
+                    $longDesc = mb_substr($description, 0, 800);
 
                     $caption = <<<TEXT
                     🎬: $name
                     🆕: $longDesc
-                    $longCont
                     TEXT;
                     $url = explode('/', $new['image']);
                     $last = array_pop($url);
@@ -540,7 +535,7 @@ class TelegramController extends Controller
         ]);
     }
 
-    public function sendPhoto($chat_id, $photo,$message, $keyboard)
+    public function sendPhoto($chat_id, $photo,$message, $keyboard=null)
     {
         Log::info($keyboard);
         Telegram::sendPhoto([

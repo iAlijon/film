@@ -138,15 +138,15 @@ class TelegramController extends Controller
 //                            'url'  => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
 //                        ])
 //                    ]);
-                    $replay_keyboard = Keyboard::make([
-                        'inline_keyboard' => [
-                            [
-                                'text' => '🔗 Batafsil',
-                                'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
-                            ]
+                    $btn = Keyboard::inlineButton([
+                        [
+                            'text' => '🔗 Batafsil',
+                            'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
                         ]
                     ]);
-                    $this->sendPhoto($chat_id, $image_path, $caption, $replay_keyboard);
+                    $keyboard = Keyboard::make()->inline();
+                    $keyboard->row([$btn]);
+                    $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
                 }
             }elseif ($message == 'Kino tahlil')
             {

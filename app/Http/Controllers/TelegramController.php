@@ -132,12 +132,6 @@ class TelegramController extends Controller
                     $url = explode('/', $model['images']);
                     $last = array_pop($url);
                     $image_path = storage_path('app/public/premiere/'.$last);
-                    $keyboard = [
-                        [
-                            'text' => '🔗 Batafsil',
-                            'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
-                        ]
-                    ];
 //                    $keyboard = Keyboard::make()->inline()->row([
 //                        Keyboard::inlineButton([
 //                            'text' => "🔗 Batafsil",
@@ -145,7 +139,12 @@ class TelegramController extends Controller
 //                        ])
 //                    ]);
                     $replay_keyboard = Keyboard::make([
-                        'inline_keyboard' => $keyboard
+                        'inline_keyboard' => [
+                            [
+                                'text' => '🔗 Batafsil',
+                                'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
+                            ]
+                        ]
                     ]);
                     $this->sendPhoto($chat_id, $image_path, $caption, $replay_keyboard);
                 }

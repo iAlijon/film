@@ -107,7 +107,7 @@ class TelegramController extends Controller
                     $id = $new['id'];
                     $keyboard = Keyboard::make()->inline()->row([
                         Keyboard::inlineButton([
-                            'text' => "Batafsil",
+                            'text' => "🔗 Batafsil",
                             'url'  => "https://film-front-javohirs-projects-cf013492.vercel.app/news/{$id}"
                         ])
                     ]);
@@ -132,12 +132,6 @@ class TelegramController extends Controller
                     $url = explode('/', $model['images']);
                     $last = array_pop($url);
                     $image_path = storage_path('app/public/premiere/'.$last);
-//                    $keyboard = Keyboard::make()->inline()->row([
-//                        Keyboard::inlineButton([
-//                            'text' => "🔗 Batafsil",
-//                            'url'  => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
-//                        ])
-//                    ]);
                     $btn = Keyboard::inlineButton([
                         'text' => '🔗 Batafsil',
                         'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"

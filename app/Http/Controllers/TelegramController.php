@@ -511,7 +511,7 @@ class TelegramController extends Controller
             'chat_id' => $chat_id,
             'photo' => InputFile::create($photo),
             'caption' => $message,
-            'reply_keyboard' => $keyboard,
+            'reply_markup' => $keyboard,
             'parse_mode' => 'HTML'
         ]);
     }

@@ -378,7 +378,7 @@ class TelegramController extends Controller
                         $keyboard = Keyboard::make()->inline()->row([
                            Keyboard::inlineButton([
                                'text' => '🔗 Batafsil',
-                               'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/book/{$model['id']}"
+                               'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/books/{$model['id']}"
                            ])
                         ]);
                         $this->sendDocument($chat_id,$file,$caption,$keyboard);

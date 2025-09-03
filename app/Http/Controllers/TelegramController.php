@@ -139,10 +139,8 @@ class TelegramController extends Controller
 //                        ])
 //                    ]);
                     $btn = Keyboard::inlineButton([
-                        [
-                            'text' => '🔗 Batafsil',
-                            'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
-                        ]
+                        'text' => '🔗 Batafsil',
+                        'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model['id']}"
                     ]);
                     $keyboard = Keyboard::make()->inline();
                     $keyboard->row([$btn]);

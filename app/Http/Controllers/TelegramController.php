@@ -206,12 +206,12 @@ class TelegramController extends Controller
                        ])
                     ]);
                     $this->sendPhoto($chat_id,$image_path,$caption,$keyboard);
-                    Telegram::sendPhoto([
-                        'chat_id' => $chat_id,
-                        'photo' => InputFile::create($image_path),
-                        'caption' => $caption,
-                        'parse_mode' => 'HTML'
-                    ]);
+//                    Telegram::sendPhoto([
+//                        'chat_id' => $chat_id,
+//                        'photo' => InputFile::create($image_path),
+//                        'caption' => $caption,
+//                        'parse_mode' => 'HTML'
+//                    ]);
                 }
             }elseif ($message == 'Shaxsiyat')
             {

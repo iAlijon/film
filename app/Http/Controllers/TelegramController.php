@@ -64,11 +64,6 @@ class TelegramController extends Controller
                     ->row(['Kinofakt', 'Filmografiya'])
                     ->row(['Kitoblar']);
                 $this->sendMessage($chat_id,'Bo\'timizga xush kelibsiz'.' '.$name,$keyboard);
-//                Telegram::sendMessage([
-//                    'chat_id' => $chat_id,
-//                    'text' => 'Bo\'timizga xush kelibsiz'.' '.$name,
-//                    'reply_markup' => $keyboard
-//                ]);
             }elseif ($message === 'Yangiliklar') {
                 $models = News::where('status', 1)
                     ->select('id','name_oz', 'description_oz', 'content_oz', 'view_count', 'image')
@@ -206,12 +201,6 @@ class TelegramController extends Controller
                        ])
                     ]);
                     $this->sendPhoto($chat_id,$image_path,$caption,$keyboard);
-//                    Telegram::sendPhoto([
-//                        'chat_id' => $chat_id,
-//                        'photo' => InputFile::create($image_path),
-//                        'caption' => $caption,
-//                        'parse_mode' => 'HTML'
-//                    ]);
                 }
             }elseif ($message == 'Shaxsiyat')
             {
@@ -268,11 +257,7 @@ class TelegramController extends Controller
                 ]);
                 $message = centerLine('Lug\'at bo\'yicha ma\'lumotni chqarish', 30);
                 $this->sendMessage($chat_id,$message,$keyboard);
-//                Telegram::sendMessage([
-//                   'chat_id' => $chat_id,
-//                   'text' => centerLine('Lug\'at bo\'yicha ma\'lumotni chqarish', 30),
-//                   'reply_markup' => $keyboard
-//                ]);
+
             }elseif ($message == '◀️ Asosiy Menu')
             {
                 $keyboard = Keyboard::make()
@@ -283,11 +268,6 @@ class TelegramController extends Controller
                     ->row(['Kinofakt', 'Filmografiya'])
                     ->row(['Kitoblar']);
                 $this->sendMessage($chat_id,'✅ Asosiy Menu', $keyboard);
-//                Telegram::sendMessage([
-//                    'chat_id' => $chat_id,
-//                    'text' => '✅ Asosiy Menu',
-//                    'reply_markup' => $keyboard
-//                ]);
             }elseif (checkLetters($message))
             {
                 $param = $this->checkLetter($message);
@@ -315,11 +295,6 @@ class TelegramController extends Controller
                        ])
                     ]);
                     $this->sendPhoto($chat_id,$image_path,$caption,$keyboard);
-//                    Telegram::sendPhoto([
-//                        'chat_id' => $chat_id,
-//                        'photo' => InputFile::create($image_path),
-//                        'caption' => $caption,
-//                    ]);
                 }
 
             }elseif ($message === 'Kinofakt') {
@@ -407,24 +382,6 @@ class TelegramController extends Controller
                            ])
                         ]);
                         $this->sendDocument($chat_id,$file,$caption,$keyboard);
-                        Telegram::sendDocument([
-                           'chat_id' => $chat_id,
-                           'document' => InputFile::create($file),
-                           'caption' => $caption,
-                            'parse_mode' => 'HTML'
-                        ]);
-                        if (!empty($remDesc)) {
-                            Telegram::sendMessage([
-                                'chat_id' => $chat_id,
-                                'text' => $remDesc
-                            ]);
-                        }
-                        if (!empty($remCont)) {
-                            Telegram::sendMessage([
-                                'chat_id' => $chat_id,
-                                'text' => $remCont
-                            ]);
-                        }
 
                     }
                 }catch (\Exception $exception) {

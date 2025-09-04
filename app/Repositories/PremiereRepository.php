@@ -5,11 +5,15 @@ namespace App\Repositories;
 
 
 use App\Models\Premiere;
+use App\Models\TelegramUser;
 use App\Traits\ImageUploads;
+use App\Traits\TelegramMessage;
+use Telegram\Bot\Keyboard\Keyboard;
 
 class PremiereRepository extends BaseRepository
 {
     use ImageUploads;
+    use TelegramMessage;
     public function __construct()
     {
         $this->model = new Premiere();
@@ -52,7 +56,26 @@ class PremiereRepository extends BaseRepository
             'content_en' => contentByDomDocment($data['content_en'], 'premiere')??null,
             'images' => $this->uploads($data['image'], 'premiere'),
             'status' => $data['status'],
+            'telegram_status' => $data['telegram_status']
         ]);
+        if ($model->telegram_status)
+        {
+            $caption = <<<TEXT
+            🎬: $model->name_oz
+               $model->description_oz
+            TEXT;
+            $telegramUsers = TelegramUser::all();
+            $keyboard = Keyboard::make()->inline()->row([
+                Keyboard::inlineButton([
+                    'text' => '🔗 Batafsil',
+                    'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model->id}"
+                ])
+            ]);
+            foreach ($telegramUsers as $user)
+            {
+                $this->sendPhoto($user->chat_id,$model->images,$caption,$keyboard);
+            }
+        }
         return $model;
     }
 
@@ -82,7 +105,8 @@ class PremiereRepository extends BaseRepository
             'content_ru' => contentByDomDocment($data['content_ru'], 'premiere'),
             'content_en' => contentByDomDocment($data['content_en'], 'premiere')??null,
             'images' => $images,
-            'status' => $data['status']
+            'status' => $data['status'],
+            'telegram_status' => $data['telegram_status']
         ]);
         return $model;
     }

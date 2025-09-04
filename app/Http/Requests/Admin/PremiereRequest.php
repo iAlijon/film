@@ -39,7 +39,8 @@ class PremiereRequest extends FormRequest
                 'content_en' => 'nullable',
                 'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
                 'status' => 'required|integer',
-                'category_id' => 'required'
+                'category_id' => 'required',
+                'telegram_status' => 'nullable'
             ];
         } else {
             return [
@@ -57,7 +58,8 @@ class PremiereRequest extends FormRequest
                 'content_en' => 'nullable',
                 'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'status' => 'required|integer',
-                'category_id' => 'required'
+                'category_id' => 'required',
+                'telegram_status' => 'nullable '
             ];
         }
     }

@@ -43,7 +43,7 @@
                                aria-selected="false">RU</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="custom-tabs-three-en-tab" data-toggle="pill"
+                            <a class="nav-link disabled" id="custom-tabs-three-en-tab" data-toggle="pill"
                                href="#custom-tabs-three-en" role="tab" aria-controls="custom-tabs-three-en"
                                aria-selected="false">EN</a>
                         </li>
@@ -99,6 +99,11 @@
                                         <option value="2">No Active</option>
                                     </select>
                                     <small class="text-danger">{{$errors->first('status')}}</small>
+                                </div>
+
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="telegram_status" value="true">
+                                    <label for="telegram_status">Telegramga Yuborish</label>
                                 </div>
                             </div>
                             {{----- uz -----}}

@@ -374,10 +374,10 @@ class TelegramController extends Controller
                         $longDesc = mb_substr($description, 0, 800);
                         $file = $model->files;
                         $caption = <<<TEXT
-                          📚: $name
-                          ✍:️$author
+                          📚   $name
+                          ✍️$author
 
-                          🎬: $longDesc
+                          🎬   $longDesc
                         TEXT;
                         $keyboard = Keyboard::make()->inline()->row([
                            Keyboard::inlineButton([

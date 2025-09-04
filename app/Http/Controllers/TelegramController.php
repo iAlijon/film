@@ -367,6 +367,7 @@ class TelegramController extends Controller
                 try {
                     foreach ($models as $model) {
                         $name = $model['name_oz'];
+                        $author = $model['author_oz'];
                         $description = $model['description_oz'];
                         $allowed = '<b><i><u><s><a><code><pre><strong><em><del><span class="tg-spoiler">';
                         $description = strip_tags($description, $allowed);
@@ -374,6 +375,7 @@ class TelegramController extends Controller
                         $file = $model->files;
                         $caption = <<<TEXT
                           📚: $name
+                          ✍:️$author
 
                           🎬: $longDesc
                         TEXT;

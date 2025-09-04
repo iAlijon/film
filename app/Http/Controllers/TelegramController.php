@@ -375,7 +375,7 @@ class TelegramController extends Controller
                         $file = $model->files;
                         $caption = <<<TEXT
                           📚   $name
-                          ✍️$author
+                          ✍️ $author
 
                           🎬   $longDesc
                         TEXT;

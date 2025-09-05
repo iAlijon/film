@@ -8,6 +8,7 @@ use App\Models\Premiere;
 use App\Models\TelegramUser;
 use App\Traits\ImageUploads;
 use App\Traits\TelegramMessage;
+use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Keyboard\Keyboard;
 
 class PremiereRepository extends BaseRepository
@@ -56,10 +57,13 @@ class PremiereRepository extends BaseRepository
             'content_en' => $data['content_en']??null,
             'images' => $this->uploads($data['image'], 'premiere'),
             'status' => $data['status'],
-            'telegram_status' => $data['telegram_status']??false
+            'telegram_status' => $data['telegram_status']??false,
         ]);
         if ($model->telegram_status)
         {
+            $url = explode('/', $model->images);
+            $last = array_pop($url);
+            $image_path = storage_path('app/public/premiere/'.$last);
             $caption = <<<TEXT
             🎬: $model->name_oz
                $model->description_oz
@@ -73,8 +77,11 @@ class PremiereRepository extends BaseRepository
             ]);
             foreach ($telegramUsers as $user)
             {
-                $this->sendPhoto($user->chat_id,$model->images,$caption,$keyboard);
+                $response = $this->sendPhoto($user->telegram_id,$image_path,$caption,$keyboard);
             }
+            Log::info($response->getMessageId());
+            $model->message_id = $response->getMessageId();
+            $model->save();
         }
         return $model;
     }
@@ -108,6 +115,17 @@ class PremiereRepository extends BaseRepository
             'status' => $data['status'],
             'telegram_status' => $data['telegram_status']??false
         ]);
+        if ($model->telegram_status)
+        {
+            $caption = <<<TEXT
+              🎬: $model->name_oz
+                $model->description_oz
+            TEXT;
+            $users = TelegramUser::all();
+            foreach ($users as $user) {
+                $this->editMessageCaption($user->telegram_id,$model->message_id,$caption);
+            }
+        }
         return $model;
     }
 

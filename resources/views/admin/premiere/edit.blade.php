@@ -105,7 +105,7 @@
                                 </div>
 
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="telegram_status" value="true">
+                                    <input type="checkbox" class="form-check-input" name="telegram_status" {{$model->telegram_status?'checked':''}}>
                                     <label for="telegram_status">Telegramga Yuborish</label>
                                 </div>
                             </div>

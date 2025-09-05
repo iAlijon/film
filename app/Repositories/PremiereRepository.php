@@ -53,10 +53,10 @@ class PremiereRepository extends BaseRepository
             'content_oz' => contentByDomDocment($data['content_oz'], 'premiere'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'premiere'),
             'content_ru' => contentByDomDocment($data['content_ru'], 'premiere'),
-            'content_en' => contentByDomDocment($data['content_en'], 'premiere')??null,
+            'content_en' => $data['content_en']??null,
             'images' => $this->uploads($data['image'], 'premiere'),
             'status' => $data['status'],
-            'telegram_status' => $data['telegram_status']
+            'telegram_status' => $data['telegram_status']??false
         ]);
         if ($model->telegram_status)
         {
@@ -103,10 +103,10 @@ class PremiereRepository extends BaseRepository
             'content_oz' => contentByDomDocment($data['content_oz'], 'premiere'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'premiere'),
             'content_ru' => contentByDomDocment($data['content_ru'], 'premiere'),
-            'content_en' => contentByDomDocment($data['content_en'], 'premiere')??null,
+            'content_en' => $data['content_en']??null,
             'images' => $images,
             'status' => $data['status'],
-            'telegram_status' => $data['telegram_status']
+            'telegram_status' => $data['telegram_status']??false
         ]);
         return $model;
     }

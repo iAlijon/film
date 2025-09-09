@@ -36,9 +36,6 @@ trait TelegramMessage
 
     public function editMessageCaption($chat_id,$message_id,$caption)
     {
-        Log::info($chat_id);
-        Log::info($message_id);
-        Log::info($caption);
         Telegram::editMessageCaption([
            'chat_id' => $chat_id,
            'message_id' => $message_id,

@@ -57,6 +57,7 @@ class TelegramController extends Controller
                 ],[
                     'name' => $update->getMessage()->getFrom()->getFirstName(),
                     'username' => $update->getMessage()->getFrom()->getUsername()??null,
+                    'message_id' => $update->getMessage()->getMessageId()
                 ]);
                 $keyboard = Keyboard::make()
                     ->setResizeKeyboard(true)

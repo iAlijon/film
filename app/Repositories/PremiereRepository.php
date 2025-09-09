@@ -59,29 +59,33 @@ class PremiereRepository extends BaseRepository
             'status' => $data['status'],
             'telegram_status' => $data['telegram_status']??false,
         ]);
-        if ($model->telegram_status)
-        {
-            $url = explode('/', $model->images);
-            $last = array_pop($url);
-            $image_path = storage_path('app/public/premiere/'.$last);
-            $caption = <<<TEXT
+        try {
+            if ($model->telegram_status)
+            {
+                $url = explode('/', $model->images);
+                $last = array_pop($url);
+                $image_path = storage_path('app/public/premiere/'.$last);
+                $caption = <<<TEXT
             🎬: $model->name_oz
                $model->description_oz
             TEXT;
-            $telegramUsers = TelegramUser::all();
-            $keyboard = Keyboard::make()->inline()->row([
-                Keyboard::inlineButton([
-                    'text' => '🔗 Batafsil',
-                    'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model->id}"
-                ])
-            ]);
-            foreach ($telegramUsers as $user)
-            {
-                $response = $this->sendPhoto($user->telegram_id,$image_path,$caption,$keyboard);
+                $telegramUsers = TelegramUser::all();
+                $keyboard = Keyboard::make()->inline()->row([
+                    Keyboard::inlineButton([
+                        'text' => '🔗 Batafsil',
+                        'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/premiere/{$model->id}"
+                    ])
+                ]);
+                foreach ($telegramUsers as $user)
+                {
+                    $response = $this->sendPhoto($user->telegram_id,$image_path,$caption,$keyboard);
+                }
+                Log::info($response);
+                $model->message_id = $response->getMessageId();
+                $model->save();
             }
-            Log::info($response->getMessageId());
-            $model->message_id = $response->getMessageId();
-            $model->save();
+        }catch (\Exception $exception) {
+            Log::info($exception->getMessage());
         }
         return $model;
     }
@@ -115,16 +119,22 @@ class PremiereRepository extends BaseRepository
             'status' => $data['status'],
             'telegram_status' => $data['telegram_status']??false
         ]);
-        if ($model->telegram_status)
-        {
-            $caption = <<<TEXT
-              🎬: $model->name_oz
-                $model->description_oz
-            TEXT;
-            $users = TelegramUser::all();
-            foreach ($users as $user) {
-                $this->editMessageCaption($user->telegram_id,$model->message_id,$caption);
+        try {
+            if ($model->telegram_status)
+            {
+                $caption = <<<TEXT
+                  🎬: $model->name_oz
+                    $model->description_oz
+                TEXT;
+                $users = TelegramUser::all();
+                foreach ($users as $user) {
+                    $this->editMessageCaption($user->telegram_id,$model->message_id,$caption);
+                }
             }
+        }catch (\Exception $exception)
+        {
+            Log::info($exception->getMessage());
+            Log::info($exception->getCode());
         }
         return $model;
     }

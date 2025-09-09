@@ -178,14 +178,7 @@ if (!function_exists('checkLetters'))
         $params = [
           'A','B','V','G','D','E','Z','I','Y','K','L','M','N','P','R','S','T','U','F','H','Ch','Sh','Y'
         ];
-        $lettersArray = array_map('strtoupper', str_split($letters));
-        foreach ($lettersArray as $letter)
-        {
-            if (!in_array($letter, $params)){
-                return false;
-            }
-        }
-        return true;
+        return in_array(strtoupper($letters), $params, true);
     }
 }
 
@@ -201,7 +194,6 @@ if (!function_exists('centerLine'))
 if (!function_exists('checkMessage'))
 {
     function checkMessage($message) {
-        \Illuminate\Support\Facades\Log::info($message);
         switch($message){
             case 'Yangiliklar':
                 return true;
@@ -234,7 +226,7 @@ if (!function_exists('checkMessage'))
                 return true;
                 break;
             case checkLetters($message):
-                return true;
+                checkLetters($message);
                 break;
             default:
                 return false;

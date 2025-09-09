@@ -49,14 +49,14 @@ class TelegramController extends Controller
             $chat_id = $update->getMessage()->getChat()->getId();
             $message = $update->getMessage()->getText();
             $message_id = $update->getMessage()->getMessageId();
-            $name = $update->getMessage()->getFrom()->getFirstName();
+            Log::info($message_id);
             if ($message === '/start') {
+                $name = $update->getMessage()->getFrom()->getFirstName();
                 TelegramUser::updateOrCreate([
                     'telegram_id' => $update->getMessage()->getChat()->getId()
                 ],[
                     'name' => $update->getMessage()->getFrom()->getFirstName(),
                     'username' => $update->getMessage()->getFrom()->getUsername()??null,
-                    'message_id' => $message_id
                 ]);
                 $keyboard = Keyboard::make()
                     ->setResizeKeyboard(true)
@@ -112,7 +112,7 @@ class TelegramController extends Controller
                     $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
                 }
             }elseif ($message === 'Premyera'){
-                $models = Premiere::where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
+                $models = Premiere::where('status', 1)->orderBy('created_at', 'desc')->latest()->take(5)->get();
                 if (count($models) === 0){
                     $this->NotFound($chat_id, centerLine('Bu menu da ma\'lumot topilmadi', 30));
                 }
@@ -136,7 +136,7 @@ class TelegramController extends Controller
                     ]);
                     $keyboard = Keyboard::make()->inline();
                     $keyboard->row([$btn]);
-                    Log::info($keyboard);
+//                    Log::info($keyboard);
                     $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
                 }
             }elseif ($message == 'Kino tahlil')
@@ -169,7 +169,7 @@ class TelegramController extends Controller
                        $this->sendPhoto($chat_id,$image_path,$caption,$keyboard);
                     }
                 }catch (\Exception $exception){
-                    Log::info($exception->getMessage());
+                    Log::info('tahlil', [$exception->getMessage()]);
                 }
 
             }elseif ($message == 'Suhbatlar'){
@@ -270,8 +270,7 @@ class TelegramController extends Controller
                     ->row(['Kinofakt', 'Filmografiya'])
                     ->row(['Kitoblar']);
                 $this->sendMessage($chat_id,'✅ Asosiy Menu', $keyboard);
-            }elseif (checkLetters($message))
-            {
+            }elseif (checkLetters($message)) {
                 $param = $this->checkLetter($message);
                 $result = FilmDictionaryCategory::where('dictionary_category_id', $param->id)->with('film_dictionary')->get();
                 if (count($result) === 0) {
@@ -327,7 +326,7 @@ class TelegramController extends Controller
                         $this->sendPhoto($chat_id,$image_path,$caption,$keyboard);
                     }
                 }catch (\Exception $e) {
-                    Log::info($e->getMessage());
+                    Log::info('fact',[$e->getMessage()]);
                 }
             }elseif ($message === 'Filmografiya') {
                 $models = Filmography::where('status', 1)->get();
@@ -358,7 +357,7 @@ class TelegramController extends Controller
                     }
                 }catch (\Exception $exception)
                 {
-                    Log::info($exception->getMessage());
+                    Log::info('Filmografiya',[$exception->getMessage()]);
                 }
             }elseif ($message === 'Kitoblar') {
                 $models = Books::where('status', 1)->get();
@@ -390,21 +389,20 @@ class TelegramController extends Controller
 
                     }
                 }catch (\Exception $exception) {
-                    Log::error($exception->getMessage());
+                    Log::error('Kitoblar',[$exception->getMessage()]);
                 }
-            }elseif (!checkMessage($message))
-            {
+            }elseif (!checkMessage($message)) {
+
                 Telegram::deleteMessage([
                      'message_id' => $message_id,
+                    'chat_id' => $chat_id
                 ]);
-
                 $sent = Telegram::sendMessage([
                     'chat_id' => $chat_id,
                     'text' => $message,
                 ]);
 
                 $newMsgId = $sent->getMessageId();
-
                 $frames = [];
                 $len = mb_strlen($message);
 
@@ -440,7 +438,13 @@ class TelegramController extends Controller
     public function checkLetter($letter)
     {
         $result = Dictionary::whereJsonContains('name_oz->upper', $letter)->get();
-        return $result[0];
+        Log::info(!empty($result));
+        if (!empty($result)) {
+            return $result[0];
+        }else {
+            return false;
+        }
+
     }
 
     public function NotFound($chat_id,$text)
@@ -466,7 +470,7 @@ class TelegramController extends Controller
     {
         Telegram::sendPhoto([
             'chat_id' => $chat_id,
-            'photo' => $photo,
+            'photo' => InputFile::create($photo),
             'caption' => $message,
             'reply_markup' => $keyboard,
             'parse_mode' => 'HTML'

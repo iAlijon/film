@@ -66,9 +66,9 @@ class PremiereRepository extends BaseRepository
                 $last = array_pop($url);
                 $image_path = storage_path('app/public/premiere/'.$last);
                 $caption = <<<TEXT
-            🎬: $model->name_oz
-               $model->description_oz
-            TEXT;
+                🎬: $model->name_oz
+                   $model->description_oz
+                TEXT;
                 $telegramUsers = TelegramUser::all();
                 $keyboard = Keyboard::make()->inline()->row([
                     Keyboard::inlineButton([

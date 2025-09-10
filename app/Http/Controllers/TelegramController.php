@@ -14,13 +14,7 @@ use App\Models\News;
 use App\Models\Person;
 use App\Models\Premiere;
 use App\Models\TelegramUser;
-use App\Telegram\Commands\StartCommand;
-use http\Client;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use Telegram\Bot\Api;
 use Telegram\Bot\FileUpload\InputFile;
 use Telegram\Bot\Keyboard\Keyboard;
 use Telegram\Bot\Laravel\Facades\Telegram;
@@ -137,7 +131,6 @@ class TelegramController extends Controller
                     ]);
                     $keyboard = Keyboard::make()->inline();
                     $keyboard->row([$btn]);
-//                    Log::info($keyboard);
                     $this->sendPhoto($chat_id, $image_path, $caption, $keyboard);
                 }
             }elseif ($message == 'Kino tahlil')
@@ -395,7 +388,7 @@ class TelegramController extends Controller
             }elseif (!checkMessage($message)) {
 
                 Telegram::deleteMessage([
-                     'message_id' => $message_id,
+                    'message_id' => $message_id,
                     'chat_id' => $chat_id
                 ]);
                 $sent = Telegram::sendMessage([

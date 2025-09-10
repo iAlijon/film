@@ -4,7 +4,6 @@
 namespace App\Traits;
 
 
-use Illuminate\Support\Facades\Log;
 use Telegram\Bot\FileUpload\InputFile;
 use Telegram\Bot\Laravel\Facades\Telegram;
 

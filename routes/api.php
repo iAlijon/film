@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\GoogleController;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*

@@ -6,7 +6,10 @@ namespace App\Repositories;
 
 use App\Models\FilmDictionary;
 use App\Models\FilmDictionaryCategory;
+use App\Models\TelegramUser;
 use App\Traits\ImageUploads;
+use Illuminate\Support\Facades\Log;
+use Telegram\Bot\Keyboard\Keyboard;
 
 class FilmDictionaryRepository extends BaseRepository
 {
@@ -61,13 +64,41 @@ class FilmDictionaryRepository extends BaseRepository
             'content_en' => $data['content_en'] ?? null,
             'status' => $data['status'],
             'images' => $images,
+            'telegram_status' => $data['telegram_status']
         ]);
+
         foreach ($data['dictionary_id'] as $item) {
             FilmDictionaryCategory::create([
                 'dictionary_category_id' => $item,
                 'film_dictionary_id' => $model->id
             ]);
         }
+
+        try {
+
+            if ($data['telegram_status']) {
+                $url = explode('/', $model->images);
+                $last = array_pop($url);
+                $image_path = storage_path('app/public/dictionary/'.$last);
+                $caption = <<<TEXT
+                    $model->name_oz
+                    $model->description_oz
+                TEXT;
+                $users = TelegramUser::all();
+                $keyboard = Keyboard::make()->inline()->row([
+                    Keyboard::inlineButton([
+                        'text' => '🔗 Batafsil',
+                        'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/dictionary/{$model->id}"
+                    ])
+                ]);
+                foreach ($users as $user) {
+                    $this->senPhoto($user->telegram_id, $image_path,$caption, $keyboard);
+                }
+            }
+        }catch (\Exception $exception) {
+            Log::info('dictionary: ',[$exception->getMessage()]);
+        }
+
         if ($model) {
             return $model;
         }

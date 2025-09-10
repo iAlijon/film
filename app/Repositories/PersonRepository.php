@@ -68,9 +68,11 @@ class PersonRepository extends BaseRepository
                 $image_path = storage_path('app/public/person/'.$last);
 
                 $caption = <<<TEXT
-                 👤   $model->full_name_oz,
+                 👤   $model->full_name_oz
+
                  📅   $model->birth_date
-                 🆕:  $model->description_oz
+
+                      $model->description_oz
                 TEXT;
 
                 $keyboard = Keyboard::make()->inline()->row([

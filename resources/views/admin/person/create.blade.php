@@ -137,6 +137,13 @@
                                     </select>
                                     <small class="text-danger">{{$errors->first('status')}}</small>
                                 </div>
+
+                                <div class="form-check">
+                                    <label>
+                                        <input type="checkbox" class="form-check-input" name="telegram_status" value="true">
+                                        Telegramga Yuborish
+                                    </label>
+                                </div>
                             </div>
                             {{----  uz  ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">

@@ -102,8 +102,10 @@
                                 </div>
 
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="telegram_status" value="true">
-                                    <label for="telegram_status">Telegramga Yuborish</label>
+                                    <label>
+                                        <input type="checkbox" class="form-check-input" name="telegram_status" value="true">
+                                        Telegramga Yuborish
+                                    </label>
                                 </div>
                             </div>
                             {{----- uz -----}}

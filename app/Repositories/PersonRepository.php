@@ -5,11 +5,16 @@ namespace App\Repositories;
 
 
 use App\Models\Person;
+use App\Models\TelegramUser;
 use App\Traits\ImageUploads;
+use App\Traits\TelegramMessage;
+use Illuminate\Support\Facades\Log;
+use Telegram\Bot\Keyboard\Keyboard;
 
 class PersonRepository extends BaseRepository
 {
     use ImageUploads;
+    use TelegramMessage;
     public function __construct()
     {
         $this->model = new Person();
@@ -49,11 +54,43 @@ class PersonRepository extends BaseRepository
             'content_oz' => contentByDomDocment($data['content_oz'], 'person'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'person'),
             'content_ru' => contentByDomDocment($data['content_ru'], 'person'),
-            'content_en' => contentByDomDocment($data['content_en'], 'person')??null,
+            'content_en' => contentByDomDocment($data['content_en'], 'person'),
             'status' => $data['status'],
             'images' => $this->uploads($data['image'], 'person'),
-            'birth_date' => $data['birth_date']
+            'birth_date' => $data['birth_date'],
+            'telegram_status' => $data['telegram_status']
         ]);
+
+        try {
+            if ($model->telegram_status) {
+                $url = explode('/', $model->images);
+                $last = array_pop($url);
+                $image_path = storage_path('app/public/person/'.$last);
+
+                $caption = <<<TEXT
+                 👤   $model->full_name_oz,
+                 📅   $model->birth_date
+                 🆕:  $model->description_oz
+                TEXT;
+
+                $keyboard = Keyboard::make()->inline()->row([
+                    Keyboard::inlineButton([
+                        'text' => '🔗 Batafsil',
+                        'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/persons/{$model->id}"
+                    ])
+                ]);
+
+                $users = TelegramUser::all();
+
+                foreach ($users as $user) {
+                    $this->sendPhoto($user->telegram_id,$image_path,$caption, $keyboard);
+                }
+
+            }
+        }catch (\Exception $exception) {
+            Log::info('person: ', [$exception->getMessage()]);
+        }
+
 
         if ($model) {
             return $model;
@@ -85,7 +122,7 @@ class PersonRepository extends BaseRepository
             'content_oz' => contentByDomDocment($data['content_oz'], 'person'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'person'),
             'content_ru' => contentByDomDocment($data['content_ru'], 'person'),
-            'content_en' => contentByDomDocment($data['content_en'], 'person')??null,
+            'content_en' => contentByDomDocment($data['content_en'], 'person'),
             'status' => $data['status'],
             'images' => $images,
             'birth_date' => $data['birth_date']

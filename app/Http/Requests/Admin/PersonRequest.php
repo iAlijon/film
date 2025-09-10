@@ -40,7 +40,8 @@ class PersonRequest extends FormRequest
                 'content_en' => 'nullable',
                 'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
                 'status' => 'required|integer',
-                'birth_date' => 'required|date'
+                'birth_date' => 'required|date',
+                'telegram_status' => 'nullable'
             ];
         }elseif ($this->isMethod('put')) {
             return [
@@ -59,7 +60,8 @@ class PersonRequest extends FormRequest
                 'content_en' => 'nullable',
                 'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'status' => 'required|integer',
-                'birth_date' => 'required|date'
+                'birth_date' => 'required|date',
+                'telegram_status' => 'nullable'
             ];
         }
     }

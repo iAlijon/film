@@ -5,6 +5,9 @@ use Illuminate\Support\Str;
 if (!function_exists('contentByDomDocment')) {
     function contentByDomDocment($content, $folder)
     {
+        if (empty($content)) {
+            return null;
+        }
         $dom = new \DomDocument();
         libxml_use_internal_errors(true);
         $content = str_replace("\0", '', $content);

@@ -8,13 +8,14 @@ use App\Models\FilmDictionary;
 use App\Models\FilmDictionaryCategory;
 use App\Models\TelegramUser;
 use App\Traits\ImageUploads;
+use App\Traits\TelegramMessage;
 use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Keyboard\Keyboard;
 
 class FilmDictionaryRepository extends BaseRepository
 {
     use ImageUploads;
-
+    use TelegramMessage;
     public function __construct()
     {
         $this->model = new FilmDictionary();
@@ -92,7 +93,7 @@ class FilmDictionaryRepository extends BaseRepository
                     ])
                 ]);
                 foreach ($users as $user) {
-                    $this->senPhoto($user->telegram_id, $image_path,$caption, $keyboard);
+                    $this->sendPhoto($user->telegram_id,$image_path,$caption,$keyboard);
                 }
             }
         }catch (\Exception $exception) {

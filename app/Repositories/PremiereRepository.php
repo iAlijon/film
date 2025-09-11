@@ -59,6 +59,7 @@ class PremiereRepository extends BaseRepository
             'status' => $data['status'],
             'telegram_status' => $data['telegram_status']??false,
         ]);
+
         try {
             if ($model->telegram_status)
             {
@@ -87,6 +88,7 @@ class PremiereRepository extends BaseRepository
         }catch (\Exception $exception) {
             Log::info($exception->getMessage());
         }
+
         return $model;
     }
 
@@ -119,7 +121,9 @@ class PremiereRepository extends BaseRepository
             'status' => $data['status'],
             'telegram_status' => $data['telegram_status']??false
         ]);
+
         try {
+
             if ($model->telegram_status)
             {
                 $caption = <<<TEXT
@@ -131,11 +135,14 @@ class PremiereRepository extends BaseRepository
                     $this->editMessageCaption($user->telegram_id,$model->message_id,$caption);
                 }
             }
-        }catch (\Exception $exception)
-        {
+
+        }catch (\Exception $exception) {
+
             Log::info($exception->getMessage());
             Log::info($exception->getCode());
+
         }
+
         return $model;
     }
 

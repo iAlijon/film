@@ -39,6 +39,7 @@ class InterviewRequest extends FormRequest
             'content_ru' => 'required',
             'content_en' => 'nullable',
             'status' => 'required|integer',
+            'telegram_status' => 'nullable'
         ];
     }
 }

@@ -45,7 +45,7 @@
                                aria-selected="false">RU</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="custom-tabs-three-en-tab" data-toggle="pill"
+                            <a class="nav-link disabled" id="custom-tabs-three-en-tab" data-toggle="pill"
                                href="#custom-tabs-three-en" role="tab" aria-controls="custom-tabs-three-en"
                                aria-selected="false">EN</a>
                         </li>
@@ -107,6 +107,15 @@
                                         <option value="2">No Active</option>
                                     </select>
                                 </div>
+
+                                <div class="form-check">
+                                    <label>
+                                        <input type="checkbox" name="telegram_status" class="form-check-input"
+                                               value="true">
+                                        Telegramga Yuborish
+                                    </label>
+                                </div>
+
                             </div>
                             {{----  uz  ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">

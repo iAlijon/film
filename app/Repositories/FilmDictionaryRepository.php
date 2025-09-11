@@ -61,8 +61,8 @@ class FilmDictionaryRepository extends BaseRepository
             'description_en' => $data['description_en'] ?? null,
             'content_oz' => contentByDomDocment($data['content_oz'], 'dictionary'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'dictionary'),
-            'content_ru' => $data['content_ru'] ?? null,
-            'content_en' => $data['content_en'] ?? null,
+            'content_ru' => contentByDomDocment($data['content_ru'], 'dictionary'),
+            'content_en' => $data['content_en'],
             'status' => $data['status'],
             'images' => $images,
             'telegram_status' => $data['telegram_status']
@@ -128,8 +128,8 @@ class FilmDictionaryRepository extends BaseRepository
             'description_en' => $data['description_en'] ?? null,
             'content_oz' => contentByDomDocment($data['content_oz'], 'dictionary'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'dictionary'),
-            'content_ru' => $data['content_ru'] ?? null,
-            'content_en' => $data['content_en'] ?? null,
+            'content_ru' => contentByDomDocment($data['content_ru'], 'dictionary'),
+            'content_en' => $data['content_en'],
             'status' => $data['status'],
             'images' => $images,
         ]);

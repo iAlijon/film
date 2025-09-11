@@ -6,9 +6,14 @@ namespace App\Repositories;
 
 use App\Models\Interview;
 use App\Models\PeopleAssociatedWithTheFilmCategory;
+use App\Models\TelegramUser;
+use App\Traits\TelegramMessage;
+use Illuminate\Support\Facades\Log;
+use Telegram\Bot\Keyboard\Keyboard;
 
 class InterviewRepository extends BaseRepository
 {
+    use TelegramMessage;
     public function __construct()
     {
         $this->model = new Interview();
@@ -35,7 +40,6 @@ class InterviewRepository extends BaseRepository
 
     public function create($data)
     {
-
         $model = $this->model->create([
             'category_id' => $data['category_id'],
             'interview_people_id' => $data['interview_people_id'],
@@ -50,10 +54,41 @@ class InterviewRepository extends BaseRepository
             'content_oz' => contentByDomDocment($data['content_oz'], 'interview'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'interview'),
             'content_ru' => contentByDomDocment($data['content_ru'], 'interview'),
-            'content_en' => contentByDomDocment($data['content_en'], 'interview')??null,
+            'content_en' => contentByDomDocment($data['content_en'], 'interview'),
             'anchor' => null,
             'status' => $data['status'],
+            'telegram_status' => $data['telegram_status']
         ]);
+
+        if ($model->telegram_status) {
+            try {
+                $url = explode('/', $model->people->images);
+                $last = array_pop($url);
+                $image_path = storage_path('app/public/interview_people/'.$last);
+                $full_name_oz = $model->people->full_name_oz;
+                $caption = <<<TEXT
+                👤: $full_name_oz
+
+                    $model->interview_oz
+
+                    $model->description_oz
+                TEXT;
+                $keyboard = Keyboard::make()->inline()->row([
+                    Keyboard::inlineButton([
+                        'text' => '🔗 Batafsil',
+                        'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/interview/{$model->id}"
+                    ])
+                ]);
+                $users = TelegramUser::all();
+                foreach ($users as $user) {
+                    $this->sendPhoto($user->telegram_id,$image_path,$caption,$keyboard);
+                }
+
+            }catch (\Exception $exception) {
+                Log::info('interview: ', [$exception->getMessage()]);
+            }
+        }
+
         if ($model) {
             return $model;
         }
@@ -77,8 +112,9 @@ class InterviewRepository extends BaseRepository
             'content_oz' => contentByDomDocment($data['content_oz'], 'interview'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'interview'),
             'content_ru' => contentByDomDocment($data['content_ru'], 'interview'),
-            'content_en' => contentByDomDocment($data['content_en'], 'interview')??null,
+            'content_en' => contentByDomDocment($data['content_en'], 'interview'),
             'status' => $data['status'],
+            'telegram_status' => $data['telegram_status']
         ]);
         if ($model) {
             return $model;

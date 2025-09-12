@@ -67,8 +67,10 @@ class NewsRepository extends BaseRepository
                 $last = array_pop($url);
                 $image_path = storage_path('app/public/news/'.$last);
                 $caption = <<<TEXT
-                   $model->name_oz
-                   $model->descripton_oz
+                🎬: $model->name_oz
+                🆕: $model->descripton_oz
+
+                👉 @kinoArtUzBot
                 TEXT;
                 $keyboard = Keyboard::make()->inline()->row([
                     Keyboard::inlineButton([

@@ -1,12 +1,7 @@
 <?php
 namespace App\Services;
 use App\Models\TelegramUser;
-use App\Models\User;
-use CURLFile;
 use Illuminate\Support\Facades\Log;
-use Telegram\Bot\Api;
-use Telegram\Bot\Exceptions\TelegramResponseException;
-use Telegram\Bot\FileUpload\InputFile;
 
 class TelegramServices
 {

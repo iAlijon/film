@@ -5,12 +5,16 @@ namespace App\Repositories;
 
 
 use App\Models\CinemaFact;
+use App\Models\TelegramUser;
 use App\Traits\ImageUploads;
+use App\Traits\TelegramMessage;
+use Illuminate\Support\Facades\Log;
+use Telegram\Bot\Keyboard\Keyboard;
 
 class CinemaFactRepository extends BaseRepository
 {
     use ImageUploads;
-
+    use TelegramMessage;
     public function __construct()
     {
         $this->model = new CinemaFact();
@@ -51,8 +55,33 @@ class CinemaFactRepository extends BaseRepository
             'content_ru' => contentByDomDocment($data['content_ru'], 'fact'),
             'content_en' => contentByDomDocment($data['content_en'], 'fact') ?? null,
             'status' => $data['status'],
-            'images' => $this->uploads($data['image'], 'fact')
+            'images' => $this->uploads($data['image'], 'fact'),
+            'telegram_status' => $data['telegram_status']
         ]);
+
+        try {
+            if ($model->telegram_status) {
+                $url = explode('/', $model->images);
+                $last = array_pop($url);
+                $image_path = storage_path('app/public/fact/'.$last);
+                $caption = <<<TEXT
+                   $model->name_oz
+                   $model->description_oz
+                TEXT;
+                $keyboard = Keyboard::make()->inline()->row([
+                    Keyboard::inlineButton([
+                        'text' => '🔗 Batafsil',
+                        'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/facts/{$model->id}"
+                    ])
+                ]);
+                $users = TelegramUser::all();
+                foreach ($users as $user) {
+                    $this->sendPhoto($user->telegram_id,$image_path,$caption,$keyboard);
+                }
+            }
+        }catch (\Exception $exception) {
+            Log::info('fact: ',[$exception->getMessage()]);
+        }
         if ($model) {
             return $model;
         }

@@ -5,11 +5,16 @@ namespace App\Repositories;
 
 
 use App\Models\FilmAnalysis;
+use App\Models\TelegramUser;
 use App\Traits\ImageUploads;
+use App\Traits\TelegramMessage;
+use Illuminate\Support\Facades\Log;
+use Telegram\Bot\Keyboard\Keyboard;
 
 class FilmAnalysisRepository extends BaseRepository
 {
     use ImageUploads;
+    use TelegramMessage;
     public function __construct()
     {
         $this->model = new FilmAnalysis();
@@ -50,10 +55,37 @@ class FilmAnalysisRepository extends BaseRepository
             'content_oz' => contentByDomDocment($data['content_oz'], 'analysis'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'analysis'),
             'content_ru' => contentByDomDocment($data['content_ru'], 'analysis'),
-            'content_en' => contentByDomDocment($data['content_en'], 'analysis')??null,
+            'content_en' => contentByDomDocment($data['content_en'], 'analysis'),
             'status' => $data['status'],
             'images' => $this->uploads($data['image'], 'analysis'),
         ]);
+
+        try {
+
+            if ($model->telegra_status) {
+                $url = explode('/', $model->images);
+                $last = array_pop($url);
+                $image_path = storage_path('app/public/analysis/'.$last);
+                $caption = <<<TEXT
+                    $model->name_oz
+                    $model->description_oz
+                TEXT;
+                $keyboard = Keyboard::make()->inline()->row([
+                   Keyboard::inlineButton([
+                       'text' => '🔗 Batafsil',
+                       'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/analysis/{$model->id}"
+                   ])
+                ]);
+                $users = TelegramUser::all();
+                foreach ($users as $user) {
+                    $this->sendPhoto($user->telegram_id,$image_path,$caption,$keyboard);
+                }
+
+            }
+
+        }catch (\Exception $exception) {
+            Log::info('film_analysis: ', [$exception->getMessage()]);
+        }
         if ($model)
         {
             return $model;
@@ -86,7 +118,7 @@ class FilmAnalysisRepository extends BaseRepository
             'content_oz' => contentByDomDocment($data['content_oz'], 'analysis'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'analysis'),
             'content_ru' => contentByDomDocment($data['content_ru'], 'analysis'),
-            'content_en' => contentByDomDocment($data['content_en'], 'analysis')??null,
+            'content_en' => contentByDomDocment($data['content_en'], 'analysis'),
             'status' => $data['status'],
             'images' => $images
         ]);

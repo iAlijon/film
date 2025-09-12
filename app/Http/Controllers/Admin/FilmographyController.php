@@ -5,14 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Filmography;
 use App\Models\PersonCategory;
+use App\Models\TelegramUser;
 use App\Traits\ImageUploads;
+use App\Traits\TelegramMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Telegram\Bot\Keyboard\Keyboard;
 
 class FilmographyController extends Controller
 {
     use ImageUploads;
-
+    use TelegramMessage;
     /**
      * Display a listing of the resource.
      *
@@ -76,7 +80,8 @@ class FilmographyController extends Controller
             'content_en' => 'nullable',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
             'status' => 'required|boolean',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'telegram_status' => 'nullable'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -94,11 +99,36 @@ class FilmographyController extends Controller
             'content_oz' => contentByDomDocment($data['content_oz'], 'filmography'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'filmography'),
             'content_ru' => contentByDomDocment($data['content_ru'], 'filmography'),
-            'content_en' => contentByDomDocment($data['content_en'], 'filmography')??null,
+            'content_en' => contentByDomDocment($data['content_en'], 'filmography'),
             'images' => $this->uploads($data['image'], 'filmography'),
             'status' => $data['status'],
-            'category_id' => $data['category_id']
+            'category_id' => $data['category_id'],
+            'telegram_status' => $data['telegram_status']
         ]);
+        try {
+            if ($model->telegram_status) {
+                $url = explode('/', $model->images);
+                $last = array_pop($url);
+                $image_path = storage_path('app/public/filmography/'.$last);
+                $caption = <<<TEXT
+                    $model->name_oz
+                    $model->telegram_status
+                TEXT;
+                $keyboard = Keyboard::make()->inline()->row([
+                   Keyboard::inlineButton([
+                       'text' => '🔗 Batafsil',
+                       'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/filmography/{$model->id}"
+                   ])
+                ]);
+                $users = TelegramUser::all();
+                foreach ($users as $user) {
+                    $this->sendPhoto($user->telegram_id,$image_path,$caption,$keyboard);
+                }
+            }
+        }catch (\Exception $exception) {
+            Log::info('filmography: ', [$exception->getMessage()]);
+        }
+
         if ($model) {
             $request->session()->flash('success', 'Success');
             return redirect()->route('filmography.index');
@@ -156,7 +186,8 @@ class FilmographyController extends Controller
             'content_en' => 'nullable',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             'status' => 'required|boolean',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'telegram_status' => 'nullable'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -183,7 +214,7 @@ class FilmographyController extends Controller
             'content_oz' => contentByDomDocment($data['content_oz'], 'filmography'),
             'content_uz' => contentByDomDocment($data['content_uz'], 'filmography'),
             'content_ru' => contentByDomDocment($data['content_ru'], 'filmography'),
-            'content_en' => contentByDomDocment($data['content_en'], 'filmography')??null,
+            'content_en' => contentByDomDocment($data['content_en'], 'filmography'),
             'images' => $images,
             'status' => $data['status'],
             'category_id' => $data['category_id']

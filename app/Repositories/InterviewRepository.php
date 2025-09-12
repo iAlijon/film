@@ -67,7 +67,7 @@ class InterviewRepository extends BaseRepository
                 $image_path = storage_path('app/public/interview_people/'.$last);
                 $full_name_oz = $model->people->full_name_oz;
                 $caption = <<<TEXT
-                👤: $full_name_oz
+                👤:  $full_name_oz
 
                     $model->interview_oz
 

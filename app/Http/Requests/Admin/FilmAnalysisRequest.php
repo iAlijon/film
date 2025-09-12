@@ -40,6 +40,7 @@ class FilmAnalysisRequest extends FormRequest
                 'content_en' => 'nullable',
                 'status' => 'required|integer',
                 'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+                'telegram_status' => 'nullable'
             ];
         }else {
             return [
@@ -58,6 +59,7 @@ class FilmAnalysisRequest extends FormRequest
                 'content_en' => 'nullable',
                 'status' => 'required|integer',
                 'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+                'telegram_status' => 'nullable'
             ];
         }
     }

@@ -98,6 +98,13 @@
                                     </select>
                                 </div>
 
+                                <div class="form-check">
+                                    <label>
+                                        <input type="checkbox" class="form-check-input" value="true" name="telegram_status">
+                                        Telegramga Yuborish
+                                    </label>
+                                </div>
+
                             </div>
                             {{---- uz ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">

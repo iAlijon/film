@@ -38,7 +38,8 @@ class CinemaFactRequest extends FormRequest
                 'content_ru' => 'required',
                 'content_en' => 'nullable',
                 'status' => 'required|integer',
-                'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
+                'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+                'telegram_status' => 'nullable'
             ];
         }else {
             return [
@@ -55,7 +56,8 @@ class CinemaFactRequest extends FormRequest
                 'content_ru' => 'required',
                 'content_en' => 'nullable',
                 'status' => 'required|integer',
-                'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048'
+                'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'telegram_status' => 'nullable'
             ];
         }
     }

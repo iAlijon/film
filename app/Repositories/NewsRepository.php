@@ -8,16 +8,19 @@ use App\Http\Filter\NewFilter;
 use App\Models\News;
 use App\Models\TelegramUser;
 use App\Traits\ImageUploads;
+use App\Traits\TelegramMessage;
 use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Api;
 use Telegram\Bot\Exceptions\TelegramResponseException;
 use Telegram\Bot\FileUpload\InputFile;
+use Telegram\Bot\Keyboard\Keyboard;
 use Telegram\Bot\Laravel\Facades\Telegram;
 use App\Services\TelegramServices;
 
 class NewsRepository extends BaseRepository
 {
     use ImageUploads;
+    use TelegramMessage;
     protected $telegram;
     public function __construct(TelegramServices $telegramServices)
     {
@@ -54,9 +57,35 @@ class NewsRepository extends BaseRepository
             'content_en' => $data['content_en'] ?? null,
             'status' => $data['status'],
             'image' => $this->uploads($data['images'], 'news'),
-            'category_id' => $data['category_id']
+            'category_id' => $data['category_id'],
+            'telegram_status' => $data['telegram_status']
         ]);
-        $this->telegram->sendToTelegram($model);
+
+        try {
+            if ($model->telegram_status) {
+                $url = explode('/', $model->images);
+                $last = array_pop($url);
+                $image_path = storage_path('app/public/news/'.$last);
+                $caption = <<<TEXT
+                   $model->name_oz
+                   $model->descripton_oz
+                TEXT;
+                $keyboard = Keyboard::make()->inline()->row([
+                    Keyboard::inlineButton([
+                        'text' => '🔗 Batafsil',
+                        'url' => "https://film-front-javohirs-projects-cf013492.vercel.app/news/{$model->id}"
+                    ])
+                ]);
+                $users = TelegramUser::all();
+                foreach ($users as $user) {
+                    $this->sendPhoto($user->telegram_id,$image_path,$caption,$keyboard);
+                }
+
+            }
+        }catch (\Exception $exception) {
+            Log::info('news: ', [$exception->getMessage()]);
+        }
+
         if ($model) {
             return $model;
         }

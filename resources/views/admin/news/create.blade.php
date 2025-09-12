@@ -106,6 +106,7 @@
                                         Telegramga Yuborish
                                     </label>
                                 </div>
+
                             </div>
                             {{----  uz  ----}}
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel">

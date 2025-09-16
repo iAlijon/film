@@ -60,7 +60,7 @@ class TelegramController extends Controller
                     ->row(['Shaxsiyat', 'Kinolug\'at'])
                     ->row(['Kinofakt', 'Filmografiya'])
                     ->row(['Kitoblar']);
-                $this->sendMessage($chat_id,'Bo\'timizga xush kelibsiz'.' '.$name,$keyboard);
+                $this->sendMessage($chat_id,'🖐 Bo\'timizga xush kelibsiz'.' '.$name,$keyboard);
             }elseif ($message === 'Yangiliklar') {
                 $models = News::where('status', 1)
                     ->select('id','name_oz', 'description_oz', 'content_oz', 'view_count', 'image')

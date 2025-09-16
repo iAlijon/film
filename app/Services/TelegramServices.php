@@ -50,9 +50,7 @@ class TelegramServices
                     Log::info('chat_id', [$e->getMessage()]);
                 }
             }
-        }catch (\Exception $exception)
-
-        {
+        }catch (\Exception $exception) {
             Log::error('Yuborishdagi xatolik:'.$exception->getMessage());
         }
     }

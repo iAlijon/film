@@ -11,30 +11,65 @@ class FilmographyController extends Controller
 {
     public function index(Request $request)
     {
+//        $lang = $request->header('lang', 'oz');
+//        $result = $request->all();
+//        $per_page = $result['per_page']??6;
+//        if (isset($result['category_id']) && !empty($result['category_id'])) {
+//            $params = Filmography::where('category_id', $result['category_id'])->where('status', 1)
+//                ->with(['translations' => function ($q) use ($lang){
+//                    $q->where('translates' ,$lang);
+//                }])
+//                ->orderBy('created_at', 'desc')
+//                ->paginate($per_page);
+//        }else {
+//            $params = Filmography::where('status', 1)
+//                ->with(['translations' => function ($q) use ($lang){
+//                    $q->where('translates' ,$lang);
+//                }])
+//                ->orderBy('created_at', 'desc')
+//                ->paginate($per_page);
+//        }
+//
+//
+//        if ($params) {
+//            return successJson($params, 'ok');
+//        }
+//        return errorJson('Undefined Element !', 404);
         $lang = $request->header('lang', 'oz');
         $result = $request->all();
-        $per_page = $result['per_page']??6;
+        $per_page = $result['per_page'] ?? 6;
+
+        $query = Filmography::where('status', 1)
+            ->with(['translations' => function ($q) use ($lang) {
+                $q->where('translates', $lang);
+            }])
+            ->orderBy('created_at', 'desc');
+
         if (isset($result['category_id']) && !empty($result['category_id'])) {
-            $params = Filmography::where('category_id', $result['category_id'])->where('status', 1)
-                ->with(['translations' => function ($q) use ($lang){
-                    $q->where('translates' ,$lang);
-                }])
-                ->orderBy('created_at', 'desc')
-                ->paginate($per_page);
-        }else {
-            $params = Filmography::where('status', 1)
-                ->with(['translations' => function ($q) use ($lang){
-                    $q->where('translates' ,$lang);
-                }])
-                ->orderBy('created_at', 'desc')
-                ->paginate($per_page);
+            $query->where('category_id', $result['category_id']);
         }
 
+        $data = $query->paginate($per_page);
+        $paginatedResult = $data->toArray();
 
-        if ($params) {
-            return successJson($params, 'ok');
+        $paginatedResult['data'] = collect($data->items())->map(function ($item) {
+            $translate = $item->translations->first();
+            $arr = $item->toArray();
+            unset($arr['translations']);
+
+            if ($translate) {
+                $arr['name'] = $translate->name;
+                $arr['description'] = $translate->description;
+                $arr['content'] = $translate->content;
+            }
+
+            return $arr;
+        });
+
+        if ($data->isNotEmpty()) {
+            return successJson($paginatedResult, 'ok');
         }
-        return errorJson('Undefined Element !', 404);
+        return errorJson('Undefined Element!', 404);
     }
 
     public function show(Request $request,$id)
@@ -54,6 +89,16 @@ class FilmographyController extends Controller
                     'view_count' => $count
                 ]);
                 Cache::put($cache, true, now()->addMinutes(3));
+            }
+
+            $translate = $data->translates->first();
+            $result = $data->toArray();
+            unset($result['translates']);
+
+            if ($translate) {
+                $result['name'] = $translate->name;
+                $result['description'] = $translate->description;
+                $result['content'] = $translate->content;
             }
             return successJson($data, 'ok');
         }

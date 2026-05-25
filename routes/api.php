@@ -38,8 +38,8 @@ Route::post('/telegram/webhook', [\App\Http\Controllers\TelegramController::clas
 
 Route::get('aphorism', [\App\Http\Controllers\AphorismController::class, 'index'])->name('aphorism');
 Route::get('film_digests/{id}', [\App\Http\Controllers\PremiereController::class, 'show'])->name('film_digest.api.show');
-Route::get('film_diagnostics/{id}', [\App\Http\Controllers\FilmAnalysisController::class,'show'])->name('movie_diagnosis.api.show');
-Route::get('cinema_catalog/{id}', [\App\Http\Controllers\FilmographyController::class, 'show'])->name('cinema_catalog.api.show');
+Route::get('film_diagnostics/{id}', [\App\Http\Controllers\FilmAnalysisController::class,'show'])->name('film_diagnostics.api.show');
+Route::get('film_catalogs/{id}', [\App\Http\Controllers\FilmographyController::class, 'show'])->name('film_catalogs.api.show');
 Route::get('movie_guide/{id}', [\App\Http\Controllers\KinogidController::class, 'show'])->name('movie_guide.api.show');
 Route::get('books/{id}', [\App\Http\Controllers\BookController::class, 'show'])->name('book.api.show');
 

@@ -94,13 +94,9 @@ class FilmographyController extends Controller
             $translate = $items->translations ? $items->translations->first() : null;
             $result = $items->toArray();
             unset($result['translations']);
-
-            if ($translate) {
-                $result['name'] = $translate->name ?? null;
-                $result['description'] = $translate->description ?? null;
-                $result['content'] = $translate->content ??null;
-            }
-
+            $result['name'] = $translate->name ?? null;
+            $result['description'] = $translate->description ?? null;
+            $result['content'] = $translate->content ?? null;
             return successJson($result, 'ok');
         }
         return errorJson('Undefined Element!', 404);

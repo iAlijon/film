@@ -92,8 +92,9 @@ class FilmographyController extends Controller
             }
 
             $translate = $items->translates->first();
+            dd($items);
             $result = $items->toArray();
-            unset($result['translates']);
+            unset($result['translations']);
 
             if ($translate) {
                 $result['name'] = $translate->name;

@@ -41,8 +41,8 @@ Route::get('film_digests/{id}', [\App\Http\Controllers\PremiereController::class
 Route::get('film_diagnostics/{id}', [\App\Http\Controllers\FilmAnalysisController::class,'show'])->name('film_diagnostics.api.show');
 Route::get('film_catalogs/{id}', [\App\Http\Controllers\FilmographyController::class, 'show'])->name('film_catalogs.api.show');
 Route::get('film_grids/{id}', [\App\Http\Controllers\KinogidController::class, 'show'])->name('film_grids.api.show');
-Route::get('books/{id}', [\App\Http\Controllers\BookController::class, 'show'])->name('book.api.show');
 Route::get('books/file_download/{id}', [\App\Http\Controllers\BookController::class, 'fileDownload'])->name('book.file_download.api.show');
+Route::get('books/{id}', [\App\Http\Controllers\BookController::class, 'show'])->name('book.api.show');
 
 //Route::get('news/{id}', [\App\Http\Controllers\NewsController::class, 'show'])->name('news.api.show')->middleware('view_count');
 //Route::get('interview/{id}', [\App\Http\Controllers\InterviewController::class, 'show'])->name('interview.api.show');

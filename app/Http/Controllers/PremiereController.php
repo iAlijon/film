@@ -33,13 +33,11 @@ class PremiereController extends Controller
             $translate = $item->translates->first();
             $arr = $item->toArray();
             unset($arr['translates']);
-
-            if ($translate) {
-                $arr['name'] = $translate->name;
-                $arr['description'] = $translate->description;
-                $arr['content'] = $translate->content;
-            }
-
+            $arr['name'] = $translate->name ?? null;
+            $arr['description'] = $translate->description ?? null;
+            $arr['content'] = $translate->content ?? null;
+            $result['translates'] = $translate->translates ?? null;
+            $result['premiere_id'] = $translate->premiere_id ?? null;
             return $arr;
         });
 
@@ -74,15 +72,11 @@ class PremiereController extends Controller
             $result = $param->toArray();
             $translates = $param->translates->first();
             unset($result['translates']);
-
-            if ($translates) {
-                $result['name'] = $translates->name;
-                $result['description'] = $translates->description;
-                $result['content'] = $translates->content;
-                $result['translates'] = $translates->translates;
-                $result['premiere_id'] = $translates->premiere_id;
-
-            }
+            $result['name'] = $translates->name ?? null;
+            $result['description'] = $translates->description ?? null;
+            $result['content'] = $translates->content ?? null;
+            $result['translates'] = $translates->translates ?? null;
+            $result['premiere_id'] = $translates->premiere_id ?? null;
             return successJson($result, 'ok');
         }
         return errorJson('Undefined Element', 404);

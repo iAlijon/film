@@ -79,7 +79,7 @@ class PremiereController extends Controller
                 $result['name'] = $translates->name;
                 $result['description'] = $translates->description;
                 $result['content'] = $translates->content;
-                $result['content'] = $translates->translates;
+                $result['translates'] = $translates->translates;
                 $result['premiere_id'] = $translates->premiere_id;
 
             }

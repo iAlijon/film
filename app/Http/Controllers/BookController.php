@@ -90,8 +90,24 @@ class BookController extends Controller
 
     public function fileDownload($id){
         $model = Books::with('translates')->find($id);
-        $file_name = basename($model->translates->files);
-        $path = public_path('files/book/'.$file_name);
+
+        if (!$model) {
+            return errorJson('Undefined Element!', 404);
+        }
+
+        $translate = collect($model->translates)->first();
+
+        if (!$translate || !$translate->files) {
+            return errorJson('File topilmadi!', 404);
+        }
+
+        $file_name = basename($translate->files);
+        $path = public_path('files/book/' . $file_name);
+
+        if (!file_exists($path)) {
+            return errorJson('File mavjud emas!', 404);
+        }
+
         return response()->download($path);
     }
 }

@@ -14,6 +14,7 @@ trait ImageUploads
 //        $app_url = config('app.url');
         $dir_name = 'public/'.$folder;
         $file_name = time().'_'.$image->getClientOriginalName();
+        $file_name = str_replace(' ', '_', $file_name);
         $path = $dir_name."/".$file_name;
         if (Storage::put($path, file_get_contents($image))) {
             return '/storage/'.$folder.'/'.$file_name;

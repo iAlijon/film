@@ -44,7 +44,7 @@ class PremiereController extends Controller
         });
 
         if ($data->isNotEmpty()) {
-            return successJson($result, 'ok');
+            return successJson($paginatedResult, 'ok');
         }
         return errorJson('Undefined Element!', 404);
 

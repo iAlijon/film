@@ -80,6 +80,7 @@ class FilmographyController extends Controller
                 $q->where('translates' ,$lang);
             }])
             ->first();
+        dd($items);
         if ($items) {
             $ip = $request->ip();
             $cache = "view_count_{$id}_ip_{$ip}";

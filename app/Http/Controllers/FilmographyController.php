@@ -91,7 +91,7 @@ class FilmographyController extends Controller
                 Cache::put($cache, true, now()->addMinutes(3));
             }
 
-            $translate = $items->translates->first();
+            $translate = $items->translations ? $items->translations->first() : null;
             $result = $items->toArray();
             unset($result['translations']);
 

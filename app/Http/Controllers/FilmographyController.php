@@ -96,9 +96,9 @@ class FilmographyController extends Controller
             unset($result['translations']);
 
             if ($translate) {
-                $result['name'] = $translate->name;
-                $result['description'] = $translate->description;
-                $result['content'] = $translate->content;
+                $result['name'] = $translate->name ?? null;
+                $result['description'] = $translate->description ?? null;
+                $result['content'] = $translate->content ??null;
             }
 
             return successJson($result, 'ok');

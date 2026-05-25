@@ -20,12 +20,10 @@ class AphorismResource extends JsonResource
             'id' => $this->id,
             'images' => $this->images,
             'created_at' => $this->created_at,
-            'translates' => [
-                'full_name' => $this->translations->first()->full_name ?? null,
-                'description' => $this->translations->first()->description ?? null,
-                'calendar' => $this->translations->first()->calendar ?? null,
-                'translates' => $this->translations->first()->translates ?? null
-            ]
+            'full_name' => $this->translations->first()->full_name ?? null,
+            'description' => $this->translations->first()->description ?? null,
+            'calendar' => $this->translations->first()->calendar ?? null,
+            'translates' => $this->translations->first()->translates ?? null
         ];
     }
 }

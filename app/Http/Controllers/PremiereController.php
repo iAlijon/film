@@ -47,27 +47,6 @@ class PremiereController extends Controller
             return successJson($paginatedResult, 'ok');
         }
         return errorJson('Undefined Element!', 404);
-
-
-//        if (isset($result['category_id']) && !empty($result['category_id'])) {
-//            $data = Premiere::where('category_id', $result['category_id'])->where('status', 1)->whereHas('translates', function ($q) use ($lang){
-//                $q->where('translates', $lang);
-//            })
-//                ->with(['translates' => function ($q) use ($lang){
-//                    $q->where('translates', $lang);
-//                }])
-//                ->orderBy('id', 'desc')
-//                ->paginate($per_page);
-//        }else{
-//            $data = Premiere::where('status', 1)->whereHas('translates', function ($q) use ($lang){
-//                $q->where('translates', $lang);
-//            })
-//                ->with(['translates' => function ($q) use ($lang){
-//                    $q->where('translates', $lang);
-//                }])
-//                ->orderBy('id', 'desc')
-//                ->paginate($per_page);
-//        }
     }
 
     public function show(Request $request,$id)

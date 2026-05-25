@@ -48,6 +48,7 @@ class SearchController extends Controller
 //        return successJson($data);
 
         $q = $request->input();
+        dd($q);
         $lang = $request->header('lang', 'oz');
 
         $film_digests = Premiere::where('status', 1)

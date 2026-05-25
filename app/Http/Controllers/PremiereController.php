@@ -28,16 +28,15 @@ class PremiereController extends Controller
         }
 
         $data = $query->paginate($per_page);
-        dd($data->getCollection()->first()->translates);
-        $items = $data->getCollection()->map(function ($item){
-            $item->translates = $item->translates->first();
-            return $item;
+        $result = $data->toArray();
+        $result['data'] = collect($data->items())->map(function ($item) {
+            $arr = $item->toArray();
+            $arr['translates'] = $item->translates->first();
+            return $arr;
         });
 
-        $data->setCollection($items);
-
         if ($data) {
-            return successJson($data, 'ok');
+            return successJson($result, 'ok');
         }
         return errorJson('Undefined Element!', 404);
 

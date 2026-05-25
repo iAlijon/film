@@ -75,24 +75,24 @@ class FilmographyController extends Controller
     public function show(Request $request,$id)
     {
         $lang = $request->header('lang', 'oz');
-        $data = Filmography::where('id', $id)
+        $items = Filmography::where('id', $id)
             ->with(['translations' => function ($q) use ($lang){
                 $q->where('translates' ,$lang);
             }])
             ->first();
-        if ($data) {
+        if ($items) {
             $ip = $request->ip();
             $cache = "view_count_{$id}_ip_{$ip}";
-            $count = $data->view_count + 1;
+            $count = $items->view_count + 1;
             if (!Cache::has($cache)) {
-                $data->update([
+                $items->update([
                     'view_count' => $count
                 ]);
                 Cache::put($cache, true, now()->addMinutes(3));
             }
 
-            $translate = $data->translates->first();
-            $result = $data->toArray();
+            $translate = $items->translates->first();
+            $result = $items->toArray();
             unset($result['translates']);
 
             if ($translate) {
@@ -100,8 +100,9 @@ class FilmographyController extends Controller
                 $result['description'] = $translate->description;
                 $result['content'] = $translate->content;
             }
-            return successJson($data, 'ok');
+
+            return successJson($result, 'ok');
         }
-        return errorJson('Undefined Element !', 404);
+        return errorJson('Undefined Element!', 404);
     }
 }

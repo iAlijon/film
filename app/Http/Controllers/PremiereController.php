@@ -85,7 +85,17 @@ class PremiereController extends Controller
             }
 
             $result = $param->toArray();
-            $result['translates'] = $param->translates->first();
+            $translates = $param->translates->first();
+            unset($result['translates']);
+
+            if ($translates) {
+                $result['name'] = $translates->name;
+                $result['description'] = $translates->description;
+                $result['content'] = $translates->content;
+                $result['content'] = $translates->translates;
+                $result['premiere_id'] = $translates->premiere_id;
+
+            }
             return successJson($result, 'ok');
         }
         return errorJson('Undefined Element', 404);

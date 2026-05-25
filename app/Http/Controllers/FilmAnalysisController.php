@@ -31,15 +31,11 @@ class FilmAnalysisController extends Controller
             $translate = $item->translates->first();
             $arr = $item->toArray();
             unset($arr['translates']);
-
-            if ($translate) {
-                $arr['name'] = $translate->name;
-                $arr['description'] = $translate->description;
-                $arr['content'] = $translate->content;
-                $arr['film_analysis_id'] = $translate->film_analysis_id;
-                $arr['translates'] = $translate->translates;
-            }
-
+            $arr['name'] = $translate->name ?? null;
+            $arr['description'] = $translate->description ?? null;
+            $arr['content'] = $translate->content ?? null;
+            $arr['film_analysis_id'] = $translate->film_analysis_id ?? null;
+            $arr['translates'] = $translate->translates ?? null;
             return $arr;
         });
 
@@ -73,15 +69,11 @@ class FilmAnalysisController extends Controller
             $translate = $items->translates->first();
             $result = $items->toArray();
             unset($result['translates']);
-
-            if ($translate) {
-                $result['name'] = $translate->name;
-                $result['description'] = $translate->description;
-                $result['content'] = $translate->content;
-                $result['film_analysis_id'] = $translate->film_analysis_id;
-                $result['translates'] = $translate->translates;
-            }
-
+            $result['name'] = $translate->name ?? null;
+            $result['description'] = $translate->description ?? null;
+            $result['content'] = $translate->content ?? null;
+            $result['film_analysis_id'] = $translate->film_analysis_id ?? null;
+            $result['translates'] = $translate->translates ?? null;
             return successJson($result, 'ok');
         }
         return errorJson('Undefined Element!', 404);

@@ -36,6 +36,7 @@ class KinogidController extends Controller
             $arr['description'] = $translate->description ?? null;
             $arr['content'] = $translate->content ?? null;
             $arr['translates'] = $translate->translates ?? null;
+            $arr['image'] = $translate->image ?? null;
 
             return $arr;
         });
@@ -74,6 +75,7 @@ class KinogidController extends Controller
             $result['description'] = $translate->description ?? null;
             $result['content'] = $translate->content ?? null;
             $result['translates'] = $translate->translates ?? null;
+            $result['image'] = $translate->image ?? null;
 
             return successJson($result, 'ok');
         }

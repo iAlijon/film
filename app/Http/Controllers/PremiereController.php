@@ -29,11 +29,13 @@ class PremiereController extends Controller
 
         $data = $query->paginate($per_page);
 
-        $data->getCollection()->map(function ($item){
+        $items = $data->getCollection()->map(function ($item){
             $item->translates = $item->translates->first();
             return $item;
         });
-        $data->setCollection($data);
+
+        $data->setCollection($items);
+
         if ($data) {
             return successJson($data, 'ok');
         }

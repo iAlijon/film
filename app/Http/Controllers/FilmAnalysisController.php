@@ -10,26 +10,64 @@ class FilmAnalysisController extends Controller
 {
     public function index(Request $request)
     {
+//        $lang = $request->header('lang', 'oz');
+//        $params = $request->all();
+//        $per_page = $result['per_page']??6;
+//        if (isset($params['category_id']) && !empty($params['category_id'])) {
+//            $items = FilmAnalysis::where('category_id', $params['category_id'])
+//                ->with(['translates' => function ($q) use ($lang){
+//                    $q->where('translates', $lang);
+//                }])
+//                ->orderBy('created_at', 'desc')
+//                ->paginate($per_page);
+//        }else {
+//            $items = FilmAnalysis::where('status', 1)
+//                ->with(['translates' => function ($q) use ($lang){
+//                    $q->where('translates', $lang);
+//                }])
+//                ->orderBy('created_at', 'desc')
+//                ->paginate($per_page);
+//        }
+//        if ($items) {
+//            return successJson($items, 'ok');
+//        }
+//        return errorJson('Undefined Element', 404);
+
         $lang = $request->header('lang', 'oz');
         $params = $request->all();
-        $per_page = $result['per_page']??6;
+        $per_page = $params['per_page'] ?? 6;
+
+        $query = FilmAnalysis::where('status', 1)
+            ->with(['translates' => function ($q) use ($lang) {
+                $q->where('translates', $lang);
+            }])
+            ->orderBy('created_at', 'desc');
+
         if (isset($params['category_id']) && !empty($params['category_id'])) {
-            $items = FilmAnalysis::where('category_id', $params['category_id'])
-                ->with(['translates' => function ($q) use ($lang){
-                    $q->where('translates', $lang);
-                }])
-                ->orderBy('created_at', 'desc')
-                ->paginate($per_page);
-        }else {
-            $items = FilmAnalysis::where('status', 1)
-                ->with(['translates' => function ($q) use ($lang){
-                    $q->where('translates', $lang);
-                }])
-                ->orderBy('created_at', 'desc')
-                ->paginate($per_page);
+            $query->where('category_id', $params['category_id']);
         }
-        if ($items) {
-            return successJson($items, 'ok');
+
+        $data = $query->paginate($per_page);
+        $paginatedResult = $data->toArray();
+
+        $paginatedResult['data'] = collect($data->items())->map(function ($item) {
+            $translate = $item->translates->first();
+            $arr = $item->toArray();
+            unset($arr['translates']);
+
+            if ($translate) {
+                $arr['name'] = $translate->name;
+                $arr['description'] = $translate->description;
+                $arr['content'] = $translate->content;
+                $arr['film_analysis_id'] = $translate->film_analysis_id;
+                $arr['translates'] = $translate->translates;
+            }
+
+            return $arr;
+        });
+
+        if ($data->isNotEmpty()) {
+            return successJson($paginatedResult, 'ok');
         }
         return errorJson('Undefined Element', 404);
     }

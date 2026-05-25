@@ -76,13 +76,13 @@ class FilmAnalysisController extends Controller
     public function show(Request $request,$id)
     {
         $lang = $request->header('lang', 'oz');
-        $items = FilmAnalysis::where('id', $id)->orderBy('id', 'desc')
-            ->with(['translates' => function ($q) use ($lang){
+        $items = FilmAnalysis::where('id', $id)
+            ->with(['translates' => function ($q) use ($lang) {
                 $q->where('translates', $lang);
             }])
             ->first();
-        if ($items)
-        {
+
+        if ($items) {
             $ip = $request->ip();
             $cache = "view_count_{$id}_ip_{$ip}";
             $count = $items->view_count + 1;
@@ -92,9 +92,43 @@ class FilmAnalysisController extends Controller
                 ]);
                 Cache::put($cache, true, now()->addMinutes(3));
             }
-            return successJson($items, 'ok');
+
+            $translate = $items->translates->first();
+            $result = $items->toArray();
+            unset($result['translates']);
+
+            if ($translate) {
+                $arr['name'] = $translate->name;
+                $arr['description'] = $translate->description;
+                $arr['content'] = $translate->content;
+                $arr['film_analysis_id'] = $translate->film_analysis_id;
+                $arr['translates'] = $translate->translates;
+            }
+
+            return successJson($result, 'ok');
         }
         return errorJson('Undefined Element!', 404);
+
+//        $lang = $request->header('lang', 'oz');
+//        $items = FilmAnalysis::where('id', $id)->orderBy('id', 'desc')
+//            ->with(['translates' => function ($q) use ($lang){
+//                $q->where('translates', $lang);
+//            }])
+//            ->first();
+//        if ($items)
+//        {
+//            $ip = $request->ip();
+//            $cache = "view_count_{$id}_ip_{$ip}";
+//            $count = $items->view_count + 1;
+//            if (!Cache::has($cache)) {
+//                $items->update([
+//                    'view_count' => $count
+//                ]);
+//                Cache::put($cache, true, now()->addMinutes(3));
+//            }
+//            return successJson($items, 'ok');
+//        }
+//        return errorJson('Undefined Element!', 404);
     }
 
 }

@@ -28,7 +28,7 @@ class PremiereController extends Controller
         }
 
         $data = $query->paginate($per_page);
-
+        dd($data->getCollection()->first()->translates);
         $items = $data->getCollection()->map(function ($item){
             $item->translates = $item->translates->first();
             return $item;

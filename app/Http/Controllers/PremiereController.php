@@ -13,6 +13,33 @@ class PremiereController extends Controller
         $lang = $request->header('lang', 'oz');
         $result = $request->all();
         $per_page = $result['per_page']??6;
+
+        $query = Premiere::where('status', 1)
+            ->whereHas('translates', function ($q) use ($lang) {
+                $q->where('translates', $lang);
+            })
+            ->with(['translates' => function ($q) use ($lang) {
+                $q->where('translates', $lang);
+            }])
+            ->orderBy('id', 'desc');
+
+        if (isset($result['category_id']) && !empty($result['category_id'])) {
+            $query->where('category_id', $result['category_id']);
+        }
+
+        $data = $query->paginate($per_page);
+
+        $data->getCollection()->transform(function ($item){
+            $item->translates = $item->translates->first();
+            return $item;
+        });
+
+        if ($data) {
+            return successJson($data, 'ok');
+        }
+        return errorJson('Undefined Element!', 404);
+
+
 //        if (isset($result['category_id']) && !empty($result['category_id'])) {
 //            $data = Premiere::where('category_id', $result['category_id'])->where('status', 1)->whereHas('translates', function ($q) use ($lang){
 //                $q->where('translates', $lang);
@@ -32,31 +59,6 @@ class PremiereController extends Controller
 //                ->orderBy('id', 'desc')
 //                ->paginate($per_page);
 //        }
-
-        $query = Premiere::where('status', 1)
-            ->whereHas('translates', function ($q) use ($lang) {
-                $q->where('translates', $lang);
-            })
-            ->with(['translates' => function ($q) use ($lang) {
-                $q->where('translates', $lang);
-            }])
-            ->orderBy('id', 'desc');
-
-        if (isset($result['category_id']) && !empty($result['category_id'])) {
-            $query->where('category_id', $result['category_id']);
-        }
-
-        $data = $query->paginate($per_page);
-
-        $data->getCollection()->transform(function ($item){
-           $item->translates = $item->translates->first();
-           return $item;
-        });
-
-        if ($data) {
-            return successJson($data, 'ok');
-        }
-        return errorJson('Undefined Element!', 404);
     }
 
     public function show(Request $request,$id)

@@ -54,9 +54,9 @@ class SearchController extends Controller
             ->whereHas('translates', function ($query) use ($q, $lang) {
                 $query->where('translates', $lang)
                     ->where(function ($query) use ($q) {
-                        $query->where('name', 'like', "%{$q}%")
-                            ->orWhere('description', 'like', "%{$q}%")
-                            ->orWhere('content', 'like', "%{$q}%");
+                        $query->where('name', 'ilike', "%{$q}%")
+                            ->orWhere('description', 'ilike', "%{$q}%")
+                            ->orWhere('content', 'ilike', "%{$q}%");
                     });
             })
             ->with(['translates' => function ($query) use ($lang) {
@@ -77,9 +77,9 @@ class SearchController extends Controller
             ->whereHas('translates', function ($query) use ($q, $lang) {
                 $query->where('translates', $lang)
                     ->where(function ($query) use ($q) {
-                        $query->where('name', 'like', "%{$q}%")
-                            ->orWhere('description', 'like', "%{$q}%")
-                            ->orWhere('content', 'like', "%{$q}%");
+                        $query->where('name', 'ilike', "%{$q}%")
+                            ->orWhere('description', 'ilike', "%{$q}%")
+                            ->orWhere('content', 'ilike', "%{$q}%");
                     });
             })
             ->with(['translates' => function ($query) use ($lang) {
@@ -100,9 +100,9 @@ class SearchController extends Controller
             ->whereHas('translations', function ($query) use ($q, $lang) {
                 $query->where('translates', $lang)
                     ->where(function ($query) use ($q) {
-                        $query->where('name', 'like', "%{$q}%")
-                            ->orWhere('description', 'like', "%{$q}%")
-                            ->orWhere('content', 'like', "%{$q}%");
+                        $query->where('name', 'ilike', "%{$q}%")
+                            ->orWhere('description', 'ilike', "%{$q}%")
+                            ->orWhere('content', 'ilike', "%{$q}%");
                     });
             })
             ->with(['translations' => function ($query) use ($lang) {
@@ -123,9 +123,9 @@ class SearchController extends Controller
             ->whereHas('translates', function ($query) use ($q, $lang) {
                 $query->where('translates', $lang)
                     ->where(function ($query) use ($q) {
-                        $query->where('name', 'like', "%{$q}%")
-                            ->orWhere('description', 'like', "%{$q}%")
-                            ->orWhere('content', 'like', "%{$q}%");
+                        $query->where('name', 'ilike', "%{$q}%")
+                            ->orWhere('description', 'ilike', "%{$q}%")
+                            ->orWhere('content', 'ilike', "%{$q}%");
                     });
             })
             ->with(['translates' => function ($query) use ($lang) {
@@ -146,8 +146,8 @@ class SearchController extends Controller
             ->whereHas('translates', function ($query) use ($q, $lang) {
                 $query->where('translates', $lang)
                     ->where(function ($query) use ($q) {
-                        $query->where('name', 'like', "%{$q}%")
-                            ->orWhere('description', 'like', "%{$q}%");
+                        $query->where('name', 'ilike', "%{$q}%")
+                            ->orWhere('description', 'ilike', "%{$q}%");
                     });
             })
             ->with(['translates' => function ($query) use ($lang) {

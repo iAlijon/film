@@ -48,6 +48,11 @@ class PremiereController extends Controller
 
         $data = $query->paginate($per_page);
 
+        $data->getCollection()->transform(function ($item){
+           $item->translates = $item->translates->first();
+           return $item;
+        });
+
         if ($data) {
             return successJson($data, 'ok');
         }

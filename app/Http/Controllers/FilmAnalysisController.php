@@ -98,11 +98,11 @@ class FilmAnalysisController extends Controller
             unset($result['translates']);
 
             if ($translate) {
-                $arr['name'] = $translate->name;
-                $arr['description'] = $translate->description;
-                $arr['content'] = $translate->content;
-                $arr['film_analysis_id'] = $translate->film_analysis_id;
-                $arr['translates'] = $translate->translates;
+                $result['name'] = $translate->name;
+                $result['description'] = $translate->description;
+                $result['content'] = $translate->content;
+                $result['film_analysis_id'] = $translate->film_analysis_id;
+                $result['translates'] = $translate->translates;
             }
 
             return successJson($result, 'ok');

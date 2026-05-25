@@ -147,8 +147,7 @@ class SearchController extends Controller
                 $query->where('translates', $lang)
                     ->where(function ($query) use ($q) {
                         $query->where('name', 'like', "%{$q}%")
-                            ->orWhere('description', 'like', "%{$q}%")
-                            ->orWhere('content', 'like', "%{$q}%");
+                            ->orWhere('description', 'like', "%{$q}%");
                     });
             })
             ->with(['translates' => function ($query) use ($lang) {

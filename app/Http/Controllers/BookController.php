@@ -52,25 +52,6 @@ class BookController extends Controller
 
     public function show(Request $request, $id)
     {
-//        $lang = $request->header('lang', 'oz');
-//        $data = Books::where('id', $id)
-//            ->with(['translates' => function ($q) use ($lang){
-//                $q->where('translates', $lang);
-//            }])
-//            ->first();
-//        if ($data) {
-//            $ip = $request->ip();
-//            $cache = "view_count_{$id}_ip_{$ip}";
-//            $count = $data->view_count + 1;
-//            if (!Cache::has($cache)) {
-//                $data->update([
-//                    'view_count' => $count
-//                ]);
-//                Cache::put($cache, true, now()->addMinutes(3));
-//            }
-//            return successJson($data, 'ok');
-//        }
-//        return errorJson('Undefined Element !', 404);
         $lang = $request->header('lang', 'oz');
         $data = Books::where('id', $id)
             ->with(['translates' => function ($q) use ($lang) {

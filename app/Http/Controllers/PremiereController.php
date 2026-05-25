@@ -83,7 +83,10 @@ class PremiereController extends Controller
                 ]);
                 Cache::put($cache, true, now()->addMinutes(3));
             }
-            return successJson($param, 'ok');
+
+            $result = $param->toArray();
+            $result['translates'] = $param->translates->first();
+            return successJson($result, 'ok');
         }
         return errorJson('Undefined Element', 404);
     }

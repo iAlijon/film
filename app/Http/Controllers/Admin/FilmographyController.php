@@ -66,7 +66,8 @@ class FilmographyController extends Controller
      */
     public function create(Request $request)
     {
-        $translates = $request->all();
+        $params = $request->all();
+        $translates = $params['translates'] ?? 'oz';
         $categories = PersonCategory::where('status', true)->where('type', 'film_catalogs')->with(['translates' => function ($q) use ($translates){
             $q->where('translates', $translates);
         }])->get();

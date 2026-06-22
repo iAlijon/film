@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PremiereRequest extends FormRequest
 {
@@ -32,27 +33,20 @@ class PremiereRequest extends FormRequest
             'status' => 'required|integer',
             'category_id' => 'required',
             'telegram_status' => 'nullable',
-            'translates' => 'required'
+            'translates' => 'required',
+            Rule::dimensions()->minWidth(640)->minHeight(730)->maxWidth(1920)->maxHeight(1080)
         ];
     }
 
     public function messages()
     {
         return [
-            'name_oz.required' => 'Nomi maydoni to\'ldirish talab qilinadi',
-            'name_uz.required' => 'Номи майдони тўлдириш талаб қилинади',
-            'name_ru.required' => 'Поле «Имя» обязательно для заполнения.',
-            'name_en.required' => 'The name field is required.',
-            'description_oz.required' => 'Qisqacha ma\'lumot maydoni to\'ldirish talab qilinadi',
-            'description_uz.required' => 'Қисқача маълумот майдони тўлдириш талаб қилинади',
-            'description_ru.required' => 'Обязательно заполните краткое информационное поле.',
-            'description_en.required' => 'A short information field is required.',
-            'content_oz.required' => 'To\'liq ma\'lumotlar maydoni to\'lidirish talab qilinadi',
-            'content_uz.required' => 'Тўлиқ маълумотлар майдони тўлидириш талаб қилинади',
-            'content_ru.required' => 'Поле данных обязательно для заполнения.',
-            'content_en.required' => 'Complete data field is required.',
+            'name.required' => 'Nomi maydoni to\'ldirish talab qilinadi',
+            'description.required' => 'Qisqacha ma\'lumot maydoni to\'ldirish talab qilinadi',
+            'content.required' => 'To\'liq ma\'lumotlar maydoni to\'lidirish talab qilinadi',
             'image.required' => 'Rasm maydoni to\'ldirish talab qilinadi',
             'category_id.required' => 'Kategoriya maydoni to\'ldirish talab qilinadi',
+            'image.dimensions' => 'Rasm o\'lchamlari mos emas min 640X730 max 1920X1080 bo\'lishi kerak'
         ];
     }
 }

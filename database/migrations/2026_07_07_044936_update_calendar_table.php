@@ -24,6 +24,7 @@ return new class extends Migration
         Schema::table('calendars', function (Blueprint $table){
             $table->string('date');
             $table->boolean('status');
+            $table->integer('order');
         });
     }
 

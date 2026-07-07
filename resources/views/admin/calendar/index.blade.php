@@ -27,7 +27,7 @@
             @endif
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Kalendar <i class="fas fa-calendar"></i></h3>
+                    <h3 class="card-title">Taqvim <i class="fas fa-calendar"></i></h3>
                     <div class="text-right">
                         <a href="{{route('calendar.create')}}" class="btn btn-success">&plus; Qo'shish</a>
                     </div>

@@ -20,6 +20,7 @@ Route::post('login', [\App\Http\Controllers\LoginController::class, 'login'])->n
 Route::get('auth/google', [\App\Http\Controllers\GoogleController::class, 'redirect']);
 Route::get('auth/google/callback', [\App\Http\Controllers\GoogleController::class, 'callback']);
 Route::get('aphorism', [\App\Http\Controllers\AphorismController::class, 'index'])->name('aphorism');
+Route::get('calendar', [\App\Http\Controllers\CalendarController::class, 'index'])->name('calendar');
 Route::get('film_digests', [\App\Http\Controllers\PremiereController::class, 'index'])->name('premiere.api.index');
 Route::get('film_diagnostics', [\App\Http\Controllers\FilmAnalysisController::class, 'index'])->name('movie_analysis.api.index');
 Route::get('film_catalogs', [\App\Http\Controllers\FilmographyController::class, 'index'])->name('filmography.api.index');

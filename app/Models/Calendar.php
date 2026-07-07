@@ -10,8 +10,13 @@ class Calendar extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function aphorism()
+//    public function aphorism()
+//    {
+//        return $this->belongsTo(Aphorism::class);
+//    }
+
+    public function translates()
     {
-        return $this->belongsTo(Aphorism::class);
+        return $this->hasMany(CalendarTranslates::class,'calendar_id');
     }
 }

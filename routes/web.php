@@ -30,7 +30,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'filmography' => \App\Http\Controllers\Admin\FilmographyController::class,
         'book' => \App\Http\Controllers\Admin\BooksController::class,
         'categories' => \App\Http\Controllers\Admin\PersonCategoryController::class,
-        'kino_gid' => \App\Http\Controllers\Admin\KinogitController::class
+        'kino_gid' => \App\Http\Controllers\Admin\KinogitController::class,
+        'calendar' => \App\Http\Controllers\Admin\CalendarController::class
     ]);
     Route::post('/new-status', [\App\Http\Controllers\Admin\NewsController::class, 'newStatus'])->name('new-status');
     Route::get('/book/download/{id}', [\App\Http\Controllers\Admin\BooksController::class, 'download'])->name('download');

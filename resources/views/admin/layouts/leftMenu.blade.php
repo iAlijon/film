@@ -35,6 +35,15 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{route('calendar.index')}}"
+                       class="nav-link {{(request()->is('admin/calendar*'))?'active':''}}">
+                        <i class="far fa-circle"></i>
+                        <p class="text">Kalendar</p>
+                        <span class="badge badge-primary right"></span>
+                    </a>
+                </li>
+
 {{--                <li class="nav-item">--}}
 {{--                    <a href="{{route('news.index')}}" class="nav-link {{(request()->is('admin/news*'))?'active':''}}">--}}
 {{--                        <i class="far fa-circle"></i>--}}

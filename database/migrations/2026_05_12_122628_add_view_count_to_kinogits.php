@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('kinogits', function (Blueprint $table) {
-            $table->integer('view_count')->default(0);
-            $table->boolean('telegram_status')->default(false);
-        });
+//        Schema::table('kinogits', function (Blueprint $table) {
+//            $table->integer('view_count')->default(0);
+//            $table->boolean('telegram_status')->default(false);
+//        });
     }
 
     /**

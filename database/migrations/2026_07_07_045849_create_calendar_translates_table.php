@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('calendar_translates', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('calendar_id')->index()->constrained()->cascadeOnDelete();
-            $table->string('description', 1000);
-            $table->string('translates')->index();
-            $table->timestamps();
-        });
+//        Schema::create('calendar_translates', function (Blueprint $table) {
+//            $table->id();
+//            $table->foreignId('calendar_id')->index()->constrained()->cascadeOnDelete();
+//            $table->string('description', 1000);
+//            $table->string('translates')->index();
+//            $table->timestamps();
+//        });
     }
 
     /**

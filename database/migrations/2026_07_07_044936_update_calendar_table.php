@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-//        Schema::dropColumns('calendars', [
-//            'aphorism_id',
-//            'description_oz',
-//            'description_uz',
-//            'description_ru',
-//            'description_en',
-//        ]);
+        Schema::dropColumns('calendars', [
+            'aphorism_id',
+            'description_oz',
+            'description_uz',
+            'description_ru',
+            'description_en',
+        ]);
 
         Schema::table('calendars', function (Blueprint $table){
             $table->string('date');

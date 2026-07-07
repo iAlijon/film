@@ -26,8 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('kinogits', function (Blueprint $table) {
-            //
-        });
+//        Schema::table('kinogits', function (Blueprint $table) {
+//            //
+//        });
     }
 };

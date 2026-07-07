@@ -31,9 +31,11 @@ class CalendarRepository extends \App\Repositories\BaseRepository
         }])->orderBy('id', 'desc')->paginate($this->limit);
     }
 
-    public function findById($id)
+    public function findById($id, $translates = null)
     {
-        return $this->model->with('translates')->find($id);
+        return $this->model->with(['translates' => function ($q) use ($translates){
+            $q->where('translates', $translates);
+        }])->find($id);
     }
 
     public function create($data)
@@ -59,14 +61,14 @@ class CalendarRepository extends \App\Repositories\BaseRepository
 
     public function update($data, $id)
     {
-        $model = $this->model->with('translates')->findOrFail($id);
+        $model = $this->model->with(['translates'])->findOrFail($id);
         $model->update([
             'date' => $data['date'],
             'status' => $data['status'],
             'order' => $data['order']
         ]);
 
-        $model->translates->updateOrCreate([
+        $model->translates()->updateOrCreate([
             'translates' => $data['translates']
         ],[
             'description' => $data['description']

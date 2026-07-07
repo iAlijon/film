@@ -73,7 +73,8 @@ class CalendarController extends Controller
      */
     public function show($id)
     {
-        $model = $this->repo->findById($id);
+        $translates = $this->request->translates ?? 'oz';
+        $model = $this->repo->findById($id, $translates);
         return view('admin.calendar.show', compact('model'));
     }
 
@@ -84,7 +85,8 @@ class CalendarController extends Controller
      */
     public function edit($id)
     {
-        $model = $this->repo->findById($id);
+        $translates = $this->request->translates ?? 'oz';
+        $model = $this->repo->findById($id, $translates);
         return view('admin.calendar.edit', compact('model'));
     }
 

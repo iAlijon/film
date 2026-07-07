@@ -21,16 +21,10 @@ return new class extends Migration
 //            'description_en',
 //        ]);
 
-        Schema::table('calendars', function (Blueprint $table) {
-            if (!Schema::hasColumn('calendars', 'date')) {
-                $table->string('date');
-            }
-            if (!Schema::hasColumn('calendars', 'status')) {
-                $table->integer('status');
-            }
-            if (!Schema::hasColumn('calendars', 'order')) {
-                $table->integer('order');
-            }
+        Schema::table('calendars', function (Blueprint $table){
+            $table->string('date');
+            $table->integer('status');
+            $table->integer('order');
         });
     }
 
@@ -41,12 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('calendars', function (Blueprint $table) {
-            foreach (['date', 'status', 'order'] as $column) {
-                if (Schema::hasColumn('calendars', $column)) {
-                    $table->dropColumn($column);
-                }
-            }
-        });
+        //
     }
 };

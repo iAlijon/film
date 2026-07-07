@@ -39,7 +39,7 @@
                     <a href="{{route('calendar.index')}}"
                        class="nav-link {{(request()->is('admin/calendar*'))?'active':''}}">
                         <i class="far fa-circle"></i>
-                        <p class="text">Kalendar</p>
+                        <p class="text">Taqvim</p>
                         <span class="badge badge-primary right"></span>
                     </a>
                 </li>

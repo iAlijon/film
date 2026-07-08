@@ -61,29 +61,6 @@
                             <small class="text-danger">{{$errors->first('name')}}</small>
                         </div>
 
-{{--                        <div class="form-group">--}}
-{{--                            <label for="image">{{labels('image')}}</label>--}}
-{{--                            @if($model->images)--}}
-{{--                                <div id="imageBox" style="width: 200px; height: 200px; margin-bottom: 30px">--}}
-{{--                                    <img src="{{getInFolder($model->images, 'analysis')}}" alt=""--}}
-{{--                                         style="width: 100%; height: 100%">--}}
-{{--                                    <p>--}}
-{{--                                        <a href="#" id="changeImage">O'zgartiring</a>--}}
-{{--                                    </p>--}}
-{{--                                </div>--}}
-{{--                                <div id="fileInput" style="display: none">--}}
-{{--                                    <input type="file" class="form-control" name="images">--}}
-{{--                                    <p>--}}
-{{--                                        <a href="" id="cancelChangeImage">Bekor qilish</a>--}}
-{{--                                    </p>--}}
-{{--                                </div>--}}
-{{--                            @else--}}
-{{--                                <input type="file" class="form-control" name="image" accept="image/jpeg,png,jpg"--}}
-{{--                                       maxlength="2048">--}}
-{{--                            @endif--}}
-{{--                            <small class="text-danger">{{$errors->first('image')}}</small>--}}
-{{--                        </div>--}}
-
                         <x-image-edit-field :image="$model->images" input-name="image" />
 
                         <div class="form-group">
@@ -125,13 +102,5 @@
 @endsection
 
 @push('js')
-{{--    <script>--}}
-{{--        $(document).ready(function (){--}}
-{{--            let cancel = document.getElementsByClassName('image');--}}
-{{--            // let selectFile = document.getElementsByName('image');--}}
-{{--            $('#replace').click(function (){--}}
-{{--                console.log('click')--}}
-{{--            })--}}
-{{--        })--}}
-{{--    </script>--}}
+
 @endpush

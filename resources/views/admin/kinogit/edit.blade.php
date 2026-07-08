@@ -53,12 +53,14 @@
                             <small class="text-danger">{{$errors->first('name')}}</small>
                         </div>
 
-                        <div class="form-group required">
-                            <label for="image">{{labels('image')}}</label>
-                            <input type="file" class="form-control @error('image') border-danger @enderror" name="image"
-                                   accept="image/jpeg,png,jpg">
-                            <small class="text-danger">{{$errors->first('image')}}</small>
-                        </div>
+{{--                        <div class="form-group required">--}}
+{{--                            <label for="image">{{labels('image')}}</label>--}}
+{{--                            <input type="file" class="form-control @error('image') border-danger @enderror" name="image"--}}
+{{--                                   accept="image/jpeg,png,jpg">--}}
+{{--                            <small class="text-danger">{{$errors->first('image')}}</small>--}}
+{{--                        </div>--}}
+
+                        <x-image-edit-field :image="$model->translates->first()?->image" input-name="image" />
 
                         <div class="form-group required">
                             <label for="description">{{labels('description')}}</label>

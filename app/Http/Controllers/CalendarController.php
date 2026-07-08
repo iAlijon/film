@@ -33,6 +33,5 @@ class CalendarController extends Controller
             return successJson($paginatedResult, 'ok');
         }
         return errorJson('Undefined Element!', 404);
-        return successJson($models, 'ok');
     }
 }

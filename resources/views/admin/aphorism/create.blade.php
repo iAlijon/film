@@ -58,35 +58,35 @@
                         </div>
 
                         {{-- ── Taqvim ── --}}
-                        <div class="card card-outline card-success">
-                            <div class="card-header">
-                                <label>{{labels('calendar')}}</label>
-                            </div>
-                            <div class="card-body">
-                                <div id="dynamic-forms">
+{{--                        <div class="card card-outline card-success">--}}
+{{--                            <div class="card-header">--}}
+{{--                                <label>{{labels('calendar')}}</label>--}}
+{{--                            </div>--}}
+{{--                            <div class="card-body">--}}
+{{--                                <div id="dynamic-forms">--}}
 
-                                    {{-- Birinchi forma --}}
-                                    <div class="dynamic-form">
-                                        <div class="card mb-2">
-                                            <div class="card-header">
-                                                <label>1</label>
-                                            </div>
-                                            <div class="card-body">
-                                                <textarea name="calendar[0]"
-                                                          class="form-control @error('calendar.0') border-danger @enderror"
-                                                          placeholder="{{labels('calendar')}}">{{ old('calendar.0') }}</textarea>
-                                                <small class="text-danger">{{ $errors->first('calendar.0') }}</small>
-                                            </div>
-                                        </div>
-                                    </div>
+{{--                                    --}}{{-- Birinchi forma --}}
+{{--                                    <div class="dynamic-form">--}}
+{{--                                        <div class="card mb-2">--}}
+{{--                                            <div class="card-header">--}}
+{{--                                                <label>1</label>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="card-body">--}}
+{{--                                                <textarea name="calendar[0]"--}}
+{{--                                                          class="form-control @error('calendar.0') border-danger @enderror"--}}
+{{--                                                          placeholder="{{labels('calendar')}}">{{ old('calendar.0') }}</textarea>--}}
+{{--                                                <small class="text-danger">{{ $errors->first('calendar.0') }}</small>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                    <button type="button" class="btn btn-primary mt-3 float-right" id="add-form-btn">
-                                        + Qo'shish
-                                    </button>
+{{--                                    <button type="button" class="btn btn-primary mt-3 float-right" id="add-form-btn">--}}
+{{--                                        + Qo'shish--}}
+{{--                                    </button>--}}
 
-                                </div>
-                            </div>
-                        </div>
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                         <div class="form-group">
                             <label>{{labels('status')}}</label>
@@ -115,61 +115,61 @@
 @endsection
 
 @push('js')
-    <script>
-        let formIndex = 1;
+{{--    <script>--}}
+{{--        let formIndex = 1;--}}
 
-        function addForm() {
-            const dynamicForms = document.getElementById('dynamic-forms');
-            const addFormButton = document.getElementById('add-form-btn');
+{{--        function addForm() {--}}
+{{--            const dynamicForms = document.getElementById('dynamic-forms');--}}
+{{--            const addFormButton = document.getElementById('add-form-btn');--}}
 
-            const newForm = document.createElement('div');
-            newForm.classList.add('dynamic-form');
-            newForm.innerHTML = `
-            <div class="card mb-2">
-                <div class="card-header">
-                    <label>${formIndex + 1}</label>
-                    <button type="button" class="remove-form-btn btn btn-danger btn-sm float-right">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <textarea name="calendar[${formIndex}]"
-                              class="form-control"
-                              placeholder="Tavsif kiriting"></textarea>
-                </div>
-            </div>
-        `;
+{{--            const newForm = document.createElement('div');--}}
+{{--            newForm.classList.add('dynamic-form');--}}
+{{--            newForm.innerHTML = `--}}
+{{--            <div class="card mb-2">--}}
+{{--                <div class="card-header">--}}
+{{--                    <label>${formIndex + 1}</label>--}}
+{{--                    <button type="button" class="remove-form-btn btn btn-danger btn-sm float-right">--}}
+{{--                        <i class="fas fa-trash"></i>--}}
+{{--                    </button>--}}
+{{--                </div>--}}
+{{--                <div class="card-body">--}}
+{{--                    <textarea name="calendar[${formIndex}]"--}}
+{{--                              class="form-control"--}}
+{{--                              placeholder="Tavsif kiriting"></textarea>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        `;--}}
 
-            dynamicForms.insertBefore(newForm, addFormButton);
-            formIndex++;
-        }
+{{--            dynamicForms.insertBefore(newForm, addFormButton);--}}
+{{--            formIndex++;--}}
+{{--        }--}}
 
-        function reindexForms() {
-            const forms = document.querySelectorAll('#dynamic-forms .dynamic-form');
-            forms.forEach((form, index) => {
-                const textarea = form.querySelector('textarea');
-                if (textarea) {
-                    textarea.setAttribute('name', `calendar[${index}]`);
-                }
-                const label = form.querySelector('.card-header label');
-                if (label) {
-                    label.textContent = index + 1;
-                }
-            });
-            formIndex = forms.length;
-        }
+{{--        function reindexForms() {--}}
+{{--            const forms = document.querySelectorAll('#dynamic-forms .dynamic-form');--}}
+{{--            forms.forEach((form, index) => {--}}
+{{--                const textarea = form.querySelector('textarea');--}}
+{{--                if (textarea) {--}}
+{{--                    textarea.setAttribute('name', `calendar[${index}]`);--}}
+{{--                }--}}
+{{--                const label = form.querySelector('.card-header label');--}}
+{{--                if (label) {--}}
+{{--                    label.textContent = index + 1;--}}
+{{--                }--}}
+{{--            });--}}
+{{--            formIndex = forms.length;--}}
+{{--        }--}}
 
-        document.getElementById('add-form-btn').addEventListener('click', addForm);
+{{--        document.getElementById('add-form-btn').addEventListener('click', addForm);--}}
 
-        document.getElementById('dynamic-forms').addEventListener('click', function (e) {
-            const removeBtn = e.target.closest('.remove-form-btn');
-            if (removeBtn) {
-                const formGroup = removeBtn.closest('.dynamic-form');
-                if (formGroup) {
-                    formGroup.remove();
-                    reindexForms();
-                }
-            }
-        });
-    </script>
+{{--        document.getElementById('dynamic-forms').addEventListener('click', function (e) {--}}
+{{--            const removeBtn = e.target.closest('.remove-form-btn');--}}
+{{--            if (removeBtn) {--}}
+{{--                const formGroup = removeBtn.closest('.dynamic-form');--}}
+{{--                if (formGroup) {--}}
+{{--                    formGroup.remove();--}}
+{{--                    reindexForms();--}}
+{{--                }--}}
+{{--            }--}}
+{{--        });--}}
+{{--    </script>--}}
 @endpush

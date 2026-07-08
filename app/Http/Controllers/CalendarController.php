@@ -35,3 +35,4 @@ class CalendarController extends Controller
         return errorJson('Undefined Element!', 404);
     }
 }
+

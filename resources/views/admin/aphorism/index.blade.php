@@ -38,7 +38,7 @@
                             <th>#</th>
                             <th>F.I.O</th>
                             <th>Qisqacha ma'lumoti</th>
-                            <th>Afarizmlar</th>
+{{--                            <th>Afarizmlar</th>--}}
                             <th>Qo'shilgan vaqti</th>
                             <th>Status</th>
                             <th></th>
@@ -52,7 +52,7 @@
                                     <input type="text" class="form-control" name="full_name" value="{{request('full_name')}}" placeholder="F.I.O">
                                 </th>
                                 <th></th>
-                                <th></th>
+{{--                                <th></th>--}}
                                 <th></th>
                                 <th>
                                     <select name="status" id="" class="form-control" onchange="this.form.submit()">
@@ -79,13 +79,13 @@
                                         {{$translate->description}}
                                     @endforeach
                                 </td>
-                                <td>
-                                    @foreach($item->translations as $translate)
-                                        @foreach($translate['calendar'] as $calendar)
-                                        {{$calendar}}
-                                        @endforeach
-                                    @endforeach
-                                </td>
+{{--                                <td>--}}
+{{--                                    @foreach($item->translations as $translate)--}}
+{{--                                        @foreach($translate['calendar'] as $calendar)--}}
+{{--                                        {{$calendar}}--}}
+{{--                                        @endforeach--}}
+{{--                                    @endforeach--}}
+{{--                                </td>--}}
                                 <td>
                                     @foreach($item->translations as $translate)
                                         {{$translate->created_at->format('Y-m-d')}}

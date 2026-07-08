@@ -60,7 +60,7 @@ class AphorismRepository extends BaseRepository
             'full_name' => $data['full_name'],
             'description' => $data['description'],
             'translates' => $data['translates'],
-            'calendar' => $data['calendar'],
+            'calendar' => $data['calendar']??null,
         ]);
         return $model;
     }
@@ -89,7 +89,7 @@ class AphorismRepository extends BaseRepository
             ],[
                'full_name' => $data['full_name'],
                'description' => $data['description'],
-               'calendar' => $data['calendar'],
+//               'calendar' => $data['calendar'],
 
         ]);
         return $model;

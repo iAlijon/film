@@ -32,7 +32,7 @@
 </head>
 <body>
     <div class="cd-hero">
-        @include('components.navbar')
+        @include('admin.components.navbar')
     </div>
 
     <div class="cd-bg-video-wrapper" data-video="/front/video/bangkok-city">
@@ -41,14 +41,14 @@
 
     <!-- Content -->
     <div class="cd-hero">
-        @include('components.navbar')
+        @include('admin.components.navbar')
 
         <ul class="cd-hero-slider">
             <li class="selected">
                 @yield('content')
             </li>
         </ul>
-        @include('components.footer')
+        @include('admin.components.footer')
     </div>
 
     <!-- Preloader, https://ihatetomatoes.net/create-custom-preloading-screen/ -->

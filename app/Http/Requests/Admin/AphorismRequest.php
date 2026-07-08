@@ -27,7 +27,7 @@ class AphorismRequest extends FormRequest
             return [
                 'full_name' => 'required|string',
                 'description' => 'required',
-                'calendar.*' => 'required',
+//                'calendar.*' => 'required',
                 'status' => 'required|integer',
                 'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
                 'translates' => 'required|in:oz,uz,ru,en',
@@ -37,7 +37,7 @@ class AphorismRequest extends FormRequest
             return [
                 'full_name' => 'required|string',
                 'description' => 'required',
-                'calendar.*' => 'required',
+//                'calendar.*' => 'required',
                 'status' => 'required|integer',
                 'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'translates' => 'required|in:oz,uz,ru,en',
@@ -49,10 +49,10 @@ class AphorismRequest extends FormRequest
     public function messages()
     {
         return [
-            'calendar.*.required' => 'Taqvim maydoni to\'lidirish tablab etiladi',
+//            'calendar.*.required' => 'Taqvim maydoni to\'lidirish tablab etiladi',
             'image.required' => 'Rasm maydoni to\'ldirish talab qilinadi',
             'full_name' => 'F.I.O maydoni to\'ldirish talab qilinadi',
-                'description' => 'Qisqacha ma\'lumot maydoni to\'ldirish talab qilinadi',
+            'description' => 'Qisqacha ma\'lumot maydoni to\'ldirish talab qilinadi',
         ];
     }
 }

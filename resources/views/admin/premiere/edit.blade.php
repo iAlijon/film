@@ -45,6 +45,7 @@
                             <small class="text-danger">{{$errors->first('premiere_category')}}</small>
                         </div>
 
+
                         <div class="form-group">
                             <label for="name">{{labels('name')}}</label>
                             <input type="text" name="name"
@@ -53,11 +54,13 @@
                             <small class="text-danger">{{$errors->first('name')}}</small>
                         </div>
 
-                        <div class="form-group">
-                            <label for="image">{{labels('image')}}</label>
-                            <input type="file" name="image" class="form-control" accept="image/jpeg,png,jpg">
-                            <small class="text-danger">{{$errors->first('image')}}</small>
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="image">{{labels('image')}}</label>--}}
+{{--                            <input type="file" name="image" class="form-control" accept="image/jpeg,png,jpg">--}}
+{{--                            <small class="text-danger">{{$errors->first('image')}}</small>--}}
+{{--                        </div>--}}
+
+                        <x-image-edit-field :image="$model->images" input-name="image" />
 
                         <div class="form-group">
                             <label for="description">{{labels('description')}}</label>

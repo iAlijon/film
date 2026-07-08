@@ -195,6 +195,49 @@
 {{--            });--}}
 {{--        });--}}
 {{--    </script>--}}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.edit-image-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    const id = this.dataset.target;
+                    document.getElementById('imageInput_' + id).style.display = 'block';
+                    document.getElementById('imageInput_' + id).click();
+                    document.getElementById('imageButtons_' + id).style.display = 'none';
+                    document.getElementById('editControls_' + id).style.display = 'block';
+                });
+            });
+
+            document.querySelectorAll('.cancel-image-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    const id = this.dataset.target;
+                    const img = document.getElementById('currentImage_' + id);
+                    img.src = img.dataset.original;
+                    img.style.display = 'block';
+                    document.getElementById('imageInput_' + id).value = '';
+                    document.getElementById('imageInput_' + id).style.display = 'none';
+                    document.getElementById('editControls_' + id).style.display = 'none';
+                    document.getElementById('imageButtons_' + id).style.display = 'block';
+                });
+            });
+
+            document.querySelectorAll('input[type="file"][id^="imageInput_"]').forEach(function (input) {
+                input.addEventListener('change', function (e) {
+                    const id = this.id.replace('imageInput_', '');
+                    const img = document.getElementById('currentImage_' + id);
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (event) {
+                            img.src = event.target.result;
+                            img.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+        });
+    </script>
     @stack('js')
 </body>
 </html>

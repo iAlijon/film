@@ -62,6 +62,7 @@ class PremiereRepository extends BaseRepository
             'category_id' => $data['category_id'],
             'slug' => Str::slug($data['name']),
             'images' => $this->uploads($data['image'], 'film_digest'),
+            'video' => $this->video($data['video']),
             'status' => $data['status'],
             'telegram_status' => $data['telegram_status']??false,
         ]);
@@ -72,6 +73,8 @@ class PremiereRepository extends BaseRepository
             'content' => contentByDomDocment($data['content'], 'premiere'),
             'translates' => $data['translates']
         ]);
+
+
 
         try {
             if ($model->telegram_status)
@@ -116,10 +119,43 @@ class PremiereRepository extends BaseRepository
         }else {
             $images = $model->images;
         }
+
+        if (isset($data['video']) && !empty($data['video'])) {
+            // Eski faylni o'chirish
+            if ($model->video) {
+                $oldPath = public_path($model->video);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
+            }
+
+            // Yangi faylni saqlash
+            $video = $data['video'];
+            $extension = $video->getClientOriginalExtension();
+            $full_name = uniqid('video_', true) . '.' . $extension;
+            $path = public_path('file/video');
+
+            if (!file_exists($path)) {
+                mkdir($path, 0755, true);
+            }
+
+            if ($video->move($path, $full_name)) {
+                $videoPath = 'file/video/' . $full_name;
+            } else {
+                $videoPath = $model->video;
+            }
+        } else {
+            // Video o'zgartirilmagan bo'lsa - eskisini saqlab qolamiz
+            $videoPath = $model->video;
+        }
+
+
+
         $model->update([
             'category_id' => $data['category_id'],
             'slug' => Str::slug($data['name']),
             'images' => $images,
+            'video' => $videoPath,
             'status' => $data['status'],
             'telegram_status' => $data['telegram_status']??false
         ]);

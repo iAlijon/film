@@ -58,6 +58,12 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="video">Video</label>
+                            <input type="file" class="form-control @error('video') border-danger @enderror" name="video" accept="video/mp4,video/webm,video/mov,video/avi">
+                            <small class="text-danger">{{$errors->first('video')}}</small>
+                        </div>
+
+                        <div class="form-group">
                             <label for="description">Qisqacha ma'lumot</label>
                             <textarea name="description" cols="30" rows="5"
                                       class="form-control @error('description') border-danger @enderror"></textarea>

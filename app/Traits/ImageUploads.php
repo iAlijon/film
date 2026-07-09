@@ -35,4 +35,22 @@ trait ImageUploads
             return null;
         }
     }
+
+    public function video($video)
+    {
+        $extension = $video->getClientOriginalExtension();
+        $full_name = uniqid('video_', true) . '.' . $extension;
+
+        $path = public_path('file/video');
+
+        if (!file_exists($path)) {
+            mkdir($path, 0755, true);
+        }
+
+        if ($video->move($path, $full_name)) {
+            return 'file/video/' . $full_name;
+        }
+
+        return null;
+    }
 }

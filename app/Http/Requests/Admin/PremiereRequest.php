@@ -34,6 +34,7 @@ class PremiereRequest extends FormRequest
             'category_id' => 'required',
             'telegram_status' => 'nullable',
             'translates' => 'required',
+            'video' => 'nullable|file|mimes:mp4,webm,mov,avi|max:15360',
             Rule::dimensions()->minWidth(640)->minHeight(730)->maxWidth(1920)->maxHeight(1080)
         ];
     }
@@ -46,7 +47,9 @@ class PremiereRequest extends FormRequest
             'content.required' => 'To\'liq ma\'lumotlar maydoni to\'lidirish talab qilinadi',
             'image.required' => 'Rasm maydoni to\'ldirish talab qilinadi',
             'category_id.required' => 'Kategoriya maydoni to\'ldirish talab qilinadi',
-            'image.dimensions' => 'Rasm o\'lchamlari mos emas min 640X730 max 1920X1080 bo\'lishi kerak'
+            'image.dimensions' => 'Rasm o\'lchamlari mos emas min 640X730 max 1920X1080 bo\'lishi kerak',
+            'video.max' => 'Video hajmi 15 mb dan oshmasligi kerak',
+            'video.mimes' => 'Faqat MP4, WEBM, MOVI yoki AVI bo\'lishi kerak'
         ];
     }
 }

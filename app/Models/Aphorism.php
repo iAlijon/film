@@ -12,11 +12,6 @@ class Aphorism extends Model
     use GlobalSearch;
     protected $guarded = [];
 
-    public function calendar()
-    {
-        return $this->hasMany(Calendar::class, 'aphorism_id', 'id');
-    }
-
     public function translations()
     {
         return $this->hasMany(AphorismTranslations::class, 'aphorism_id');

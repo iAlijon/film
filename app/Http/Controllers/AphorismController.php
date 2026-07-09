@@ -11,7 +11,7 @@ class AphorismController extends Controller
     public function index(Request $request)
     {
         $translates = $request->header('lang') ?? 'oz';
-        $models = Aphorism::where('status', true)->with(['calendar', 'translations' => function ($q) use ($translates) {
+        $models = Aphorism::where('status', true)->with(['translations' => function ($q) use ($translates) {
             $q->where('translates', $translates);
         }])->latest()->first();
         if (!$models) {

@@ -144,6 +144,15 @@ class PremiereRepository extends BaseRepository
             } else {
                 $videoPath = $model->video;
             }
+        } elseif (isset($data['remove_video']) && $data['remove_video'] == '1') {
+            // Video o'chirilishi so'ralgan - faylni o'chirib, bazani bo'sh qilamiz
+            if ($model->video) {
+                $oldPath = public_path($model->video);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
+            }
+            $videoPath = null;
         } else {
             // Video o'zgartirilmagan bo'lsa - eskisini saqlab qolamiz
             $videoPath = $model->video;
@@ -162,7 +171,7 @@ class PremiereRepository extends BaseRepository
 
         $model->translates()->updateOrCreate([
             'translates' => $data['translates']
-            ],[
+        ],[
             'name' => $data['name'],
             'description' => $data['description'],
             'content' => contentByDomDocment($data['content'], 'premiere'),
@@ -173,9 +182,9 @@ class PremiereRepository extends BaseRepository
             if ($model->telegram_status)
             {
                 $caption = <<<TEXT
-                  🎬: $model->name_oz
-                    $model->description_oz
-                TEXT;
+          🎬: $model->name_oz
+            $model->description_oz
+        TEXT;
                 $users = TelegramUser::all();
                 foreach ($users as $user) {
                     $this->editMessageCaption($user->telegram_id,$model->message_id,$caption);

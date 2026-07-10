@@ -121,7 +121,7 @@ if (!function_exists('getInFolder')) {
 }
 
 if (!function_exists('deleteImages')) {
-    function deleteImages($images, $folder)
+    function   deleteImages($images, $folder)
     {
         $path = explode('storage/' . $folder . '/', $images);
         if ($path) {

@@ -57,6 +57,49 @@
                         <x-image-edit-field :image="$model->images" input-name="image" />
 
                         <div class="form-group">
+                            <label>{{ labels('video') }}</label>
+
+                            <div class="video-edit-wrapper mb-2">
+                                @if($model->video)
+                                    <video id="currentVideo" width="300" controls>
+                                        <source src="{{ asset($model->video) }}" type="video/mp4">
+                                    </video>
+                                @else
+                                    <video id="currentVideo" width="300" controls style="display: none;">
+                                        <source src="" type="video/mp4">
+                                    </video>
+                                @endif
+
+                                <input type="file" name="video" id="videoInput"
+                                       class="form-control @error('video') border-danger @enderror"
+                                       accept="video/mp4,video/webm,video/quicktime,video/x-msvideo"
+                                       style="{{ $model->video ? 'display: none;' : '' }}">
+
+                                {{-- Video o'chirilganini bildiruvchi yashirin maydon --}}
+                                <input type="hidden" name="remove_video" id="removeVideoFlag" value="0">
+
+                                @if($model->video)
+                                    <div id="videoButtons">
+                                        <button type="button" class="btn btn-primary btn-sm mt-2" id="editVideoBtn">
+                                            O'zgartirish
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm mt-2" id="removeVideoBtn">
+                                            O'chirish
+                                        </button>
+                                    </div>
+
+                                    <div id="videoEditControls" style="display: none;">
+                                        <button type="button" class="btn btn-secondary btn-sm mt-2" id="cancelVideoBtn">
+                                            Bekor qilish
+                                        </button>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <small class="text-danger">{{ $errors->first('video') }}</small>
+                        </div>
+
+                        <div class="form-group">
                             <label for="description">{{labels('description')}}</label>
                             <textarea name="description" cols="30" rows="5"
                                       class="form-control @error('description') border-danger @enderror">{{$model->translates->first()?->description}}</textarea>
@@ -95,3 +138,62 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    @if($model->video)
+        <script>
+            const currentVideo = document.getElementById('currentVideo');
+            const videoInput = document.getElementById('videoInput');
+            const editVideoBtn = document.getElementById('editVideoBtn');
+            const removeVideoBtn = document.getElementById('removeVideoBtn');
+            const cancelVideoBtn = document.getElementById('cancelVideoBtn');
+            const videoEditControls = document.getElementById('videoEditControls');
+            const videoButtons = document.getElementById('videoButtons');
+            const removeVideoFlag = document.getElementById('removeVideoFlag');
+
+            const originalVideoSrc = currentVideo.querySelector('source').src;
+
+            // "O'zgartirish" bosilganda
+            editVideoBtn.addEventListener('click', function () {
+                videoInput.style.display = 'block';
+                videoInput.click();
+                videoButtons.style.display = 'none';
+                videoEditControls.style.display = 'block';
+            });
+
+            // "O'chirish" bosilganda - videoni butunlay olib tashlash
+            removeVideoBtn.addEventListener('click', function () {
+                if (confirm("Videoni o'chirishga ishonchingiz komilmi?")) {
+                    currentVideo.style.display = 'none';
+                    videoButtons.style.display = 'none';
+                    videoEditControls.style.display = 'block';
+                    removeVideoFlag.value = '1'; // backend'ga video o'chirilishi kerakligini bildiradi
+                }
+            });
+
+            // Fayl tanlanganda - preview yangilanadi va o'chirish flagini bekor qiladi
+            videoInput.addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const url = URL.createObjectURL(file);
+                    currentVideo.querySelector('source').src = url;
+                    currentVideo.load();
+                    currentVideo.style.display = 'block';
+                    removeVideoFlag.value = '0'; // yangi video tanlansa, o'chirish bekor qilinadi
+                }
+            });
+
+            // "Bekor qilish" bosilganda - eski videoga qaytariladi, hamma narsa asl holatga qaytadi
+            cancelVideoBtn.addEventListener('click', function () {
+                currentVideo.querySelector('source').src = originalVideoSrc;
+                currentVideo.load();
+                currentVideo.style.display = 'block';
+                videoInput.value = '';
+                removeVideoFlag.value = '0';
+                videoInput.style.display = 'none';
+                videoEditControls.style.display = 'none';
+                videoButtons.style.display = 'block';
+            });
+        </script>
+    @endif
+@endpush

@@ -29,12 +29,13 @@ class PremiereRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'content' => 'required',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             'status' => 'required|integer',
             'category_id' => 'required',
             'telegram_status' => 'nullable',
             'translates' => 'required',
             'video' => 'nullable|file|mimes:mp4,webm,mov,avi|max:15360',
+            'remove_video' => 'nullable|in:0,1',
             Rule::dimensions()->minWidth(640)->minHeight(730)->maxWidth(1920)->maxHeight(1080)
         ];
     }

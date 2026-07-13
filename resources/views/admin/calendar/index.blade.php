@@ -87,7 +87,7 @@
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a href="{{route('calendar.edit', $model->id)}}" class="btn btn-info mr-2"><i
                                                 class="fas fa-edit"></i></a>
-                                        <form action="{{ route('film_analysis.destroy', $model->id) }}" method="post"
+                                        <form action="{{ route('calendar.destroy', $model->id) }}" method="post"
                                               id="deleteItem-{{$model->id}}">
                                             @csrf
                                             @method('delete')

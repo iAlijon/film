@@ -43,7 +43,7 @@ class VideoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'video_file'   => 'required|file|mimetypes:video/mp4,video/avi,video/webm|max:15360',
+            'video_file'   => 'required|file|mimetypes:video/mp4,video/avi,video/webm|max:102400',
             'width_ratio'  => 'required|integer|min:1|max:100',
             'height_ratio' => 'required|integer|min:1|max:100',
             'status'       => 'required|in:1,2',
@@ -51,7 +51,7 @@ class VideoController extends Controller
             'video_file.required'  => 'Video fayl majburiy!',
             'video_file.file'      => 'Noto\'g\'ri fayl!',
             'video_file.mimetypes' => 'Faqat MP4, AVI, MOV, MKV, WEBM formatlar qabul qilinadi!',
-            'video_file.max'       => 'Video hajmi 15 MB dan oshmasligi kerak!',
+            'video_file.max'       => 'Video hajmi 100 MB dan oshmasligi kerak!',
             'width_ratio.required' => 'Kenglik nisbati majburiy!',
             'height_ratio.required'=> 'Balandlik nisbati majburiy!',
             'status.required'      => 'Status majburiy!',
@@ -102,14 +102,14 @@ class VideoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'video_file'   => 'nullable|file|mimetypes:video/mp4,video/avi,video/webm|max:15360',
+            'video_file'   => 'nullable|file|mimetypes:video/mp4,video/avi,video/webm|max:102400',
             'width_ratio'  => 'required|integer|min:1|max:100',
             'height_ratio' => 'required|integer|min:1|max:100',
             'status'       => 'required|in:1,2',
         ], [
             'video_file.file'      => 'Noto\'g\'ri fayl!',
             'video_file.mimetypes' => 'Faqat MP4, AVI, MOV, MKV, WEBM formatlar qabul qilinadi!',
-            'video_file.max'       => 'Video hajmi 15 MB dan oshmasligi kerak!',
+            'video_file.max'       => 'Video hajmi 100 MB dan oshmasligi kerak!',
             'width_ratio.required' => 'Kenglik nisbati majburiy!',
             'height_ratio.required'=> 'Balandlik nisbati majburiy!',
             'status.required'      => 'Status majburiy!',

@@ -47,7 +47,7 @@
 
                                 <div class="form-group required">
                                     <label for="name">{{labels('name')}}</label>
-                                    <input type="text" class="form-control @error('name') border-danger @enderror" name="name" value="{{old('name')}}">
+                                    <input type="text" class="form-control @error('name') border-danger @enderror" name="name" value="{{old('name')}}" placeholder="Nomi">
                                     <small class="text-danger">{{$errors->first('name')}}</small>
                                 </div>
 
@@ -59,7 +59,7 @@
 
                                 <div class="form-group required">
                                     <label for="description">{{labels('description')}}</label>
-                                    <textarea name="description" id="" cols="30" rows="5" class="form-control @error('description') border-danger @enderror">
+                                    <textarea name="description" id="" cols="30" rows="5" class="form-control @error('description') border-danger @enderror" placeholder="Qisqacha ma'lumot">
                                         {{old('description')}}
                                     </textarea>
                                     <small class="text-danger">{{$errors->first('description')}}</small>
@@ -74,6 +74,12 @@
                                 </div>
 
                                 <div class="form-group required">
+                                    <label for="date">Sana</label>
+                                    <input type="text" class="form-control @error('date') border-danger @enderror" name="date" placeholder="Sana">
+                                    <small class="text-danger"{{$errors->first('date')}}></small>
+                                </div>
+
+                                <div class="form-group required">
                                     <label for="status">{{labels('status')}}</label>
                                     <select name="status" id="" class="form-control">
                                         <option value="1" selected>Active</option>
@@ -84,7 +90,7 @@
 
                                 <div class="form-group">
                                     <label for="">{{labels('order')}}</label>
-                                    <input type="text" name="order" class="form-control">
+                                    <input type="text" name="order" class="form-control" value="{{$order + 1}}">
                                     <small class="text-danger">{{$errors->first('order')}}</small>
                                 </div>
                             <div class="text-right">

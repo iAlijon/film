@@ -70,6 +70,12 @@
                         </div>
 
                         <div class="form-group required">
+                            <label for="date">Sana</label>
+                            <input type="text" class="form-control @error('date') border-danger @enderror" name="date" placeholder="Sana" value="{{$model->date}}">
+                            <small class="text-danger"{{$errors->first('date')}}></small>
+                        </div>
+
+                        <div class="form-group required">
                             <label for="status">{{labels('status')}}</label>
                             <select name="status" id="" class="form-control">
                                 <option value="1" {{$model->status == 1?'selected':''}}>Active</option>

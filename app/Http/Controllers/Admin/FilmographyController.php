@@ -71,7 +71,8 @@ class FilmographyController extends Controller
         $categories = PersonCategory::where('status', true)->where('type', 'film_catalogs')->with(['translates' => function ($q) use ($translates){
             $q->where('translates', $translates);
         }])->get();
-        return view('admin.filmography.create', compact('categories'));
+        $order = Filmography::max('order');
+        return view('admin.filmography.create', compact('categories', 'order'));
     }
 
     /**
@@ -91,7 +92,8 @@ class FilmographyController extends Controller
             'category_id' => 'required',
             'telegram_status' => 'nullable',
             'translates' => 'required',
-            'order' => 'required'
+            'order' => 'required',
+            'date' => 'required'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -108,7 +110,8 @@ class FilmographyController extends Controller
             'status' => $data['status'],
             'category_id' => $data['category_id'],
             'telegram_status' => $telegram,
-            'order' => $request['order']
+            'order' => $request['order'],
+            'date' => $request['date']
         ]);
 
         FilmographyTranslations::create([
@@ -197,7 +200,8 @@ class FilmographyController extends Controller
             'status' => 'required|boolean',
             'category_id' => 'required',
             'telegram_status' => 'nullable',
-            'order' => 'required'
+            'order' => 'required',
+            'date' => 'required'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -218,7 +222,8 @@ class FilmographyController extends Controller
             'images' => $images,
             'status' => $data['status'],
             'order' => $data['order'],
-            'telegram_status' => isset($data['telegram_status']) ? $data['telegram_status'] : false
+            'telegram_status' => isset($data['telegram_status']) ? $data['telegram_status'] : false,
+            'date' => $data['date']
         ]);
         $model->translations()->updateOrCreate([
                 'translates' => $data['translates']

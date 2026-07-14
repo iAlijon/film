@@ -27,6 +27,15 @@
                 <li class="nav-header">MENUS</li>
 
                 <li class="nav-item">
+                    <a href="{{route('video.index')}}"
+                       class="nav-link {{(request()->is('admin/video*'))?'active':''}}">
+                        <i class="far fa-circle"></i>
+                        <p class="text">Video</p>
+                        <span class="badge badge-primary right"></span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{route('aphorism.index')}}"
                        class="nav-link {{(request()->is('admin/aphorism*'))?'active':''}}">
                         <i class="far fa-circle"></i>

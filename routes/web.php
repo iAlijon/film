@@ -31,14 +31,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
         'book' => \App\Http\Controllers\Admin\BooksController::class,
         'categories' => \App\Http\Controllers\Admin\PersonCategoryController::class,
         'kino_gid' => \App\Http\Controllers\Admin\KinogitController::class,
-        'calendar' => \App\Http\Controllers\Admin\CalendarController::class
+        'calendar' => \App\Http\Controllers\Admin\CalendarController::class,
+        'video' => \App\Http\Controllers\Admin\VideoController::class,
     ]);
     Route::post('/new-status', [\App\Http\Controllers\Admin\NewsController::class, 'newStatus'])->name('new-status');
+    Route::post('/video-status', [\App\Http\Controllers\Admin\VideoController::class, 'videoStatus'])->name('video-status');
     Route::get('/book/download/{id}', [\App\Http\Controllers\Admin\BooksController::class, 'download'])->name('download');
     Route::get('/interview-status', [\App\Http\Controllers\Admin\InterviewController::class, 'interviewStatus'])->name('interview-status');
     Route::get('order_category', [\App\Http\Controllers\Admin\PersonCategoryController::class, 'order'])->name('order_category');
     Route::get('telegram_user', [\App\Http\Controllers\Admin\TelegramUsers::class, 'index'])->name('telegram_user');
     Route::get('users', [\App\Http\Controllers\Admin\UsersController::class, 'index'])->name('users');
 });
-
-

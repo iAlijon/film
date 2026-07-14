@@ -187,8 +187,8 @@
                         <div class="form-group">
                             <label>Status</label>
                             <select name="status" class="form-control form-control-sm" style="max-width:200px;">
-                                <option value="1" {{ old('status', $model->status) == 1 ? 'selected' : '' }}>Faol</option>
-                                <option value="0" {{ old('status', $model->status) == 0 ? 'selected' : '' }}>Nofaol</option>
+                                <option value="1" {{ old('status', $model->status) == 1 ? 'selected' : '' }}>Active</option>
+                                <option value="2" {{ old('status', $model->status) == 2 ? 'selected' : '' }}>No Active</option>
                             </select>
                         </div>
 

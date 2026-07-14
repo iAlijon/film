@@ -161,8 +161,8 @@
                             <label>Status</label>
                             <select name="status" class="form-control form-control-sm" onchange="this.form.submit()">
                                 <option value="">Barchasi</option>
-                                <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Faol</option>
-                                <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Nofaol</option>
+                                <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Active</option>
+                                <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>No Active</option>
                             </select>
                         </div>
                         <div class="col-md-2">

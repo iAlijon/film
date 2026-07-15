@@ -93,7 +93,7 @@ class FilmographyController extends Controller
             'telegram_status' => 'nullable',
             'translates' => 'required',
             'order' => 'required',
-            'date' => 'required'
+            'year' => 'required'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -111,7 +111,7 @@ class FilmographyController extends Controller
             'category_id' => $data['category_id'],
             'telegram_status' => $telegram,
             'order' => $request['order'],
-            'date' => $request['date']
+            'year' => $request['year']
         ]);
 
         FilmographyTranslations::create([
@@ -201,7 +201,7 @@ class FilmographyController extends Controller
             'category_id' => 'required',
             'telegram_status' => 'nullable',
             'order' => 'required',
-            'date' => 'required'
+            'year' => 'required'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -223,7 +223,7 @@ class FilmographyController extends Controller
             'status' => $data['status'],
             'order' => $data['order'],
             'telegram_status' => isset($data['telegram_status']) ? $data['telegram_status'] : false,
-            'date' => $data['date']
+            'year' => $data['year']
         ]);
         $model->translations()->updateOrCreate([
                 'translates' => $data['translates']

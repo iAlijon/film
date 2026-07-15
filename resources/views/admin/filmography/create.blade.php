@@ -73,10 +73,15 @@
                                     <small class="text-danger">{{$errors->first('content')}}</small>
                                 </div>
 
+{{--                                <div class="form-group required">--}}
+{{--                                    <label for="year">Sana</label>--}}
+{{--                                    <input type="text" class="form-control @error('year') border-danger @enderror" name="year" placeholder="Yil">--}}
+{{--                                    <small class="text-danger"{{$errors->first('year')}}></small>--}}
+{{--                                </div>--}}
+
                                 <div class="form-group required">
-                                    <label for="date">Sana</label>
-                                    <input type="text" class="form-control @error('date') border-danger @enderror" name="date" placeholder="Sana">
-                                    <small class="text-danger"{{$errors->first('date')}}></small>
+                                    <label for="year">Yil</label>
+                                    <select name="year" id="yearSelect" class="form-control"></select>
                                 </div>
 
                                 <div class="form-group required">
@@ -102,3 +107,18 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script>
+        const select = document.getElementById('yearSelect');
+        const currentYear = new Date().getFullYear();
+        const startYear = 1900; // qaysi yildan boshlab kerak bo'lsa
+
+        for (let year = currentYear; year >= startYear; year--) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            select.appendChild(option);
+        }
+    </script>
+@endpush

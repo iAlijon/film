@@ -25,8 +25,8 @@ class FilmographyController extends Controller
             $query->where('category_id', $result['category_id']);
         }
 
-        if (isset($result['date']) && !empty($result['date'])) {
-            $query->where('date', $result['date']);
+        if (isset($result['year']) && !empty($result['year'])) {
+            $query->where('year', $result['year']);
         }
 
         $data = $query->paginate($per_page);

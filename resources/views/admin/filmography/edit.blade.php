@@ -70,9 +70,8 @@
                         </div>
 
                         <div class="form-group required">
-                            <label for="date">Sana</label>
-                            <input type="text" class="form-control @error('date') border-danger @enderror" name="date" placeholder="Sana" value="{{$model->date}}">
-                            <small class="text-danger"{{$errors->first('date')}}></small>
+                            <label for="year">Yil</label>
+                            <select name="year" id="yearSelect" class="form-control" data-selected="{{ $model->year }}"></select>
                         </div>
 
                         <div class="form-group required">
@@ -99,3 +98,22 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script>
+        const select = document.getElementById('yearSelect');
+        const currentYear = new Date().getFullYear();
+        const startYear = 1900;
+        const selectedYear = select.dataset.selected; // Blade'dan kelgan qiymat
+
+        for (let year = currentYear; year >= startYear; year--) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            if (year == selectedYear) {
+                option.selected = true; // shu yil avtomatik tanlanadi
+            }
+            select.appendChild(option);
+        }
+    </script>
+@endpush

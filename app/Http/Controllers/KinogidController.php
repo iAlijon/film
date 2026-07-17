@@ -24,6 +24,13 @@ class KinogidController extends Controller
             $query->where('category_id', $result['category_id']);
         }
 
+        if (isset($result['creatorRoles']) && !empty($result['creatorRoles'])) {
+            $creatorRoles = $result['creatorRoles'];
+            $query->whereHas('translates', function ($q) use ($creatorRoles){
+               $q->where('creatorRoles', $creatorRoles);
+            });
+        }
+
         $data = $query->paginate($per_page);
         $paginatedResult = $data->toArray();
 
@@ -37,6 +44,7 @@ class KinogidController extends Controller
             $arr['content'] = $translate->content ?? null;
             $arr['translates'] = $translate->translates ?? null;
             $arr['image'] = $translate->image ?? null;
+            $arr['creatorRoles'] = $translate->creatorRoles ?? null;
 
             return $arr;
         });

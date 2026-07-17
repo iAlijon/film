@@ -52,6 +52,7 @@ class KinogitRepository extends BaseRepository
             'description' => $data['description'],
             'content' => contentByDomDocment($data['content'], 'kinogit'),
             'image' => $this->uploads($data['image'], 'kinogit'),
+            'creatorRoles' => $data['creatorRoles']
         ]);
 
         if ($model)
@@ -94,6 +95,7 @@ class KinogitRepository extends BaseRepository
             'description' => $data['description'],
             'content' => contentByDomDocment($data['content'], 'kinogit'),
             'image' => $images,
+            'creatorRoles' => $data['creatorRoles']
         ]);
 
         if ($item) {

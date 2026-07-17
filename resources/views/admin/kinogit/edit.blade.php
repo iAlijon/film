@@ -47,6 +47,31 @@
                         </div>
 
                         <div class="form-group required">
+                            <label for="creatorRoles">Ijodkor</label>
+                            @if($translates == 'oz')
+                                <select name="creatorRoles" id="" class="form-control">
+                                    <option value="">---</option>
+                                    <option value="rejissor" {{$model->translates->first()?->creatorRoles == 'rejissor' ? 'selected' : ''}}>Rejissor</option>
+                                    <option value="ssenariynavis" {{$model->translates->first()?->creatorRoles == 'ssenariynavis' ? 'selected' : ''}}>Ssenariynavis</option>
+                                    <option value="operator" {{$model->translates->first()?->creatorRoles == 'operator' ? 'selected' : ''}}>Operator</option>
+                                    <option value="rassom" {{$model->translates->first()?->creatorRoles == 'rassom' ? 'selected' : ''}}>Rassom</option>
+                                    <option value="bastakor" {{$model->translates->first()?->creatorRoles == 'bastakor' ? 'selected' : ''}}>Bastakor</option>
+                                    <option value="boshqa_ijodkorlar" {{$model->translates->first()?->creatorRoles == 'boshqa_ijodkorlar' ? 'selected' : ''}}>Boshqa ijodkorlar</option>
+                                </select>
+                            @else
+                                <select name="creatorRoles" id="" class="form-control">
+                                    <option value="">---</option>
+                                    <option value="rejissor" {{$model->translates->first()?->creatorRoles == 'rejissor' ? 'selected' : ''}}>Режиссор</option>
+                                    <option value="ssenariynavis" {{$model->translates->first()?->creatorRoles == 'ssenariynavis' ? 'selected' : ''}}>Ссенарийнавис</option>
+                                    <option value="operator" {{$model->translates->first()?->creatorRoles == 'operator' ? 'selected' : ''}}>Оператор</option>
+                                    <option value="rassom" {{$model->translates->first()?->creatorRoles == 'rassom' ? 'selected' : ''}}>Рассом</option>
+                                    <option value="bastakor" {{$model->translates->first()?->creatorRoles == 'bastakor' ? 'selected' : ''}}>Бастакор</option>
+                                    <option value="boshqa_ijodkorlar" {{$model->translates->first()?->creatorRoles == 'boshqa_ijodkorlar' ? 'selected' : ''}}>Бошқа ижодкорлар</option>
+                                </select>
+                            @endif
+                        </div>
+
+                        <div class="form-group required">
                             <label for="name">{{labels('name')}}</label>
                             <input type="text" class="form-control @error('name') border-danger @enderror" name="name"
                                    value="{{$model->translates->first()?->name}}">

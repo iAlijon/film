@@ -44,10 +44,34 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group required">
+                            <label for="creatorRoles">Ijodkor</label>
+                            @if($translates == 'oz')
+                                <select name="creatorRoles" id="" class="form-control">
+                                    <option value="">---</option>
+                                    <option value="rejissor">Rejissor</option>
+                                    <option value="ssenariynavis">Ssenariynavis</option>
+                                    <option value="operator">Operator</option>
+                                    <option value="rassom">Rassom</option>
+                                    <option value="bastakor">Bastakor</option>
+                                    <option value="boshqa_ijodkorlar">Boshqa ijodkorlar</option>
+                                </select>
+                            @else
+                                <select name="creatorRoles" id="" class="form-control">
+                                    <option value="">---</option>
+                                    <option value="rejissor">Режиссор</option>
+                                    <option value="ssenariynavis">Ссенарийнавис</option>
+                                    <option value="operator">Оператор</option>
+                                    <option value="rassom">Рассом</option>
+                                    <option value="bastakor">Бастакор</option>
+                                    <option value="boshqa_ijodkorlar">Бошқа ижодкорлар</option>
+                                </select>
+                            @endif
+                        </div>
 
                         <div class="form-group required">
                             <label for="name">{{labels('name')}}</label>
-                            <input type="text" class="form-control @error('name') border-danger @enderror" name="name" value="{{old('name')}}">
+                            <input type="text" class="form-control @error('name') border-danger @enderror" name="name" value="{{old('name')}}" placeholder="{{labels('name')}}">
                             <small class="text-danger">{{$errors->first('name')}}</small>
                         </div>
 
@@ -59,7 +83,7 @@
 
                         <div class="form-group required">
                             <label for="description">{{labels('description')}}</label>
-                            <textarea name="description" id="" cols="30" rows="5" class="form-control @error('description') border-danger @enderror">
+                            <textarea name="description" id="" cols="30" rows="5" class="form-control @error('description') border-danger @enderror" placeholder="{{labels('description')}}">
                                         {{old('description')}}
                                     </textarea>
                             <small class="text-danger">{{$errors->first('description')}}</small>
@@ -84,7 +108,7 @@
 
                         <div class="form-group">
                             <label for="">{{labels('order')}}</label>
-                            <input type="text" name="order" class="form-control">
+                            <input type="text" name="order" class="form-control" value="{{$order + 1}}">
                             <small class="text-danger">{{$errors->first('order')}}</small>
                         </div>
                         <div class="text-right">

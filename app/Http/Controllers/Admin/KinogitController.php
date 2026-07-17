@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KinogidRequest;
+use App\Models\Kinogit;
 use App\Models\PersonCategory;
 use App\Repositories\KinogitRepository;
 use Illuminate\Http\Request;
@@ -38,7 +39,8 @@ class KinogitController extends Controller
         $categories = PersonCategory::where('status', 1)->where('type', 'film_grids')->with(['translates' => function ($q) use ($translates){
             $q->where('translates', $translates);
         }])->get();
-        return view('admin.kinogit.create', compact('categories'));
+        $order = Kinogit::max('order');
+        return view('admin.kinogit.create', compact('categories', 'translates', 'order'));
     }
 
     /**
@@ -84,7 +86,7 @@ class KinogitController extends Controller
             $q->where('translates', $translates);
         }])->get();
         $model = $this->repo->findById($id, $translates);
-        return view('admin.kinogit.edit', compact('categories', 'model'));
+        return view('admin.kinogit.edit', compact('categories', 'model', 'translates'));
     }
 
     /**

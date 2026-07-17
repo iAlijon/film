@@ -38,6 +38,7 @@
                         <tr>
                             <th>#</th>
                             <th>Kategoriya</th>
+                            <th>Ijodkor</th>
                             <th>Nomi</th>
                             <th>Qisqacha ma'lumot</th>
                             <th>Status</th>
@@ -63,6 +64,7 @@
                                 </th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                                 <th>
                                     <select name="status" id="" class="form-control" onchange="this.form.submit()">
                                         <option value="">---</option>
@@ -79,7 +81,7 @@
                         @forelse($models as $k => $model)
                             <tr>
                                 <td>{{$k + 1}}</td>
-                                <th>
+                                <td>
                                     @foreach($categories as $category)
                                         @if($category->id == $model->category_id)
                                             @foreach($category->translates as $item)
@@ -87,7 +89,24 @@
                                             @endforeach
                                         @endif
                                     @endforeach
-                                </th>
+                                </td>
+                                <td>
+                                    @foreach($model['translates'] as $translates)
+                                        @if($translates->creatorRoles == 'rejissor')
+                                            Rejissor
+                                        @elseif($translates->creatorRoles == 'ssenariynavis')
+                                            Ssenariynavis
+                                        @elseif($translates->creatorRoles == 'operator')
+                                            Operator
+                                        @elseif($translates->creatorRoles == 'rassom')
+                                            Rassom
+                                        @elseif($translates->creatorRoles == 'bastakor')
+                                            Bastakor
+                                        @elseif($translates->creatorRoles == 'boshqa_ijodkorlar')
+                                            Boshqa ijodkorlar
+                                        @endif
+                                    @endforeach
+                                </td>
                                 <td>
                                     @foreach($model['translates'] as $translate)
                                         {{$translate->name}}

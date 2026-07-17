@@ -24,8 +24,8 @@ class KinogidController extends Controller
             $query->where('category_id', $result['category_id']);
         }
 
-        if (isset($result['creatorRoles']) && !empty($result['creatorRoles'])) {
-            $creatorRoles = $result['creatorRoles'];
+        if (isset($result['creator_role']) && !empty($result['creator_role'])) {
+            $creatorRoles = $result['creator_role'];
             $query->whereHas('translates', function ($q) use ($creatorRoles){
                $q->where('creatorRoles', $creatorRoles);
             });

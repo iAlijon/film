@@ -63,7 +63,9 @@ class BooksRepository extends BaseRepository
                 'status' => $data['status'],
                 'category_id' => $data['category_id'],
                 'order' => $data['order'],
-                'slug' => Str::slug($data['name'])
+                'slug' => Str::slug($data['name']),
+                'width_ratio' => $data['width_ratio'] ?? 16,
+                'height_ratio' => $data['height_ratio'] ?? 9,
             ]);
             $model->translates()->create([
                 'name' => $data['name'],
@@ -110,7 +112,9 @@ class BooksRepository extends BaseRepository
                 'status' => $data['status'],
                 'category_id' => $data['category_id'],
                 'slug' => $data['name'],
-                'order' => $data['order']
+                'order' => $data['order'],
+                'width_ratio' => $data['width_ratio'] ?? 16,
+                'height_ratio' => $data['height_ratio'] ?? 9,
             ]);
 
             $model->translates()->updateOrCreate([

@@ -73,6 +73,8 @@
                             <small class="text-danger">{{$errors->first('content')}}</small>
                         </div>
 
+                        @include('admin.components.ratio-fields')
+
                         <div class="form-group">
                             <label for="status">{{labels('status')}}</label>
                             <select name="status" id="status" class="form-control">

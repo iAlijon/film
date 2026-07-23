@@ -88,6 +88,8 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 
+                        @include('admin.components.ratio-fields')
+
                         <div class="form-group">
                             <label>{{labels('status')}}</label>
                             <select name="status" class="form-control">

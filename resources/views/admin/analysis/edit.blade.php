@@ -77,6 +77,8 @@
                             <small class="text-danger">{{$errors->first('content')}}</small>
                         </div>
 
+                        @include('admin.components.ratio-fields', ['widthRatio' => $model->width_ratio ?? 16, 'heightRatio' => $model->height_ratio ?? 9])
+
                         <div class="form-group">
                             <label for="status">{{labels('status')}}</label>
                             <select name="status" id="status" class="form-control">

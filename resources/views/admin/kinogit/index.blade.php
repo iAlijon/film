@@ -10,8 +10,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ul class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('interview.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Interview</li>
+                        <li class="breadcrumb-item"><a href="{{route('kino_gid.index')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Kinogit</li>
                     </ul>
                 </div>
             </div>

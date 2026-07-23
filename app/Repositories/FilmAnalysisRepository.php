@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Telegram\Bot\Keyboard\Keyboard;
 
-class FilmAnalysisRepository extends BaseRepository
+class    FilmAnalysisRepository extends BaseRepository
 {
     use ImageUploads;
     use TelegramMessage;
@@ -64,7 +64,9 @@ class FilmAnalysisRepository extends BaseRepository
             'status' => $data['status'],
             'images' => $this->uploads($data['image'], 'analysis'),
             'order'  => $data['order'],
-            'telegram_status' => $data['telegram_status'] ?? false
+            'telegram_status' => $data['telegram_status'] ?? false,
+            'width_ratio' => $data['width_ratio'] ?? 16,
+            'height_ratio' => $data['height_ratio'] ?? 9,
         ]);
 
         $model->translates()->create([
@@ -124,7 +126,9 @@ class FilmAnalysisRepository extends BaseRepository
             'images' => $images,
             'order' => $data['order'],
             'telegram_status' => isset($data['telegram_status']) ? $data['telegram_status'] : false,
-            'slug' => Str::slug($data['name'])
+            'slug' => Str::slug($data['name']),
+            'width_ratio' => $data['width_ratio'] ?? 16,
+            'height_ratio' => $data['height_ratio'] ?? 9,
         ]);
 
         $item->translates()->updateOrCreate([

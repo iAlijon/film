@@ -84,6 +84,8 @@
                                     <select name="year" id="yearSelect" class="form-control"></select>
                                 </div>
 
+                                @include('admin.components.ratio-fields')
+
                                 <div class="form-group required">
                                     <label for="status">{{labels('status')}}</label>
                                     <select name="status" id="" class="form-control">

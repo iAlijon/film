@@ -54,7 +54,9 @@ class AphorismRepository extends BaseRepository
             'slug' => Str::slug($data['full_name']),
             'images' => $this->uploads($data['image'], 'aphorism'),
             'status' => $data['status'],
-            'order' => $data['order']
+            'order' => $data['order'],
+            'width_ratio' => $data['width_ratio'] ?? 16,
+            'height_ratio' => $data['height_ratio'] ?? 9,
         ]);
         $model->translations()->create([
             'full_name' => $data['full_name'],
@@ -81,7 +83,9 @@ class AphorismRepository extends BaseRepository
             'slug' => $data['full_name'],
             'images' => $images,
             'status' => $data['status'],
-            'order' => $data['order']
+            'order' => $data['order'],
+            'width_ratio' => $data['width_ratio'] ?? 16,
+            'height_ratio' => $data['height_ratio'] ?? 9,
         ]);
 
         $model->translations()->updateOrCreate([

@@ -109,6 +109,8 @@
                             <small class="text-danger">{{$errors->first('date')}}</small>
                         </div>
 
+                        @include('admin.components.ratio-fields')
+
                         <div class="form-group">
                             <label for="status">Status</label>
                             <select name="status" id="" class="form-control">

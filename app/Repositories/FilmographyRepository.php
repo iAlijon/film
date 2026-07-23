@@ -43,7 +43,9 @@ class FilmographyRepository extends BaseRepository
             'content_ru' => $data['content_ru']??null,
             'content_en' => $data['content_en']??null,
             'images' => $this->uploads($data['image'], 'filmography'),
-            'status' => $data['status']
+            'status' => $data['status'],
+            'width_ratio' => $data['width_ratio'] ?? 16,
+            'height_ratio' => $data['height_ratio'] ?? 9,
         ]);
         if ($model){
             return $model;
@@ -71,7 +73,9 @@ class FilmographyRepository extends BaseRepository
             'content_ru' => $data['content_ru']??null,
             'content_en' => $data['content_en']??null,
             'images' => $this->uploads($data['image'], 'filmography'),
-            'status' => $data['status']
+            'status' => $data['status'],
+            'width_ratio' => $data['width_ratio'] ?? 16,
+            'height_ratio' => $data['height_ratio'] ?? 9,
         ]);
         if ($model)
         {

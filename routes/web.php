@@ -18,21 +18,21 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'] ,function (){
     Route::get('/', [\App\Http\Controllers\Admin\Dashboard::class, 'index'])->name('dashboard');
     Route::get('logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
     Route::resources([
+        'video' => \App\Http\Controllers\Admin\VideoController::class,
         'aphorism' => \App\Http\Controllers\Admin\AphorismController::class,
-        'news' => \App\Http\Controllers\Admin\NewsController::class,
+        'calendar' => \App\Http\Controllers\Admin\CalendarController::class,
         'film_digest' => \App\Http\Controllers\Admin\PremiereController::class,
-        'interview' => \App\Http\Controllers\Admin\InterviewController::class,
-        'interview_peoples' => \App\Http\Controllers\Admin\InterviewPeoplesController::class,
-        'person' => \App\Http\Controllers\Admin\PersonController::class,
-        'film_dictionary' => \App\Http\Controllers\Admin\FilmDictionaryController::class,
-        'cinema_fact' => \App\Http\Controllers\Admin\CinemaFactController::class,
-        'film_analysis' => \App\Http\Controllers\Admin\MovieAnalysisController::class,
+        'kino_gid' => \App\Http\Controllers\Admin\KinogitController::class,
         'filmography' => \App\Http\Controllers\Admin\FilmographyController::class,
+        'film_analysis' => \App\Http\Controllers\Admin\MovieAnalysisController::class,
         'book' => \App\Http\Controllers\Admin\BooksController::class,
         'categories' => \App\Http\Controllers\Admin\PersonCategoryController::class,
-        'kino_gid' => \App\Http\Controllers\Admin\KinogitController::class,
-        'calendar' => \App\Http\Controllers\Admin\CalendarController::class,
-        'video' => \App\Http\Controllers\Admin\VideoController::class,
+//        'news' => \App\Http\Controllers\Admin\NewsController::class,
+//        'interview' => \App\Http\Controllers\Admin\InterviewController::class,
+//        'interview_peoples' => \App\Http\Controllers\Admin\InterviewPeoplesController::class,
+//        'person' => \App\Http\Controllers\Admin\PersonController::class,
+//        'film_dictionary' => \App\Http\Controllers\Admin\FilmDictionaryController::class,
+//        'cinema_fact' => \App\Http\Controllers\Admin\CinemaFactController::class,
     ]);
     Route::post('/new-status', [\App\Http\Controllers\Admin\NewsController::class, 'newStatus'])->name('new-status');
     Route::post('/video-status', [\App\Http\Controllers\Admin\VideoController::class, 'videoStatus'])->name('video-status');

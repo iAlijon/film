@@ -42,7 +42,9 @@ class KinogitRepository extends BaseRepository
             'slug' => Str::slug($data['name']),
             'status' => $data['status'],
             'order' => $data['order'],
-            'category_id' => $data['category_id']
+            'category_id' => $data['category_id'],
+            'width_ratio' => $data['width_ratio'] ?? 16,
+            'height_ratio' => $data['height_ratio'] ?? 9,
         ]);
 
         $model->translates()->updateOrCreate([
@@ -85,7 +87,9 @@ class KinogitRepository extends BaseRepository
             'status' => $data['status'],
             'order' => $data['order'],
 //            'telegram_status' => isset($data['telegram_status']) ? $data['telegram_status'] : false,
-            'slug' => Str::slug($data['name'])
+            'slug' => Str::slug($data['name']),
+            'width_ratio' => $data['width_ratio'] ?? 16,
+            'height_ratio' => $data['height_ratio'] ?? 9,
         ]);
 
         $item->translates()->updateOrCreate([

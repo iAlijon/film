@@ -74,6 +74,8 @@
                             <select name="year" id="yearSelect" class="form-control" data-selected="{{ $model->year }}"></select>
                         </div>
 
+                        @include('admin.components.ratio-fields', ['widthRatio' => $model->width_ratio ?? 16, 'heightRatio' => $model->height_ratio ?? 9])
+
                         <div class="form-group required">
                             <label for="status">{{labels('status')}}</label>
                             <select name="status" id="" class="form-control">

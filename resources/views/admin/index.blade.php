@@ -113,14 +113,14 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>{{$menus['news']}}</h3>
+                        <h3>{{$menus['aphorism']}}</h3>
 
-                        <p>Yangliklar</p>
+                        <p>Afarismlar</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-newspaper"></i>
                     </div>
-                    <a href="{{route('news.index')}}" class="small-box-footer">
+                    <a href="{{route('aphorism.index')}}" class="small-box-footer">
                         More info <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -129,13 +129,13 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>{{$menus['aphorism']}}</h3>
-                        <p>Afarizmlar</p>
+                        <h3>{{$menus['calendar']}}</h3>
+                        <p>Taqvim</p>
                     </div>
                     <div class="icon">
-                        <i class="fa fa-aphorism"></i>
+                        <i class="fa fa-calendar"></i>
                     </div>
-                    <a href="{{route('aphorism.index')}}" class="small-box-footer">
+                    <a href="{{route('calendar.index')}}" class="small-box-footer">
                         More info <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -146,7 +146,7 @@
                 <div class="small-box bg-blue">
                     <div class="inner">
                         <h3>{{$menus['film_digest']}}</h3>
-                        <p>Premyeralar</p>
+                        <p>Kinodayjest</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-film"></i>
@@ -161,73 +161,137 @@
                 <!-- small box -->
                 <div class="small-box bg-dark">
                     <div class="inner">
-                        <h3>{{$menus['interview']}}</h3>
-                        <p>Suxbatlar</p>
+                        <h3>{{$menus['film_gid']}}</h3>
+                        <p>Kinogid</p>
                     </div>
                     <div class="icon">
-                        <i class="fa fa-users"></i>
+                        <i class="fa fa-video"></i>
                     </div>
-                    <a href="{{route('interview.index')}}" class="small-box-footer">
+                    <a href="{{route('kino_gid.index')}}" class="small-box-footer">
                         More info <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="col-12">
-                <div class="card card-info">
-                    <div class="card-header">
-                        <h3 class="card-title">Yangiliklar <i class="fas fa-newspaper"></i></h3>
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-fuchsia">
+                    <div class="inner">
+                        <h3>{{$menus['filmography']}}</h3>
+                        <p>Kinokatalog</p>
                     </div>
-                    <div class="card-body">
-                        <table class="table table-hover table-bordered table-striped text-center table-sm">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nomi</th>
-                                    <th>Qisqacha ma'lumot</th>
-                                    <th>Kategoriya</th>
-                                    <th>Status</th>
-                                    <th>Qo'shilgan sana</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @forelse($news as $k => $new)
-                                <tr>
-                                    <td>{{$k + 1}}</td>
-                                    <td>{{$new->name_oz}}</td>
-                                    <td>{{$new->description_oz}}</td>
-                                    <td>{{$new->category->name_oz}}</td>
-                                    <td>
-                                        <label class="switch">
-                                            <input type="checkbox"
-                                                   class="status-toggle"
-                                                   data-id="{{$new->id}}"
-                                                {{$new->status == true ? 'checked':false}}
-                                            >
-                                            <div class="slider round"></div>
-                                        </label>
-                                    </td>
-                                    <td class="text-center">{{\Carbon\Carbon::parse($new->created_at)->format('d.m.Y')}}</td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="9" class="text-center">
-                                        <div class="alert alert-default-warning">
-                                            Ma'lumot mavjud emas
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforelse
-                            </tbody>
-                        </table>
+                    <div class="icon">
+                        <i class="fa fa-th"></i>
                     </div>
-                    <div class="card-footer">
-                        <div class="float-right">
-                            {{$news->links('vendor.pagination.bootstrap-5')}}
-                        </div>
-                    </div>
+                    <a href="{{route('filmography.index')}}" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
                 </div>
             </div>
+
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{$menus['film_analysis']}}</h3>
+                        <p>Kinotashxis</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-stethoscope"></i>
+                    </div>
+                    <a href="{{route('film_analysis.index')}}" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-gradient-lightblue">
+                    <div class="inner">
+                        <h3>{{$menus['book']}}</h3>
+                        <p>Kinomutola</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-book"></i>
+                    </div>
+                    <a href="{{route('book.index')}}" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-gray">
+                    <div class="inner">
+                        <h3>{{$menus['categories']}}</h3>
+                        <p>Kategoriya</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-tags"></i>
+                    </div>
+                    <a href="{{route('categories.index')}}" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+{{--            <div class="col-12">--}}
+{{--                <div class="card card-info">--}}
+{{--                    <div class="card-header">--}}
+{{--                        <h3 class="card-title">Yangiliklar <i class="fas fa-newspaper"></i></h3>--}}
+{{--                    </div>--}}
+{{--                    <div class="card-body">--}}
+{{--                        <table class="table table-hover table-bordered table-striped text-center table-sm">--}}
+{{--                            <thead>--}}
+{{--                                <tr>--}}
+{{--                                    <th>#</th>--}}
+{{--                                    <th>Nomi</th>--}}
+{{--                                    <th>Qisqacha ma'lumot</th>--}}
+{{--                                    <th>Kategoriya</th>--}}
+{{--                                    <th>Status</th>--}}
+{{--                                    <th>Qo'shilgan sana</th>--}}
+{{--                                </tr>--}}
+{{--                            </thead>--}}
+{{--                            <tbody>--}}
+{{--                            @forelse($news as $k => $new)--}}
+{{--                                <tr>--}}
+{{--                                    <td>{{$k + 1}}</td>--}}
+{{--                                    <td>{{$new->name_oz}}</td>--}}
+{{--                                    <td>{{$new->description_oz}}</td>--}}
+{{--                                    <td>{{$new->category->name_oz}}</td>--}}
+{{--                                    <td>--}}
+{{--                                        <label class="switch">--}}
+{{--                                            <input type="checkbox"--}}
+{{--                                                   class="status-toggle"--}}
+{{--                                                   data-id="{{$new->id}}"--}}
+{{--                                                {{$new->status == true ? 'checked':false}}--}}
+{{--                                            >--}}
+{{--                                            <div class="slider round"></div>--}}
+{{--                                        </label>--}}
+{{--                                    </td>--}}
+{{--                                    <td class="text-center">{{\Carbon\Carbon::parse($new->created_at)->format('d.m.Y')}}</td>--}}
+{{--                                </tr>--}}
+{{--                            @empty--}}
+{{--                                <tr>--}}
+{{--                                    <td colspan="9" class="text-center">--}}
+{{--                                        <div class="alert alert-default-warning">--}}
+{{--                                            Ma'lumot mavjud emas--}}
+{{--                                        </div>--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                            @endforelse--}}
+{{--                            </tbody>--}}
+{{--                        </table>--}}
+{{--                    </div>--}}
+{{--                    <div class="card-footer">--}}
+{{--                        <div class="float-right">--}}
+{{--                            {{$news->links('vendor.pagination.bootstrap-5')}}--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
     </section>
 @endsection

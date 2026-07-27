@@ -22,7 +22,9 @@ class AphorismResource extends JsonResource
             'created_at' => $this->created_at,
             'full_name' => $this->translations->first()->full_name ?? null,
             'description' => $this->translations->first()->description ?? null,
-            'translates' => $this->translations->first()->translates ?? null
+            'translates' => $this->translations->first()->translates ?? null,
+            'width_ratio' => $this->width_ratio,
+            'height_ratio' => $this->height_ratio,
         ];
     }
 }

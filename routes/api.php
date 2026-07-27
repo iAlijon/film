@@ -30,13 +30,6 @@ Route::get('categories', [\App\Http\Controllers\CategoriesController::class, 'in
 Route::get('search', [\App\Http\Controllers\SearchController::class, 'search']);
 Route::post('/telegram/webhook', [\App\Http\Controllers\TelegramController::class, 'handle']);
 
-//Route::get('news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.api.index');
-//Route::get('interview', [\App\Http\Controllers\InterviewController::class, 'index'])->name('interview.api.index');
-//Route::get('persons', [\App\Http\Controllers\PersonDirectorController::class, 'index'])->name('person.api.index');
-//Route::get('letters_category', [\App\Http\Controllers\DictionaryController::class, 'letters'])->name('letters');
-//Route::get('dictionary', [\App\Http\Controllers\DictionaryController::class, 'index'])->name('dictionary.api.index');
-//Route::get('cinema_fact', [\App\Http\Controllers\FilmFactController::class, 'index'])->name('cinema.api.index');
-
 Route::get('aphorism', [\App\Http\Controllers\AphorismController::class, 'index'])->name('aphorism');
 Route::get('film_digests/{id}', [\App\Http\Controllers\PremiereController::class, 'show'])->name('film_digest.api.show');
 Route::get('film_diagnostics/{id}', [\App\Http\Controllers\FilmAnalysisController::class,'show'])->name('film_diagnostics.api.show');
@@ -46,6 +39,13 @@ Route::get('books/file_download/{id}', [\App\Http\Controllers\BookController::cl
 Route::get('books/{id}', [\App\Http\Controllers\BookController::class, 'show'])->name('book.api.show');
 
 Route::get('videos', [\App\Http\Controllers\VideoController::class, 'index'])->name('video.api.index');
+
+//Route::get('news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.api.index');
+//Route::get('interview', [\App\Http\Controllers\InterviewController::class, 'index'])->name('interview.api.index');
+//Route::get('persons', [\App\Http\Controllers\PersonDirectorController::class, 'index'])->name('person.api.index');
+//Route::get('letters_category', [\App\Http\Controllers\DictionaryController::class, 'letters'])->name('letters');
+//Route::get('dictionary', [\App\Http\Controllers\DictionaryController::class, 'index'])->name('dictionary.api.index');
+//Route::get('cinema_fact', [\App\Http\Controllers\FilmFactController::class, 'index'])->name('cinema.api.index');
 
 //Route::get('news/{id}', [\App\Http\Controllers\NewsController::class, 'show'])->name('news.api.show')->middleware('view_count');
 //Route::get('interview/{id}', [\App\Http\Controllers\InterviewController::class, 'show'])->name('interview.api.show');

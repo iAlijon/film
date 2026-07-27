@@ -56,6 +56,8 @@
 
                         <x-image-edit-field :image="$model->images" input-name="image" />
 
+                        @include('admin.components.ratio-fields', ['widthRatio' => $model->width_ratio ?? 16, 'heightRatio' => $model->height_ratio ?? 9])
+
                         <div class="form-group">
                             <label>{{ labels('video') }}</label>
 
@@ -194,6 +196,36 @@
                 videoEditControls.style.display = 'none';
                 videoButtons.style.display = 'block';
             });
+
+            $('.ratio-btn').on('click', function () {
+                const w = $(this).data('w');
+                const h = $(this).data('h');
+                $('input[name="width_ratio"]').val(w);
+                $('input[name="height_ratio"]').val(h);
+                $('.ratio-btn').removeClass('btn-secondary').addClass('btn-outline-secondary');
+                $(this).removeClass('btn-outline-secondary').addClass('btn-secondary');
+            });
+
+            // Alert yopish
+            $('.cancel').click(function () {
+                $(this).closest('.alert').fadeOut();
+            });
         </script>
     @endif
+
+    <script>
+        $('.ratio-btn').on('click', function () {
+            const w = $(this).data('w');
+            const h = $(this).data('h');
+            $('input[name="width_ratio"]').val(w);
+            $('input[name="height_ratio"]').val(h);
+            $('.ratio-btn').removeClass('btn-secondary').addClass('btn-outline-secondary');
+            $(this).removeClass('btn-outline-secondary').addClass('btn-secondary');
+        });
+
+        // Alert yopish
+        $('.cancel').click(function () {
+            $(this).closest('.alert').fadeOut();
+        });
+    </script>
 @endpush

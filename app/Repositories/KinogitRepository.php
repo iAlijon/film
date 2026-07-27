@@ -53,7 +53,7 @@ class KinogitRepository extends BaseRepository
             'name' => $data['name'],
             'description' => $data['description'],
             'content' => contentByDomDocment($data['content'], 'kinogit'),
-            'image' => $this->uploads($data['image'], 'kinogit'),
+            'image' => $this->uploads($data['image'], 'kinogit', $data['width_ratio'], $data['height_ratio']),
             'creatorRoles' => $data['creatorRoles']
         ]);
 
@@ -78,7 +78,7 @@ class KinogitRepository extends BaseRepository
             if ($item->images) {
                 deleteImages($item->images, 'kinogit');
             }
-            $images = $this->uploads($data['image'], 'kinogit');
+            $images = $this->uploads($data['image'], 'kinogit', $data['width_ratio'], $data['height_ratio']);
         } else {
             $images = $item->translates->first()->image;
         }
@@ -86,10 +86,10 @@ class KinogitRepository extends BaseRepository
             'category_id' => $data['category_id'],
             'status' => $data['status'],
             'order' => $data['order'],
-//            'telegram_status' => isset($data['telegram_status']) ? $data['telegram_status'] : false,
             'slug' => Str::slug($data['name']),
             'width_ratio' => $data['width_ratio'] ?? 16,
             'height_ratio' => $data['height_ratio'] ?? 9,
+//            'telegram_status' => isset($data['telegram_status']) ? $data['telegram_status'] : false,
         ]);
 
         $item->translates()->updateOrCreate([

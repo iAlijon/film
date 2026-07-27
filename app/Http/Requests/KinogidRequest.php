@@ -33,7 +33,9 @@ class KinogidRequest extends FormRequest
 //            'telegram_status' => 'nullable',
             'order' => 'required',
             'translates' => 'required',
-            'creatorRoles' => 'required'
+            'creatorRoles' => 'required',
+            'width_ratio'  => 'required|integer|min:1|max:100',
+            'height_ratio' => 'required|integer|min:1|max:100',
         ];
     }
 }

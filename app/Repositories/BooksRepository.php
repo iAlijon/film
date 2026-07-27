@@ -70,7 +70,7 @@ class BooksRepository extends BaseRepository
             $model->translates()->create([
                 'name' => $data['name'],
                 'description' => $data['description'],
-                'images' => $this->uploads($data['image'], 'book'),
+                'images' => $this->uploads($data['image'], 'book', $data['width_ratio'], $data['height_ratio']),
                 'files' => $this->fileUploads($data['file'], 'book'),
                 'author' => $data['author'],
                 'about' => $data['about'],
@@ -96,7 +96,7 @@ class BooksRepository extends BaseRepository
                 if ($model->images) {
                     deleteImages($model->images, 'book');
                 }
-                $images = $this->uploads($data['image'], 'book');
+                $images = $this->uploads($data['image'], 'book',$data['width_ratio'], $data['height_ratio']);
             } else {
                 $images = $model->images;
             }

@@ -36,7 +36,9 @@ class PremiereRequest extends FormRequest
             'translates' => 'required',
             'video' => 'nullable|file|mimes:mp4,webm,mov,avi|max:15360',
             'remove_video' => 'nullable|in:0,1',
-            Rule::dimensions()->minWidth(640)->minHeight(730)->maxWidth(1920)->maxHeight(1080)
+            Rule::dimensions()->minWidth(640)->minHeight(730)->maxWidth(1920)->maxHeight(1080),
+            'width_ratio'  => 'required|integer|min:1|max:100',
+            'height_ratio' => 'required|integer|min:1|max:100',
         ];
     }
 

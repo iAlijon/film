@@ -117,61 +117,38 @@
 @endsection
 
 @push('js')
-{{--    <script>--}}
-{{--        let formIndex = 1;--}}
+    <script>
+        $(document).ready(function () {
 
-{{--        function addForm() {--}}
-{{--            const dynamicForms = document.getElementById('dynamic-forms');--}}
-{{--            const addFormButton = document.getElementById('add-form-btn');--}}
+            // Custom file label update
+            $('#video_file').on('change', function () {
+                const fileName = $(this).val().split('\\').pop();
+                $(this).siblings('.custom-file-label').text(fileName || 'Faylni tanlang...');
 
-{{--            const newForm = document.createElement('div');--}}
-{{--            newForm.classList.add('dynamic-form');--}}
-{{--            newForm.innerHTML = `--}}
-{{--            <div class="card mb-2">--}}
-{{--                <div class="card-header">--}}
-{{--                    <label>${formIndex + 1}</label>--}}
-{{--                    <button type="button" class="remove-form-btn btn btn-danger btn-sm float-right">--}}
-{{--                        <i class="fas fa-trash"></i>--}}
-{{--                    </button>--}}
-{{--                </div>--}}
-{{--                <div class="card-body">--}}
-{{--                    <textarea name="calendar[${formIndex}]"--}}
-{{--                              class="form-control"--}}
-{{--                              placeholder="Tavsif kiriting"></textarea>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        `;--}}
+                // Video preview
+                const file = this.files[0];
+                if (file) {
+                    const url = URL.createObjectURL(file);
+                    $('#videoPreview source').attr('src', url);
+                    $('#videoPreview')[0].load();
+                    $('#videoPreviewBox').show();
+                }
+            });
 
-{{--            dynamicForms.insertBefore(newForm, addFormButton);--}}
-{{--            formIndex++;--}}
-{{--        }--}}
+            // Quick ratio buttons
+            $('.ratio-btn').on('click', function () {
+                const w = $(this).data('w');
+                const h = $(this).data('h');
+                $('input[name="width_ratio"]').val(w);
+                $('input[name="height_ratio"]').val(h);
+                $('.ratio-btn').removeClass('btn-secondary').addClass('btn-outline-secondary');
+                $(this).removeClass('btn-outline-secondary').addClass('btn-secondary');
+            });
 
-{{--        function reindexForms() {--}}
-{{--            const forms = document.querySelectorAll('#dynamic-forms .dynamic-form');--}}
-{{--            forms.forEach((form, index) => {--}}
-{{--                const textarea = form.querySelector('textarea');--}}
-{{--                if (textarea) {--}}
-{{--                    textarea.setAttribute('name', `calendar[${index}]`);--}}
-{{--                }--}}
-{{--                const label = form.querySelector('.card-header label');--}}
-{{--                if (label) {--}}
-{{--                    label.textContent = index + 1;--}}
-{{--                }--}}
-{{--            });--}}
-{{--            formIndex = forms.length;--}}
-{{--        }--}}
-
-{{--        document.getElementById('add-form-btn').addEventListener('click', addForm);--}}
-
-{{--        document.getElementById('dynamic-forms').addEventListener('click', function (e) {--}}
-{{--            const removeBtn = e.target.closest('.remove-form-btn');--}}
-{{--            if (removeBtn) {--}}
-{{--                const formGroup = removeBtn.closest('.dynamic-form');--}}
-{{--                if (formGroup) {--}}
-{{--                    formGroup.remove();--}}
-{{--                    reindexForms();--}}
-{{--                }--}}
-{{--            }--}}
-{{--        });--}}
-{{--    </script>--}}
+            // Close alert
+            $('.cancel').click(function () {
+                $(this).closest('.alert').fadeOut();
+            });
+        });
+    </script>
 @endpush

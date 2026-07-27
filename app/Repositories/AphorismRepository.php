@@ -8,6 +8,7 @@ use App\Models\Aphorism;
 use App\Models\Calendar;
 use App\Traits\ImageUploads;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class AphorismRepository extends BaseRepository
 {
@@ -52,7 +53,7 @@ class AphorismRepository extends BaseRepository
     {
         $model = $this->model->create([
             'slug' => Str::slug($data['full_name']),
-            'images' => $this->uploads($data['image'], 'aphorism'),
+            'images' => $this->uploads($data['image'], 'aphorism', $data['width_ratio'], $data['height_ratio']),
             'status' => $data['status'],
             'order' => $data['order'],
             'width_ratio' => $data['width_ratio'] ?? 16,
@@ -74,7 +75,7 @@ class AphorismRepository extends BaseRepository
             if ($model->images) {
                 deleteImages($model->images, 'aphorism');
             }
-            $images = $this->uploads($data['image'], 'aphorism' );
+            $images = $this->uploads($data['image'], 'aphorism', $data['width_ratio'], $data['height_ratio']);
         }else {
             $images = $model->images;
         }

@@ -34,7 +34,9 @@ class BooksRequest extends FormRequest
             'about' => 'required',
             'date' => 'required',
             'translates' => 'required',
-            'order' => 'required'
+            'order' => 'required',
+            'width_ratio'  => 'required|integer|min:1|max:100',
+            'height_ratio' => 'required|integer|min:1|max:100',
         ];
     }
 }

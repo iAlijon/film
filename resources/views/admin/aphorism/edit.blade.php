@@ -73,5 +73,19 @@
 @endsection
 
 @push('js')
+    <script>
+        $('.ratio-btn').on('click', function () {
+            const w = $(this).data('w');
+            const h = $(this).data('h');
+            $('input[name="width_ratio"]').val(w);
+            $('input[name="height_ratio"]').val(h);
+            $('.ratio-btn').removeClass('btn-secondary').addClass('btn-outline-secondary');
+            $(this).removeClass('btn-outline-secondary').addClass('btn-secondary');
+        });
 
+        // Alert yopish
+        $('.cancel').click(function () {
+            $(this).closest('.alert').fadeOut();
+        });
+    </script>
 @endpush

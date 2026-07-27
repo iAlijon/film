@@ -93,7 +93,9 @@ class FilmographyController extends Controller
             'telegram_status' => 'nullable',
             'translates' => 'required',
             'order' => 'required',
-            'year' => 'required'
+            'year' => 'required',
+            'width_ratio'  => 'required|integer|min:1|max:100',
+            'height_ratio' => 'required|integer|min:1|max:100',
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -106,7 +108,7 @@ class FilmographyController extends Controller
         }
         $model = Filmography::create([
             'slug' => Str::slug($data['name']),
-            'images' => $this->uploads($data['image'], 'filmography'),
+            'images' => $this->uploads($data['image'], 'filmography', $data['width_ratio'], $data['height_ratio']),
             'status' => $data['status'],
             'category_id' => $data['category_id'],
             'telegram_status' => $telegram,
@@ -201,7 +203,9 @@ class FilmographyController extends Controller
             'category_id' => 'required',
             'telegram_status' => 'nullable',
             'order' => 'required',
-            'year' => 'required'
+            'year' => 'required',
+            'width_ratio'  => 'required|integer|min:1|max:100',
+            'height_ratio' => 'required|integer|min:1|max:100',
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -212,7 +216,7 @@ class FilmographyController extends Controller
             if ($model->images) {
                 deleteImages($model->images, 'filmography');
             }
-            $images = $this->uploads($data['image'], 'filmography');
+            $images = $this->uploads($data['image'], 'filmography',$data['width_ratio'], $data['height_ratio']);
         }else {
             $images = $model->images;
         }

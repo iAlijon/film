@@ -62,7 +62,7 @@ class    FilmAnalysisRepository extends BaseRepository
             'slug' => Str::slug($data['name']),
             'category_id' => $data['category_id'],
             'status' => $data['status'],
-            'images' => $this->uploads($data['image'], 'analysis'),
+            'images' => $this->uploads($data['image'], 'analysis', $data['width_ratio'], $data['height_ratio']),
             'order'  => $data['order'],
             'telegram_status' => $data['telegram_status'] ?? false,
             'width_ratio' => $data['width_ratio'] ?? 16,
@@ -116,7 +116,7 @@ class    FilmAnalysisRepository extends BaseRepository
             if ($item->images) {
                 deleteImages($item->images, 'analysis');
             }
-            $images = $this->uploads($data['image'], 'analysis');
+            $images = $this->uploads($data['image'], 'analysis', $data['width_ratio'], $data['height_ratio']);
         } else {
             $images = $item->images;
         }

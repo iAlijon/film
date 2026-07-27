@@ -82,6 +82,8 @@
                             <small class="text-danger">{{$errors->first('image')}}</small>
                         </div>
 
+                        @include('admin.components.ratio-fields')
+
                         <div class="form-group">
                             <label for="file">{{labels('file')}}</label>
                             <input type="file" name="file" class="form-control @error('file') border-danger @enderror"
@@ -109,8 +111,6 @@
                             <small class="text-danger">{{$errors->first('date')}}</small>
                         </div>
 
-                        @include('admin.components.ratio-fields')
-
                         <div class="form-group">
                             <label for="status">Status</label>
                             <select name="status" id="" class="form-control">
@@ -133,3 +133,40 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function () {
+
+            // Custom file label update
+            $('#video_file').on('change', function () {
+                const fileName = $(this).val().split('\\').pop();
+                $(this).siblings('.custom-file-label').text(fileName || 'Faylni tanlang...');
+
+                // Video preview
+                const file = this.files[0];
+                if (file) {
+                    const url = URL.createObjectURL(file);
+                    $('#videoPreview source').attr('src', url);
+                    $('#videoPreview')[0].load();
+                    $('#videoPreviewBox').show();
+                }
+            });
+
+            // Quick ratio buttons
+            $('.ratio-btn').on('click', function () {
+                const w = $(this).data('w');
+                const h = $(this).data('h');
+                $('input[name="width_ratio"]').val(w);
+                $('input[name="height_ratio"]').val(h);
+                $('.ratio-btn').removeClass('btn-secondary').addClass('btn-outline-secondary');
+                $(this).removeClass('btn-outline-secondary').addClass('btn-secondary');
+            });
+
+            // Close alert
+            $('.cancel').click(function () {
+                $(this).closest('.alert').fadeOut();
+            });
+        });
+    </script>
+@endpush

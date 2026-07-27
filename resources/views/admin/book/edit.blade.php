@@ -76,6 +76,8 @@
 
                         <x-image-edit-field :image="$model->translates->first()?->images" input-name="image" />
 
+                        @include('admin.components.ratio-fields', ['widthRatio' => $model->width_ratio ?? 16, 'heightRatio' => $model->height_ratio ?? 9])
+
                         <div class="form-group">
                             <label for="file">{{labels('file')}}</label>
                             <input type="file" name="file" class="form-control @error('file') border-danger @enderror" accept=".doc,.docx,.xls,.xlsx,.ppt,.pptx,.pdf">
@@ -120,3 +122,21 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script>
+        $('.ratio-btn').on('click', function () {
+            const w = $(this).data('w');
+            const h = $(this).data('h');
+            $('input[name="width_ratio"]').val(w);
+            $('input[name="height_ratio"]').val(h);
+            $('.ratio-btn').removeClass('btn-secondary').addClass('btn-outline-secondary');
+            $(this).removeClass('btn-outline-secondary').addClass('btn-secondary');
+        });
+
+        // Alert yopish
+        $('.cancel').click(function () {
+            $(this).closest('.alert').fadeOut();
+        });
+    </script>
+@endpush

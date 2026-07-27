@@ -61,7 +61,7 @@ class PremiereRepository extends BaseRepository
         $model = $this->model->create([
             'category_id' => $data['category_id'],
             'slug' => Str::slug($data['name']),
-            'images' => $this->uploads($data['image'], 'film_digest'),
+            'images' => $this->uploads($data['image'], 'film_digest', $data['width_ratio'], $data['height_ratio']),
             'video' => $this->video($data['video']),
             'status' => $data['status'],
             'telegram_status' => $data['telegram_status']??false,
@@ -115,7 +115,7 @@ class PremiereRepository extends BaseRepository
             if ($model->images) {
                 deleteImages($model->images, 'premiere');
             }
-            $images = $this->uploads($data['image'], 'premiere');
+            $images = $this->uploads($data['image'], 'premiere', $data['width_ratio'], $data['height_ratio']);
         }else {
             $images = $model->images;
         }

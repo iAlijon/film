@@ -32,6 +32,8 @@ class AphorismRequest extends FormRequest
                 'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
                 'translates' => 'required|in:oz,uz,ru,en',
                 'order' => 'required',
+                'width_ratio'  => 'required|integer|min:1|max:100',
+                'height_ratio' => 'required|integer|min:1|max:100',
             ];
         }else {
             return [
@@ -42,6 +44,8 @@ class AphorismRequest extends FormRequest
                 'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'translates' => 'required|in:oz,uz,ru,en',
                 'order' => 'required',
+                'width_ratio'  => 'required|integer|min:1|max:100',
+                'height_ratio' => 'required|integer|min:1|max:100',
             ];
         }
     }
